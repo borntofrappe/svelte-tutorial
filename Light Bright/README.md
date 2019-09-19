@@ -1,19 +1,18 @@
 # [Light Bright](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42?version=3.12.1)
 
-## Preface
 
-This project was inspired by a [take-home project @freeCodeCamp](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42?version=3.12.1). Using only the REPL, I was able to create the basic functionalities behind the application, and in so doing I think I managed to create a rather teaching endeavor.
+1. install the necessary packages:
 
-In addition to the live demo, you find here the files to run the project locally. These are retrieved directly from the REPL.
+    ```code
+    npm install
+    ```
 
-1. install packages
+1. run the development environment:
 
-  ```code
-  npm install
-  ```
+    ```
+    npm run dev
+    ```
 
-1. run the development environment
+    The application will be made available at `http://localhost:5000`
 
-  ```
-  npm run dev
-  ```
+1. have fun. [The tutorial](https://svelte.dev/tutorial) is a great place to start, while [the API reference](https://svelte.dev/docs) will give you more details.
