@@ -1,2 +1,5 @@
 # svelte-tutorial
-Practice with Svelte.js with a series of applications.
+
+## Preface
+
+In this repo I set out to include _and_ explain a series of projects built with [Svelte.js](https://svelte.dev).
