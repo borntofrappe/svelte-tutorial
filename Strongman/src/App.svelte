@@ -1,0 +1,243 @@
+<style>
+    /* remove the default styles for the button */
+    button {
+        background: none;
+        border: none;
+        /* ! the outline is replaced by the graphics in the svg  */
+        outline: none;
+    }
+    /* when the button is focused increase the opacity of the handle and show the shadow beneath the mallet */
+    button svg .handle {
+        transition: opacity 0.5s ease-in;
+    }
+    button:focus svg .handle {
+        opacity: 1;
+    }
+    button svg .shadow {
+        transition: transform 0.5s ease-in;
+    }
+    button:focus svg .shadow {
+        transform: scale(1);
+    }
+
+    /* size the svg to occupy a sizeable portion of the viewport */
+    svg {
+        display: block;
+        max-width: 450px;
+        width: 90vw;
+        height: auto;
+    }
+</style>
+<!-- wrap the graphic in a button to make it clickable -->
+<button aria-label="Strongman button" aria-describedby="description">
+    <span hidden id="description"
+        >Press the button to raise the hammer. Release it to check your feat of
+        strength.</span
+    >
+    <svg viewBox="0 0 100 100" width="400" height="400">
+        <defs>
+            <!-- rectangle used for the bar and re-used in the clip -->
+            <rect
+                x="-3.25"
+                y="0"
+                width="6.5"
+                height="55"
+                rx="3.25"
+                id="line"
+            ></rect>
+            <clipPath id="clip">
+                <use href="#line" stroke-linecap="square"></use>
+            </clipPath>
+        </defs>
+        <!-- tower -->
+        <g transform="translate(25 90)">
+            <path
+                fill="hsl(0, 0%, 98%)"
+                stroke="hsl(205, 21%, 70%)"
+                stroke-width="2.5"
+                d="M -12 0 v -70 a 12 12 0 0 1 24 0 v 70"
+            ></path>
+            <g transform="translate(0 -70)">
+                <use href="#line" fill="hsl(182, 82%, 62%)"></use>
+                <g clip-path="url(#clip)">
+                    <!-- translate to the following
+                        transform="translate(0 0)"
+                        to completely show the red bar
+                    -->
+                    <g class="score" transform="translate(0 55)">
+                        <use href="#line" fill="hsl(358, 100%, 67%)"></use>
+                    </g>
+                </g>
+                <circle
+                    cx="0"
+                    cy="55"
+                    r="5"
+                    fill="hsl(358, 100%, 67%)"
+                ></circle>
+            </g>
+
+            <rect
+                x="-13.25"
+                y="0"
+                width="26.5"
+                height="2"
+                fill="hsl(0, 0%, 98%)"
+            ></rect>
+            <rect
+                x="-13.25"
+                y="0"
+                width="2.5"
+                height="2"
+                fill="hsl(248, 51%, 18%)"
+            ></rect>
+            <rect
+                x="10.75"
+                y="0"
+                width="2.5"
+                height="2"
+                fill="hsl(248, 51%, 18%)"
+            ></rect>
+            <rect
+                x="-1.5"
+                y="0"
+                width="3"
+                height="2"
+                fill="hsl(248, 51%, 18%)"
+            ></rect>
+            <!-- translate to the following
+                transform="translate(0 0)"
+                to have the puck pushed down
+            -->
+            <g class="puck" transform="translate(0 -2.5)">
+                <rect
+                    x="-5.5"
+                    y="0"
+                    width="11"
+                    height="2.5"
+                    fill="hsl(358, 100%, 67%)"
+                ></rect>
+            </g>
+            <g transform="translate(0 2)">
+                <rect
+                    x="-18"
+                    y="0"
+                    width="36"
+                    height="3"
+                    fill="hsl(205, 21%, 70%)"
+                ></rect>
+            </g>
+
+            <g transform="translate(0 5)">
+                <rect
+                    x="-22"
+                    y="1.75"
+                    width="44"
+                    height="1.75"
+                    rx="0.75"
+                    opacity="0.3"
+                    fill="hsl(248, 51%, 18%)"
+                ></rect>
+                <rect
+                    x="-20"
+                    y="0"
+                    width="40"
+                    height="2.5"
+                    fill="hsl(248, 51%, 18%)"
+                ></rect>
+            </g>
+        </g>
+
+        <!-- hammer
+            draw the hammer starting from the top of the puck
+            translate and rotate the group to then distance the graphic
+        -->
+        <g transform="translate(25 86)">
+            <!--
+                ! change the transform origin to have the translation/rotation occur from the center right (the bottom of the handle)
+            -->
+            <g opacity="1" transform="translate(36 -11.5)">
+                <!-- translate and rotate to the following values
+                    transform="translate(15 0) rotate(100)"
+                    to have the hammer fully charged up
+                    -->
+                <g class="hammer" transform="translate(0 0) rotate(0)">
+                    <g transform="translate(-36 11.5)">
+                        <rect
+                            x="8"
+                            y="-10.75"
+                            width="28"
+                            height="2.5"
+                            fill="hsl(0, 0%, 98%)"
+                        ></rect>
+                        <!-- increase the opacity of the shadow for the focus state (to provide an alternative to the outline) -->
+                        <rect
+                            class="handle"
+                            opacity="0.7"
+                            x="8"
+                            y="-10.75"
+                            width="4"
+                            height="2.5"
+                            fill="hsl(248, 51%, 18%)"
+                        ></rect>
+                        <!-- increase the opacity of the handle (always for the focus state) -->
+                        <rect
+                            class="handle"
+                            opacity="0.5"
+                            x="26"
+                            y="-10.75"
+                            width="10"
+                            height="2.5"
+                            fill="hsl(358, 100%, 67%)"
+                        ></rect>
+                        <rect
+                            id="stripe-red"
+                            x="-7.5"
+                            y="0"
+                            width="15"
+                            height="2.5"
+                            fill="hsl(358, 100%, 67%)"
+                        ></rect>
+                        <rect
+                            id="stripe-white"
+                            x="-9"
+                            y="-2.5"
+                            width="18"
+                            height="2.5"
+                            fill="hsl(0, 0%, 98%)"
+                        ></rect>
+                        <rect
+                            x="-8"
+                            y="-16.5"
+                            width="16"
+                            height="14"
+                            fill="hsl(248, 51%, 18%)"
+                        ></rect>
+                        <use
+                            href="#stripe-white"
+                            transform="translate(0 -16.5)"
+                        ></use>
+                        <use
+                            href="#stripe-red"
+                            transform="translate(0 -21.5)"
+                        ></use>
+                    </g>
+                </g>
+            </g>
+
+            <!-- show the shadow by increasing its scale (always for the focus state) -->
+            <g transform="translate(31 12)">
+                <rect
+                    class="shadow"
+                    x="-6"
+                    y="-1.5"
+                    width="12"
+                    height="1.5"
+                    rx="1"
+                    opacity="0.6"
+                    transform="scale(0 0.8)"
+                    fill="hsl(248, 51%, 18%)"
+                ></rect>
+            </g>
+        </g>
+    </svg>
+</button>

@@ -1,0 +1,13 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    min-height: 100vh;
+    background: hsl(249, 51%, 52%);
+    /* display the graphic in the center of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
