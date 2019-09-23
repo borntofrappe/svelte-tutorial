@@ -1,3 +1,62 @@
+<script>
+    import { onDestroy } from "svelte";
+    import { tweened, spring } from "svelte/motion";
+    import { expoOut, cubicInOut } from "svelte/easing";
+    const threshold = 2;
+    // let duration = 0;
+    // $: translation = duration * 7.5;
+    // $: rotation = duration * 50;
+
+    const duration = spring(0);
+    let translation;
+    let rotation;
+    const unsubscribe = duration.subscribe(d => {
+        translation = d * 7.5;
+        rotation = d * 50;
+    });
+    let puck = tweened(2);
+    let score = tweened(55);
+
+    let interval;
+
+    function handleMousedown() {
+        puck.set(2, {
+            duration: 200,
+            delay: 0
+        });
+        score.set(55, {
+            duration: 200,
+            delay: 0
+        });
+        interval = setInterval(() => {
+            duration.update(d => d + 0.01);
+            if (rotation >= threshold * 50) {
+                duration.set(threshold);
+                clearInterval(interval);
+            }
+        }, 10);
+    }
+    function handleMouseup() {
+        score.set(((threshold - $duration) / threshold) * 55, {
+            duration: 1000,
+            delay: 200,
+            easing: expoOut
+        });
+        puck.set(0, {
+            duration: 200,
+            delay: 180
+        });
+        duration.set(0, {
+            easing: cubicInOut,
+            duration: 200
+        });
+        clearInterval(interval);
+    }
+    onDestroy(() => {
+        clearInterval(interval);
+        unsubscribe();
+    });
+</script>
 <style>
     /* remove the default styles for the button */
     button {
@@ -29,7 +88,20 @@
     }
 </style>
 <!-- wrap the graphic in a button to make it clickable -->
-<button aria-label="Strongman button" aria-describedby="description">
+<button
+    on:mousedown="{handleMousedown}"
+    on:mouseup="{handleMouseup}"
+    on:touchstart="{handleMousedown}"
+    on:touchend="{handleMouseup}"
+    on:keypress="{(e)  => {
+        if(e.keyCode === 32 && $duration === 0) {
+            handleMousedown();
+        }
+    }}"
+    on:keyup="{handleMouseup}"
+    aria-label="Strongman button"
+    aria-describedby="description"
+>
     <span hidden id="description"
         >Press the button to raise the hammer. Release it to check your feat of
         strength.</span
@@ -64,7 +136,7 @@
                         transform="translate(0 0)"
                         to completely show the red bar
                     -->
-                    <g class="score" transform="translate(0 55)">
+                    <g class="score" transform="translate(0 {$score})">
                         <use href="#line" fill="hsl(358, 100%, 67%)"></use>
                     </g>
                 </g>
@@ -108,7 +180,7 @@
                 transform="translate(0 0)"
                 to have the puck pushed down
             -->
-            <g class="puck" transform="translate(0 -2.5)">
+            <g class="puck" transform="translate(0 -{$puck})">
                 <rect
                     x="-5.5"
                     y="0"
@@ -160,7 +232,10 @@
                     transform="translate(15 0) rotate(100)"
                     to have the hammer fully charged up
                     -->
-                <g class="hammer" transform="translate(0 0) rotate(0)">
+                <g
+                    class="hammer"
+                    transform="translate({translation} {translation}) rotate({rotation})"
+                >
                     <g transform="translate(-36 11.5)">
                         <rect
                             x="8"
@@ -226,17 +301,19 @@
 
             <!-- show the shadow by increasing its scale (always for the focus state) -->
             <g transform="translate(31 12)">
-                <rect
-                    class="shadow"
-                    x="-6"
-                    y="-1.5"
-                    width="12"
-                    height="1.5"
-                    rx="1"
-                    opacity="0.6"
-                    transform="scale(0 0.8)"
-                    fill="hsl(248, 51%, 18%)"
-                ></rect>
+                <g transform="translate({translation * 1.2} 0)">
+                    <rect
+                        class="shadow"
+                        x="-6"
+                        y="-1.5"
+                        width="12"
+                        height="1.5"
+                        rx="1"
+                        opacity="0.6"
+                        transform="scale(0 0.8)"
+                        fill="hsl(248, 51%, 18%)"
+                    ></rect>
+                </g>
             </g>
         </g>
     </svg>
