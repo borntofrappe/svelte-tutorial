@@ -1,7 +1,7 @@
 <script>
     import { onDestroy } from "svelte";
     import { tweened, spring } from "svelte/motion";
-    import { expoOut, cubicInOut } from "svelte/easing";
+    import { expoOut } from "svelte/easing";
     const threshold = 2;
     // let duration = 0;
     // $: translation = duration * 7.5;
@@ -39,16 +39,15 @@
     function handleMouseup() {
         score.set(((threshold - $duration) / threshold) * 55, {
             duration: 1000,
-            delay: 200,
+            delay: 150,
             easing: expoOut
         });
         puck.set(0, {
             duration: 200,
-            delay: 180
+            delay: 140
         });
         duration.set(0, {
-            easing: cubicInOut,
-            duration: 200
+            duration: 150
         });
         clearInterval(interval);
     }
@@ -234,7 +233,7 @@
                     -->
                 <g
                     class="hammer"
-                    transform="translate({translation} {translation}) rotate({rotation})"
+                    transform="translate({translation} {-translation / 3}) rotate({rotation})"
                 >
                     <g transform="translate(-36 11.5)">
                         <rect
