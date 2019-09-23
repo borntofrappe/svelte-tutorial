@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    min-height: 100vh;
+    background: hsl(249, 51%, 52%);
+    /* display the graphic in the center of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* remove the default styles for the button */
+button {
+    background: none;
+    border: none;
+    /* ! the outline is replaced by the graphics in the svg  */
+    outline: none;
+}
+/* when the button is focused increase the opacity of the handle and show the shadow beneath the mallet */
+button svg .handle {
+    transition: opacity 0.5s ease-in;
+}
+button:focus svg .handle {
+    opacity: 1;
+}
+button svg .shadow {
+    transition: transform 0.5s ease-in;
+}
+button:focus svg .shadow {
+    transform: scale(1);
+}
+
+/* size the svg to occupy a sizeable portion of the viewport */
+svg {
+    display: block;
+    max-width: 450px;
+    width: 90vw;
+    height: auto;
+}
