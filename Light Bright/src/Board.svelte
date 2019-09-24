@@ -1,31 +1,31 @@
 <script>
 	import Controls from './Controls.svelte';
 	import { randomColor } from './utils.js';
-	
+
 	let board = Array(100).fill();
 	let history = [];
 	let color = randomColor();
-	
-	// board
+
+
 	let isMouseDown = false;
 	function colorTile(index) {
 		board[index] = color;
-		
+
 		if(history.includes(index)) {
 			const historyIndex = history.findIndex(i => i === index);
 			history = [index, ...history.slice(0, historyIndex), ...history.slice(historyIndex + 1)];
 		} else {
-			history = [index, ...history];	
+			history = [index, ...history];
 		}
 	}
-	
+
 	function removeTile(index) {
 		board[index] = null;
 		history = history.slice(1);
 	}
-	
 
-	// controls
+
+
 	function removePrevious() {
 		const previous = history[0];
 		if(previous !== null) {
@@ -33,7 +33,7 @@
 			history = history.slice(1);
 		}
 	}
-	
+
 	function clearBoard() {
 		board = board.map((tile) => tile ? null : tile);
 		history = [];
@@ -57,17 +57,19 @@
 	}
 </style>
 
+<svelte:body on:mouseleave={() => isMouseDown = false} />
+
 <Controls disabled={history.length === 0} on:remove={removePrevious} on:clear={clearBoard}/>
-<div 
+<div
 	class="board"
 	on:mouseup={() => {
 		color = randomColor();
 		isMouseDown = false;
 	}}>
 	{#each board as tile, i}
-		<button 
+		<button
 						class="tile"
-						on:mousedown={() => {
+						on:mousedown|preventDefault={() => {
 							colorTile(i);
 							isMouseDown = true;
 						}}
