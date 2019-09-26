@@ -4,9 +4,9 @@
     // selectWinners allows to halve the array by selecting one item from each couplet
     import { selectWinners } from "./utils.js";
 
-    export let teams;
+    export let bracket;
     // describe the winner as the only item of the input array, if existing
-    $: winner = teams.length === 1 && teams[0];
+    $: winner = bracket.length === 1 && bracket[0];
 </script>
 
 <style>
@@ -65,16 +65,16 @@
 
 <!-- display the winner in a heading or an unordered list with the teams if no winner is identified -->
 {#if winner}
-<h2>{winner}</h2>
+<h2>{winner.name}</h2>
 {:else}
 <ul>
-    {#each teams as team}
-    <li>{team}</li>
+    {#each bracket as team (team.id)}
+    <li>{team.name}</li>
     {/each}
 </ul>
 
 <!-- call the component itself passing as argument half the array
-	this means the component renders a series of <ul> elements until a winner is described in the <h2> element
-	-->
-<svelte:self teams="{selectWinners(teams)}" />
+    this means the component renders a series of <ul> elements until a winner is described in the <h2> element
+    -->
+<svelte:self bracket="{selectWinners(bracket)}" />
 {/if}

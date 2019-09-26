@@ -3,18 +3,15 @@
 	import Header from './Header.svelte';
 	import Bracket from './Bracket.svelte';
 
-	// starting from a hard-coded array of names
-	const teams = [
-		'Turtles',
-		'Hummingbirds',
-		'Dolphins',
-		'Lambs',
-		'Lions',
-		'Giraffes',
-		'Wolves',
-		'Pellicans'
-	];
+	// store describing the teams
+	import { names } from './stores.js';
 
+	// based on the array of names, create an array of objects for the bracket
+	// this to provide an identifier as to distinguish the elements in the {#each} block
+	$: bracket = $names.map(name => ({
+		name,
+		id: Math.random()
+	}));
 </script>
 
 <style>
@@ -41,6 +38,8 @@
 
 <Header title="Who's going to win?"/>
 
+<!-- to display the names side by side, wrap the bracket component in a container styled as a flex row -->
 <main class="bracket">
-	<Bracket {teams} />
+	<Bracket {bracket} />
 </main>
+
