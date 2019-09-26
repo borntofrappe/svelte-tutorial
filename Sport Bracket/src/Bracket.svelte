@@ -2,7 +2,7 @@
     // the idea is to recursively call the bracket component with a smaller and smaller array (cut down in half each time)
     // as the array reaches 1 item, the idea is to then include such item in a heading
     // selectWinners allows to halve the array by selecting one item from each couplet
-    import { selectWinners } from "./utils.js";
+    import { selectWinners } from './utils.js';
 
     export let bracket;
     // describe the winner as the only item of the input array, if existing
@@ -18,8 +18,7 @@
         flex-grow: 1;
         list-style: none;
     }
-    ul li,
-    h2 {
+    ul li, h2 {
         flex-grow: 1;
         display: flex;
         flex-direction: column;
@@ -29,6 +28,7 @@
     }
     ul li {
         position: relative;
+        font-size: 0.95rem;
     }
     /* with pseudo elements draw the following structure next to each couplet
     ---
@@ -41,7 +41,7 @@
     ul li:before,
     ul li:after {
         position: absolute;
-        content: "";
+        content: '';
         top: 50%;
         left: 100%;
         background: currentColor;
@@ -61,20 +61,25 @@
     ul:nth-of-type(n) li:nth-of-type(even):after {
         transform: translate(0%, -100%);
     }
+    h2 {
+        text-transform: uppercase;
+        font-size: 1.25rem;
+    }
 </style>
 
 <!-- display the winner in a heading or an unordered list with the teams if no winner is identified -->
 {#if winner}
-<h2>{winner.name}</h2>
+    <h2>{winner.name}</h2>
 {:else}
-<ul>
-    {#each bracket as team (team.id)}
-    <li>{team.name}</li>
-    {/each}
-</ul>
+    <ul>
+        {#each bracket as team (team.id)}
+        <li>{team.name}</li>
+        {/each}
+    </ul>
 
-<!-- call the component itself passing as argument half the array
+    <!-- call the component itself passing as argument half the array
     this means the component renders a series of <ul> elements until a winner is described in the <h2> element
     -->
-<svelte:self bracket="{selectWinners(bracket)}" />
+    <svelte:self bracket={selectWinners(bracket)} />
 {/if}
+

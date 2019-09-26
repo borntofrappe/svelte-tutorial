@@ -20,24 +20,14 @@
 </script>
 
 <style>
-	:global(*) {
-		padding: 0;
-		margin: 0;
-		box-sizing: border-box;
-	}
-	:global(body) {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	:global(body > * + *) {
-		margin-top: 1rem;
-	}
-
 	.bracket {
-		max-width: 1000px;
+		max-width: 800px;
 		width: 100%;
 		display: flex;
+		background: #fff;
+		padding: 0.75rem;
+		border-radius: 5px;
+		box-shadow: 0 5px 16px -5px hsla(0, 0%, 0%, 0.1);
 	}
 </style>
 
