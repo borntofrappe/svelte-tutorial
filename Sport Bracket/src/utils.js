@@ -13,3 +13,14 @@ export function selectWinners(teams) {
 		});
 	return half;
 }
+
+/* shuffleArray
+input: array of teams
+output: array in which the items are shuffled at random
+*/
+export function shuffleTeams(teams) {
+	const { length } = teams;
+	const arr = Array(length);
+
+	return teams.reverse();
+};
