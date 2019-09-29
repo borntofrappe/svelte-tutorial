@@ -21,3 +21,7 @@ A silly button allowing to raise a mallet and strike the puck of a carnival mach
 Describe the eliminatory stages for a hypothetical sport competition, taking advtange of the `<svelte:self>` component.
 
 **Tags**: self, store, custom store
+
+## Shopping List
+
+Create a small CRUD application to describe a shopping list through text and visualizations.
