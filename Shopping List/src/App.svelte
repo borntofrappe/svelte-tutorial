@@ -1,1 +1,7 @@
-<h1>Hello shopping!</h1>
+<script>
+    import Form from './Form.svelte';
+    import List from './List.svelte';
+</script>
+
+<Form />
+<List />
