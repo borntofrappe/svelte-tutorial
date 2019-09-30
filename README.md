@@ -22,6 +22,8 @@ Describe the eliminatory stages for a hypothetical sport competition, taking adv
 
 **Tags**: self, store, custom store
 
-## Shopping List
+## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
-Create a small CRUD application to describe a shopping list through text and visualizations.
+Create a CRUD application to add/update/delete key value pairs. Hihglight the items through D3 and two visualizations.
+
+**Tags**: bind, custom store, crud, d3
