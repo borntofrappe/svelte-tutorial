@@ -62,8 +62,21 @@
         Highlight items
     </h2>
 
-    <!-- include the visualization here -->
+    <!-- include the visualizations here -->
     <div>
+        <svg viewbox="0 0 {width + (margin.left + margin.right)} {height + (margin.top + margin.bottom)}" {width} {height}>
+            <g transform="translate({margin.left} {margin.top})">
+                {#each topFive as top, index}
+                <g transform="translate(0 {yScale(index) + yScale.bandwidth() / 2})">
+                    <path d="M 0 0 h {xScale(top.value)}" fill="none" stroke="{top.color}" stroke-linecap="round" stroke-width="7"></path>
+                    <g transform="translate({xScale(top.value)} 0)">
+                        <circle cx="0" cy="0" r="12" fill="{top.color}"></circle>
+                        <text x="25" y="0" dominant-baseline="middle" fill="hsl(240, 25%, 95%)" font-size="{width / 22}">{top.name}</text>
+                    </g>
+                </g>
+                {/each}
+            </g>
+        </svg>
         <svg viewbox="0 0 {width + (margin.left + margin.right)} {height + (margin.top + margin.bottom)}" {width} {height}>
             <g transform="translate({margin.left} {margin.top})">
                 <g transform="translate({width / 2} {height / 2})">
@@ -74,19 +87,6 @@
                         {$items.reduce((acc, curr) => acc + curr.value, 0)}
                     </text>
                 </g>
-            </g>
-        </svg>
-        <svg viewbox="0 0 {width + (margin.left + margin.right)} {height + (margin.top + margin.bottom)}" {width} {height}>
-            <g transform="translate({margin.left} {margin.top})">
-                {#each topFive as top, index}
-                <g transform="translate(0 {yScale(index) + yScale.bandwidth()})">
-                    <path d="M 0 0 h {xScale(top.value)}" fill="none" stroke="{top.color}" stroke-linecap="round" stroke-width="7"></path>
-                    <g transform="translate({xScale(top.value)} 0)">
-                        <circle cx="0" cy="0" r="12" fill="{top.color}"></circle>
-                        <text x="25" y="0" dominant-baseline="middle" fill="hsl(240, 25%, 95%)" font-size="{width / 22}">{top.name}</text>
-                    </g>
-                </g>
-                {/each}
             </g>
         </svg>
     </div>
