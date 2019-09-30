@@ -59,7 +59,7 @@
 <!-- introduce the section with a heading and describe the items in a main element -->
 <section>
     <h2>
-        <span class="icon">
+        <span>
             <svg viewBox="0 0 100 100" width="40" height="40">
                 <use href="#list"></use>
             </svg>

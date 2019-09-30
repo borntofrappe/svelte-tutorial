@@ -30,4 +30,11 @@
             </g>
         </g>
     </symbol>
+    <symbol id="highlight">
+        <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round">
+            <path d="M 35 65 v -7.5"></path>
+            <path d="M 50 65 v -15"></path>
+            <path d="M 65 65 v -30"></path>
+        </g>
+    </symbol>
 </svg>

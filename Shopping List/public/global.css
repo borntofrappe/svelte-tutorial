@@ -36,8 +36,8 @@ h2 span svg {
     filter: drop-shadow(0 0 3px hsla(240, 25%, 0%, 0.5));
 }
 
-.app > * + * {
-    margin-top: 3.5rem;
+.app > * + * + * {
+    margin-top: 5rem;
 }
 section > * + * {
     margin-top: 1rem;

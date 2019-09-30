@@ -2,6 +2,7 @@
     import SVG from './SVG.svelte';
     import Form from './Form.svelte';
     import List from './List.svelte';
+    import Visualization from './Visualization.svelte';
 </script>
 
 <style>
@@ -16,4 +17,5 @@
     <SVG />
     <Form />
     <List />
+    <Visualization />
 </div>
