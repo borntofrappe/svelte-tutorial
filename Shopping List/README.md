@@ -1,11 +1,7 @@
-# [Shopping List](https://svelte.dev/repl/9b3112ba9d5d40ddaaa11a1c5bdcea83)
+# [Key Value Pairs](https://svelte.dev/repl/9b3112ba9d5d40ddaaa11a1c5bdcea83)
 
-## Goal
+> more aptly **key numerical value pairs**
 
-Create a small CRUD application to describe a shopping list through text and visualizations.
+## Notes
 
-Topics currently being covered: store, custom store, input binding
-
-## Update
-
-In the **res** folder you find the different parts of the application, developed in terms of UI.
+In the **res** folder you find different markup and stylesheet files describing the components in terms of visuals. The **highlight items** sub-folder already and actually includes d3, giving an idea for the viz component.
