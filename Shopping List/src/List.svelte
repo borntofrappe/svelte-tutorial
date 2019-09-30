@@ -55,6 +55,7 @@
     }
 </style>
 
+{#if $items.length > 0}
 <!-- introduce the section with a heading and describe the items in a main element -->
 <section>
     <h2>
@@ -69,7 +70,7 @@
     <!-- display the articles in a grid, specifying the name and numerical values in a column -->
     <main>
         {#each $items as item (item.name)}
-        <article>
+        <article style="border-color: {item.color}">
             <h2>{item.name}</h2>
             <p>{item.value}</p>
             <!-- following a click on the button update the store with the delete operation -->
@@ -82,3 +83,4 @@
         {/each}
     </main>
 </section>
+{/if}
