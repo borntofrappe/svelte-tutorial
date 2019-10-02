@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300|Open+Sans:400&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: hsl(0, 0%, 95%);
+    color: hsl(0, 0%, 20%);
+    font-family: "Open Sans", sans-serif;
+    /* center the .stopwatch container in the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* display the svg, ul and .controls in a column */
+.stopwatch {
+    display: flex;
+    flex-direction: column;
+}
+.stopwatch > * + * {
+    margin-top: 0.75rem;
+}
+
+/* the color is picked up by the svg through the currentColor keyword */
+.stopwatch svg {
+    font-family: "Roboto Mono", monospace;
+    color: hsl(0, 0%, 5%);
+}
+
+/* limit the height of the unordered list */
+.stopwatch ul {
+    list-style: none;
+    height: 225px;
+    overflow-y: auto;
+    padding: 0 0.5rem; /* horizontal padding included for the scrollbar */
+}
+/* display each list item in a row */
+.stopwatch ul li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid hsl(0, 0%, 70%);
+    padding: 0.75rem 0;
+}
+.stopwatch ul > li + li {
+    margin-top: 1rem;
+}
+/* separate the space of each row equally among the direct children (the h2, h3 and h4 elements */
+.stopwatch ul li > * {
+    font-weight: 400;
+    width: 0;
+    flex-grow: 1;
+}
+.stopwatch ul li h2 {
+    text-align: left;
+    font-size: 1rem;
+}
+.stopwatch ul li h2 sup {
+    font-size: 0.7rem;
+    margin-left: -0.25rem;
+}
+.stopwatch ul li h3 {
+    text-align: center;
+    font-size: 1.15rem;
+}
+.stopwatch ul li h4 {
+    text-align: right;
+    font-size: 0.75rem;
+}
+
+/* display the button(s) in a row */
+.stopwatch .controls {
+    display: flex;
+    border: 1px solid hsl(0, 0%, 25%);
+    border-radius: 20px;
+}
+.stopwatch .controls button {
+    font-size: 0.9rem;
+    color: hsl(0, 0%, 10%);
+    font-family: inherit;
+    padding: 0.5rem;
+    flex-grow: 1;
+    width: 0;
+    border: none;
+    background: none;
+}
+/* include a border on all button but the first, to avoid a border when only one element exist */
+.stopwatch .controls button:not(:first-of-type) {
+    border-left: 1px solid hsl(0, 0%, 25%);
+}
+
+/* for devices supporting css grid */
+@supports (display: grid) {
+    /* for larger viewports */
+    @media (min-width: 600px) {
+        /* display the svg, ul and .controls in a grid
+
+        |   svg  |  ul           |
+        |   svg  |   .controls   |
+        */
+        .stopwatch {
+            display: grid;
+            grid-gap: 20px 50px;
+            grid-template-columns: 300px 250px;
+            grid-template-rows: 225px auto;
+            grid-template-areas: "watch list" "watch controls";
+            justify-content: space-between;
+        }
+        .stopwatch svg {
+            grid-area: watch;
+            align-self: center;
+        }
+        .stopwatch ul {
+            grid-area: list;
+        }
+        .stopwatch .controls {
+            grid-area: controls;
+            align-self: center;
+        }
+        .stopwatch > * + * {
+            margin-top: 0;
+        }
+    }
+}
+
+/* for -webkit supported browsers style the scrollbar closer to the overall ui */
+.stopwatch ul::-webkit-scrollbar {
+    width: 6px;
+}
+.stopwatch ul::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: hsl(0, 0%, 80%);
+}
+.stopwatch ul::-webkit-scrollbar-thumb {
+    background-color: hsl(0, 0%, 30%);
+    border-radius: 3px;
+}
