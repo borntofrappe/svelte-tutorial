@@ -27,3 +27,9 @@ Describe the eliminatory stages for a hypothetical sport competition, taking adv
 Create a CRUD application to add/update/delete key value pairs. Hihglight the items through D3 and two visualizations.
 
 **Tags**: bind, custom store, crud, d3
+
+## [Stopwatch](https://svelte.dev/repl/591aff801e1d47498afdc2738fea4485)
+
+Create an application allowing to track the passing of time and the lapse between laps.
+
+**Tags**: setInterval, store, readable
