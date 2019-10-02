@@ -1,62 +1,65 @@
-html, body {
-	position: relative;
-	width: 100%;
-	height: 100%;
+/* styles which are meant to be global
+mostly connected to the body or the layout of the .stopwatch container
+*/
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300|Open+Sans:400&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 body {
-	color: #333;
-	margin: 0;
-	padding: 8px;
-	box-sizing: border-box;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background: hsl(0, 0%, 95%);
+    color: hsl(0, 0%, 20%);
+    font-family: "Open Sans", sans-serif;
+    /* center the .stopwatch container in the viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
+/* display the content of the .stopwatch container in a column */
+.stopwatch {
+    display: flex;
+    flex-direction: column;
+}
+.stopwatch > * + * {
+    margin-top: 0.75rem;
 }
 
-a:hover {
-	text-decoration: underline;
-}
+/* for devices supporting css grid */
+@supports (display: grid) {
+    /* for larger viewports */
+    @media (min-width: 600px) {
+        /* display the svg, ul and .controls in a grid
 
-a:visited {
-	color: rgb(0,80,160);
-}
-
-label {
-	display: block;
-}
-
-input, button, select, textarea {
-	font-family: inherit;
-	font-size: inherit;
-	padding: 0.4em;
-	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
-}
-
-input:disabled {
-	color: #ccc;
-}
-
-input[type="range"] {
-	height: 0;
-}
-
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
-button:active {
-	background-color: #ddd;
-}
-
-button:focus {
-	border-color: #666;
+			|   svg  |  ul           |
+			|   svg  |   .controls   |
+		*/
+        .stopwatch {
+            display: grid;
+            grid-gap: 20px 50px;
+            grid-template-columns: 300px 250px;
+            grid-template-rows: 225px auto;
+            grid-template-areas: "watch list" "watch controls";
+            justify-content: space-between;
+        }
+        .stopwatch svg {
+            grid-area: watch;
+            align-self: center;
+        }
+        .stopwatch ul {
+            grid-area: list;
+        }
+        .stopwatch .controls {
+            grid-area: controls;
+            align-self: center;
+        }
+        .stopwatch > * + * {
+            margin-top: 0;
+        }
+    }
 }
