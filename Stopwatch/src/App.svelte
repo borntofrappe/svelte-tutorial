@@ -6,10 +6,10 @@
 	// import the number of milliseconds from the readable stores
 	import { time } from './stores.js';
 
-	// previous is set to record the time accumulated before the pause button is pressed
-	let previous = 0;
     // lapse is set to consider the time since the start button is first pressed
     let lapse = 0;
+	// previous is set to record the time accumulated before the pause button is pressed
+    let previous = 0;
 
     // unsubscribe is set to refer to the function used to unsubscribe from the store
     let unsubscribe;
@@ -18,7 +18,7 @@
     function start() {
         // assign the stop function to unsubscribe
         unsubscribe = time.subscribe(value => {
-            // add the previous value
+            // add the previous value to the current number of milliseconds
             lapse = value + previous;
         });
     }
@@ -34,17 +34,17 @@
 
     // through the stop function unsubscribe from the readable store and reset the values
     function stop() {
-        terminate();
         lapse = 0;
         previous = 0;
 
         laps = [];
+        terminate();
     }
 
     // through the pause function unsubscribe from the store and set previous to match the value held by lapse
     function pause() {
-        terminate();
         previous = lapse;
+        terminate();
 	}
 
     // describe the booleans to determine the button(s) included in the controls component

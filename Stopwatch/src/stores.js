@@ -12,6 +12,9 @@ export const time = readable(0, function start(set) {
 	}, 10);
 
 	return function stop() {
+		// ! forcedly set the readable value to 0 before clearing the interval
+		// it seems the store would otherwise retain the last value and the application would stagger from this value straight to 0
+		set(0);
 		clearInterval(interval);
 	};
 });
