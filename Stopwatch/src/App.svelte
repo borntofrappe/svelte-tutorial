@@ -45,11 +45,22 @@
         previous = lapse;
 	}
 
+    // describe the booleans to determine the button(s) included in the controls component
+    // subscription refers to the state in which the start button has been pressed
+    // here the subscription is ongoing and the unsubscribe variable holds a truthy value
+    $:subscription = !!unsubscribe;
+    // lapsed refers to the state in which the subscription  has started and lapse holds a value greater than 0
+    $:lapsed = !!lapse;
+
 	// laps refers to an array describing the number of milliseconds after each lap
 	let laps = [];
 
-    $:isSubscribed = !unsubscribe;
-    $:isLapsed = !!lapse;
+
+    // through the lap function include the current number of milliseconds in the laps array
+    function lap() {
+        laps = [lapse, ...laps];
+    }
+
 </script>
 
 <div class="stopwatch">
@@ -57,6 +68,8 @@
     <StopWatch {lapse} />
     <!-- pass the array of laps to the laps component -->
     <Laps {laps} />
-    <!-- following the events disaptched from the controls component call the start/pause/stop/lap function  -->
-	<Controls on:start={start} on:stop={stop} on:pause={pause} {isSubscribed} {isLapsed} />
+    <!-- following the events disaptched from the controls component call the start/pause/stop/lap function
+    pass the necessary booleans to display the corecct button(s)
+    -->
+	<Controls on:start={start} on:stop={stop} on:pause={pause} on:lap={lap} {subscription} {lapsed} />
 </div>

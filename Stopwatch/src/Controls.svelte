@@ -3,9 +3,11 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
-    export let isSubscribed = false;
-    export let isLapsed = false;
+    // consider the booleans passed down from App.svelte
+    export let subscription;
+    export let lapsed;
 
+    // following a click on the buttons dispatch the matching events
     function start() {
         dispatch("start");
     }
@@ -42,11 +44,20 @@
         border-left: 1px solid hsl(0, 0%, 25%);
     }
 </style>
+
+<!-- depending on the value of subscription and lapsed display different controls
+subscription -> Lap & pause
+    otherwise, lapsed -> Reset & continue
+        otherwiose -> Start
+-->
 <div class="controls">
-    {#if isSubscribed}
-    <button on:click="{start}">Start</button>
-    {:else}
+    {#if subscription}
+    <button on:click="{lap}">Lap</button>
     <button on:click="{pause}">Pause</button>
+    {:else if lapsed}
     <button on:click="{stop}">Reset</button>
+    <button on:click="{start}">Continue</button>
+    {:else}
+    <button on:click="{start}">Start</button>
     {/if}
 </div>
