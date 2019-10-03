@@ -32,4 +32,4 @@ Create a CRUD application to add/update/delete key value pairs. Hihglight the it
 
 Create an application allowing to track the passing of time and the lapse between laps.
 
-**Tags**: setInterval, store, readable
+**Tags**: setInterval, store, readable, animation, conditional statements
