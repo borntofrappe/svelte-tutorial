@@ -37,11 +37,22 @@
         width: 0;
         border: none;
         background: none;
+        border-radius: inherit;
         margin: 0; /* by default svelte applies a margin to the bottom of the button */
+        transition: background 0.2s ease-out;
     }
     /* include a border on all button but the first, to avoid a border when only one element exist */
     div button:not(:first-of-type) {
         border-left: 1px solid hsl(0, 0%, 25%);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    div button:focus {
+        outline-color: hsl(0, 0%, 25%);
+    }
+    div button:hover {
+        background: hsl(0, 0%, 92%);
     }
 </style>
 

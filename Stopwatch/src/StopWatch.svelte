@@ -24,15 +24,6 @@
                 <path d="M -2.25 0 h 4.5 l -2.25 2.5 l -2.25 -2.5" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"></path>
             </g>
         </g>
-        <g transform="rotate(0)">
-            <!-- hard-coded value -->
-            <g class="mark" transform="translate(0 0)" opacity="0">
-                <!-- hard-coded value -->
-                <g transform="translate(0 -38)">
-                    <circle r="1" fill="currentColor"></circle>
-                </g>
-            </g>
-        </g>
 
         <g transform="translate(0 20)">
             <!-- include the number of milliseconds in the rotation of the minutes dial

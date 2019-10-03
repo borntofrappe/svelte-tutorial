@@ -1,4 +1,7 @@
 <script>
+    import { fly } from "svelte/transition";
+    import { flip } from "svelte/animate";
+
     import { formatTime } from "./utils.js";
 
     export let laps = [];
@@ -48,13 +51,13 @@
 <!-- since lap refers to an decreasing number of milliseconds it is possible to use the value as a key without risk of duplication  -->
 <ul>
     {#each laps as lap, i (lap)}
-    <li>
+    <li in:fly={{ y: -20, duration: 300, delay: 50 }} animate:flip={{ duration: 350 }}>
         <h2>Lap <sup>{laps.length - i}</sup></h2>
         <!-- total -->
         <h3>{formatTime(lap)}</h3>
         <!-- number of milliseconds for the current lap
-		total minus the number of milliseconds of every value following the current one
-		-->
+        total minus the number of milliseconds of every value following the current one
+        -->
         <h4>+{(i < laps.length - 1) ? formatTime(lap - laps[i + 1]) : formatTime(lap)}</h4>
     </li>
     {/each}
