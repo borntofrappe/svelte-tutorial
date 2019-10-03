@@ -1,4 +1,5 @@
 <script>
+    import { onDestroy } from 'svelte';
 	import StopWatch from './StopWatch.svelte';
 	import Laps from './Laps.svelte';
 	import Controls from './Controls.svelte';
@@ -57,10 +58,23 @@
 	// laps refers to an array describing the number of milliseconds after each lap
 	let laps = [];
 
-    // through the lap function include the current number of milliseconds in the laps array
+    // through the lap function include an object specifying the total and partial number of milliseconds
     function lap() {
-        laps = [lapse, ...laps];
+        const { length } = laps;
+        const total = lapse;
+        // partial referring to the number of milliseconds between the previous (if existing) and current lap
+        const partial = length > 0 ? total - laps[0].total : total;
+        laps = [{
+            number: length + 1,
+            total,
+            partial,
+        }, ...laps];
     }
+
+    // unsubscribe from the store to avoid memory leaks
+    onDestroy(() => {
+        terminate();
+    });
 
 </script>
 
