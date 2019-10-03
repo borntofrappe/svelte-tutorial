@@ -1,24 +1,8 @@
 <script>
+    import { formatTime } from "./utils.js";
+
     // lapse refers to the number of milliseconds in the stopwatch
     export let lapse = 0;
-
-    /* create two utility functions to display the time in the desired format
-        mm:ss:t
-
-        where t refers to the tenths of seconds
-    */
-    // for the minute and second place specify a function to prepend numbers smaller than 10 with a zero
-    function zeroPadded(number) {
-        return number >= 10 ? number.toString() : `0${number}`;
-    }
-    // for the tenths of seconds consider the last digit of the number of tenths of seconds
-    function lastDigit(number) {
-        return number.toString()[number.toString().length - 1];
-    }
-
-    $: mm = zeroPadded(Math.floor(lapse / 36000));
-    $: ss = zeroPadded(Math.floor(lapse / 1000) % 60);
-    $: t = lastDigit(Math.floor(lapse / 100));
 </script>
 
 <style>
@@ -62,7 +46,7 @@
         </g>
 
         <text text-anchor="middle" fill="currentColor" dominant-baseline="middle" font-size="10" style="font-weight: 300; letter-spacing: 1px;">
-            {mm}:{ss}.{t}
+            {formatTime(lapse)}
         </text>
     </g>
 </svg>

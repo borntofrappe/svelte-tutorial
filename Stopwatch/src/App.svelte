@@ -37,6 +37,8 @@
         terminate();
         lapse = 0;
         previous = 0;
+
+        laps = [];
     }
 
     // through the pause function unsubscribe from the store and set previous to match the value held by lapse
@@ -54,7 +56,6 @@
 
 	// laps refers to an array describing the number of milliseconds after each lap
 	let laps = [];
-
 
     // through the lap function include the current number of milliseconds in the laps array
     function lap() {

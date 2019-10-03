@@ -1,4 +1,6 @@
 <script>
+    import { formatTime } from "./utils.js";
+
     export let laps = [];
 </script>
 <style>
@@ -30,7 +32,7 @@
         font-size: 1rem;
     }
     ul li h2 sup {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
         margin-left: -0.25rem;
     }
     ul li h3 {
@@ -42,10 +44,18 @@
         font-size: 0.75rem;
     }
 </style>
+
+<!-- since lap refers to an decreasing number of milliseconds it is possible to use the value as a key without risk of duplication  -->
 <ul>
-    {#each laps as lap}
+    {#each laps as lap, i (lap)}
     <li>
-        <h2>{lap}</h2>
+        <h2>Lap <sup>{laps.length - i}</sup></h2>
+        <!-- total -->
+        <h3>{formatTime(lap)}</h3>
+        <!-- number of milliseconds for the current lap
+		total minus the number of milliseconds of every value following the current one
+		-->
+        <h4>+{(i < laps.length - 1) ? formatTime(lap - laps[i + 1]) : formatTime(lap)}</h4>
     </li>
     {/each}
 </ul>
