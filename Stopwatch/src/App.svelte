@@ -84,7 +84,7 @@
     <!-- pass the array of laps to the laps component -->
     <Laps {laps} />
     <!-- following the events disaptched from the controls component call the start/pause/stop/lap function
-    pass the necessary booleans to display the corecct button(s)
+    pass the necessary booleans to display the correct button(s)
     -->
 	<Controls on:start={start} on:stop={stop} on:pause={pause} on:lap={lap} {subscription} {lapsed} />
 </div>

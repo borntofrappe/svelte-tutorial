@@ -3,10 +3,6 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
-    // consider the booleans passed down from App.svelte
-    export let subscription;
-    export let lapsed;
-
     // following a click on the buttons dispatch the matching events
     function start() {
         dispatch("start");
@@ -20,6 +16,10 @@
     function lap() {
         dispatch("lap");
     }
+
+    // consider the booleans passed down from App.svelte
+    export let subscription;
+    export let lapsed;
 </script>
 <style>
     /* display the button(s) in a row */

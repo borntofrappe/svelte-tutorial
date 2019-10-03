@@ -1,11 +1,12 @@
 <script>
+    // import fly to introduce new list items from the top
     import { fly } from "svelte/transition";
+    // import flip to animate the remaining list items toward their new position
     import { flip } from "svelte/animate";
 
     import { formatTime } from "./utils.js";
 
     export let laps = [];
-
 </script>
 <style>
     /* limit the height of the unordered list */
@@ -52,9 +53,8 @@
 <!-- use lap.total as a unique key to differentiate between the items -->
 <ul>
     {#each laps as lap (lap.total)}
-    <li in:fly={{ y: -20, duration: 300, delay: 50 }} animate:flip={{ duration: 350 }}>
+    <li in:fly="{{ y: -20, duration: 300, delay: 50 }}" animate:flip="{{ duration: 350 }}">
         <h2>Lap <sup>{lap.number}</sup></h2>
-        <!-- total -->
         <h3>{formatTime(lap.total)}</h3>
         <h4>+{formatTime(lap.partial)}</h4>
     </li>
