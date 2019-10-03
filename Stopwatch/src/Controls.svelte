@@ -38,7 +38,6 @@
         border: none;
         background: none;
         border-radius: inherit;
-        margin: 0; /* by default svelte applies a margin to the bottom of the button */
         transition: background 0.2s ease-out;
     }
     /* include a border on all button but the first, to avoid a border when only one element exist */

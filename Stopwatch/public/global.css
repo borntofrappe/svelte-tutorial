@@ -63,16 +63,3 @@ body {
         }
     }
 }
-
-/* for -webkit supported browsers style the scrollbar closer to the overall ui */
-.stopwatch ul::-webkit-scrollbar {
-    width: 6px;
-}
-.stopwatch ul::-webkit-scrollbar-track {
-    border-radius: 3px;
-    background: hsl(0, 0%, 80%);
-}
-.stopwatch ul::-webkit-scrollbar-thumb {
-    background-color: hsl(0, 0%, 30%);
-    border-radius: 3px;
-}

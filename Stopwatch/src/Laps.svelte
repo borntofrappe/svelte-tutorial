@@ -48,6 +48,20 @@
         text-align: right;
         font-size: 0.75rem;
     }
+
+    /* for -webkit supported browsers style the scrollbar closer to the overall ui */
+    ul::-webkit-scrollbar {
+        width: 6px;
+    }
+    ul::-webkit-scrollbar-track {
+        border-radius: 3px;
+        background: hsl(0, 0%, 80%);
+    }
+    ul::-webkit-scrollbar-thumb {
+        background-color: hsl(0, 0%, 30%);
+        border-radius: 3px;
+    }
+
 </style>
 
 <!-- use lap.total as a unique key to differentiate between the items -->

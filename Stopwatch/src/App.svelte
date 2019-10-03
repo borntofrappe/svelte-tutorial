@@ -1,6 +1,6 @@
 <script>
     import { onDestroy } from 'svelte';
-	import StopWatch from './StopWatch.svelte';
+	import Stopwatch from './Stopwatch.svelte';
 	import Laps from './Laps.svelte';
 	import Controls from './Controls.svelte';
 
@@ -80,7 +80,7 @@
 
 <div class="stopwatch">
     <!-- pass the number of milliseconds to the stopwatch component -->
-    <StopWatch {lapse} />
+    <Stopwatch {lapse} />
     <!-- pass the array of laps to the laps component -->
     <Laps {laps} />
     <!-- following the events disaptched from the controls component call the start/pause/stop/lap function
