@@ -6,6 +6,30 @@
 	export let data;
 </script>
 
+<style>
+	table {
+		padding: 1.25rem 2rem;
+        background: hsl(0, 0%, 100%);
+		box-shadow: 0 -1px 10px -5px hsla(0, 0%, 0%, 0.2);
+		text-align: center;
+		table-layout: fixed;
+	}
+	th {
+		text-transform: uppercase;
+		font-size: 1.25rem;
+		width: 50%;
+	}
+	tr {
+		line-height: 2;
+	}
+	tr:nth-of-type(even) td {
+		background: hsl(0, 0%, 95%);
+	}
+	tr:nth-of-type(odd) td {
+		background: hsl(0, 0%, 98%);
+	}
+</style>
+
 <table transition:fade>
 	<tr>
 		<th>Word</th>
@@ -17,7 +41,7 @@
 	{#each data as datum (datum.word)}
 		<tr animate:flip in:fly={{ x: -50 }} out:fly={{x : 50}}>
 			<td>{datum.word}</td>
-			<td>{datum.frequency}</td>
+			<td class="number">{datum.frequency}</td>
 		</tr>
 	{/each}
 </table>

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Karla&display=swap");
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -5,5 +7,43 @@
 }
 body {
     min-height: 100vh;
-    background: hsl(0, 0%, 95%);
+    background: hsl(0, 0%, 90%);
+    font-family: "Karla", sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    width: 95vw;
+    margin: 1rem auto;
+}
+.container > * + * {
+    margin-top: 1rem;
+}
+
+@supports (display: grid) {
+    @media (min-width: 600px) {
+        .container {
+            display: grid;
+            max-width: 750px;
+            grid-template-areas: "form form" "table visualization";
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 1rem;
+        }
+
+        .container form {
+            grid-area: form;
+        }
+        .container table {
+            grid-area: table;
+        }
+        .container svg {
+            grid-area: visualization;
+        }
+
+        .container > * + * {
+            margin-top: 0;
+        }
+    }
 }

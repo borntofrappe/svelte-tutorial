@@ -7,7 +7,7 @@
     const dispatch = createEventDispatcher();
 
     // value bound to the input element
-    let value;
+    let value = "initial text value to just see the table";
     // array describing the words & frequency
     let data = [];
     0;
@@ -50,8 +50,41 @@
     }
 </script>
 
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 1.25rem 1rem;
+        background: hsl(0, 0%, 100%);
+        box-shadow: 0 -1px 10px -5px hsl(0, 0%, 0%, 0.2);
+    }
+    form > * + * {
+        margin-top: 1rem;
+    }
+    textarea {
+        width: 100%;
+        min-height: 200px;
+        font-family: inherit;
+        font-size: 1rem;
+        line-height: 1.5;
+        resize: none;
+        border: 2px solid hsl(220, 80%, 85%);
+        padding: 0.5rem;
+    }
+    button {
+        align-self: flex-start;
+        padding: 0.5rem 1rem;
+        background: hsl(211, 92%, 58%);
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-family: inherit;
+        color: hsl(0, 0%, 100%);
+    }
+</style>
+
 <form on:submit|preventDefault="{handleSubmit}">
-    <input type="text" bind:value />
+    <textarea bind:value></textarea>
     <button>
         Count
     </button>
