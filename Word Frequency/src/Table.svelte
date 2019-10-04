@@ -13,6 +13,8 @@
 		box-shadow: 0 -1px 10px -5px hsla(0, 0%, 0%, 0.2);
 		text-align: center;
 		table-layout: fixed;
+        min-height: 300px;
+
 	}
 	th {
 		text-transform: uppercase;

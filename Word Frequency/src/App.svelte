@@ -46,7 +46,8 @@
 
 	<!-- if the array is not empty display a table and svg to highlight the data -->
 	{#if data.length > 0}
-		<Table {data} />
+		<Table data={data.slice(0, 8)} />
+		<Visualization data={data.slice(0, 8)} />
 	{/if}
 
 </div>

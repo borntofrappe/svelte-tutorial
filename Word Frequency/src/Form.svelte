@@ -7,7 +7,7 @@
     const dispatch = createEventDispatcher();
 
     // value bound to the input element
-    let value = "initial text value to just see the table";
+    let value = "There is a CSS property for tables that, it seems to me, is well-supported, little known, and super useful. It changes the way that tables are rendered such that it gives you a sturdier, more predictable layout.";
     // array describing the words & frequency
     let data = [];
     0;
