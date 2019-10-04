@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Karla&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Mukta:400,500&display=swap");
 
 * {
     box-sizing: border-box;
@@ -7,10 +7,13 @@
 }
 body {
     min-height: 100vh;
-    background: hsl(0, 0%, 90%);
-    font-family: "Karla", sans-serif;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><g fill="none" stroke-width="1" stroke="hsl(210, 90%, 30%)"><path d="M 0 30 Q 40 60 20 100"></path><path d="M 20 0 Q 40 60 100 30"></path></g></svg>'),
+        hsl(210, 90%, 45%);
+    background-size: 50px;
+    font-family: "Mukta", sans-serif;
 }
 
+/* by default display the contents in a column */
 .container {
     display: flex;
     flex-direction: column;
@@ -18,32 +21,77 @@ body {
     width: 95vw;
     margin: 1rem auto;
 }
+/* by default separate the containers vertically */
 .container > * + * {
     margin-top: 1rem;
 }
 
+/* for grid-supporting devices */
 @supports (display: grid) {
-    @media (min-width: 600px) {
+    /* for wide enough viewports */
+    @media (min-width: 700px) {
+        /* display the three components in a grid
+
+        .input            .input
+        .spreadsheet      .chart
+        */
         .container {
             display: grid;
             max-width: 750px;
-            grid-template-areas: "form form" "table visualization";
+            grid-template-areas: "input input" "spreadsheet chart";
             grid-template-columns: 1fr 1fr;
             grid-gap: 1rem;
         }
+        .container .input {
+            grid-area: input;
+        }
+        .container .spreadsheet {
+            grid-area: spreadsheet;
+        }
+        /* align the .chart to the beginning of the row, to avoid stretching the element when the sibling .spreadsheet becomes taller */
+        .container .chart {
+            grid-area: chart;
+            align-self: start;
+        }
 
-        .container form {
-            grid-area: form;
-        }
-        .container table {
-            grid-area: table;
-        }
-        .container svg {
-            grid-area: visualization;
-        }
-
+        /* remove the margin applied by default between the flex children */
         .container > * + * {
             margin-top: 0;
         }
     }
+}
+
+/* for all meaningful containers
+describe a card layout with a white background and considerable padding
+*/
+.container .input,
+.container .spreadsheet,
+.container .chart {
+    background: hsl(0, 0%, 100%);
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 2px 10px -5px hsl(210, 85%, 10%);
+    /* position relative for the icons */
+    position: relative;
+}
+/* absolute position the icons at alternating corners of the containers */
+.container .input .icon,
+.container .spreadsheet .icon,
+.container .chart .icon {
+    position: absolute;
+    filter: drop-shadow(0 1px 5px hsla(210, 90%, 30%, 0.2));
+}
+.container .input .icon {
+    top: 0;
+    right: 0;
+    transform: rotate(20deg);
+}
+.container .spreadsheet .icon {
+    top: 0;
+    left: 0;
+    transform: rotate(-20deg);
+}
+.container .chart .icon {
+    bottom: 0;
+    right: 0;
+    transform: rotate(10deg);
 }

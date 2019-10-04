@@ -1,53 +1,29 @@
 <script>
-	import Form from './Form.svelte';
-	import Table from './Table.svelte';
-	import Visualization from './Visualization.svelte';
+	import Defs from './Defs.svelte';
+	import Input from './Input.svelte';
+	import Spreadsheet from './Spreadsheet.svelte';
+	import Chart from './Chart.svelte';
 
 	// data refers to an array in which to describe the words and their frequency
 	let data = [];
 
-	// following the update event use the data included in the event.detail property
+	// following the update event use the data included in the .detail property
 	function update(event) {
 		data = event.detail;
 	}
 </script>
-<style>
-	.container {
-		display: flex;
-		flex-direction: column;
-		max-width: 450px;
-		width: 95vw;
-		margin: 1rem auto;
-	}
-	.container > * + * {
-		margin-top: 1rem;
-	}
 
-	@supports (display: grid) {
-		@media (min-width: 600px) {
-			.container {
-				display: grid;
-				max-width: 750px;
-				grid-template-areas: 'form form' 'table visualization';
-				grid-gap: 1rem;
-			}
-
-			.container > * + * {
-				margin-top: 0;
-			}
-		}
-	}
-</style>
-
+<!-- include the icons described in the defs block -->
+<Defs/>
 <div class="container">
 
 	<!-- listen for the update event on the form -->
-	<Form on:update={update} />
+	<Input on:update={update} />
 
-	<!-- if the array is not empty display a table and svg to highlight the data -->
+	<!-- display the chart and the graphic only if the array is not empty -->
 	{#if data.length > 0}
-		<Table data={data.slice(0, 8)} />
-		<Visualization data={data.slice(0, 8)} />
+		<Spreadsheet {data} />
+		<Chart {data} />
 	{/if}
 
 </div>
