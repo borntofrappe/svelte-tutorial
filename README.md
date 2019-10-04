@@ -33,3 +33,9 @@ Create a CRUD application to add/update/delete key value pairs. Hihglight the it
 Create an application allowing to track the passing of time and the lapse between laps.
 
 **Tags**: setInterval, store, readable, animation, conditional statements
+
+## [Word Frequency](https://svelte.dev/repl/d047e6a494bc402a8897a25ae6c16725)
+
+Enumerate the number of times words appear in a patch of text, through tables and visualizations.
+
+**Tags**: each, animation, d3
