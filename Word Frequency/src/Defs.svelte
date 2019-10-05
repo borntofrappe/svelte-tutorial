@@ -1,6 +1,8 @@
-<!-- svg icons used throughout the project, in the corner of each meaningful container -->
+<!-- ùù icons used throughout the project, in the corner of each meaningful container -->
 <svg style="display: none;" viewBox="0 0 100 100" width="40" height="40">
-    <!-- ! each symbol has its own viewbox -->
+    <!-- ! each symbol has its own viewbox
+    moreover, each symbol uses a variation of the blue chosen for the application
+    -->
     <symbol id="keyboard" viewBox="0 0 100 60">
         <rect x="0" y="0" width="100" height="60" rx="5" fill="hsl(210, 90%, 75%)"></rect>
         <g id="keys">

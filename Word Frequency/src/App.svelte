@@ -7,22 +7,26 @@
 	// data refers to an array in which to describe the words and their frequency
 	let data = [];
 
-	// following the update event use the data included in the .detail property
+	// following the update event update the data with the value received in the detail property
 	function update(event) {
 		data = event.detail;
 	}
 </script>
 
-<!-- include the icons described in the defs block -->
+<!-- svg defs block, injecting the symbols later used in the project -->
 <Defs/>
 <div class="container">
 
-	<!-- listen for the update event on the form -->
+	<!-- input component, featuring the textarea and controls' buttons -->
 	<Input on:update={update} />
 
-	<!-- display the chart and the graphic only if the array is not empty -->
+	<!-- assuming data describes a series of words and their absolute frequency
+	the conditional allow to transition the components in and out of the page
+	-->
 	{#if data.length > 0}
+		<!-- spreadsheet component, highlighting the data in a table element -->
 		<Spreadsheet {data} />
+		<!-- chart component, highlighting the data through a visualization -->
 		<Chart {data} />
 	{/if}
 

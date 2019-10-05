@@ -1,16 +1,17 @@
 <script>
     // transition directives for the table and items as they are added/removed
-    import { fade, fly } from "svelte/transition";
+    import { fly, fade } from "svelte/transition";
     // animation directive for items as they are repositioned
     import { flip } from "svelte/animate";
 
-    // use the data received from the parent component to create a table highlighting the words and frequencies
+    // use the data received from the parent component to create a table highlighting the words and frequencies in table rows
     export let data;
 </script>
 
 <style>
     /* second component
-dedicate half a width to each column */
+    dedicate half a width to each column
+    */
     section table {
         width: 100%;
         border-collapse: collapse;
@@ -22,7 +23,7 @@ dedicate half a width to each column */
     }
     section table tr th {
         text-transform: uppercase;
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         width: 50%;
         background: hsl(210, 90%, 60%);
         border-bottom: 2px solid hsl(210, 90%, 50%);
@@ -38,6 +39,7 @@ dedicate half a width to each column */
     }
 </style>
 
+<!-- transition the section from the left -->
 <section class="spreadsheet" transition:fly="{{ x: -25 }}">
     <svg class="icon" viewBox="0 0 90 100" width="45" height="50">
         <use href="#table"></use>
@@ -48,10 +50,13 @@ dedicate half a width to each column */
             <th>Frequency</th>
         </tr>
         <!-- for each object include a row with two cells, describing the word and frequency
-		it is possible to use the word as a key as this is a unique value
+        it is possible to use the word as a key as this is a unique value
+
+        transition new rows from the left
+        animate existing rows through the flip animation
 		-->
         {#each data as datum (datum.word)}
-        <tr transition:fly="{{ x: -50 }}" animate:flip>
+        <tr in:fly="{{ x: -50 }}" animate:flip>
             <td>{datum.word}</td>
             <td class="number">{datum.frequency}</td>
         </tr>
