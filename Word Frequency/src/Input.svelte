@@ -2,8 +2,10 @@
     /* input component
 	- create the array of words & frequency from the textarea element
 	- dispatch an _update_ event passing the array as argument
+    - include filler text on load and when pressing the load sample button
 	*/
     import { createEventDispatcher } from "svelte";
+    import { onMount } from "svelte";
     const dispatch = createEventDispatcher();
 
     // value bound to the textarea
@@ -18,10 +20,10 @@
 	this returns an array of strings which is in turn reduced to an array of objects
 	objects describing the word and its frequency
 	*/
-    function count() {
-        if (value) {
-            data = value
-                // array of words
+
+    function wordsByFrequency(text) {
+        return (
+            text // array of words
                 .match(regexWord)
                 // array of _lowercase_ words
                 .map(word => word.toLowerCase())
@@ -41,12 +43,26 @@
                     return acc;
                 }, [])
                 // sorted in descending order
-                .sort((a, b) => b.frequency - a.frequency);
-        } else {
-            // ! if value doesn't hold a value reset data to an empty array
-            data = [];
-        }
+                .sort((a, b) => b.frequency - a.frequency)
+        );
+    }
+    function count() {
+        data = value ? wordsByFrequency(value) : [];
         dispatch("update", data);
+    }
+
+    function parseDOM(text) {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "text/xml");
+        const descriptions = xml.querySelectorAll("item description");
+        const description = descriptions[Math.floor(Math.random() * descriptions.length)];
+        return description.textContent.match(/<p>([^<]+)<\/p>/)[1];
+    }
+    function load() {
+        // https://podcast.freecodecamp.org/
+        fetch("https://podcast.freecodecamp.org/rss")
+            .then(response => response.text().then(text => parseDOM(text)))
+            .then(text => (value = text));
     }
 </script>
 
@@ -105,7 +121,7 @@
         <button on:click="{count}">
             Count words
         </button>
-        <button>
+        <button on:click="{load}">
             Load sample
         </button>
     </div>

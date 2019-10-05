@@ -51,6 +51,7 @@
     /* third component
 have the svg expand to cover the available width and height */
     section .graphic {
+        display: block;
         width: 100%;
         height: auto;
         color: hsl(210, 90%, 55%);
