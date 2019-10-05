@@ -1,4 +1,9 @@
 <script>
+    // transition directives for the table and items as they are added/removed
+    import { fade, fly } from "svelte/transition";
+    // animation directive for items as they are repositioned
+    import { flip } from "svelte/animate";
+
     // use the data received from the parent component to create a table highlighting the words and frequencies
     export let data;
 </script>
@@ -33,7 +38,7 @@ dedicate half a width to each column */
     }
 </style>
 
-<section class="spreadsheet">
+<section class="spreadsheet" transition:fly="{{ x: -25 }}">
     <svg class="icon" viewBox="0 0 90 100" width="45" height="50">
         <use href="#table"></use>
     </svg>
@@ -46,7 +51,7 @@ dedicate half a width to each column */
 		it is possible to use the word as a key as this is a unique value
 		-->
         {#each data as datum (datum.word)}
-        <tr>
+        <tr transition:fly="{{ x: -50 }}" animate:flip>
             <td>{datum.word}</td>
             <td class="number">{datum.frequency}</td>
         </tr>
