@@ -87,6 +87,7 @@
             <text x="0" y="0" font-size="5" text-anchor="middle" dominant-baseline="middle" transform="translate({arcText.centroid(datum).join(' ')})">{datum.data.word}</text>
             <path d="{arc(datum)}" fill="{color(i)}" stroke="hsl(0, 0%, 100%)" stroke-width="1"></path>
             {/each}
+            <text x="0" y="0" font-size="4" text-anchor="middle" dominant-baseline="middle" style="text-transform: uppercase; letter-spacing: 0.01rem;">Frequency</text>
         </g>
     </svg>
 </section>

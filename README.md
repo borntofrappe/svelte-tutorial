@@ -34,8 +34,8 @@ Create an application allowing to track the passing of time and the lapse betwee
 
 **Tags**: setInterval, store, readable, animation, conditional statements
 
-## [Word Frequency](https://svelte.dev/repl/d047e6a494bc402a8897a25ae6c16725)
+## [Word Frequency](https://codepen.io/borntofrappe/pen/QWWWqQM)
 
-Enumerate the number of times words appear in a patch of text, through tables and visualizations.
+Elaborate the absolute frequency for every word included in a textarea element. Highlight the result through a table and a pie chart.
 
-**Tags**: each, animation, d3
+**Tags**: each, d3, fetch, animation

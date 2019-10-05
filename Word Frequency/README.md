@@ -1,3 +1,3 @@
-# [Word Frequency](https://svelte.dev/repl/d047e6a494bc402a8897a25ae6c16725)
+# [Word Frequency](https://codepen.io/borntofrappe/full/QWWWqQM)
 
-Elaborate a patch to text to highlight the absolute frequency of each unique word.
+Elaborate the absolute frequency for every word included in a textarea element. Highlight the result through a table and a pie chart.
