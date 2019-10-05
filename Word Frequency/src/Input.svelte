@@ -18,7 +18,7 @@
 	this returns an array of strings which is in turn reduced to an array of objects
 	objects describing the word and its frequency
 	*/
-    function handleCount() {
+    function count() {
         if (value) {
             data = value
                 // array of words
@@ -52,7 +52,7 @@
 
 <style>
     /* first component
-separate the direct children vertically */
+    separate the direct children vertically */
     main > * + * {
         margin-top: 1rem;
     }
@@ -102,7 +102,7 @@ separate the direct children vertically */
     </svg>
     <textarea bind:value></textarea>
     <div class="controls">
-        <button on:click="{handleCount}">
+        <button on:click="{count}">
             Count words
         </button>
         <button>

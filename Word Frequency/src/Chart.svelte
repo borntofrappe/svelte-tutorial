@@ -5,17 +5,26 @@
     // values for the visualization
     const width = 100;
     const height = 100;
-    const margin = 20;
 
-    $: xScale = d3
-        .scaleLinear()
-        .domain([0, d3.max(data, d => d.frequency)])
-        .range([0, width - margin]);
+    // slice the pie according to the individual frequencies
+    const pie = d3.pie().value(d => d.frequency);
 
-    $: yScale = d3
-        .scaleBand()
-        .domain(data.map(({ word }) => word))
-        .range([0, height]);
+    // arc used for the slices
+    // use an outerRadius smaller than half the width to allocate space for the text
+    const arc = d3
+        .arc()
+        .innerRadius(width / 8)
+        .outerRadius(width / 3.5);
+
+    // arc used for the text
+    // the idea is to use the arc's centroid to have the text positioned outside the slices
+    const arcText = d3
+        .arc()
+        .innerRadius(width / 2.75)
+        .outerRadius(width / 2.25);
+
+    // color scale for the slices
+    const color = d3.scaleOrdinal(d3.schemePastel1);
 </script>
 
 <style>
@@ -36,15 +45,24 @@ have the svg expand to cover the available width and height */
         <use href="#chart"></use>
     </svg>
     <svg class="graphic" viewBox="0 0 {width} {height}" {width} {height}>
-        <!-- for each datum add a line, circle and text element describing the word and frequency -->
-        {#each data as datum, i (datum.word)}
-        <g transform="translate(0 {yScale(datum.word) + yScale.bandwidth() / 2})">
-            <path d="M 0 0 h {xScale(datum.frequency)}" fill="none" stroke="currentColor" stroke-width="1"></path>
-            <g transform="translate({xScale(datum.frequency)} 0)">
-                <circle cx="0" cy="0" r="2" fill="currentColor"></circle>
-                <text x="5" y="0" dominant-baseline="middle" font-size="5">{datum.word}</text>
-            </g>
+        <defs>
+            <clipPath id="clip">
+                <circle cx="0" cy="0" r="{width / 3}"></circle>
+            </clipPath>
+        </defs>
+        <!-- center the arcs in the svg -->
+        <g transform="translate({width / 2} {height / 2})">
+            <!-- for each datum add an arc using the pie-d data -->
+            {#each pie(data) as datum, i (datum.data.word)}
+            <!-- between the text and the slice include a stroke connecting the two centroids
+            included before the slice to have the line beneath the path element
+            -->
+            <path clip-path="url(#clip)" fill="none" stroke="currentColor" stroke-width="0.5" d="M {arc.centroid(datum).join(' ')} L {arcText.centroid(datum).join(' ')}">{datum.data.word}</path>
+            <!-- slice -->
+            <path d="{arc(datum)}" fill="{color(i)}" stroke="hsl(0, 0%, 100%)" stroke-width="1"></path>
+            <!-- next to each slice include a text with the second arc -->
+            <text x="0" y="0" font-size="4" text-anchor="middle" dominant-baseline="middle" transform="translate({arcText.centroid(datum).join(' ')})">{datum.data.word}</text>
+            {/each}
         </g>
-        {/each}
     </svg>
 </section>
