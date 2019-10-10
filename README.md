@@ -39,3 +39,9 @@ Create an application allowing to track the passing of time and the lapse betwee
 Elaborate the absolute frequency for every word included in a textarea element. Highlight the result through a table and a pie chart.
 
 **Tags**: each, d3, fetch, animation
+
+## [Wind Chill Index](https://svelte.dev/repl/4f87e0117de9489d8f76977549e62573)
+
+Compute the wind chill index on the basis of the input temperature and speed. Differentiate the result according to the chosen unit of measure.
+
+**Tags**: form, conditional, transition
