@@ -17,5 +17,5 @@ export const bounds = {
 	speed: {
 		metric: 4.8,
 		imperial: 3
-	}, 
+	},
 }

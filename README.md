@@ -18,7 +18,7 @@ A silly button allowing to raise a mallet and strike the puck of a carnival mach
 
 ## [Sport Bracket](https://svelte.dev/repl/4941cafa6eee409d947716816190222f)
 
-Describe the eliminatory stages for a hypothetical sport competition, taking advtange of the `<svelte:self>` component.
+Describe the eliminatory stages for a hypothetical sport competition, taking advantage of the `<svelte:self>` component.
 
 **Tags**: self, store, custom store
 
@@ -40,8 +40,8 @@ Elaborate the absolute frequency for every word included in a textarea element. 
 
 **Tags**: each, d3, fetch, animation
 
-## [Wind Chill Index](https://svelte.dev/repl/4f87e0117de9489d8f76977549e62573)
+## [Wind Chill Index](https://svelte.dev/repl/c8f46ac1f70e46189ff550011aebb7df)
 
 Compute the wind chill index on the basis of the input temperature and speed. Differentiate the result according to the chosen unit of measure.
 
-**Tags**: form, conditional, transition
+**Tags**: form, dispatch, spread
