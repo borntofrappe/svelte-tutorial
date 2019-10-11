@@ -113,7 +113,6 @@ form label input[type="checkbox"]:checked + svg .translate {
 form button {
     margin-top: 2.5rem;
     background: hsla(210, 25%, 15%);
-    /* box-shadow: 0px 0px 0px 2px hsl(210, 25%, 15%); */
     border: none;
     border-bottom: 2px inset hsl(210, 25%, 0%);
     padding: 1rem 1rem;

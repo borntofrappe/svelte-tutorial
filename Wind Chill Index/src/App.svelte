@@ -11,10 +11,12 @@
 	}
 </script>
 
-<Form on:submit={handleSubmit} />
-<!-- display the result conditional to the variable having a truthy value -->
-{#if result}
-	<!-- spread the properties to have the component pick up the individual values -->
-	<Result {...result} />
-{/if}
+<div class="app">
+	<Form on:submit={handleSubmit} />
+	<!-- display the result conditional to the variable having a truthy value -->
+	{#if result}
+		<!-- spread the properties to have the component pick up the individual values -->
+		<Result {...result} />
+	{/if}
+</div>
 
