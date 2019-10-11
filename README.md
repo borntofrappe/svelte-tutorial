@@ -40,7 +40,7 @@ Elaborate the absolute frequency for every word included in a textarea element. 
 
 **Tags**: each, d3, fetch, animation
 
-## [Wind Chill Index](https://svelte.dev/repl/c8f46ac1f70e46189ff550011aebb7df)
+## [Wind Chill Index](https://codepen.io/borntofrappe/pen/WNNrrJg)
 
 Compute the wind chill index on the basis of the input temperature and speed. Differentiate the result according to the chosen unit of measure.
 

@@ -1,4 +1,4 @@
-# [Wind Chill Index](https://svelte.dev/repl/c8f46ac1f70e46189ff550011aebb7df)
+# [Wind Chill Index](https://codepen.io/borntofrappe/full/WNNrrJg)
 
 ## Goal
 

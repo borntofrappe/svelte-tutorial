@@ -1,4 +1,7 @@
 <script>
+    import { fly } from 'svelte/transition';
+    import { quintOut } from 'svelte/easing';
+
     // describe the variables received from the parent component
     export let isMetric;
     export let temperature;
@@ -9,7 +12,7 @@
     dl {
         text-align: right;
         background: hsl(210, 25%, 25%);
-        box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.2);
+        box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.4);
         padding: 1.5rem 3rem;
         font-weight: 700;
         text-align: center;
@@ -57,7 +60,7 @@
     }
 </style>
 <!-- include the values in a wrapping container -->
-<dl>
+<dl in:fly={{ y: -25, duration: 500, easing: quintOut }}>
     <dt>{index}</dt>
     <dd>WCI</dd>
 

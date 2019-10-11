@@ -33,7 +33,7 @@
     form {
         background: hsl(210, 25%, 25%);
         color: hsl(210, 25%, 85%);
-        box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.2);
+        box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.4);
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
