@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Wind Chill UI</title>
+    </head>
+    <body>
+        <div class="app">
+            <form>
+                <label>
+                    <span>Temperature</span>
+                    <input required type="number" step="0.1" value="-20" />
+                    <sub>c°</sub>
+                    <svg viewBox="0 0 22 51" width="66" height="153">
+                        <g transform="translate(10.5 7.5)" stroke-linecap="round" stroke-linejoin="round">
+                            <g stroke="hsl(210, 25%, 40%)" stroke-width="3">
+                                <path id="line" d="M 0 2 h 10"></path>
+                                <use href="#line" y="6"></use>
+                                <use href="#line" y="12"></use>
+                                <use href="#line" y="18"></use>
+                            </g>
+                            <path stroke="hsl(210, 25%, 40%)" stroke-width="15" d="M 0 0 v 30 a 3 3 0 0 0 0 6 a 3 3 0 0 0 0 -6"></path>
+                            <path stroke="hsl(210, 25%, 20%)" stroke-width="5" d="M 0 0 v 30 a 3 3 0 0 0 0 6 a 3 3 0 0 0 0 -6"></path>
+                            <g transform="translate(0 -3.5)">
+                                <path class="scale" transform="scale(1 0)" stroke-linecap="initial" stroke="hsl(210, 25%, 40%)" stroke-width="5" d="M 0 0 v 30"></path>
+                            </g>
+                            <path stroke="hsl(210, 25%, 20%)" stroke-width="5" d="M 0 30 a 3 3 0 0 0 0 6 a 3 3 0 0 0 0 -6"></path>
+                        </g>
+                    </svg>
+                </label>
+                <label>
+                    <span>Speed</span>
+                    <input required type="number" step="0.1" value="4" />
+                    <sub>km/h</sub>
+                    <svg viewBox="0 0 93 84" width="93" height="84">
+                        <g transform="translate(4 65)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+                            <g transform="translate(47.5 0)">
+                                <g class="rotate">
+                                    <g transform="translate(-47.5 0)">
+                                        <path fill="none" stroke="hsl(210, 25%, 40%)" d="M 10 0 q 18.75 0 37.5 -5 q 18.75 5 37.5 5"></path>
+                                        <g fill="hsl(210, 25%, 40%)" stroke="hsl(210, 25%, 40%)">
+                                            <path d="M 10 0 h 37.5 v 15 v -15 h 37.5 l -8 -7 l 8 7 l -8 7 l 8 -7 h -60 l -10 -10 h -15 l 10 10 l -10 10 h 15 l 10 -10"></path>
+                                            <path d="M 47.5 0 v -10 q -25 -5 -25 -25 q -10 0 -10 12 q 0 -20 5 -20 q -15 0 -15 10 a 22.5 22.5 0 0 1 45 0 q 10 0 15 -20 q 0 -8 -5 -8 q 15 0 15 8 l 5 5 l -5 5 q 0 33 -25 33"></path>
+                                        </g>
+                                        <circle cx="68" cy="-52" r="3" stroke="none" fill="hsl(210, 25%, 20%)"></circle>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </label>
+                <label for="unit" style="align-self: center;">
+                    <span>Imperial</span>
+                    <input checked type="checkbox" id="unit" name="unit" />
+                    <svg viewBox="0 0 100 60" width="100" height="60">
+                        <rect fill="hsla(210, 25%, 80%, 0.15)" x="0" y="0" width="100" height="60" rx="30"></rect>
+                        <circle fill="hsl(210, 25%, 90%)" class="translate" cx="75" cy="30" r="17" transform="translate(-50 0)" fill="currentColor"></circle>
+                    </svg>
+                    <span>Metric</span>
+                </label>
+                <button>
+                    Calculate
+                </button>
+            </form>
+            <dl>
+                <dt>-24</dt>
+                <dd>WCI</dd>
+
+                <dt>-20</dt>
+                <dd>c°</dd>
+
+                <dt>-4.8</dt>
+                <dd>km/h</dd>
+            </dl>
+        </div>
+    </body>
+</html>

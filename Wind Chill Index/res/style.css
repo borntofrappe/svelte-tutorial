@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Ubuntu", sans-serif;
+    background: hsl(210, 10%, 90%);
+}
+
+.app {
+    width: 95vw;
+    max-width: 400px;
+    margin: 0.5rem auto;
+}
+.app > * + * {
+    margin-top: 1.5rem;
+}
+form {
+    background: hsl(210, 25%, 25%);
+    color: hsl(210, 25%, 85%);
+    box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.2);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form > * + * {
+    margin-top: 2rem;
+}
+
+form label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+form label > * + * {
+    margin-left: 1.25rem;
+}
+form label span {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+form label input[type="number"] {
+    text-align: right;
+    font-family: inherit;
+    color: inherit;
+    width: 5rem;
+    height: 3rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border: none;
+    background: hsla(210, 25%, 80%, 0.15);
+    border-radius: 12px;
+    opacity: 0.7;
+    outline: none;
+}
+form label input[type="number"]:focus {
+    opacity: 1;
+}
+form label sub {
+    font-size: 1.2rem;
+}
+form label input[type="number"] + sub + svg {
+    display: block;
+    height: 64px;
+    width: auto;
+}
+form label input[type="number"] + sub + svg .scale,
+form label input[type="number"] + sub + svg .rotate {
+    transition: transform 3s cubic-bezier(0.175, 0.885, 0.32, 1.5);
+}
+
+form label input[type="number"]:focus + sub + svg .scale {
+    transform: scaleY(1);
+}
+form label input[type="number"]:focus + sub + svg .rotate {
+    transform: rotateY(-30deg);
+}
+
+form label input[type="checkbox"] {
+    color: inherit;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    opacity: 0;
+}
+form label input[type="checkbox"] + svg {
+    opacity: 0.7;
+}
+form label input[type="checkbox"]:focus + svg,
+form label input[type="checkbox"]:active + svg {
+    opacity: 1;
+}
+form label input[type="checkbox"] + svg {
+    display: block;
+    width: 64px;
+    height: auto;
+}
+form label input[type="checkbox"] + svg .translate {
+    transition: transform 0.5s ease-in-out;
+}
+form label input[type="checkbox"]:checked + svg .translate {
+    transition: transform 0.25s ease-in-out;
+    transform: translate(0px);
+}
+
+form button {
+    margin-top: 2.5rem;
+    background: hsla(210, 25%, 15%);
+    /* box-shadow: 0px 0px 0px 2px hsl(210, 25%, 15%); */
+    border: none;
+    border-bottom: 2px inset hsl(210, 25%, 0%);
+    padding: 1rem 1rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.015rem;
+    color: inherit;
+    text-transform: uppercase;
+    position: relative;
+}
+
+dl {
+    text-align: right;
+    background: hsl(210, 25%, 25%);
+    box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.2);
+    padding: 1.5rem 3rem;
+    font-weight: 700;
+    text-align: center;
+}
+dt {
+    font-size: 5.5rem;
+    color: hsl(210, 25%, 85%);
+}
+dt:nth-of-type(n + 2) {
+    margin-top: 1rem;
+    font-size: 2.25rem;
+}
+dd {
+    margin-left: 0.75rem;
+    color: hsl(210, 25%, 0%);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+@supports (display: grid) {
+    dl {
+        display: grid;
+        grid-gap: 1.25rem 0.5rem;
+        justify-items: center;
+        grid-template-areas: "wci wci-unit" "temperature speed" "temperature-unit speed-unit";
+    }
+    dl dt:nth-of-type(1) {
+        grid-area: wci;
+    }
+    dl dd:nth-of-type(1) {
+        grid-area: wci-unit;
+        align-self: end;
+    }
+    dl dt:nth-of-type(2) {
+        grid-area: temperature;
+    }
+    dl dd:nth-of-type(2) {
+        grid-area: temperature-unit;
+    }
+    dl dt:nth-of-type(3) {
+        grid-area: speed;
+    }
+    dl dd:nth-of-type(3) {
+        grid-area: speed-unit;
+    }
+}

@@ -12,4 +12,4 @@ The project begun with the repl before moving locally to work with rollup and in
 
 ### Design
 
-In the **res** folder you find the icons drawn for the input elements of type number. They are meant to be transitioned as the respective elements are focused on.
+In the **res** folder you find the icons drawn for the input elements of type number. They are meant to be transitioned as the respective elements are focused on. You also find the markup and stylesheet describing the UI for the application.
