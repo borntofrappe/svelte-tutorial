@@ -5,19 +5,93 @@
     padding: 0;
     margin: 0;
 }
+/* by default show the components in a column */
 body {
     font-family: "Ubuntu", sans-serif;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.25" viewBox="0 0 100 100" width="100" height="100"><g transform="translate(50 50) rotate(-25)" fill="none" stroke="hsl(210, 25%, 40%)" stroke-width="5" stroke-linecap="round"><path id="branch" d="M 0 0 v 30 m 0 -22 l 10 10 m -20 0 l 10 -10 m 0 14 l 7 7 m -14 0 l 7 -7"></path><use href="%23branch" transform="rotate(90)"></use><use href="%23branch" transform="rotate(180)"></use><use href="%23branch" transform="rotate(270)"></use></g></svg>'),
-        hsl(210, 10%, 90%);
-    background-size: 10%;
-    background-position: -50% -100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.25" viewBox="0 0 100 100" width="100" height="100"><g transform="translate(50 50) rotate(-25)" fill="none" stroke="hsl(180, 60%, 5%)" stroke-width="5" stroke-linecap="round"><path id="branch" d="M 0 0 v 30 m 0 -22 l 10 10 m -20 0 l 10 -10 m 0 14 l 7 7 m -14 0 l 7 -7"></path><use href="%23branch" transform="rotate(90)"></use><use href="%23branch" transform="rotate(180)"></use><use href="%23branch" transform="rotate(270)"></use></g></svg>'),
+        hsl(215, 95%, 5%);
 }
 
 .app {
-    width: 95vw;
-    max-width: 400px;
-    margin: 0.5rem auto;
+    width: 90vw;
+    max-width: 700px;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .app > * + * {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
+}
+form {
+    border-top: 0.25rem solid hsl(180, 60%, 50%);
+    border-bottom: 0.25rem solid hsl(180, 60%, 50%);
+}
+
+/* if grid is supported */
+@supports (display: grid) {
+    /* for larger viewports */
+    @media (min-width: 700px) {
+        /* display the header, form and dl containers in a grid
+        header  form
+        dl    dl
+        */
+        .app {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(2, minmax(max-content, 1fr));
+            grid-auto-rows: minmax(200px, auto);
+            justify-items: center;
+        }
+        .app > * + * {
+            margin-top: initial;
+            border-top: none;
+        }
+        /* add a background to the header and dl element (the form is set to to have a background by default) */
+        header {
+            align-self: end;
+            background: hsl(215, 95%, 15%);
+        }
+        form {
+            align-self: start;
+            /* remove the borders included on the form */
+            border-top: none;
+            border-bottom: none;
+        }
+        dl {
+            grid-column: span 2;
+            justify-self: stretch;
+            background: hsl(215, 95%, 15%);
+        }
+    }
+    /* for any viewport display the information in the dl in a grid
+    wci             wci-unit
+    temperature     speed
+    t-unit          s-unit
+    */
+    dl {
+        display: grid;
+        grid-gap: 1.25rem 0.5rem;
+        justify-items: center;
+        grid-template-areas: "wci wci-unit" "temperature speed" "temperature-unit speed-unit";
+    }
+    dl dt:nth-of-type(1) {
+        grid-area: wci;
+    }
+    dl dd:nth-of-type(1) {
+        grid-area: wci-unit;
+        align-self: end;
+    }
+    dl dt:nth-of-type(2) {
+        grid-area: temperature;
+    }
+    dl dd:nth-of-type(2) {
+        grid-area: temperature-unit;
+    }
+    dl dt:nth-of-type(3) {
+        grid-area: speed;
+    }
+    dl dd:nth-of-type(3) {
+        grid-area: speed-unit;
+    }
 }

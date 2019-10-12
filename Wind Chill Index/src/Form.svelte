@@ -31,22 +31,32 @@
 
 <style>
     form {
-        background: hsl(210, 25%, 25%);
+        background: hsl(215, 95%, 15%);
         color: hsl(210, 25%, 85%);
-        box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.4);
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
         align-items: center;
+        max-width: 400px;
+        box-shadow: 0 2px 10px -4px hsla(180, 60%, 0%, 0.1);
     }
     form > * + * {
-        margin-top: 2rem;
+        margin-top: 2.5rem;
     }
-
+    p {
+        line-height: 1.5;
+    }
+    p mark {
+        border-bottom: 2px solid hsl(210, 25%, 85%);
+        background: none;
+        color: inherit;
+    }
     label {
+        width: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        /* position relative to absolute position the input of type checkbox where the svg is set to stay */
         position: relative;
     }
     label > * + * {
@@ -55,8 +65,13 @@
     span {
         font-size: 1.5rem;
         font-weight: 700;
+        letter-spacing: 0.01rem;
+    }
+    sub {
+        font-size: 1.2rem;
     }
     input[type="number"] {
+        margin-left: auto;
         text-align: right;
         font-family: inherit;
         color: inherit;
@@ -65,34 +80,17 @@
         padding: 0.5rem;
         font-size: 1.2rem;
         border: none;
-        background: hsla(210, 25%, 80%, 0.15);
+        background: hsla(200, 70%, 55%, 0.2);
         border-radius: 12px;
         opacity: 0.7;
         outline: none;
+        transition: opacity 0.2s ease-in-out;
     }
     input[type="number"]:focus {
         opacity: 1;
     }
-    sub {
-        font-size: 1.2rem;
-    }
-    input[type="number"] + sub + svg {
-        display: block;
-        height: 64px;
-        width: auto;
-    }
-    input[type="number"] + sub + svg .scale,
-    input[type="number"] + sub + svg .rotate {
-        transition: transform 3s cubic-bezier(0.175, 0.885, 0.32, 1.5);
-    }
 
-    input[type="number"]:focus + sub + svg .scale {
-        transform: scaleY(1);
-    }
-    input[type="number"]:focus + sub + svg .rotate {
-        transform: rotateY(-30deg);
-    }
-
+    /* absolute position the checkbox on top of the replacing svg */
     input[type="checkbox"] {
         color: inherit;
         position: absolute;
@@ -104,6 +102,8 @@
     }
     input[type="checkbox"] + svg {
         opacity: 0.7;
+        fill: hsla(200, 70%, 55%, 0.2);
+        transition: opacity 0.2s ease-in-out;
     }
     input[type="checkbox"]:focus + svg,
     input[type="checkbox"]:active + svg {
@@ -121,19 +121,29 @@
         transition: transform 0.25s ease-in-out;
         transform: translate(0px);
     }
+
     button {
-        margin-top: 2.5rem;
-        background: hsla(210, 25%, 15%);
+        outline: none;
         border: none;
-        border-bottom: 2px inset hsl(210, 25%, 0%);
-        padding: 1rem 1rem;
+        background: hsl(180, 60%, 85%);
+        color: hsl(210, 25%, 0%);
+        padding: 1rem;
         border-radius: 10px;
         font-family: inherit;
-        font-size: 1rem;
+        font-size: 1.2rem;
         letter-spacing: 0.015rem;
-        color: inherit;
         text-transform: uppercase;
-        position: relative;
+        filter: drop-shadow(0px 5px hsl(180, 60%, 50%));
+        transition: all 0.2s ease-in-out;
+    }
+    button:hover,
+    button:focus {
+        transform: translateY(2px);
+        filter: drop-shadow(0px 3px hsl(180, 60%, 50%));
+    }
+    button:active {
+        transform: translateY(5px);
+        filter: drop-shadow(0px 0px hsl(180, 60%, 50%));
     }
 </style>
 
@@ -147,51 +157,18 @@ markup
 	heading describing the index
 -->
 <form on:submit|preventDefault="{handleSubmit}">
+    <p>The <mark>wind chill index</mark> tries to estimate the lowering of body temperature considering air temperature and the wind's speed.</p>
     <!-- wrap each input in a label -->
     <label>
-        <span>Temperature</span>
+        <span>Temperature <sub>({isMetric ? 'c°' : 'f°'})</sub></span>
         <!-- change the min and max attributes according to the chosen unit of measure
             accordingly, change the text for the unit of measure
         -->
         <input required type="number" bind:value={temperature} max={isMetric ? maxTemperature.metric : maxTemperature.imperial} step="0.1" />
-        <sub>{isMetric ? 'c°' : 'f°'}</sub>
-        <svg viewBox="0 0 22 51" width="66" height="153">
-            <g transform="translate(10.5 7.5)" stroke-linecap="round" stroke-linejoin="round">
-                <g stroke="hsl(210, 25%, 40%)" stroke-width="3">
-                    <path id="line" d="M 0 2 h 10"></path>
-                    <use href="#line" y="6"></use>
-                    <use href="#line" y="12"></use>
-                    <use href="#line" y="18"></use>
-                </g>
-                <path stroke="hsl(210, 25%, 40%)" stroke-width="15" d="M 0 0 v 30 a 3 3 0 0 0 0 6 a 3 3 0 0 0 0 -6"></path>
-                <path stroke="hsl(210, 25%, 20%)" stroke-width="5" d="M 0 0 v 30 a 3 3 0 0 0 0 6 a 3 3 0 0 0 0 -6"></path>
-                <g transform="translate(0 -3.5)">
-                    <path class="scale" transform="scale(1 0)" stroke-linecap="initial" stroke="hsl(210, 25%, 40%)" stroke-width="5" d="M 0 0 v 30"></path>
-                </g>
-                <path stroke="hsl(210, 25%, 20%)" stroke-width="5" d="M 0 30 a 3 3 0 0 0 0 6 a 3 3 0 0 0 0 -6"></path>
-            </g>
-        </svg>
     </label>
     <label>
-        <span>Speed</span>
+        <span>Speed <sub>({isMetric ? 'km/h' : 'mph'})</sub></span>
         <input required type="number" bind:value={speed} min={isMetric ? minSpeed.metric : minSpeed.imperial} step="0.1" />
-        <sub>{isMetric ? 'km/h' : 'mph'}</sub>
-        <svg viewBox="0 0 93 84" width="93" height="84">
-            <g transform="translate(4 65)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-                <g transform="translate(47.5 0)">
-                    <g class="rotate">
-                        <g transform="translate(-47.5 0)">
-                            <path fill="none" stroke="hsl(210, 25%, 40%)" d="M 10 0 q 18.75 0 37.5 -5 q 18.75 5 37.5 5"></path>
-                            <g fill="hsl(210, 25%, 40%)" stroke="hsl(210, 25%, 40%)">
-                                <path d="M 10 0 h 37.5 v 15 v -15 h 37.5 l -8 -7 l 8 7 l -8 7 l 8 -7 h -60 l -10 -10 h -15 l 10 10 l -10 10 h 15 l 10 -10"></path>
-                                <path d="M 47.5 0 v -10 q -25 -5 -25 -25 q -10 0 -10 12 q 0 -20 5 -20 q -15 0 -15 10 a 22.5 22.5 0 0 1 45 0 q 10 0 15 -20 q 0 -8 -5 -8 q 15 0 15 8 l 5 5 l -5 5 q 0 33 -25 33"></path>
-                            </g>
-                            <circle cx="68" cy="-52" r="3" stroke="none" fill="hsl(210, 25%, 20%)"></circle>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </svg>
     </label>
     <label for="unit">
         <span>Imperial</span>

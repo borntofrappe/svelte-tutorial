@@ -15,25 +15,6 @@ const anemometer = new Group({
   },
 });
 
-// base
-new Cylinder({
-  addTo: anemometer,
-  diameter: 80,
-  length: 20,
-  stroke: false,
-  color: 'hsl(215, 95%, 5%)',
-  rotate: {
-    x: TAU / 4,
-  },
-});
-
-new Shape({
-  addTo: anemometer,
-  path: [{ x: 0, y: 0 }, { x: 0, y: -30 }],
-  stroke: 20,
-  color: 'hsl(215, 95%, 5%)',
-});
-
 // anchor from which to rotate the shapes
 const fulcrum = new Anchor({
   addTo: anemometer,
