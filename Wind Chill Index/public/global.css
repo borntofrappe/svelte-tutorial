@@ -7,7 +7,10 @@
 }
 body {
     font-family: "Ubuntu", sans-serif;
-    background: hsl(210, 10%, 90%);
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.25" viewBox="0 0 100 100" width="100" height="100"><g transform="translate(50 50) rotate(-25)" fill="none" stroke="hsl(210, 25%, 40%)" stroke-width="5" stroke-linecap="round"><path id="branch" d="M 0 0 v 30 m 0 -22 l 10 10 m -20 0 l 10 -10 m 0 14 l 7 7 m -14 0 l 7 -7"></path><use href="%23branch" transform="rotate(90)"></use><use href="%23branch" transform="rotate(180)"></use><use href="%23branch" transform="rotate(270)"></use></g></svg>'),
+        hsl(210, 10%, 90%);
+    background-size: 10%;
+    background-position: -50% -100%;
 }
 
 .app {
