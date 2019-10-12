@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu:400,700&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Ubuntu", sans-serif;
+    background-size: 100px;
+    background-position: -50% -100%;
+    background: hsl(215, 95%, 5%);
+}
+
+.app {
+    width: 90vw;
+    max-width: 700px;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.app > * + * {
+    margin-top: 2rem;
+    border-top: 0.25rem solid hsl(180, 60%, 50%);
+}
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 10px -4px hsla(180, 60%, 0%, 0.1);
+}
+header canvas {
+    display: block;
+}
+header h1 {
+    background: hsl(215, 95%, 5%);
+    padding: 2rem;
+    color: hsl(210, 25%, 85%);
+}
+header h1 mark {
+    font-size: 5rem;
+    border-bottom: 2px solid hsl(210, 25%, 85%);
+    background: none;
+    color: inherit;
+}
+
+form {
+    background: hsl(215, 95%, 5%);
+    color: hsl(210, 25%, 85%);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    box-shadow: 0 2px 10px -4px hsla(180, 60%, 0%, 0.1);
+}
+form > * + * {
+    margin-top: 2.5rem;
+}
+form p {
+    line-height: 1.5;
+}
+form p mark {
+    border-bottom: 2px solid hsl(210, 25%, 85%);
+    background: none;
+    color: inherit;
+}
+form label {
+    display: flex;
+    align-items: center;
+    /* position relative to absolute position the input of type checkbox where the svg is set to stay */
+    position: relative;
+}
+form label > * + * {
+    margin-left: 1.25rem;
+}
+form label span {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.01rem;
+}
+form label span sub {
+    font-size: 1.2rem;
+}
+form label input[type="number"] {
+    text-align: right;
+    font-family: inherit;
+    color: inherit;
+    width: 5rem;
+    height: 3rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    border: none;
+    background: hsla(200, 70%, 55%, 0.2);
+    border-radius: 12px;
+    opacity: 0.7;
+    outline: none;
+    transition: opacity 0.2s ease-in-out;
+}
+form label input[type="number"]:focus {
+    opacity: 1;
+}
+
+/* absolute position the checkbox on top of the replacing svg */
+form label input[type="checkbox"] {
+    color: inherit;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    opacity: 0;
+}
+form label input[type="checkbox"] + svg {
+    opacity: 0.7;
+    fill: hsla(200, 70%, 55%, 0.2);
+    transition: opacity 0.2s ease-in-out;
+}
+form label input[type="checkbox"]:focus + svg,
+form label input[type="checkbox"]:active + svg {
+    opacity: 1;
+}
+form label input[type="checkbox"] + svg {
+    display: block;
+    width: 64px;
+    height: auto;
+}
+form label input[type="checkbox"] + svg .translate {
+    transition: transform 0.5s ease-in-out;
+}
+form label input[type="checkbox"]:checked + svg .translate {
+    transition: transform 0.25s ease-in-out;
+    transform: translate(0px);
+}
+
+form button {
+    outline: none;
+    border: none;
+    background: hsl(180, 60%, 85%);
+    color: hsl(210, 25%, 0%);
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 1.2rem;
+    letter-spacing: 0.015rem;
+    text-transform: uppercase;
+    filter: drop-shadow(0px 5px hsl(180, 60%, 50%));
+    transition: all 0.2s ease-in-out;
+}
+form button:hover,
+form button:focus {
+    transform: translateY(2px);
+    filter: drop-shadow(0px 3px hsl(180, 60%, 50%));
+}
+form button:active {
+    transform: translateY(5px);
+    filter: drop-shadow(0px 0px hsl(180, 60%, 50%));
+}
+
+dl {
+    box-shadow: 0 2px 10px -4px hsla(180, 60%, 0%, 0.1);
+
+    text-align: right;
+    background: hsl(215, 95%, 5%);
+    box-shadow: 0 1px 10px -5px hsla(220, 20%, 2%, 0.2);
+    padding: 1.5rem 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: hsl(180, 60%, 85%);
+}
+dt {
+    font-size: 7rem;
+}
+dt:nth-of-type(n + 2) {
+    margin-top: 1rem;
+    font-size: 2.5rem;
+}
+dd {
+    margin-left: 0.75rem;
+    color: hsl(180, 60%, 50%);
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+@supports (display: grid) {
+    @media (min-width: 800px) {
+        body {
+            background: hsl(215, 95%, 15%);
+        }
+        .app {
+            display: grid;
+            grid-gap: 1rem;
+            grid-template-columns: repeat(2, minmax(max-content, 1fr));
+            grid-auto-rows: minmax(200px, auto);
+            justify-items: center;
+        }
+        .app > * + * {
+            margin-top: initial;
+            border-top: none;
+        }
+        header {
+            grid-column: 1/2;
+            align-self: end;
+        }
+        form {
+            grid-column: 2/3;
+            grid-row: 1/2;
+            align-self: start;
+        }
+        dl {
+            grid-column: 1/3;
+            grid-row: 2/3;
+            justify-self: stretch;
+        }
+    }
+    dl {
+        display: grid;
+        grid-gap: 1.25rem 0.5rem;
+        justify-items: center;
+        grid-template-areas: "wci wci-unit" "temperature speed" "temperature-unit speed-unit";
+    }
+    dl dt:nth-of-type(1) {
+        grid-area: wci;
+    }
+    dl dd:nth-of-type(1) {
+        grid-area: wci-unit;
+        align-self: end;
+    }
+    dl dt:nth-of-type(2) {
+        grid-area: temperature;
+    }
+    dl dd:nth-of-type(2) {
+        grid-area: temperature-unit;
+    }
+    dl dt:nth-of-type(3) {
+        grid-area: speed;
+    }
+    dl dd:nth-of-type(3) {
+        grid-area: speed-unit;
+    }
+}
