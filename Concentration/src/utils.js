@@ -1,4 +1,4 @@
-const seeds = ['e','f','c','`'];
+const seeds = ['♥','♦','♣','♠'];
 const numbers = Array(9).fill().map((item, index) => index + 1);
 const values = [...numbers, 'J', 'Q', 'K'];
 

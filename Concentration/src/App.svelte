@@ -1,18 +1,18 @@
 <script>
 	import { createDeck } from './utils.js';
 	import Card from './Card.svelte';
-	const deck = createDeck(16);	
+	const deck = createDeck(16);
 </script>
 <style>
-	:global(body) {
-		background: hsl(0, 0%, 10%);
-	}
 	main {
+		margin: 1rem auto;
+		width: 90vw;
+		max-width: 700px;
 		display: grid;
-		grid-template-columns: repeat(4, 150px);
-		grid-auto-rows: 150px;
-		grid-gap: 0.5rem;
-		justify-content: center;
+		grid-template-columns: repeat(auto-fit, 140px);
+		grid-auto-rows: max-content;
+		grid-gap: 1rem;
+		justify-content: space-evenly;
 	}
 </style>
 
