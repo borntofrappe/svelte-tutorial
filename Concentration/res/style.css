@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    min-height: 100vh;
+    color: hsl(340, 5%, 25%);
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.1" width="100" height="100" fill="hsl(340, 10%, 30%)"><path d="M21.5 18.938a8 8 0 0113.856-8q6 10.392-3.856 25.32-17.856 1.072-23.856-9.32a8 8 0 0113.856-8M67 11.144L87.124 18 83 38.856 62.876 32zM77.5 79.33a14 14 0 01-5.49 20.49l25.98-15a14 14 0 01-20.49-5.49 9 9 0 01-15.588 9 9 9 0 0115.588-9 9 9 0 01-9-15.588 9 9 0 019 15.588 9 9 0 0115.588-9 9 9 0 01-15.588 9M27.5 79.33a14 14 0 01-5.49 20.49l25.98-15a14 14 0 01-20.49-5.49 8 8 0 01-13.856 8q-5-8.66 3.856-25.32 18.856.66 23.856 9.32a8 8 0 01-13.856 8"/></svg>'),
+        hsl(340, 10%, 5%);
+    display: grid;
+    place-items: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 400;
+}
+.card {
+    /* position relative to absolute position the nested elements */
+    position: relative;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 220px;
+    height: 250px;
+    /* include a perspective value on the individual card to have the rotation around the y axis occur relative to the center of the article */
+    transition: transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    /* rotate the card by default, so to show the back */
+    transform: perspective(800px) rotateY(180deg);
+    transform-style: preserve-3d;
+}
+/* when the class of flip is applied, rotate the card backwards */
+.card.flip {
+    transform: perspective(800px) rotateY(0deg);
+}
+/* absolute position the nested elements to cover the entire surface of the article */
+.face,
+button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+/* remove the default background and border from the button */
+button {
+    background: none;
+    border: none;
+}
+/* for each face, set a default border and background
+the background is updated individually for the two faces
+*/
+.face {
+    /* backface to hide the content as the card gets flipped */
+    backface-visibility: hidden;
+    border: 1rem solid hsl(340, 70%, 50%);
+    background: hsl(0, 0%, 100%);
+    /* remove the pointer events to have the click event registered on the button */
+    pointer-events: none;
+}
+/* include a repeating pattern for the back */
+.back {
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200"><defs><path id="a" d="M0-50L50 0 0 50-50 0z" stroke="none"/><g id="b"><use href="%23a" fill="hsl(340, 70%, 50%)"/><use href="%23a" transform="scale(.8)" fill="hsl(345, 90%, 65%)"/><use href="%23a" transform="scale(.6)" fill="hsl(0, 90%, 60%)"/><use href="%23a" transform="scale(.4)" fill="hsl(30, 80%, 70%)"/><use href="%23a" transform="scale(.2)" fill="hsl(50, 95%, 80%)"/></g></defs><use href="%23b"/><use href="%23b" x="100"/><use href="%23b" x="100" y="100"/><use href="%23b" y="100"/><use href="%23b" x="50" y="50"/></svg>'),
+        hsl(0, 0%, 100%);
+    background-size: 25%;
+    transform: rotateY(180deg);
+}
+/* include svelte's logo in the front of the card */
+.front {
+    background: url('data:image/svg+xml;utf8,<svg opacity="0.1" xmlns="http://www.w3.org/2000/svg" width="480" height="440" viewBox="0 0 240 220" stroke="hsl(340, 70%, 50%)" stroke-width="20" stroke-linejoin="round" stroke-linecap="round" fill="none"><g transform="translate(120 110) rotate(-35)"><path id="a" d="M50-22.5h-60 25a45 45 0 010 90h-75a45 45 0 010-90"/><use transform="scale(-1)" href="%23a"/></g></svg>'),
+        hsl(0, 0%, 100%);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 50% 50%;
+    /* center the heading in the card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    font-size: 2.75rem;
+    font-weight: 900;
+}
