@@ -45,3 +45,7 @@ Elaborate the absolute frequency for every word included in a textarea element. 
 Compute the wind chill index on the basis of the input temperature and speed. Differentiate the result according to the chosen unit of measure.
 
 **Tags**: form, dispatch, spread
+
+## Concentration
+
+Replicate the structure of a memory-based game in which cards are flipped to create a match.
