@@ -1,26 +1,12 @@
 <script>
-	import { createDeck, randomUpTo } from './utils.js';
+	import { stackDeck } from './utils.js';
 	import Card from './Card.svelte';
-	const half = createDeck(8);
-	let deck = [...half].map((value) => ({
-		value,
-		isFlipped: true,
-		isPaired: false,
-		id: Math.random(),
-	}));
+	import Victory from './Victory.svelte';
 
-	for(let value of half) {
-		const { length } = deck;
-		const index = randomUpTo(length);
-		const card = {
-			value,
-			isFlipped: true,
-			isPaired: false,
-			id: Math.random(),
-		};
-		deck = [...deck.slice(0, index), card, ...deck.slice(index)];
-	}
+	const cards = 16;
+	let deck = stackDeck(cards);
 
+	let victory;
 
 	function handleFlip(e) {
 		const  selection  = e.detail;
@@ -47,8 +33,13 @@
 
 		const hasWon = deck.every(card => card.isPaired);
 		if(hasWon) {
-			console.log('victory');
+			victory = true;
 		}
+	}
+
+	function handleReset() {
+		victory = null;
+		deck = stackDeck(cards);
 	}
 
 </script>
@@ -64,6 +55,10 @@
 		justify-content: center;
 	}
 </style>
+
+{#if victory}
+	<Victory on:reset={handleReset} />
+{/if}
 
 <main>
 	{#each deck as card (card.id)}
