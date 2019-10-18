@@ -48,4 +48,6 @@ Compute the wind chill index on the basis of the input temperature and speed. Di
 
 ## Concentration
 
-Replicate the structure of a memory-based game in which cards are flipped to create a match.
+A memory-based game in which cards are flipped and matched in pairs.
+
+**Tags**: utils, each, svg, transition

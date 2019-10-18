@@ -1,8 +1,8 @@
-# Svelte Concentration
+# [Concentration](https://codepen.io/borntofrappe/full/yLLVNME)
 
 ## Goal
 
-Replicate the structure of a memory-based card game in which cards are flipped to create a match.
+A memory-based game in which cards are flipped and matched in pairs.
 
 ## res
 
@@ -30,7 +30,7 @@ It is important to note that I used the `perspective` value in the `transform` p
 
 When more card are added however, the second option allows to have the perspective relative to each separate card. The first option would provide a perspective point for the wrapping container, and every card would be rotated relative to it. For more information check out [this introduction to 3D transform properties](https://3dtransforms.desandro.com).
 
-Another important trait is relative to the **markup** for the individual card:
+Another important note is relative to the **markup** for the individual card:
 
 ```html
 <article class="card">

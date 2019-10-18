@@ -35,7 +35,12 @@
     }
     section {
         padding: 3rem 3.5rem;
-        background: hsl(0, 0%, 100%);
+        background: url('data:image/svg+xml;utf8,<svg opacity="0.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="250" height="250"><defs><circle id="a" cx="0" cy="0" r="5" fill="hsl(0, 0%, 0%)" stroke="none"/><path id="b" fill="none" stroke="hsl(0, 0%, 0%)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" d="M0 0a4 4 0 00-4-4 4 4 0 010-8 4 4 0 000-8 4 4 0 010-8 4 4 0 004-4"/></defs><g><g><g><g transform="translate(50 100) scale(1 1) translate(-47.5 -2.5) rotate(45) translate(-50 -100) translate(50 50)"><path fill="hsl(0, 0%, 0%)" stroke="hsl(0, 0%, 0%)" stroke-width="10" stroke-linejoin="round" stroke-linecap="round" d="M0 45l-27.5-55h55z"/><use href="%23a" transform="translate(-40 -25)"/><use href="%23a" transform="translate(-15 -45)"/><use href="%23a" transform="translate(0 -25)"/><use href="%23a" transform="translate(40 -30)"/><use href="%23b" transform="translate(-15 -18) rotate(-25)"/><use href="%23b" transform="translate(15 -18) rotate(30)"/></g></g></g></g></svg>'),
+            url('data:image/svg+xml;utf8,<svg opacity="0.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="250" height="250"><defs><circle id="a" cx="0" cy="0" r="5" fill="hsl(0, 0%, 0%)" stroke="none"/><path id="b" fill="none" stroke="hsl(0, 0%, 0%)" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" d="M0 0a4 4 0 00-4-4 4 4 0 010-8 4 4 0 000-8 4 4 0 010-8 4 4 0 004-4"/></defs><g><g><g><g transform="translate(50 100) scale(-1 1) translate(-47.5 -2.5) rotate(45) translate(-50 -100) translate(50 50)"><path fill="hsl(0, 0%, 0%)" stroke="hsl(0, 0%, 0%)" stroke-width="10" stroke-linejoin="round" stroke-linecap="round" d="M0 45l-27.5-55h55z"/><use href="%23a" transform="translate(-40 -25)"/><use href="%23a" transform="translate(-15 -45)"/><use href="%23a" transform="translate(0 -25)"/><use href="%23a" transform="translate(40 -30)"/><use href="%23b" transform="translate(-15 -18) rotate(-25)"/><use href="%23b" transform="translate(15 -18) rotate(30)"/></g></g></g></g></svg>'),
+            hsl(0, 0%, 100%);
+        background-size: 30%;
+        background-position: 0% 100%, 100% 100%;
+        background-repeat: no-repeat;
         text-align: center;
         border: 0.75rem solid hsl(340, 70%, 50%);
         border-radius: 15px;
