@@ -1,11 +1,13 @@
 <script>
+    // the idea is to have the card component describe the card and allow for click/key presses through a button
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
-    export let card;
     function flip() {
         dispatch("flip", card);
     }
+
+    export let card;
 </script>
 
 <style>
@@ -25,6 +27,7 @@
     .flip {
         transform: perspective(800px) rotateY(180deg);
     }
+    /* when the class of pair is applied, animate the card to momentarily shake */
     .paired {
         animation: pair 0.25s 1s ease-in-out 2 alternate;
     }
@@ -88,14 +91,14 @@
 </style>
 
 <!-- markup
-        article, wrapping container
-            div, front
-            div, back
-            button
+    article, wrapping container
+    div, front
+    div, back
+    button
 
-        the button is stretched to cover the size of the entire article, so to react to a click event on the entire surface
-		-->
-
+the button is stretched to cover the size of the entire article, so to react to a click event on the entire surface
+-->
+<!-- include the flip and paired classes considering the state of the individual card -->
 <article class:flip="{card.isFlipped && !card.isPaired}" class:paired="{card.isPaired}">
     <div class="face front">
         <h1 style="color: {(card.value.includes('♥') || card.value.includes('♦')) ? 'hsl(0, 70%, 50%)' : 'hsl(0, 50%, 5%)'}">
@@ -103,5 +106,6 @@
         </h1>
     </div>
     <div class="face back"></div>
+    <!-- disable the button as the card is paired -->
     <button disabled="{card.isPaired}" aria-label="Flip card" on:click="{flip}"></button>
 </article>
