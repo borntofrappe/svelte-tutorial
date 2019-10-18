@@ -13,6 +13,9 @@ function randomCard() {
 	const card = `${value}${seed}`;
 	return card;
 }
+export function randomUpTo(max) {
+	return Math.floor(Math.random() * max);
+}
 export function createDeck(cards) {
 	const deck = [];
 	while(deck.length < cards) {

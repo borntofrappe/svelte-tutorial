@@ -1,13 +1,15 @@
 <script>
+    import { createEventDispatcher } from "svelte";
+    const dispatch = createEventDispatcher();
+
     export let card;
-    let ref;
     function flip() {
-        ref.classList.toggle("flip");
+        dispatch("flip", card);
     }
 </script>
 
 <style>
-    .card {
+    article {
         /* position relative to absolute position the nested elements */
         position: relative;
         padding: 2rem;
@@ -20,8 +22,19 @@
         transform-style: preserve-3d;
     }
     /* when the class of flip is applied, rotate the card on its back */
-    .card.flip {
+    .flip {
         transform: perspective(800px) rotateY(180deg);
+    }
+    .paired {
+        animation: pair 0.25s 1s ease-in-out 2 alternate;
+    }
+    @keyframes pair {
+        25% {
+            transform: rotateZ(-5deg);
+        }
+        75% {
+            transform: rotateZ(5deg);
+        }
     }
     /* absolute position the nested elements to cover the entire surface of the article */
     .face,
@@ -83,12 +96,12 @@
         the button is stretched to cover the size of the entire article, so to react to a click event on the entire surface
 		-->
 
-<article class="card flip" bind:this="{ref}">
+<article class:flip="{card.isFlipped && !card.isPaired}" class:paired="{card.isPaired}">
     <div class="face front">
-        <h1 style="color: {(card.includes('♥') || card.includes('♦')) ? 'hsl(0, 70%, 50%)' : 'hsl(0, 50%, 5%)'}">
-            {card}
+        <h1 style="color: {(card.value.includes('♥') || card.value.includes('♦')) ? 'hsl(0, 70%, 50%)' : 'hsl(0, 50%, 5%)'}">
+            {card.value}
         </h1>
     </div>
     <div class="face back"></div>
-    <button aria-label="Flip card" on:click="{flip}"></button>
+    <button disabled="{card.isPaired}" aria-label="Flip card" on:click="{flip}"></button>
 </article>
