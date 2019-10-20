@@ -51,3 +51,9 @@ Compute the wind chill index on the basis of the input temperature and speed. Di
 A memory-based game in which cards are flipped and matched in pairs.
 
 **Tags**: utils, each, svg, transition
+
+## Infinity Maze
+
+An experiment with SVG syntax and the Aldous-Broder algorithm to create an endless game in which the player moves within the boundaries of a maze to reach a goal.
+
+**Tags**: svg, algorithm, motion
