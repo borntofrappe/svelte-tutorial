@@ -6,7 +6,7 @@ Create an entertaining game in which a square moves within the boundaries of a m
 
 ## Notes
 
-This project is the fruition of several smaller-scale efforts, developing the game in its different components. You find the building components in the different sub-folders:
+This project is the fruition of several smaller-scale efforts, developing the game in its different components. You find the building components in the **res** folder:
 
 -   Maze grid: the grid ultimately used for the maze. Consider how the stroke is used alongside the viewBox attribute to avoid any cropping and have the maze literally nested inside the wrapping SVG element.
 
