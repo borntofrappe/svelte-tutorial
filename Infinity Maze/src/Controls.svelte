@@ -8,12 +8,13 @@
     }
 
     export let isPlaying;
+    export let isReady;
 </script>
 
 <style>
     button {
-        width: 4rem;
-        height: 4rem;
+        width: 3.75rem;
+        height: 3.75rem;
         border: none;
         background: none;
         position: absolute;
@@ -21,8 +22,8 @@
         z-index: 5;
     }
     #play {
-        width: 5.5rem;
-        height: 5.5rem;
+        width: 4rem;
+        height: 4rem;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -55,8 +56,8 @@
             height: 2.5rem;
         }
         #play {
-            width: 3rem;
-            height: 3rem;
+            width: 3.25rem;
+            height: 3.25rem;
         }
     }
 </style>
@@ -65,7 +66,7 @@
     <button id="play" on:click="{() => handleDispatch('play')}" aria-label="Play the infinite maze">
         <Arrow rotation={90} />
     </button>
-{:else}
+{:else if isReady}
     <button id="up" on:click="{() => handleDispatch('up')}" aria-label="Move the square up">
         <Arrow />
     </button>
