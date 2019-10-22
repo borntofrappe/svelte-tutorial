@@ -1,7 +1,21 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
     import Arrow from './Arrow.svelte';
+    import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
+
+    import { fly } from 'svelte/transition';
+    import { sineInOut } from 'svelte/easing';
+
+    function scaleDown(node, { duration = 250}) {
+        return {
+            duration,
+            css: t => {
+                const eased = sineInOut(t);
+                return `transform: scale(${eased});`;
+            }
+        };
+    }
+
 
     function handleDispatch(control) {
         dispatch('control', control);
@@ -12,20 +26,20 @@
 </script>
 
 {#if !isPlaying}
-    <button id="play" on:click="{() => handleDispatch('play')}" aria-label="Play the infinite maze">
+    <button out:scaleDown id="play" on:click="{() => handleDispatch('play')}" aria-label="Play the infinite maze">
         <Arrow rotation={90} />
     </button>
 {:else if isReady}
-    <button id="up" on:click="{() => handleDispatch('up')}" aria-label="Move the square up">
+    <button transition:fly="{{ delay: 150 }}" id="up" on:click="{() => handleDispatch('up')}" aria-label="Move the square up">
         <Arrow />
     </button>
-    <button id="left" on:click="{() => handleDispatch('left')}" aria-label="Move the square left">
+    <button transition:fly="{{ delay: 150 }}" id="left" on:click="{() => handleDispatch('left')}" aria-label="Move the square left">
         <Arrow rotation={270}/>
     </button>
-    <button id="right" on:click="{() => handleDispatch('right')}" aria-label="Move the square right">
+    <button transition:fly="{{ delay: 150 }}" id="right" on:click="{() => handleDispatch('right')}" aria-label="Move the square right">
         <Arrow rotation={90}/>
     </button>
-    <button id="down" on:click="{() => handleDispatch('down')}" aria-label="Move the square down">
+    <button transition:fly="{{ delay: 150 }}" id="down" on:click="{() => handleDispatch('down')}" aria-label="Move the square down">
         <Arrow rotation={180}/>
     </button>
 {/if}

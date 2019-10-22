@@ -1,3 +1,25 @@
+// function returning a random integer up to a maximum
+export function randomUpTo(max) {
+  return Math.floor(Math.random() * max);
+}
+
+// function returning a random item from an array
+function randomItem(arr) {
+  return arr[randomUpTo(arr.length)];
+}
+
+
+// function returning a random point considering two maximum values
+// ! include an optional third parameter to have the function return a point different than a given point
+// specify a default value for which the random function will never equate
+export function randomPoint(xMax, yMax, point = [-1, -1]) {
+  const [pX, pY] = point;
+  const x = randomUpTo(xMax);
+  const y = randomUpTo(yMax);
+
+  return x === pX && y === pY ? randomPoint(xMax, yMax, point) : [x, y];
+}
+
 // function returning a promises which resolves in a grid of a defined number of columns and rows
 export const createMaze = (columns, rows) =>
   new Promise(resolve => {
@@ -61,7 +83,7 @@ export const createMaze = (columns, rows) =>
         return x >= 0 && x <= columns - 1 && y >= 0 && y <= rows - 1;
       });
 
-      const neighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+      const neighbor = randomItem(neighbors);
       // the gate describes the direction picked up by the cell
       const { gate } = neighbor;
       // the coordinates dictate where the algorithm will move next
@@ -94,6 +116,7 @@ export const createMaze = (columns, rows) =>
     }
 
     // kickstart the random walk from a random point in the grid
-    randomWalk(Math.floor(Math.random(rows)), Math.floor(Math.random(columns)));
+    randomWalk(randomUpTo(columns), randomUpTo(rows));
   });
+
 

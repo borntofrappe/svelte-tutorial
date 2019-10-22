@@ -1,6 +1,7 @@
 <script>
     import Controls from './Controls.svelte';
-    import { createMaze } from './utils.js';
+    import Square from './Square.svelte';
+    import { createMaze, randomUpTo, randomPoint } from './utils.js';
     import { tweened } from 'svelte/motion';
     import { sineInOut } from 'svelte/easing';
 
@@ -15,8 +16,6 @@
 	const stroke = 10;
     const columns = 5;
     const rows = 5;
-    let maze = [];
-
 
     // include an svg element with one group for each cell
 	// in this group include one <use> element per gate, identifying the border
@@ -24,14 +23,24 @@
 	const width = columns * h;
 	const height = rows * v;
 
-    let x = tweened(columns / 2 - 0.5);
-    let y = tweened(rows / 2 - 0.5);
+    let cell;
+    let maze = [];
+
+    const cX = columns / 2 - 0.5;
+    const cY = rows / 2 - 0.5;
+
+    let gX = cX;
+    let gY = cY;
+
+    let pX = tweened(cX);
+    let pY = tweened(cY);
+
     let vX = tweened(0);
     let vY = tweened(0);
     let vWidth = tweened(width + stroke);
     let vHeight = tweened(height + stroke);
 
-    function play() {
+    function zoomOut() {
         isReady = true;
         vX.set(0);
         vY.set(0);
@@ -39,29 +48,29 @@
         vHeight.set(height + stroke);
     }
     function reposition() {
-        const rX = Math.floor(Math.random() * columns);
-        const rY = Math.floor(Math.random() * rows);
-        x.set(rX, {
+        [gX, gY] = randomPoint(columns, rows);
+        let [x, y] = randomPoint(columns, rows, [gX, gY]);
+        pX.set(x, {
             duration: 0,
         });
-        y.set(rY, {
+        pY.set(y, {
             duration: 0,
         });
-        vX.set((rX * h) + stroke, {
+        vX.set((x * h) + stroke, {
             duration: 0,
         });
-        vY.set((rY * v) + stroke, {
+        vY.set((y * v) + stroke, {
             duration: 0,
         });
         setTimeout(() => {
-            play();
+            zoomOut();
         }, 1000);
     }
 
-    function buildMaze() {
+    function zoomIn() {
         isPlaying = true;
-        vX.set(($x * h) + stroke);
-        vY.set(($y * v) + stroke);
+        vX.set(($pX * h) + stroke);
+        vY.set(($pY * v) + stroke);
         vWidth.set(h - stroke);
         vHeight.set(v - stroke);
 
@@ -76,7 +85,7 @@
     }
 
     function moveSquare(direction) {
-        x.set($x + 1);
+        pX.set($pX + 1);
 
     }
 
@@ -84,7 +93,7 @@
         const control = e.detail;
         switch(control) {
             case 'play':
-                buildMaze();
+                zoomIn();
                 break;
             case 'up':
             case 'left':
@@ -107,8 +116,6 @@
             <path id="east" d="M {h} 0 v {v}"></path>
             <path id="south" d="M 0 {v} h {h}"></path>
             <path id="west" d="M 0 0 v {v}"></path>
-            <rect id="square" x="0" y="0" width="{h - stroke}" height="{v -
-    stroke}"></rect>
         </defs>
         <g
             stroke="currentColor"
@@ -122,9 +129,9 @@
                     {#each maze as { column, row, gates }}
                         <g transform="translate({column * h} {row * v})">
                             {#each Object.entries(gates) as [href, isGated]}
-                            {#if isGated}
-                            <use href="#{href}"></use>
-                            {/if}
+                                {#if isGated}
+                                    <use href="#{href}"></use>
+                                {/if}
                             {/each}
                         </g>
                     {/each}
@@ -132,13 +139,15 @@
             </g>
         </g>
 
-        <g stroke="none" fill="hsl(0, 60%, 25%)">
-            <g transform="translate({stroke} {stroke})">
-                <g transform="translate({$x * h} {$y * v})">
-                    <use href="#square"></use>
-                </g>
+        <g transform="translate({stroke} {stroke})">
+            <g id="goal" transform="translate({gX * h} {gY * v})">
+                <Square fill="currentColor" width="{h - stroke}" height="{v - stroke}" />
+            </g>
+            <g id="player" transform="translate({$pX * h} {$pY * v})">
+                <Square fill="hsl(340, 70%, 60%)" width="{h - stroke}" height="{v - stroke}" />
             </g>
         </g>
+
     </svg>
     <Controls {isPlaying} {isReady} on:control={handleControl}/>
 </div>
