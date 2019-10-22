@@ -3,10 +3,11 @@
     import Square from "./Square.svelte";
     import { createMaze, randomUpTo, randomPoint } from "./utils.js";
     import { tweened } from "svelte/motion";
-    import { sineInOut } from "svelte/easing";
+    import { sineInOut, quintInOut } from "svelte/easing";
 
     let isPlaying = false;
     let isReady = false;
+    let isSetup = false;
 
     // size of the cell, horizontal and vertical
     const h = 100;
@@ -41,19 +42,15 @@
     let vHeight = tweened(height + stroke);
 
     function zoomOut() {
+        const options = {
+            easing: quintInOut,
+            duration: 450
+        };
         isReady = true;
-        vX.set(0, {
-            easing: sineInOut
-        });
-        vY.set(0, {
-            easing: sineInOut
-        });
-        vWidth.set(width + stroke, {
-            easing: sineInOut
-        });
-        vHeight.set(height + stroke, {
-            easing: sineInOut
-        });
+        vX.set(0, options);
+        vY.set(0, options);
+        vWidth.set(width + stroke, options);
+        vHeight.set(height + stroke, options);
     }
     function reposition() {
         [gX, gY] = randomPoint(columns, rows);
@@ -82,22 +79,20 @@
         isPlaying = true;
         isReady = false;
 
-        vX.set($pX * h + stroke, {
-            easing: sineInOut
-        });
-        vY.set($pY * v + stroke, {
-            easing: sineInOut
-        });
-        vWidth.set(h - stroke, {
-            easing: sineInOut
-        });
-        vHeight.set(v - stroke, {
-            easing: sineInOut
-        });
+        const options = {
+            easing: quintInOut,
+            duration: 500
+        };
+
+        vX.set($pX * h + stroke, options);
+        vY.set($pY * v + stroke, options);
+        vWidth.set(h - stroke, options);
+        vHeight.set(v - stroke, options);
 
         let timeout = setTimeout(() => {
             createMaze(columns, rows).then(grid => {
                 maze = grid;
+                isSetup = true;
                 reposition();
                 clearTimeout(timeout);
             });
@@ -125,7 +120,8 @@
     function moveSquare(direction) {
         if (isReady && !isMoving && !cell.gates[direction]) {
             const options = {
-                duration: 200
+                duration: 150,
+                easing: sineInOut
             };
             const { x = 0, y = 0 } = directions[direction];
             const dX = $pX + x;
@@ -143,7 +139,7 @@
                     setUp();
                 }
                 isMoving = false;
-            }, 250);
+            }, options.duration + 50);
         }
     }
 
@@ -181,8 +177,8 @@
         </defs>
         <g stroke="currentColor" stroke-width="{stroke}" stroke-linejoin="square" stroke-linecap="square" fill="none">
             <g transform="translate({stroke / 2} {stroke / 2})">
-                {#if isReady}
-                <rect x="0" y="0" {width} {height} fill="hsl(0, 0%, 100%)"></rect>
+                {#if isSetup}
+                <rect x="0" y="0" {width} {height} fill="hsl(0, 0%, 5%)"></rect>
                 {#each maze as { column, row, gates }}
                 <g transform="translate({column * h} {row * v})">
                     {#each Object.entries(gates) as [href, isGated]} {#if isGated}
@@ -194,11 +190,11 @@
         </g>
 
         <g transform="translate({stroke} {stroke})">
-            <g id="goal" opacity="0.8" transform="translate({gX * h} {gY * v})">
-                <Square fill="currentColor" width="{h - stroke}" height="{v - stroke}" />
+            <g id="goal" transform="translate({gX * h} {gY * v})">
+                <Square fill="hsl(0, 0%, 25%)" width="{h - stroke}" height="{v - stroke}" />
             </g>
             <g id="player" transform="translate({$pX * h} {$pY * v})">
-                <Square fill="hsl(340, 70%, 55%)" width="{h - stroke}" height="{v - stroke}" />
+                <Square fill="hsl(340, 70%, 50%)" width="{h - stroke}" height="{v - stroke}" />
             </g>
         </g>
     </svg>

@@ -52,8 +52,8 @@ A memory-based game in which cards are flipped and matched in pairs.
 
 **Tags**: utils, each, svg, transition
 
-## Infinity Maze
+## [Infinity Maze](https://codepen.io/borntofrappe/pen/pooeyww)
 
 An experiment with SVG syntax and the Aldous-Broder algorithm to create an endless game in which the player moves within the boundaries of a maze to reach a goal.
 
-**Tags**: svg, algorithm, motion
+**Tags**: svg, algorithm, motion, grid, promise

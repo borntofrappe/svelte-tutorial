@@ -1,4 +1,4 @@
-# Infinity Maze
+# [Infinity Maze](https://codepen.io/borntofrappe/full/pooeyww)
 
 ## Goal
 
