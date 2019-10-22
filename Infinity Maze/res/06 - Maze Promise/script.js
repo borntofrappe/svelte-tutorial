@@ -1,5 +1,5 @@
 // function returning a promises which resolves in a grid of a defined number of columns and rows
-export const createMaze = (columns, rows) =>
+const createMaze = (columns, rows) =>
   new Promise(resolve => {
     // array describing the gates in opposites to have the cells remove the stroke connecting the two
     const oppositeGates = [['north', 'south'], ['east', 'west']];
@@ -97,3 +97,56 @@ export const createMaze = (columns, rows) =>
     randomWalk(Math.floor(Math.random(rows)), Math.floor(Math.random(columns)));
   });
 
+// test out the promise by drawing a maze with a set number of columns, rows and an arbitrary size
+const numberColumns = 8;
+const numberRows = 8;
+const stroke = 10;
+const h = 50;
+const v = 50;
+createMaze(numberColumns, numberRows).then(grid => {
+  // include an svg element with one group for each cell
+  // in this group include one <use> element per gate, identifying the border
+  // ! the viewBox is incremented by the stroke to avoid cropping (this is paired with the translation of the first group element)
+  const width = numberColumns * h;
+  const height = numberRows * v;
+
+  const maze = `
+    <svg
+        viewBox="0 0 ${width + stroke} ${height + stroke}"
+        width=${width}
+        height=${height}>
+        <defs>
+            <path id="north" d="M 0 0 h ${h}"></path>
+            <path id="east" d="M ${h} 0 v ${v}"></path>
+            <path id="south" d="M 0 ${v} h ${h}"></path>
+            <path id="west" d="M 0 0 v ${v}"></path>
+            <rect id="square" x="0" y="0" width="${h - stroke}" height="${v -
+    stroke}"></rect>
+        </defs>
+        <g
+          stroke="currentColor"
+          stroke-width=${stroke}
+          stroke-linejoin="square"
+          stroke-linecap="square"
+          fill="none">
+          <g transform="translate(${stroke / 2} ${stroke / 2})">
+              ${grid
+                .map(
+                  ({ column, row, gates }) => `
+              <g transform="translate(${column * h} ${row * v})">
+                  ${Object.entries(gates)
+                    .filter(([, isGated]) => isGated)
+                    .map(([href]) => `<use href="#${href}"></use>`)
+                    .join('')}
+              </g>
+              `
+                )
+                .join('')}
+          </g>
+        </g>
+    </sgv>
+`;
+
+  const body = document.querySelector('body');
+  body.innerHTML = maze;
+});

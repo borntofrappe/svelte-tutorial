@@ -15,7 +15,8 @@
 	const stroke = 10;
     const columns = 5;
     const rows = 5;
-    const maze = createMaze(columns, rows);
+    let maze = [];
+
 
     // include an svg element with one group for each cell
 	// in this group include one <use> element per gate, identifying the border
@@ -30,14 +31,14 @@
     let vWidth = tweened(width + stroke);
     let vHeight = tweened(height + stroke);
 
-    function go() {
+    function play() {
         isReady = true;
         vX.set(0);
         vY.set(0);
         vWidth.set(width + stroke);
         vHeight.set(height + stroke);
     }
-    function getReady() {
+    function reposition() {
         const rX = Math.floor(Math.random() * columns);
         const rY = Math.floor(Math.random() * rows);
         x.set(rX, {
@@ -53,19 +54,24 @@
             duration: 0,
         });
         setTimeout(() => {
-            go();
+            play();
         }, 1000);
     }
 
-    function play() {
+    function buildMaze() {
         isPlaying = true;
         vX.set(($x * h) + stroke);
         vY.set(($y * v) + stroke);
         vWidth.set(h - stroke);
         vHeight.set(v - stroke);
 
+
         setTimeout(() => {
-            getReady();
+            createMaze(columns, rows)
+                .then(grid => {
+                maze = grid;
+                reposition();
+            });
         }, 1000);
     }
 
@@ -78,7 +84,7 @@
         const control = e.detail;
         switch(control) {
             case 'play':
-                play();
+                buildMaze();
                 break;
             case 'up':
             case 'left':
@@ -126,7 +132,7 @@
             </g>
         </g>
 
-        <g stroke="none" fill="currentColor">
+        <g stroke="none" fill="hsl(0, 60%, 25%)">
             <g transform="translate({stroke} {stroke})">
                 <g transform="translate({$x * h} {$y * v})">
                     <use href="#square"></use>
