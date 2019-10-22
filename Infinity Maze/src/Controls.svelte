@@ -23,6 +23,12 @@
 
     export let isPlaying;
     export let isReady;
+    export let gates = {
+        north: false,
+        east: false,
+        south: false,
+        west: false,
+    };
 </script>
 
 {#if !isPlaying}
@@ -30,16 +36,16 @@
         <Arrow rotation={90} />
     </button>
 {:else if isReady}
-    <button transition:fly="{{ delay: 150 }}" id="up" on:click="{() => handleDispatch('up')}" aria-label="Move the square up">
+    <button disabled="{gates.north}" in:fly="{{ delay: 150 }}" out:fly="{{ duration: 200 }}" id="north" on:click="{() => handleDispatch('north')}" aria-label="Move the square up">
         <Arrow />
     </button>
-    <button transition:fly="{{ delay: 150 }}" id="left" on:click="{() => handleDispatch('left')}" aria-label="Move the square left">
+    <button disabled="{gates.west}" in:fly="{{ delay: 150 }}" out:fly="{{ duration: 200 }}" id="west" on:click="{() => handleDispatch('west')}" aria-label="Move the square left">
         <Arrow rotation={270}/>
     </button>
-    <button transition:fly="{{ delay: 150 }}" id="right" on:click="{() => handleDispatch('right')}" aria-label="Move the square right">
+    <button disabled="{gates.east}" in:fly="{{ delay: 150 }}" out:fly="{{ duration: 200 }}" id="east" on:click="{() => handleDispatch('east')}" aria-label="Move the square right">
         <Arrow rotation={90}/>
     </button>
-    <button transition:fly="{{ delay: 150 }}" id="down" on:click="{() => handleDispatch('down')}" aria-label="Move the square down">
+    <button disabled="{gates.south}" in:fly="{{ delay: 150 }}" out:fly="{{ duration: 200 }}" id="south" on:click="{() => handleDispatch('south')}" aria-label="Move the square down">
         <Arrow rotation={180}/>
     </button>
 {/if}

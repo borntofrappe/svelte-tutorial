@@ -23,6 +23,7 @@ button {
     border: none;
     background: none;
     color: inherit;
+    outline-color: hsl(0, 0%, 15%);
 }
 
 /* the background might actually be temporary */
@@ -41,6 +42,11 @@ the size of the container is dictated by the nested svg (the only element with a
 }
 button {
     position: absolute;
+    transition: color 0.2s ease-in-out;
+}
+button:disabled {
+    cursor: not-allowed;
+    color: hsl(0, 0%, 45%);
 }
 #play {
     color: hsl(0, 0%, 100%);
@@ -48,22 +54,22 @@ button {
     left: 50%;
     transform: translate(-50%, -50%) scale(1.15);
 }
-#up {
+#north {
     top: 0%;
     left: 50%;
     transform: translate(-50%, -100%);
 }
-#left {
+#west {
     top: 50%;
     left: 0%;
     transform: translate(-100%, -50%);
 }
-#right {
+#east {
     top: 50%;
     right: 0%;
     transform: translate(100%, -50%);
 }
-#down {
+#south {
     bottom: 0%;
     left: 50%;
     transform: translate(-50%, 100%);
@@ -71,9 +77,9 @@ button {
 
 /* for grid-supporting browsers position the buttons in a 3x3 grid
 
-    .       up      .
-    left    maze    right
-    .       down    .
+    .       north       .
+    west    maze        east
+    .       south       .
 
     ! be sure to reset the values included only for the default layout (for the position of the .game container and the nested buttons
 */
@@ -97,25 +103,25 @@ button {
         left: initial;
         transform: initial;
     }
-    #up {
+    #north {
         grid-column: maze;
         top: initial;
         left: initial;
         transform: initial;
     }
-    #left {
+    #west {
         grid-column-end: maze-start;
         top: initial;
         left: initial;
         transform: initial;
     }
-    #right {
+    #east {
         grid-column-start: maze-end;
         top: initial;
         right: initial;
         transform: initial;
     }
-    #down {
+    #south {
         grid-column: maze;
         bottom: initial;
         left: initial;
