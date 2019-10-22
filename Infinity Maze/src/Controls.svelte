@@ -11,57 +11,6 @@
     export let isReady;
 </script>
 
-<style>
-    button {
-        width: 3.75rem;
-        height: 3.75rem;
-        border: none;
-        background: none;
-        position: absolute;
-        color: inherit;
-        z-index: 5;
-    }
-    #play {
-        width: 4rem;
-        height: 4rem;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: hsl(0, 0%, 100%);
-    }
-    #up {
-        top: 0%;
-        left: 50%;
-        transform: translate(-50%, -100%);
-    }
-    #down {
-        bottom: 0%;
-        left: 50%;
-        transform: translate(-50%, 100%);
-    }
-    #right {
-        top: 50%;
-        right: 0%;
-        transform: translate(100%, -50%);
-    }
-    #left {
-        top: 50%;
-        left: 0%;
-        transform: translate(-100%, -50%);
-    }
-
-    @media (max-width: 600px) {
-        button {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
-        #play {
-            width: 3.25rem;
-            height: 3.25rem;
-        }
-    }
-</style>
-
 {#if !isPlaying}
     <button id="play" on:click="{() => handleDispatch('play')}" aria-label="Play the infinite maze">
         <Arrow rotation={90} />

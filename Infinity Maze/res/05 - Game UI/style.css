@@ -27,6 +27,7 @@ button {
 
 /* the background might actually be temporary */
 #maze {
+    background: hsl(0, 0%, 100%);
     max-width: 500px;
     width: 75vw;
     height: auto;
@@ -43,7 +44,6 @@ button {
     position: absolute;
 }
 #play {
-    color: hsl(0, 0%, 100%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1.15);

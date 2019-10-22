@@ -2,14 +2,6 @@
     export let rotation = 0;
 </script>
 
-<style>
-    svg {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-</style>
-
 <svg aria-hidden="true" viewBox="0 0 100 100" width="50" height="50">
     <g transform="translate(50 50)">
         <g transform="rotate({rotation})">

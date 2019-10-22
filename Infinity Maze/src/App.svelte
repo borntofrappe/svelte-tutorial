@@ -16,7 +16,6 @@
     const columns = 5;
     const rows = 5;
     const maze = createMaze(columns, rows);
-    console.log(maze)
 
     // include an svg element with one group for each cell
 	// in this group include one <use> element per gate, identifying the border
@@ -91,24 +90,9 @@
     }
 </script>
 
-<style>
-    .game {
-        width: 75vw;
-        max-width: 500px;
-        color: hsl(0, 0%, 0%);
-        position: relative;
-    }
-    svg {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-</style>
-
-
-
 <div class="game">
     <svg
+        id="maze"
         viewBox="{$vX} {$vY} {$vWidth} {$vHeight}"
         {width}
         {height}>
