@@ -1,7 +1,36 @@
 <script>
 	import DigitalWatch from './DigitalWatch.svelte';
 	import Counter from './Counter.svelte';
-	import AnalogWatch from './AnalogWatch.svelte';
+    import AnalogWatch from './AnalogWatch.svelte';
+
+    import { onDestroy } from 'svelte';
+
+    let app = 0;
+    let screen;
+    let timeout;
+
+    $: if(screen) {
+        screen.classList.remove('changing');
+    }
+
+    function changeApp(direction) {
+        if(!screen.classList.contains('changing')) {
+            screen.classList.add('changing');
+            timeout = setTimeout(() => {
+                if(direction === 'next') {
+                    app = app === 2 ? 0 : app + 1;
+                } else {
+                    app = app === 0 ? 2 : app - 1;
+                }
+                screen.classList.remove('changing');
+                clearTimeout(timeout);
+            }, 800);
+        }
+    }
+
+    onDestroy(() => {
+        clearTimeout(timeout);
+    })
 </script>
 
 <style>
@@ -36,6 +65,8 @@
         height: 50%;
         background: hsl(0, 0%, 5%);
         transform: scaleY(0);
+        z-index: 10;
+        transition: transform 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
     }
     main:before {
         top: 0%;
@@ -45,6 +76,10 @@
         bottom: 0%;
         transform-origin: 50% 100%;
     }
+    main.changing:before,
+    main.changing:after {
+        transform: scaleY(1);
+    }
 
     nav {
         width: 5rem;
@@ -53,7 +88,6 @@
         padding-left: 0rem;
         background: hsl(0, 0%, 100%);
         border-radius: 0 5rem 5rem 0;
-        /* display the buttons in a column */
         display: flex;
         flex-direction: column;
     }
@@ -76,15 +110,18 @@
 
 <div>
     <section>
-        <main>
-			<!-- include the applications here -->
-			<!-- <DigitalWatch /> -->
-			<!-- <Counter /> -->
-			<AnalogWatch />
+        <main class="changing" bind:this={screen}>
+            {#if app === 0}
+                <DigitalWatch />
+            {:else if app === 1}
+			    <Counter />
+            {:else}
+			    <AnalogWatch />
+            {/if}
         </main>
     </section>
     <nav>
-        <button aria-label="Previous Gadget"></button>
-        <button arial-label="Next Gadget"></button>
+        <button aria-label="Previous Gadget" on:click="{() => changeApp('prev')}"></button>
+        <button arial-label="Next Gadget" on:click="{() => changeApp('next')}"></button>
     </nav>
 </div>
