@@ -58,7 +58,7 @@ An experiment with SVG syntax and the Aldous-Broder algorithm to create an endle
 
 **Tags**: svg, algorithm, motion, grid, promise
 
-## Smart Watch
+## [Smart Watch](https://codepen.io/borntofrappe/pen/bGGWMBx)
 
 Create a series of independent applications for a hypothetical smart watch.
 
