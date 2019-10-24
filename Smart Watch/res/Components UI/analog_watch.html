@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Analog Watch</title>
+    </head>
+    <body>
+        <style>
+            /* the background is ultimately picked up by the parent node */
+            svg {
+                display: block;
+                width: 250px;
+                height: 250px;
+                background: hsl(120, 30%, 58%);
+            }
+        </style>
+        <svg viewBox="0 0 100 100">
+            <defs>
+                <rect id="square" x="-2.5" y="-2.5" width="5" height="5"></rect>
+            </defs>
+            <g transform="translate(50 50)">
+                <!-- dial -->
+                <g fill="currentColor" stroke="none">
+                    <g id="dial-main">
+                        <use transform="rotate(0) translate(0 -40)" href="#square"></use>
+                        <use transform="rotate(90) translate(0 -40)" href="#square"></use>
+                    </g>
+                    <use href="#dial-main" transform="scale(-1 -1)"></use>
+
+                    <g id="dial-support" opacity="0.5">
+                        <use transform="rotate(30) translate(0 -40) rotate(-30)" href="#square"></use>
+                        <use transform="rotate(60) translate(0 -40) rotate(-60)" href="#square"></use>
+                        <use transform="rotate(120) translate(0 -40) rotate(-120)" href="#square"></use>
+                        <use transform="rotate(150) translate(0 -40) rotate(-150)" href="#square"></use>
+                    </g>
+                    <use href="#dial-support" transform="scale(-1 1)"></use>
+                </g>
+
+                <!-- hands -->
+                <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="4">
+                    <!-- change the rotation of this group for the hours' hand -->
+                    <g transform="rotate(245)" id="hours">
+                        <path opacity="0.5" d="M 0 0 v -15" stroke-width="4"></path>
+                    </g>
+                    <!-- change the rotation of this group for the minutes' hand -->
+                    <g transform="rotate(45)" id="minutes">
+                        <path d="M 0 0 v -30" stroke-width="2.5"></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </body>
+</html>

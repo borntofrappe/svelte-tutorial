@@ -12,4 +12,4 @@ I'm developing the application with the React framework as well, and this will a
 
 ## res
 
-In the **res** folder you find a series of sub-folders describing the building blocks behind the application and the different components. I decided to dedicate a separate markup and stylesheet to the different parts as to focus on the design of the project.
+In the **res** folder you find a series of sub-folders describing the building blocks behind the application and the different components. By dedicating separate files I was able to focus on the SVG syntax and final design without worrying too much about the functionality.
