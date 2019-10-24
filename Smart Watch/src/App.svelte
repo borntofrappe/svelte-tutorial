@@ -1,6 +1,7 @@
 <script>
 	import DigitalWatch from './DigitalWatch.svelte';
 	import Counter from './Counter.svelte';
+	import AnalogWatch from './AnalogWatch.svelte';
 </script>
 
 <style>
@@ -78,7 +79,8 @@
         <main>
 			<!-- include the applications here -->
 			<!-- <DigitalWatch /> -->
-			<Counter />
+			<!-- <Counter /> -->
+			<AnalogWatch />
         </main>
     </section>
     <nav>
