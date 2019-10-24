@@ -1,4 +1,6 @@
-<script></script>
+<script>
+	import DigitalWatch from './DigitalWatch.svelte';
+</script>
 
 <style>
     div {
@@ -73,7 +75,8 @@
 <div>
     <section>
         <main>
-            <!-- include the gadget(s) here -->
+			<!-- include the applications here -->
+			<DigitalWatch />
         </main>
     </section>
     <nav>
