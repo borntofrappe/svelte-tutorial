@@ -24,7 +24,7 @@ Describe the eliminatory stages for a hypothetical sport competition, taking adv
 
 ## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
-Create a CRUD application to add/update/delete key value pairs. Hihglight the items through D3 and two visualizations.
+Create a CRUD application to add/update/delete key value pairs. Highlight the items through D3 and two visualizations.
 
 **Tags**: bind, custom store, crud, d3
 
@@ -57,3 +57,9 @@ A memory-based game in which cards are flipped and matched in pairs.
 An experiment with SVG syntax and the Aldous-Broder algorithm to create an endless game in which the player moves within the boundaries of a maze to reach a goal.
 
 **Tags**: svg, algorithm, motion, grid, promise
+
+## Smart Watch
+
+Create a series of independent applications for a hypothetical smart watch.
+
+**Tags**: svg, components
