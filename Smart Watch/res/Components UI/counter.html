@@ -12,11 +12,9 @@
                 width: 250px;
                 height: 250px;
                 background: hsl(120, 30%, 58%);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
             }
             svg {
+                /* given the viewBox, the svg occupies the entirety of the width and 60% of the height */
                 display: block;
                 width: 100%;
                 height: auto;
@@ -24,7 +22,7 @@
 
             /* for the button, the idea is to include two pseudo element to fake the button being pressed inwards */
             button {
-                margin-top: -90px;
+                margin: 0 auto;
                 width: 64px;
                 height: 58px;
                 background: none;
@@ -86,7 +84,7 @@
         </style>
 
         <main>
-            <svg id="watch" viewBox="0 0 100 100">
+            <svg id="watch" viewBox="0 0 100 60">
                 <!-- define the path used in the dial for the numbers
                 ! be sure to provide an element, text or otherwise, to provide the time to assistive technologies
                 -->
@@ -105,9 +103,9 @@
                     <path id="8" d="M -6 -15 h 12 v 30 h -12 z m 0 15 h 12"></path>
                     <path id="9" d="M 6 15 v -30 h -12 v 15 h 12"></path>
                     <!-- plus sign used in the button -->
-                    <path id="plus" d="M -40 0 h 80 m -40 -40 v 80"></path>
+                    <path id="add" d="M -40 0 h 80 m -40 -40 v 80"></path>
                 </defs>
-                <g transform="translate(0 32)">
+                <g transform="translate(0 30)">
                     <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="square">
                         <g stroke-width="3" opacity="0.5">
                             <path d="M 27 -14 h 46 l 5 5 v 18 l -5 5 h -46 l -5 -5 v -18 z"></path>
@@ -135,7 +133,7 @@
                 <svg viewBox="0 0 100 100" width="35" height="35">
                     <g transform="translate(50 50)">
                         <g fill="none" stroke="currentColor" stroke-width="20">
-                            <use href="#plus"></use>
+                            <use href="#add"></use>
                         </g>
                     </g>
                 </svg>
