@@ -1,10 +1,18 @@
 <script>
+    // import the utility function to pad integer values with a 0 and always return a string
     import { zeroPadded } from "./utils.js";
+
+    // on destroy to remove the interval instantiated with the components
     import { onDestroy } from "svelte";
+
+    // retrieve the current date
     let now = new Date();
+    // reactive variables: hours and minutes change as **now** changes
+    // use the utility function to fabricate a two-characters long string out of the input value
     $: hours = zeroPadded(now.getHours());
     $: minutes = zeroPadded(now.getMinutes());
 
+    // instantiate an interval to update the date
     let interval = setInterval(() => {
         now = new Date();
     }, 1000);
@@ -51,7 +59,9 @@
         <rect id="square" x="-2.5" y="-2.5" width="5" height="5"></rect>
     </defs>
     <g transform="translate(0 50)">
-        <!-- include four numbers at intervals, separating the pairs with a colon : -->
+        <!-- include the different values of the hours and minutes string at the following intervals
+        14 35 65 86
+        -->
         <g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="square" stroke-linejoin="square">
             {#if now}
             <g transform="translate(14 0)">
@@ -69,6 +79,7 @@
             </g>
             {/if}
         </g>
+        <!-- colon separating the digits -->
         <g class="colon" transform="translate(50 0)">
             <use href="#square" y="-10"></use>
             <use href="#square" y="10"></use>

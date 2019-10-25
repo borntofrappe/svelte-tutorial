@@ -1,10 +1,14 @@
 <script>
+    // on destroy to remove the interval instantiated with the components
     import { onDestroy } from "svelte";
 
+    // retrieve the current date
     let now = new Date();
+    // reactive variables: hours and minutes change as **now** changes
     $: hours = now.getHours();
     $: minutes = now.getMinutes();
 
+    // instantiate an interval to update the date
     let interval = setInterval(() => {
         now = new Date();
     }, 1000);
@@ -43,9 +47,11 @@
         </g>
 
         <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="4">
-            <g transform="rotate({hours * 15})">
+            <!-- mao the 0-23 range (getHours) to the 0-360 range (degrees) -->
+            <g transform="rotate({hours * 30})">
                 <path opacity="0.5" d="M 0 0 v -15" stroke-width="4"></path>
             </g>
+            <!-- map the 0-59 range (minutes) to the 0-360 range (degrees) -->
             <g transform="rotate({minutes * 6})">
                 <path d="M 0 0 v -30" stroke-width="2.5"></path>
             </g>

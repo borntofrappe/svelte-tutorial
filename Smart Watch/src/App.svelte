@@ -1,18 +1,31 @@
 <script>
+    /* import the different components
+    the idea is to show the different components in a chain of if:else statements
+    */
 	import DigitalWatch from './DigitalWatch.svelte';
 	import Counter from './Counter.svelte';
     import AnalogWatch from './AnalogWatch.svelte';
 
     import { onDestroy } from 'svelte';
 
+    // app is a counter variable which describes the component being displayed
     let app = 0;
+
+    // screen refers to the container nesting the component(s)
+    // the idea is to have a reference to the element to add/remove a class of .changing and create the curtain transition
     let screen;
+
+    // timeout refers to the identifier of the timeout used to toggle the class of .changing on the container
     let timeout;
 
+    // for some reason starting without a class of .changing doesn't allow for the transition
+    // use a conditional statement to remove the existing class
     $: if(screen) {
         screen.classList.remove('changing');
     }
 
+    // following a click on the prev/next buttons change the app to refer to the previous/following application
+    // ! use classList methods to toggle the class and prevent changing the screen twice before the timeout has a change to run out
     function changeApp(direction) {
         if(!screen.classList.contains('changing')) {
             screen.classList.add('changing');

@@ -1,5 +1,8 @@
 <script>
+    // initialize a variable to keep track of the counter
     let count = 0;
+    // reactive variable representing the string version of the counter
+    // the idea is to use each character of the string to include a <use> element with the matching number
     $: digits = count.toString();
 </script>
 
@@ -82,6 +85,10 @@
                 <path d="M 27 -14 h 46 l 5 5 v 18 l -5 5 h -46 l -5 -5 v -18 z"></path>
             </g>
             <g stroke-width="5">
+                <!-- use each character of the digits string to create a <use> element with the matching number
+                ! be sure to display the numbers right to left, and at the following intervals
+                32 44 56 68
+                -->
                 {#each digits as letter, index}
                 <g transform="translate({68 - (digits.length - 1) * 12 + index * 12} 0) scale(0.5)">
                     <use href="#{letter}"></use>
@@ -91,6 +98,7 @@
         </g>
     </g>
 </svg>
+<!-- increase the counter variable up to four digits -->
 <button aria-label="Increment counter" on:click="{() => count = Math.min(count + 1, 9999)}">
     <svg viewBox="0 0 100 100" width="35" height="35">
         <g transform="translate(50 50)">
