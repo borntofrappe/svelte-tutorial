@@ -1,11 +1,88 @@
 <script>
     import { ninePadded } from "./utils.js";
 
-    let operation;
+    let operand1;
+    let operator;
+    let operand2;
+    let total;
 
-    let current = "123456";
-    $: display = ninePadded(current);
+    let display = "";
 
+    const regexNumber = /\d/;
+    const regexOperation = /[+\-*/]/;
+
+    function handleNumber(number) {
+        display = display.length < 9 ? `${display}${number}` : display;
+        operand1 = parseFloat(display);
+    }
+
+    function handleOperation(operation) {
+        if (operator && operand2) {
+            handleTotal();
+        }
+        display = "";
+        operand2 = operand1;
+        operand1 = null;
+        operator = operation;
+    }
+
+    function handleTotal() {
+        switch (operator) {
+            case "+":
+                total = operand2 + operand1;
+                break;
+            case "-":
+                total = operand2 - operand1;
+                break;
+            case "*":
+                total = operand2 * operand1;
+                break;
+            case "/":
+                total = operand2 / operand1;
+                break;
+            default:
+                total = operand1;
+                break;
+        }
+        operator = null;
+        operand2 = null;
+        operand1 = total;
+        display = total.toString();
+    }
+
+    function handleClear() {
+        operand1 = null;
+        operator = null;
+        operand2 = null;
+        total = null;
+        display = "";
+    }
+
+    function handleDecimal() {
+        if (!display.includes("." && display.length < 9)) {
+            display += ".";
+        }
+    }
+
+    function handleClick(value) {
+        if (regexNumber.test(value)) {
+            handleNumber(value);
+        } else if (regexOperation.test(value)) {
+            handleOperation(value);
+        } else {
+            switch (value) {
+                case "=":
+                    handleTotal();
+                    break;
+                case "clear":
+                    handleClear();
+                    break;
+                case ".":
+                    handleDecimal();
+                    break;
+            }
+        }
+    }
     const buttons = [
         {
             href: 0,
@@ -178,15 +255,15 @@
     <g transform="translate(15 20)">
         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
             <g transform="translate(10 0)">
-                {#if operation}
-                <use href="#{operation}"></use>
+                {#if operator}
+                <use href="#{operator}"></use>
                 {:else}
                 <use href="#asterisk"></use>
                 {/if}
             </g>
-            <!-- include the characters of the display variable at intervals of 39 and starting at 60 -->
-            {#each display as character, index}
-            <g transform="translate({60 + 39 * index} 0)">
+            <!-- include the characters of the display variable at intervals of 39 and starting at 61 -->
+            {#each ninePadded(display) as character, index}
+            <g transform="translate({61 + 39 * index} 0)">
                 {#if character !== ' '}
                 <use href="#{character}"></use>
                 {:else}
@@ -200,7 +277,7 @@
 
 <section>
     {#each buttons as {href, area}}
-    <button aria-label="{area}" style="grid-area: {area};">
+    <button aria-label="{area}" style="grid-area: {area};" on:click="{() => handleClick(href)}">
         <svg viewBox="0 0 40 40" width="40" height="40">
             <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                 <use href="#{href}"></use>
