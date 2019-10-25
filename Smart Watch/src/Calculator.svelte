@@ -1,88 +1,151 @@
 <script>
+    // import the utility function adding empty spaces to make a string 9 characthers long
     import { ninePadded } from "./utils.js";
 
-    let operand1;
+    // initialize variables to keep track of the input numbers, operation and total
+    let operand1 = 0;
+    let operand2 = 0;
+    let total = 0;
     let operator;
-    let operand2;
-    let total;
 
+    // variable describing the string included in the display through use elements
     let display = "";
 
+    // regular expressions to differentiate a number or operator
     const regexNumber = /\d/;
     const regexOperation = /[+\-*/]/;
 
+    // integers
     function handleNumber(number) {
+        // if total already describes a value (existing operation) reset the display
+        if (total) {
+            // move the total to the second operand
+            operand2 = total;
+            total = 0;
+            display = "";
+        }
+
+        // append the input number to the string describing the display
+        // ! limit the number of characters to the chosen 9 digits
         display = display.length < 9 ? `${display}${number}` : display;
+        // update the operand to follow the numerical version of the display
         operand1 = parseFloat(display);
     }
 
+    // operators
     function handleOperation(operation) {
-        if (operator && operand2) {
+        // if there isn't already an operator, store the first operand in the second one and update the operator
+        if (!operator) {
+            operand2 = operand1;
+            operand1 = 0;
+            operator = operation;
+            display = "";
+        } else {
+            // compute the total and update the operation
             handleTotal();
+            operator = operation;
         }
-        display = "";
-        operand2 = operand1;
-        operand1 = null;
-        operator = operation;
     }
 
-    function handleTotal() {
-        switch (operator) {
-            case "+":
-                total = operand2 + operand1;
-                break;
-            case "-":
-                total = operand2 - operand1;
-                break;
-            case "*":
-                total = operand2 * operand1;
-                break;
-            case "/":
-                total = operand2 / operand1;
-                break;
-            default:
-                total = operand1;
-                break;
-        }
-        operator = null;
-        operand2 = null;
-        operand1 = total;
-        display = total.toString();
-    }
-
-    function handleClear() {
-        operand1 = null;
-        operator = null;
-        operand2 = null;
-        total = null;
-        display = "";
-    }
-
+    // decimal point
+    // use the handleNumber function to update the display as long as a decimal point isn't already present
     function handleDecimal() {
-        if (!display.includes("." && display.length < 9)) {
-            display += ".";
+        if (!display.includes(".")) {
+            // edge case: if the display doesn't show any number, prepend 0 before the decimal point
+            if (display) {
+                handleNumber(".");
+            } else {
+                handleNumber("0.");
+            }
         }
     }
 
+    // function called for the chosen edge cases
+    // show a series of question marks in the display
+    function handleError() {
+        display = "?".repeat(9);
+        // reset the variables
+        operator = null;
+        operand1 = 0;
+        operand2 = 0;
+        total = 0;
+    }
+
+    // equal sign
+    // according to the value of the operator and operands compute the total
+    function handleTotal() {
+        /* edge cases - division by zero: show a series of question marks */
+        if (operator === "/" && operand1 === 0) {
+            handleError();
+        } else {
+            // compute the total according to the operator
+            switch (operator) {
+                case "+":
+                    total = operand2 + operand1;
+                    break;
+                case "-":
+                    total = operand2 - operand1;
+                    break;
+                case "*":
+                    total = operand2 * operand1;
+                    break;
+                case "/":
+                    total = operand2 / operand1;
+                    break;
+                default:
+                    total = operand1;
+                    break;
+            }
+
+            /* edge cases - number greater than 999999999, or number smaller than -99999999 */
+            if (total > 999999999 || total < -99999999) {
+                handleError();
+            } else {
+                // reset the operator and the value of the second operand
+                operator = null;
+                operand1 = 0;
+                // store the total in the second operand
+                operand2 = total;
+                // show the total in the display
+                display = total.toString();
+            }
+        }
+    }
+
+    // clear
+    // reset the variables to display the default state
+    function handleClear() {
+        display = "";
+        operator = null;
+        operand1 = 0;
+        operand2 = 0;
+        total = 0;
+    }
+
+    // function following a click event on the buttons in the .controls container
+    // receiving as input the value of the button (an integer, operator or other sign)
     function handleClick(value) {
+        // dispatch the appropriate functions to update the operand/operator/total variables
         if (regexNumber.test(value)) {
             handleNumber(value);
         } else if (regexOperation.test(value)) {
             handleOperation(value);
         } else {
             switch (value) {
+                case ".":
+                    handleDecimal();
+                    break;
                 case "=":
                     handleTotal();
                     break;
                 case "clear":
                     handleClear();
                     break;
-                case ".":
-                    handleDecimal();
-                    break;
             }
         }
     }
+
+    // array describing the buttons included in the section below the display
     const buttons = [
         {
             href: 0,
@@ -244,7 +307,7 @@
         <!-- graphic shown before the total and substituted by one of the operators -->
         <path id="asterisk" d="M 7 7 l 26 26 m 0 -26 l -26 26 m 13 1 v -28 m -14 14 h 28"></path>
         <!-- graphic shown as an error message (division by 0 or number greater than the allotted length) -->
-        <path id="question" d="M 8 15 v -10 h 24 v 15 h -12 v 5 m 0 10 v 0"></path>
+        <path id="?" d="M 8 15 v -10 h 24 v 15 h -12 v 5 m 0 10 v 0"></path>
         <!-- graphic shown if the input number is less than 9 digits long -->
         <use id="placeholder" opacity="0.35" href="#8"></use>
     </defs>

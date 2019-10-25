@@ -32,9 +32,9 @@
             screen.classList.add('changing');
             timeout = setTimeout(() => {
                 if(direction === 'next') {
-                    app = app === 2 ? 0 : app + 1;
+                    app = app === 3 ? 0 : app + 1;
                 } else {
-                    app = app === 0 ? 2 : app - 1;
+                    app = app === 0 ? 3 : app - 1;
                 }
                 screen.classList.remove('changing');
                 clearTimeout(timeout);
@@ -125,14 +125,15 @@
 <div>
     <section>
         <main class="changing" bind:this={screen}>
-            <!-- {#if app === 0}
+            {#if app === 0}
                 <DigitalWatch />
             {:else if app === 1}
-			    <Counter />
+                <Calculator />
+            {:else if app === 2}
+                <Counter />
             {:else}
-			    <AnalogWatch />
-            {/if} -->
-            <Calculator />
+                <AnalogWatch />
+            {/if}
         </main>
     </section>
     <nav>
