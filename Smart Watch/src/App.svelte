@@ -3,6 +3,7 @@
     the idea is to show the different components in a chain of if:else statements
     */
 	import DigitalWatch from './DigitalWatch.svelte';
+    import Calculator from './Calculator.svelte';
 	import Counter from './Counter.svelte';
     import AnalogWatch from './AnalogWatch.svelte';
 
@@ -124,13 +125,14 @@
 <div>
     <section>
         <main class="changing" bind:this={screen}>
-            {#if app === 0}
+            <!-- {#if app === 0}
                 <DigitalWatch />
             {:else if app === 1}
 			    <Counter />
             {:else}
 			    <AnalogWatch />
-            {/if}
+            {/if} -->
+            <Calculator />
         </main>
     </section>
     <nav>

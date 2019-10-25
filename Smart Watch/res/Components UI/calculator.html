@@ -8,26 +8,20 @@
     </head>
     <body>
         <style>
-            /* display the display and controls in a column */
+            /* display the svg and controls in a column */
             main {
                 width: 250px;
                 height: 250px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: space-around;
+                justify-content: space-evenly;
                 background: hsl(120, 30%, 58%);
             }
-            /* show the numbers in a vertically aligned row */
-            .display {
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                width: 80%;
-                padding: 0.5rem 0.25rem;
-                border: 2px solid hsl(0, 0%, 0%);
-                border-left-width: 8px;
-                border-right-width: 8px;
+            svg {
+                display: block;
+                width: 90%;
+                height: auto;
             }
             /* position the buttons in a grid */
             .controls {
@@ -101,195 +95,190 @@
                 transform: scaleY(0);
             }
         </style>
-        <!-- graphics created for the calculator -->
-        <svg style="width: 0; height: 0; position: absolute;" viewBox="0 0 40 40">
-            <defs>
-                <!-- numbers -->
-                <path id="0" d="M 10 5 h 20 v 30 h -20 z"></path>
-                <path id="1" d="M 20 5 h 5 v 30 m -5 0 h 10"></path>
-                <path id="2" d="M 10 5 h 20 v 15 h -20 v 15 h 20"></path>
-                <path id="3" d="M 10 5 h 20 v 30 h -20 m 0 -15 h 20"></path>
-                <path id="4" d="M 10 5 v 15 h 20 m -5 -15 v 30"></path>
-                <path id="5" d="M 30 5 h -20 v 15 h 20 v 15 h -20"></path>
-                <path id="6" d="M 30 5 h -20 v 30 h 20 v -15 h -20"></path>
-                <path id="7" d="M 10 5 h 20 v 30"></path>
-                <path id="8" d="M 10 5 h 20 v 30 h -20 z m 0 15 h 20"></path>
-                <path id="9" d="M 30 35 v -30 h -20 v 15 h 20"></path>
-                <!-- operations -->
-                <path id="addition" d="M 5 20 h 30 m -15 -15 v 30"></path>
-                <path id="subtraction" d="M 5 20 h 30"></path>
-                <path id="multiplication" d="M 7 7 l 26 26 m 0 -26 l -26 26"></path>
-                <path id="division" d="M 5 20 h 30 m -15 -15 v 0 m 0 30 v 0"></path>
-                <path id="equal" d="M 5 12 h 30 m -30 16 h 30"></path>
-                <path id="decimal" d="M 10 35 h 0"></path>
-                <path id="clear" d="M 32 12 v -7 h -24 v 30 h 24 v -7"></path>
-                <!-- graphic shown next to the total -->
-                <path id="asterisk" d="M 7 7 l 26 26 m 0 -26 l -26 26 m 13 1 v -28 m -14 14 h 28"></path>
-                <!-- graphic shown as an error message (division by 0 or number greater than the allotted time) -->
-                <path id="question" d="M 8 15 v -10 h 24 v 15 h -12 v 5 m 0 10 v 0"></path>
-            </defs>
-        </svg>
-
         <main>
-            <!-- the idea is to show in the display the asterisk followed by 9 digit
-            there are always nine digits, even if the total is less than nine digits long
-            in this instance show semi transparent number 8 as a placeholder
+            <!-- in the svg fabricating the display define the path elements used throughout the component -->
+            <svg viewBox="0 0 450 80" width="450" height="80">
+                <defs>
+                    <!-- numbers -->
+                    <path id="0" d="M 10 5 h 20 v 30 h -20 z"></path>
+                    <path id="1" d="M 20 5 h 5 v 30 m -5 0 h 10"></path>
+                    <path id="2" d="M 10 5 h 20 v 15 h -20 v 15 h 20"></path>
+                    <path id="3" d="M 10 5 h 20 v 30 h -20 m 0 -15 h 20"></path>
+                    <path id="4" d="M 10 5 v 15 h 20 m -5 -15 v 30"></path>
+                    <path id="5" d="M 30 5 h -20 v 15 h 20 v 15 h -20"></path>
+                    <path id="6" d="M 30 5 h -20 v 30 h 20 v -15 h -20"></path>
+                    <path id="7" d="M 10 5 h 20 v 30"></path>
+                    <path id="8" d="M 10 5 h 20 v 30 h -20 z m 0 15 h 20"></path>
+                    <path id="9" d="M 30 35 v -30 h -20 v 15 h 20"></path>
+                    <!-- operations -->
+                    <path id="addition" d="M 5 20 h 30 m -15 -15 v 30"></path>
+                    <path id="subtraction" d="M 5 20 h 30"></path>
+                    <path id="multiplication" d="M 7 7 l 26 26 m 0 -26 l -26 26"></path>
+                    <path id="division" d="M 5 20 h 30 m -15 -15 v 0 m 0 30 v 0"></path>
+                    <path id="equal" d="M 5 12 h 30 m -30 16 h 30"></path>
+                    <path id="decimal" d="M 10 35 h 0"></path>
+                    <path id="clear" d="M 32 12 v -7 h -24 v 30 h 24 v -7"></path>
+                    <!-- graphic shown before the total and substituted by one of the operators -->
+                    <path id="asterisk" d="M 7 7 l 26 26 m 0 -26 l -26 26 m 13 1 v -28 m -14 14 h 28"></path>
+                    <!-- graphic shown as an error message (division by 0 or number greater than the allotted length) -->
+                    <path id="question" d="M 8 15 v -10 h 24 v 15 h -12 v 5 m 0 10 v 0"></path>
+                    <!-- graphic shown if the input number is less than 9 digits long -->
+                    <use id="placeholder" opacity="0.35" href="#8"></use>
+                </defs>
 
-            ! be sure to show nine question mark if the operation is not allowed/exceepds the nine digit length
-            ! substitute the asterisk with the selected operation
-            -->
-            <div class="display">
-                <svg viewBox="0 0 40 40" width="20" height="20">
+                <g fill="none" stroke="currentColor" stroke-width="16">
+                    <rect x="8" y="-5" width="434" height="90"></rect>
+                </g>
+                <g transform="translate(15 20)">
                     <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#asterisk"></use>
-                    </g>
-                </svg>
-                <svg opacity="0.35" viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#8"></use>
-                    </g>
-                </svg>
-                <svg opacity="0.35" viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#8"></use>
-                    </g>
-                </svg>
-                <svg opacity="0.35" viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#8"></use>
-                    </g>
-                </svg>
-                <svg opacity="0.35" viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#8"></use>
-                    </g>
-                </svg>
-                <svg viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#1"></use>
-                    </g>
-                </svg>
-                <svg viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#4"></use>
-                    </g>
-                </svg>
-                <svg viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#3"></use>
-                    </g>
-                </svg>
-                <svg viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#7"></use>
-                    </g>
-                </svg>
-                <svg viewBox="0 0 40 40" width="20" height="20">
-                    <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                        <use href="#9"></use>
-                    </g>
-                </svg>
-            </div>
-            <div class="controls">
-                <button style="grid-area: nine;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#9"></use>
+                        <g transform="translate(10 0)">
+                            <use href="#asterisk"></use>
                         </g>
-                    </svg>
-                </button>
+                        <!-- include 9 digits at intervals of 39 -->
+                        <g transform="translate(60 0)">
+                            <use href="#placeholder"></use>
+                        </g>
 
-                <button style="grid-area: eight;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#8"></use>
+                        <g transform="translate(99 0)">
+                            <use href="#placeholder"></use>
                         </g>
-                    </svg>
-                </button>
-                <button style="grid-area: seven;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#7"></use>
-                        </g>
-                    </svg>
-                </button>
 
-                <button style="grid-area: six;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#6"></use>
+                        <g transform="translate(138 0)">
+                            <use href="#placeholder"></use>
                         </g>
-                    </svg>
-                </button>
 
-                <button style="grid-area: five;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#5"></use>
+                        <g transform="translate(177 0)">
+                            <use href="#placeholder"></use>
                         </g>
-                    </svg>
-                </button>
 
-                <button style="grid-area: four;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#4"></use>
+                        <g transform="translate(216 0)">
+                            <use href="#placeholder"></use>
                         </g>
-                    </svg>
-                </button>
-                <button style="grid-area: three;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#3"></use>
-                        </g>
-                    </svg>
-                </button>
 
-                <button style="grid-area: two;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                        <g transform="translate(255 0)">
                             <use href="#2"></use>
                         </g>
-                    </svg>
-                </button>
 
-                <button style="grid-area: one;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                        <g transform="translate(294 0)">
+                            <use href="#3"></use>
+                        </g>
+                        <g transform="translate(333 0)">
+                            <use href="#4"></use>
+                        </g>
+                        <g transform="translate(372 0)">
                             <use href="#1"></use>
                         </g>
-                    </svg>
-                </button>
+                    </g>
+                </g>
+            </svg>
 
-                <button style="grid-area: zero;">
+            <!-- display every button with a use element matching the button's purpose
+            this is done purely for aesthetics and ultimately the framework should include the buttons through a loop/map
+
+            ! carefully consider the order with which the buttons are included in the markup
+            -->
+            <section class="controls">
+                <!-- numbers -->
+                <button aria-label="zero" style="grid-area: zero;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#0"></use>
                         </g>
                     </svg>
                 </button>
-                <button style="grid-area: addition;">
+                <button aria-label="one" style="grid-area: one;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#1"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="two" style="grid-area: two;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#2"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="three" style="grid-area: three;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#3"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="four" style="grid-area: four;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#4"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="five" style="grid-area: five;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#5"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="six" style="grid-area: six;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#6"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="seven" style="grid-area: seven;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#7"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="eight" style="grid-area: eight;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#8"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="nine" style="grid-area: nine;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#9"></use>
+                        </g>
+                    </svg>
+                </button>
+                <!-- operators -->
+                <button aria-label="decimal" style="grid-area: decimal;">
+                    <svg viewBox="0 0 40 40" width="40" height="40">
+                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
+                            <use href="#decimal"></use>
+                        </g>
+                    </svg>
+                </button>
+                <button aria-label="addition" style="grid-area: addition;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#addition"></use>
                         </g>
                     </svg>
                 </button>
-                <button style="grid-area: subtraction;">
+                <button aria-label="subtraction" style="grid-area: subtraction;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#subtraction"></use>
                         </g>
                     </svg>
                 </button>
-                <button style="grid-area: multiplication;">
+                <button aria-label="multiplication" style="grid-area: multiplication;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#multiplication"></use>
                         </g>
                     </svg>
                 </button>
-                <button style="grid-area: division;">
+                <button aria-label="division" style="grid-area: division;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#division"></use>
@@ -297,28 +286,21 @@
                     </svg>
                 </button>
 
-                <button style="grid-area: equal;">
+                <button aria-label="equal" style="grid-area: equal;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#equal"></use>
                         </g>
                     </svg>
                 </button>
-                <button style="grid-area: clear;">
+                <button aria-label="clear" style="grid-area: clear;">
                     <svg viewBox="0 0 40 40" width="40" height="40">
                         <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
                             <use href="#clear"></use>
                         </g>
                     </svg>
                 </button>
-                <button style="grid-area: decimal;">
-                    <svg viewBox="0 0 40 40" width="40" height="40">
-                        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="square" stroke-linejoin="square">
-                            <use href="#decimal"></use>
-                        </g>
-                    </svg>
-                </button>
-            </div>
+            </section>
         </main>
     </body>
 </html>
