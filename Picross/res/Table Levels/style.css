@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/* show the containers describing the tables in a wrapping row */
+.tables {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+/* have the border inside the table collapse */
+.tables table {
+    border: 3px solid hsl(0, 0%, 0%);
+    border-collapse: collapse;
+    margin: 0.5rem;
+}
+/* size the cells as squares */
+.tables table td {
+    width: 36px;
+    height: 36px;
+    border: 1px solid hsl(223, 34%, 70%);
+}
+/* slightly change the background of the cells according to their even/odd number */
+.tables table td:nth-of-type(odd) {
+    background: hsl(223, 34%, 99%);
+}
+.tables table td:nth-of-type(even) {
+    background: hsl(223, 34%, 96%);
+}
+.tables table tr:nth-last-of-type(odd) td:nth-last-of-type(odd) {
+    background: hsl(223, 34%, 98%);
+}
+.tables table tr:nth-last-of-type(odd) td:nth-last-of-type(even) {
+    background: hsl(223, 34%, 94%);
+}
+/* style the border between the fifth and sixth row and column with an orange color
+! for table of only five columns or rows, the border-right or border-bottom is collapsed
+*/
+.tables table td:nth-of-type(5) {
+    border-right-color: hsl(39, 100%, 50%);
+}
+.tables table tr:nth-of-type(5) td {
+    border-bottom-color: hsl(39, 100%, 50%);
+}
+/* size the svg elements to take as much space as made available by the cell */
+.tables table td svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
