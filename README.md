@@ -63,3 +63,9 @@ An experiment with SVG syntax and the Aldous-Broder algorithm to create an endle
 Create a series of independent applications for a hypothetical smart watch.
 
 **Tags**: svg, components
+
+## Picross
+
+Recreate the basic structure of the semi-popular puzzle game which allows to draw stylized figures with blocks.
+
+**Tags**: svg, table
