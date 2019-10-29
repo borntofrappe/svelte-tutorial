@@ -1,0 +1,68 @@
+/* ! colors subject to change */
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: radial-gradient(ellipse at 100% 100%, hsl(220, 95%, 95%), transparent), repeating-linear-gradient(to bottom, hsl(220, 95%, 50%) 0px, hsl(220, 95%, 50%) 3px, hsl(220, 95%, 70%) 3px, hsl(220, 95%, 75%) 6px) #303e61;
+    color: hsl(0, 0%, 5%);
+    font-family: "IBM Plex Mono", monospace;
+    /* center in the viewport */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* center the button in the container */
+section {
+    text-align: center;
+}
+section > * + *,
+div > * + * {
+    margin-top: 1rem;
+}
+
+/* use a semitransparent background for the container describing the heading and svg element */
+div {
+    padding: 2rem 4rem;
+    background: hsla(0, 0%, 100%, 0.5);
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+svg {
+    display: block;
+    width: 200px;
+    height: 200px;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    color: hsl(0, 0%, 5%);
+    border: 4px solid currentColor;
+    font-weight: 700;
+    background: none;
+    font-size: 1rem;
+    font-family: inherit;
+    /* add a pseudo element to describe a semi transparent background */
+    position: relative;
+    z-index: 5;
+}
+button:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(to bottom, hsl(0, 0%, 100%) 0, hsl(0, 0%, 85%) 5%, hsl(0, 0%, 100%) 10%), hsl(0, 0%, 100%);
+    z-index: -5;
+    opacity: 0.5;
+}

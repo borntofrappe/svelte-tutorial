@@ -6,6 +6,10 @@ Recreate the basic structure of the semi-popular puzzle game which allows to dra
 
 ## Notes
 
-This project is based on a previous experiment with the table element, in which I used JavaScript to plot a series of levels through columns, rows and cells of SVG elements. You can find the experiment [live here on codepen](https://codepen.io/borntofrappe/full/MWgEbPz), but I've extracted the main logic in the **Table Levels** subfolder.
+This project is based on a previous experiment with the table element, in which I used JavaScript to plot a series of levels through columns, rows and cells of SVG elements. You can find the experiment [live here on codepen](https://codepen.io/borntofrappe/full/MWgEbPz).
 
-In the **Table UI** folder you also find a separate output describing the way I decided to include the "hints" for the columns and rows.
+## res
+
+In the **res** folder you find the building blocks behind the application:
+
+-   in the **UI** folders you find the markup and stylesheet developed for the three stages of the application.
