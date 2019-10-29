@@ -13,3 +13,34 @@ This project is based on a previous experiment with the table element, in which 
 In the **res** folder you find the building blocks behind the application:
 
 -   in the **UI** folders you find the markup and stylesheet developed for the three stages of the application.
+
+-   in the **Table Data** folder you find the JavaScript code which builds a table from a starting level, using array methods like `map` and `reduce`.
+
+## Levels
+
+To comply with the logic described in the **Table Data** folder, each level is described through a string. Each character describes a cell in a 5x5 grid.
+
+```js
+const levels = [
+    {
+        name: "Star",
+        level: "ooxooooxooxxxxxoxxxooxoxo"
+    },
+    {
+        name: "Mobile phone",
+        level: "xxxoxxoooxxoxoxxoooxxooox"
+    },
+    {
+        name: "Heart",
+        level: "ooxooooooooooooxoooxxxoxx"
+    },
+    {
+        name: "Musical note",
+        level: "xxoooxxoxoxxoxooooxxoooxx"
+    },
+    {
+        name: "Moon",
+        level: "xxooxxxxoooxxoooooooxooox"
+    }
+];
+```
