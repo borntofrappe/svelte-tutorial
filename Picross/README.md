@@ -16,6 +16,8 @@ In the **res** folder you find the building blocks behind the application:
 
 -   in the **Table Data** folder you find the JavaScript code which builds a table from a starting level, using array methods like `map` and `reduce`.
 
+-   in the **SVG** folder you find the vector graphics used throughout the project.
+
 ## Levels
 
 To comply with the logic described in the **Table Data** folder, each level is described through a string. Each character describes a cell in a 5x5 grid.
