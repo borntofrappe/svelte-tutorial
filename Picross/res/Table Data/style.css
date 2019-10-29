@@ -29,6 +29,7 @@ tr td:first-of-type {
     /* align the cells toward the rest of the table */
     text-align: right;
     vertical-align: bottom;
+    /* reset the width to have the cell expand to cover the span's size */
     width: initial;
     height: initial;
 }
@@ -51,6 +52,7 @@ tr td span {
 /* include a solid border for the rest of the table */
 td {
     border: 1px solid hsl(0, 0%, 70%);
+    /* have each cell occupy a fixed width and height */
     width: 45px;
     height: 45px;
 }
@@ -68,7 +70,7 @@ table tr:nth-last-of-type(odd) td:nth-last-of-type(even) button {
     background: hsl(0, 0%, 94%);
 }
 
-/* have each button occupy a fixed width and height */
+/* have the nested button, or svg element, occupy the available width and height */
 td button {
     display: block;
     width: 100%;

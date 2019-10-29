@@ -88,6 +88,12 @@ table {
 tr:first-of-type td,
 tr td:first-of-type {
     border: none;
+    /* align the cells toward the rest of the table */
+    text-align: right;
+    vertical-align: bottom;
+    /* reset the width to have the cell expand to cover the span's size */
+    width: initial;
+    height: initial;
 }
 /* slightly separate the span elements included in the first column */
 tr td:first-of-type span {
@@ -107,6 +113,9 @@ tr td span {
 
 /* include a solid border for the rest of the table */
 td {
+    /* have each cell occupy a fixed width and height */
+    width: 45px;
+    height: 45px;
     border: 1px solid hsl(0, 0%, 70%);
 }
 /* change the background of selected buttons */
@@ -123,13 +132,18 @@ table tr:nth-last-of-type(odd) td:nth-last-of-type(even) button {
     background: hsl(0, 0%, 94%);
 }
 
-/* have each button occupy a fixed width and height */
+/* have the nested button, or svg element, occupy the available width and height */
 td button {
     display: block;
-    width: 45px;
-    height: 45px;
+    width: 100%;
+    height: 100%;
     background: hsl(0, 0%, 100%);
     border: none;
+}
+td svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* for smaller viewports the table starts to be more brittle */

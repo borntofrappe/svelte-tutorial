@@ -1,5 +1,6 @@
 <script>
     import Selection from './Selection.svelte';
+    import Game from './Game.svelte';
 
     // variable describing the selection
     let selection;
@@ -38,5 +39,10 @@
 
 </script>
 
-<!-- pass in the selection component an array describing the levels' names -->
-<Selection on:selection="{handleSelection}" options="{levels.map(({name}) => name)}"/>
+{#if selection}
+    <!-- if a level is selected show the game component -->
+    <Game level="{selection.level}"/>
+{:else}
+    <!-- pass in the selection component an array describing the levels' names -->
+    <Selection on:selection="{handleSelection}" options="{levels.map(({name}) => name)}"/>
+{/if}
