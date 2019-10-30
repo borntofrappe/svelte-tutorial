@@ -62,17 +62,18 @@
             player = [...player.slice(0, index), character, ...player.slice(index + 1)].join('');
 
         } else {
-            // if the two don't match include a red background for a brief moment, before returning to the original value
-            const color = getComputedStyle(this).backgroundColor;
-            this.style.background = 'hsl(0, 80%, 60%)';
+            // if the two don't match include the use element for the error and for a brief moment
+            this.innerHTML = `
+            <svg viewBox="0 0 100 100" width="40" height="40">
+                <use href="#error"></use>
+            </svg>
+            `;
             // ! use an arrow function to maintain the value of `this` as a reference to the button
             let timeout = setTimeout(() => {
-                this.style.background = color;
+                this.innerHTML = '';
                 clearTimeout(timeout)
             }, 150);
 
-            // remove the existing markup
-            this.innerHTML = '';
             // update the players string to include the missing character
             player = [...player.slice(0, index), 'x', ...player.slice(index + 1)].join('');
         }
@@ -192,25 +193,37 @@
             <rect x="0" y="0" width="60" height="60" transform="translate(20 20)"></rect>
         </clipPath>
         <linearGradient id="gradient-o" x1="0.5" x2="0.5" y1="0" y2="1">
-            <stop stop-color="#001b85" offset="0"></stop>
-            <stop stop-color="#2275dd" offset="0.5"></stop>
-            <stop stop-color="#94cdff" offset="1"></stop>
+            <stop stop-color="hsl(230, 100%, 26%)" offset="0"></stop>
+            <stop stop-color="hsl(210, 73%, 50%)" offset="0.5"></stop>
+            <stop stop-color="hsl(210, 100%, 79%)" offset="1"></stop>
         </linearGradient>
     </defs>
 
-    <symbol id="x" clip-path="url(#clip-x)">
+    <symbol id="o">
+        <rect x="0" y="0" width="100" height="100" fill="url(#gradient-o)"></rect>
+        <path d="M 0 100 v -100 h 100" stroke="hsl(0, 0%, 100%)" stroke-width="10" fill="none"></path>
+        <path d="M 100 0 v 100 h -100" stroke="hsl(0, 0%, 00%)" stroke-width="10" fill="none"></path>
+    </symbol>
+
+    <!-- use the same cross for the x character and the error graphic, with a different stroke color
+    ! this is quite a silly decision, but since the error graphic is shown very briefly, it carries little weight
+    -->
+    <symbol id="cross" clip-path="url(#clip-x)">
         <g transform="translate(50 50) scale(0.65)">
             <g transform="translate(-50 -50)">
-                <path d="M 0 0 l 100 100 m -100 0 l 100 -100" stroke="#3890EC" stroke-width="18" fill="none"></path>
+                <path d="M 0 0 l 100 100 m -100 0 l 100 -100" stroke-width="18" fill="none"></path>
             </g>
         </g>
     </symbol>
 
-    <symbol id="o">
-        <rect x="0" y="0" width="100" height="100" fill="url(#gradient-o)"></rect>
-        <path d="M 0 100 v -100 h 100" stroke="#fff" stroke-width="10" fill="none"></path>
-        <path d="M 100 0 v 100 h -100" stroke="#000" stroke-width="10" fill="none"></path>
+    <symbol id="x">
+        <use href="#cross" stroke="hsl(210, 83%, 57%)"></use>
     </symbol>
+
+    <symbol id="error">
+        <use href="#cross" stroke="hsl(0, 90%, 60%)"></use>
+    </symbol>
+
 </svg>
 
 {#if victory}

@@ -6,7 +6,7 @@
     margin: 0;
 }
 body {
-    background: radial-gradient(ellipse at 100% 100%, hsl(220, 95%, 95%), transparent), repeating-linear-gradient(to bottom, hsl(220, 95%, 50%) 0px, hsl(220, 95%, 50%) 3px, hsl(220, 95%, 70%) 3px, hsl(220, 95%, 75%) 6px) #303e61;
+    background: radial-gradient(ellipse at 100% 100%, hsl(220, 95%, 90%), transparent), repeating-linear-gradient(to bottom, hsl(220, 95%, 50%) 0px, hsl(220, 95%, 50%) 3px, hsl(220, 70%, 70%) 3px, hsl(220, 70%, 75%) 6px), #303e61;
     color: hsl(0, 0%, 5%);
     font-family: "IBM Plex Mono", monospace;
     /* center in the viewport */

@@ -1,8 +1,8 @@
-# Picross
+# [Picross](https://codepen.io/borntofrappe/full/yLLPBMr)
 
 ## Goal
 
-Recreate the basic structure of the semi-popular puzzle game which allows to draw stylized figures with blocks.
+Recreate the basic structure of the popular puzzle game which allows to draw stylized figures with a pixelated look.
 
 ## Notes
 

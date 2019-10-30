@@ -48,8 +48,8 @@
 </style>
 
 <!-- display the level through its name and use an svg element to draw the shape through a series of squares -->
-<section in:fly="{{ x: -50, duration: 650, easing: backInOut }}">
-    <div>
+<section>
+    <div in:fly="{{ x: -50, duration: 650, easing: backInOut }}">
         <h1>{name}</h1>
         <svg viewBox="0 0 {width} {height}" {width} {height}>
             <defs>
@@ -66,7 +66,7 @@
         </svg>
     </div>
 
-    <button class="btn" on:click="{() => {dispatch('reset');} }">
+    <button in:fly="{{ x: -50, duration: 650, easing: backInOut, delay: 100 }}" class="btn" on:click="{() => {dispatch('reset');} }">
         Select new level
     </button>
 </section>

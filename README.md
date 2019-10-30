@@ -64,8 +64,8 @@ Create a series of independent applications for a hypothetical smart watch.
 
 **Tags**: svg, components
 
-## Picross
+## [Picross](https://codepen.io/borntofrappe/pen/yLLPBMr)
 
-Recreate the basic structure of the semi-popular puzzle game which allows to draw stylized figures with blocks.
+Recreate the basic structure of the popular puzzle game which allows to draw stylized figures with a pixelated look.
 
-**Tags**: svg, table
+**Tags**: svg, table, transition
