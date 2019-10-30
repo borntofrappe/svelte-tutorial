@@ -35,8 +35,6 @@
         selection = levels.find(({ name }) => name === e.detail);
     }
 
-    $:console.log(selection);
-
 </script>
 
 {#if selection}

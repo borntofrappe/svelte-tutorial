@@ -1,4 +1,5 @@
 <script>
+    import Form from './Form.svelte';
     import { markupTable } from "./utils.js";
     export let level;
     const rows = 5;
@@ -8,6 +9,7 @@
     function handleChange(e) {
         console.log(e);
     }
+
 </script>
 
 <style>
@@ -18,56 +20,6 @@
         align-items: center;
         padding: 2rem 3rem;
         background: hsla(0, 0%, 100%, 0.5);
-    }
-
-    /* display the buttons in a column, at the top of the row */
-    form {
-        display: flex;
-        flex-direction: column;
-        align-self: flex-start;
-        margin-right: 2rem;
-        margin-bottom: 2rem;
-    }
-    /* separate the buttons vertically */
-    form > * + * {
-        margin-top: 1rem;
-    }
-    /* include the labels as circles with a fixed width and height */
-    label {
-        width: 65px;
-        height: 65px;
-        padding: 1rem;
-        border-radius: 50%;
-        color: hsl(0, 0%, 5%);
-        border: 4px solid currentColor;
-        background: hsl(0, 0%, 100%);
-        position: relative;
-    }
-    /* by default reduce the scale and opacity of the graphic nested in each label
-set the original values when the connected input of type radio is checked
-*/
-    label input + svg {
-        opacity: 0.5;
-        transform: scale(0.8);
-        transition: all 0.25s ease-in-out;
-    }
-    label input:checked + svg {
-        opacity: 1;
-        transform: scale(1);
-    }
-    /* position the input of type radio on top of the svg graphic */
-    label input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-    }
-    label svg {
-        display: block;
-        width: 100%;
-        height: 100%;
     }
 
     /* collapse the borders */
@@ -145,32 +97,15 @@ set the original values when the connected input of type radio is checked
         height: 100%;
     }
 
-    /* for smaller viewports the table starts to be more brittle */
+    /* for smaller viewports display the controls atop the table */
     @media (max-width: 550px) {
-        /* display the controls atop the table */
         section {
             flex-direction: column;
-        }
-        /* display the controls in a row */
-        form {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-        /* remove the space included between the controls */
-        form > * + * {
-            margin-top: 0;
-        }
-        label {
-            width: 60px;
-            height: 60px;
         }
     }
 </style>
 
-<svg style="opacity: 0; position: absolute; top: 100%; left: 100%;" viewBox="0 0 100 100">
+<svg style="opacity: 0; position: absolute; top: 100%; left: 100%; width: 0; height: 0;" viewBox="0 0 100 100">
     <defs>
         <clipPath id="clip-x">
             <rect x="0" y="0" width="60" height="60" transform="translate(20 20)"></rect>
@@ -199,28 +134,12 @@ set the original values when the connected input of type radio is checked
 
 <!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
 <section>
-    <!-- input of type radio using an svg graphic to describe the two modalities of the game -->
-    <form on:submit|preventDefault on:change="{handleChange}">
-        <label aria-label="Select pencil" for="pencil">
-            <!-- by default check the first input -->
-            <input type="radio" name="tool" id="pencil" checked />
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <g stroke="none" fill="currentColor">
-                    <path d="M 0 100 h 30 l 70 -70 l -30 -30 l -70 70"></path>
-                </g>
-            </svg>
-        </label>
 
-        <label aria-label="Select eraser" for="easer">
-            <input type="radio" name="tool" id="erase" />
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <g stroke="none" fill="currentColor">
-                    <path d="M 0 0 h 20 l 30 30 l 30 -30 h 20 v 20 l -30 30 l 30 30 v 20 h -20 l -30 -30 l -30 30 h -20 v -20 l 30 -30 l -30 -30"></path>
-                </g>
-            </svg>
-        </label>
-    </form>
+    <Form on:change="{handleChange}"/>
 
+    <!-- table using the 2D array to describe the hints through span elements and the grid through button elements
+    the <use> elements are included once the player interacts with the table
+    -->
     <table>
         {#each levelsTable as row}
         <tr>
@@ -228,9 +147,9 @@ set the original values when the connected input of type radio is checked
             <td>
                 {#if (cell === 'x' || cell === 'o')}
                 <button aria-label="Select cell">
-                    <svg viewBox="0 0 100 100">
+                    <!-- <svg viewBox="0 0 100 100">
                         <use href="#{cell}"></use>
-                    </svg>
+                    </svg> -->
                 </button>
                 {:else} {#each [...cell] as hint}
                 <span>{hint}</span>
