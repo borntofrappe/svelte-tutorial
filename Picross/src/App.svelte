@@ -35,12 +35,23 @@
         selection = levels.find(({ name }) => name === e.detail);
     }
 
+    // function called when the game describes a victory
+    function handleReset() {
+        // reset selection to present the selection's screen
+        selection = null;
+    }
+
 </script>
 
 {#if selection}
     <!-- if a level is selected show the game component -->
-    <Game level="{selection.level}"/>
+    <Game
+        level="{selection.level}"
+        name="{selection.name}"
+        on:reset="{handleReset}"/>
 {:else}
     <!-- pass in the selection component an array describing the levels' names -->
-    <Selection on:selection="{handleSelection}" options="{levels.map(({name}) => name)}"/>
+    <Selection
+        options="{levels.map(({name}) => name)}"
+        on:selection="{handleSelection}"/>
 {/if}

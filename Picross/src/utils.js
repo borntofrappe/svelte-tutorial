@@ -93,3 +93,11 @@ export function markupTable(level, rows, columns) {
     const levelsTable = [hintsColumns, ...tableRows];
     return levelsTable;
 }
+
+export function markupSVG(level, rows) {
+    const levelRows = Array(rows)
+    .fill()
+    .map((character, row) => [...level.slice(row * rows, row * rows + rows)]);
+
+    return levelRows;
+}

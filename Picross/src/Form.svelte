@@ -3,11 +3,18 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
-    let tool = "pencil";
+    // variable bound to the input(s) of type radio
+    let tool = "Pencil";
 
-    function handleChange(e) {
-        dispatch("change", tool);
-    }
+    // it is possible to dispatch the event with a reactive declaration
+    // as tool change, the function is fired
+    $: dispatch("change", tool);
+
+    // the same could be achieved with a handleChange function connected to the `change` event
+    // ! just remember to add the directive on the form
+    // function handleChange(e) {
+    //     dispatch("change", tool);
+    // }
 </script>
 
 <style>
@@ -83,11 +90,13 @@
     }
 </style>
 
-<form on:submit|preventDefault on:change="{handleChange}">
+<form on:submit|preventDefault>
     <!-- input(s) of type radio using an svg graphic to describe the two modalities of the game -->
     <label aria-label="Select pencil" for="pencil">
-        <!-- by default check the first input -->
-        <input type="radio" name="tool" id="pencil" checked />
+        <!-- bind the input elements with the tool variable
+        ! by default set the variable to consider the first input's value
+        -->
+        <input type="radio" name="tool" id="pencil" bind:group="{tool}" value="Pencil" />
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <g stroke="none" fill="currentColor">
                 <path d="M 0 100 h 30 l 70 -70 l -30 -30 l -70 70"></path>
@@ -96,7 +105,7 @@
     </label>
 
     <label aria-label="Select eraser" for="easer">
-        <input type="radio" name="tool" id="erase" />
+        <input type="radio" name="tool" id="erase" bind:group="{tool}" value="Eraser" />
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <g stroke="none" fill="currentColor">
                 <path d="M 0 0 h 20 l 30 30 l 30 -30 h 20 v 20 l -30 30 l 30 30 v 20 h -20 l -30 -30 l -30 30 h -20 v -20 l 30 -30 l -30 -30"></path>

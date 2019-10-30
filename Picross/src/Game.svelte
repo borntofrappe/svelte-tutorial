@@ -1,13 +1,30 @@
 <script>
     import Form from './Form.svelte';
+    import Victory from './Victory.svelte';
     import { markupTable } from "./utils.js";
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
+
+    // table
     export let level;
+    export let name;
     const rows = 5;
     const columns = 5;
     const levelsTable = markupTable(level, rows, columns);
 
+
+    // gameplay
+    let isDrawing = true;
     function handleChange(e) {
-        console.log(e);
+        isDrawing = e.detail === 'Pencil';
+    }
+    $:console.log(isDrawing);
+
+    // victory
+    let victory;
+    // dispatch a reset event to move the application back to the selection screen
+    function handleReset() {
+        dispatch('reset');
     }
 
 </script>
@@ -132,31 +149,37 @@
     </symbol>
 </svg>
 
-<!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
-<section>
+{#if victory}
+    <Victory
+        name="{name}"
+        level="{level}"
+        on:reset="{handleReset}"/>
+{:else}
+    <!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
+    <section>
+        <Form on:change="{handleChange}"/>
 
-    <Form on:change="{handleChange}"/>
-
-    <!-- table using the 2D array to describe the hints through span elements and the grid through button elements
-    the <use> elements are included once the player interacts with the table
-    -->
-    <table>
-        {#each levelsTable as row}
-        <tr>
-            {#each row as cell}
-            <td>
-                {#if (cell === 'x' || cell === 'o')}
-                <button aria-label="Select cell">
-                    <!-- <svg viewBox="0 0 100 100">
-                        <use href="#{cell}"></use>
-                    </svg> -->
-                </button>
-                {:else} {#each [...cell] as hint}
-                <span>{hint}</span>
-                {/each} {/if}
-            </td>
+        <!-- table using the 2D array to describe the hints through span elements and the grid through button elements
+        the <use> elements are included once the player interacts with the table
+        -->
+        <table>
+            {#each levelsTable as row}
+            <tr>
+                {#each row as cell}
+                <td>
+                    {#if (cell === 'x' || cell === 'o')}
+                    <button aria-label="Select cell" on:click="{() => {victory = true;} }">
+                        <!-- <svg viewBox="0 0 100 100">
+                            <use href="#{cell}"></use>
+                        </svg> -->
+                    </button>
+                    {:else} {#each [...cell] as hint}
+                    <span>{hint}</span>
+                    {/each} {/if}
+                </td>
+                {/each}
+            </tr>
             {/each}
-        </tr>
-        {/each}
-    </table>
-</section>
+        </table>
+    </section>
+{/if}
