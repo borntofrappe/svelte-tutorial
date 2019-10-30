@@ -1,13 +1,15 @@
 <script>
     import Form from './Form.svelte';
     import Victory from './Victory.svelte';
-    import { markupTable, compareLetter } from "./utils.js";
+    import { markupTable, checkVictory } from "./utils.js";
     import { createEventDispatcher } from 'svelte';
+
+    // transition the section from the left
     import { fly } from "svelte/transition";
     import { backInOut } from 'svelte/easing';
 
 
-    // table
+    // build the data structure included through the table element
     export let level;
     export let name;
     const rows = 5;
@@ -16,61 +18,83 @@
 
 
     // gameplay
-    let isDrawing = true;
+    // boolean describing the option selected in the input element(s) of type radio
+    let isPencil = true;
+    // boolean to restrict the logic behind the button presses
+    // this to have the component wait until the end of a timeout before moving toward the victory state
     let isPlaying = true;
+    // boolean used to describe the appropriate component
+    let victory;
+
+    // function receiving the tool from the form component
+    // switch the boolean according to the argument passed in the detail property
     function handleChange(e) {
-        isDrawing = e.detail === 'Pencil';
+        isPencil = e.detail === 'Pencil';
     }
 
+    // string describing a series of x(s)
+    /* ! this approach is rather brittle and can be improved by re-considering the input data structure
+    the idea is to update the string and compare it with the level string
+    if the two have the same `o` characters, this describes a victory
+    */
     let player = Array(level.length).fill('x').join('');
 
-
+    // function following a click event on a button
     function handleClick() {
-        if(isPlaying) {
-            const cell = this.getAttribute('data-cell');
+        // retrieve the data attributes added on each button
+        const cell = this.getAttribute('data-cell');
+        // since the first column and row describe the hint, deduct 1 by the row and column describing the position of the button
+        const row = this.getAttribute('data-row') - 1;
+        const column = this.getAttribute('data-column') - 1;
+        const index = row * rows + column;
 
-            const tool = isDrawing ? 'o' : 'x';
-            const row = this.getAttribute('data-row') - 1;
-            const column = this.getAttribute('data-column') - 1;
-            const index = row * rows + column;
+        // the game-play varies depending on the selected character
+        const character = isPencil ? 'o' : 'x';
+        // if the selected character matches the cell
+        if(character === cell) {
+            // include the character in the button
+            this.innerHTML = `
+            <svg viewBox="0 0 100 100" width="40" height="40">
+                <use href="#${cell}"></use>
+            </svg>
+            `;
+            // update the players string
+            player = [...player.slice(0, index), character, ...player.slice(index + 1)].join('');
 
-            if(cell === tool) {
-                this.innerHTML = `
-                <svg viewBox="0 0 100 100" width="40" height="40">
-                    <use href="#${cell}"></use>
-                </svg>
-                `;
-                player = [...player.slice(0, index), tool, ...player.slice(index + 1)].join('');
+        } else {
+            // if the two don't match include a red background for a brief moment, before returning to the original value
+            const color = getComputedStyle(this).backgroundColor;
+            this.style.background = 'hsl(0, 80%, 60%)';
+            // ! use an arrow function to maintain the value of `this` as a reference to the button
+            let timeout = setTimeout(() => {
+                this.style.background = color;
+                clearTimeout(timeout)
+            }, 150);
 
-            } else {
-                const color = getComputedStyle(this).backgroundColor;
-                this.style.background = 'hsl(0, 80%, 60%)';
-                let timeout = setTimeout(() => {
-                    this.style.background = color;
-                    clearTimeout(timeout)
-                }, 150);
-                this.innerHTML = '';
-                player = [...player.slice(0, index), 'x', ...player.slice(index + 1)].join('');
-            }
+            // remove the existing markup
+            this.innerHTML = '';
+            // update the players string to include the missing character
+            player = [...player.slice(0, index), 'x', ...player.slice(index + 1)].join('');
+        }
 
-            if(compareLetter('o', level, player)) {
-                isPlaying = false;
-                let timeout = setTimeout(() => {
-                    victory = true;
-                    clearTimeout(timeout);
-                }, 1000);
-            }
+        // to check for a victory, use the utility function comparing the two strings
+        if(checkVictory(level, player)) {
+            // toggle the boolean to avoid reacting to a click on the button element
+            isPlaying = false;
+            // after a brief timeout switch the boolean to highlight the victory state
+            let timeout = setTimeout(() => {
+                victory = true;
+                clearTimeout(timeout);
+            }, 1000);
         }
     }
 
-    // victory
-    let victory;
+    // dispatch the reset event to reset the value of the `selection` variable
+    // this moves the application back to the selection component
     const dispatch = createEventDispatcher();
-    // dispatch a reset event to move the application back to the selection screen
     function handleReset() {
         dispatch('reset');
     }
-
 </script>
 
 <style>
@@ -161,6 +185,7 @@
     }
 </style>
 
+<!-- graphics included in the table -->
 <svg style="opacity: 0; position: absolute; top: 100%; left: 100%; width: 0; height: 0;" viewBox="0 0 100 100">
     <defs>
         <clipPath id="clip-x">
@@ -189,6 +214,7 @@
 </svg>
 
 {#if victory}
+    <!-- pass the name and string describing the level to highlight the session in the victory component -->
     <Victory
         name="{name}"
         level="{level}"
@@ -196,7 +222,9 @@
 {:else}
     <!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
     <section in:fly="{{ x: -50, duration: 600, easing: backInOut }}">
-        <Form on:change="{handleChange}"/>
+
+        <Form
+            on:change="{handleChange}"/>
 
         <!-- table using the 2D array to describe the hints through span elements and the grid through button elements
         the <use> elements are included once the player interacts with the table
@@ -206,15 +234,26 @@
             <tr>
                 {#each row as cell, indexColumn}
                 <td>
+                    <!-- in the cell include the span elements for the hints or the button for the x and o characters -->
                     {#if (cell === 'x' || cell === 'o')}
-                    <button aria-label="Select cell" data-cell="{cell}" data-row="{indexRow}" data-column="{indexColumn}" on:click="{handleClick}">
+                    <button
+                        disabled="{!isPlaying}"
+                        aria-label="Select cell"
+                        data-cell="{cell}"
+                        data-row="{indexRow}"
+                        data-column="{indexColumn}"
+                        on:click="{handleClick}">
                         <!-- <svg viewBox="0 0 100 100">
                             <use href="#{cell}"></use>
                         </svg> -->
                     </button>
-                    {:else} {#each [...cell] as hint}
-                    <span>{hint}</span>
-                    {/each} {/if}
+
+                    {:else}
+
+                        {#each [...cell] as hint}
+                            <span>{hint}</span>
+                        {/each}
+                    {/if}
                 </td>
                 {/each}
             </tr>

@@ -10,8 +10,8 @@
     // as tool change, the function is fired
     $: dispatch("change", tool);
 
-    // the same could be achieved with a handleChange function connected to the `change` event
-    // ! just remember to add the directive on the form
+    // the same functionality could be replicated with a handleChange function connected to the `change` event
+    // ! just remember to add the :change directive to the form
     // function handleChange(e) {
     //     dispatch("change", tool);
     // }

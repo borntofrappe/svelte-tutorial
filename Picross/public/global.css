@@ -16,8 +16,8 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* use these property-value pairs for every button in the other states */
-button.select {
+/* include global property-value pairs for the buttons with a specific class */
+.btn {
     padding: 0.5rem 1rem;
     color: hsl(0, 0%, 5%);
     border: 4px solid currentColor;
@@ -29,7 +29,7 @@ button.select {
     position: relative;
     z-index: 5;
 }
-button.select:before {
+.btn:before {
     content: "";
     position: absolute;
     top: 0;

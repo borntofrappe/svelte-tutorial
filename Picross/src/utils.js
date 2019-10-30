@@ -103,13 +103,14 @@ export function markupSVG(level, rows) {
     return levelRows;
 }
 
-
-export function compareLetter(letter, string1, string2) {
-    if(string1.length !== string2.length) {
+// function checking for a victory by comparing the level and player's strings
+export function checkVictory(level, player) {
+    // return true only if the two strings match in length and have the same letter `o` in the respective position
+    if(level.length !== player.length) {
         return false;
     }
-    for(let i = 0; i < string1.length; i += 1) {
-        if((letter === string1[i] || letter === string2[i]) && string1[i] !== string2[i]) {
+    for(let i = 0; i < level.length; i += 1) {
+        if(('o' === level[i] || 'o' === player[i]) && level[i] !== player[i]) {
             return false;
         }
     }
