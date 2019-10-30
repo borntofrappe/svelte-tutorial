@@ -1,83 +1,13 @@
 <script>
+    import { markupTable } from "./utils.js";
     export let level;
-
-    let tool = "pencil";
-    function handleInput(e) {
-        console.log(e);
-    }
-
     const rows = 5;
     const columns = 5;
+    const levelsTable = markupTable(level, rows, columns);
 
-    // 2D array describing the level according to its rows (picking the characters in groups of `rows`)
-    const levelRows = Array(rows)
-        .fill()
-        .map((character, row) => [...level.slice(row * rows, row * rows + rows)]);
-
-    // 2D array describing the level according to its columns (picking every 5th character)
-    const levelColumns = Array(columns)
-        .fill()
-        .map((character, column) =>
-            Array(columns)
-                .fill()
-                .map((item, col) => level[column + columns * col])
-        );
-
-    // 2D array describing the rows prepended with a string describing the contiguous characters
-    const tableRows = levelRows.map(row => {
-        const hintsRow = row.reduce(
-            (acc, curr) => {
-                const { character, hints } = acc;
-                if (character === curr) {
-                    hints[hints.length - 1] += 1;
-                    return {
-                        character,
-                        hints
-                    };
-                }
-                return {
-                    character: curr,
-                    hints: [...hints, 1]
-                };
-            },
-            {
-                character: "",
-                hints: []
-            }
-        );
-        return [hintsRow.hints.join(""), ...row];
-    });
-
-    // 1D array describing the first row of the table, with an empty cell followed by the strings describing the contiguous characters in the column
-    const tableColumns = [
-        "",
-        ...levelColumns.map(column => {
-            const hintsCol = column.reduce(
-                (acc, curr) => {
-                    const { character, hints } = acc;
-                    if (character === curr) {
-                        hints[hints.length - 1] += 1;
-                        return {
-                            character,
-                            hints
-                        };
-                    }
-                    return {
-                        character: curr,
-                        hints: [...hints, 1]
-                    };
-                },
-                {
-                    character: "",
-                    hints: []
-                }
-            );
-            return hintsCol.hints.join("");
-        })
-    ];
-
-    // 2D array describing the table through each individual cell
-    const levelsTable = [tableColumns, ...tableRows];
+    function handleChange(e) {
+        console.log(e);
+    }
 </script>
 
 <style>
@@ -95,18 +25,15 @@
         display: flex;
         flex-direction: column;
         align-self: flex-start;
-        margin-bottom: 1rem;
-        /* rotate the container to direct the input elements toward the table to the right */
-        transform: rotate(45deg);
+        margin-right: 2rem;
+        margin-bottom: 2rem;
     }
     /* separate the buttons vertically */
     form > * + * {
         margin-top: 1rem;
     }
-    /* rotate the labels backwards to avoid rotating the icons */
+    /* include the labels as circles with a fixed width and height */
     label {
-        transform: rotate(-45deg);
-        /* include the labels as circles with a fixed width and height */
         width: 65px;
         height: 65px;
         padding: 1rem;
@@ -114,6 +41,7 @@
         color: hsl(0, 0%, 5%);
         border: 4px solid currentColor;
         background: hsl(0, 0%, 100%);
+        position: relative;
     }
     /* by default reduce the scale and opacity of the graphic nested in each label
 set the original values when the connected input of type radio is checked
@@ -151,12 +79,16 @@ set the original values when the connected input of type radio is checked
     tr:first-of-type td,
     tr td:first-of-type {
         border: none;
-        /* align the cells toward the rest of the table */
-        text-align: right;
-        vertical-align: bottom;
         /* reset the width to have the cell expand to cover the span's size */
         width: initial;
         height: initial;
+    }
+    /* align the cells toward the rest of the table */
+    tr:first-of-type td {
+        vertical-align: bottom;
+    }
+    tr td:first-of-type {
+        text-align: right;
     }
     /* slightly separate the span elements included in the first column */
     tr td:first-of-type span {
@@ -195,7 +127,7 @@ set the original values when the connected input of type radio is checked
         background: hsl(0, 0%, 94%);
     }
 
-    /* have the nested button, or svg element, occupy the available width and height */
+    /* have the nested button, occupy the available width and height */
     td button {
         display: block;
         width: 100%;
@@ -203,7 +135,11 @@ set the original values when the connected input of type radio is checked
         background: hsl(0, 0%, 100%);
         border: none;
     }
-    td svg {
+    /* stretch the svg to cover the width and height of the parent button */
+    td button svg {
+        position: absolute;
+        top: 0%;
+        left: 0%;
         display: block;
         width: 100%;
         height: 100%;
@@ -216,8 +152,7 @@ set the original values when the connected input of type radio is checked
             flex-direction: column;
         }
         /* display the controls in a row */
-        div {
-            transform: rotate(0);
+        form {
             display: flex;
             flex-direction: row;
             width: 100%;
@@ -225,29 +160,47 @@ set the original values when the connected input of type radio is checked
             align-items: center;
         }
         /* remove the space included between the controls */
-        div > * + * {
+        form > * + * {
             margin-top: 0;
         }
         label {
-            transform: rotate(0);
             width: 60px;
             height: 60px;
-        }
-        /* reduce the size of the buttons and span elements */
-        td button {
-            width: 40px;
-            height: 40px;
-        }
-        tr td span {
-            font-size: 1rem;
         }
     }
 </style>
 
+<svg style="opacity: 0; position: absolute; top: 100%; left: 100%;" viewBox="0 0 100 100">
+    <defs>
+        <clipPath id="clip-x">
+            <rect x="0" y="0" width="60" height="60" transform="translate(20 20)"></rect>
+        </clipPath>
+        <linearGradient id="gradient-o" x1="0.5" x2="0.5" y1="0" y2="1">
+            <stop stop-color="#001b85" offset="0"></stop>
+            <stop stop-color="#2275dd" offset="0.5"></stop>
+            <stop stop-color="#94cdff" offset="1"></stop>
+        </linearGradient>
+    </defs>
+
+    <symbol id="x" clip-path="url(#clip-x)">
+        <g transform="translate(50 50) scale(0.65)">
+            <g transform="translate(-50 -50)">
+                <path d="M 0 0 l 100 100 m -100 0 l 100 -100" stroke="#3890EC" stroke-width="18" fill="none"></path>
+            </g>
+        </g>
+    </symbol>
+
+    <symbol id="o">
+        <rect x="0" y="0" width="100" height="100" fill="url(#gradient-o)"></rect>
+        <path d="M 0 100 v -100 h 100" stroke="#fff" stroke-width="10" fill="none"></path>
+        <path d="M 100 0 v 100 h -100" stroke="#000" stroke-width="10" fill="none"></path>
+    </symbol>
+</svg>
+
 <!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
 <section>
     <!-- input of type radio using an svg graphic to describe the two modalities of the game -->
-    <form on:submit|preventDefault on:input="{handleInput}">
+    <form on:submit|preventDefault on:change="{handleChange}">
         <label aria-label="Select pencil" for="pencil">
             <!-- by default check the first input -->
             <input type="radio" name="tool" id="pencil" checked />
@@ -274,7 +227,11 @@ set the original values when the connected input of type radio is checked
             {#each row as cell}
             <td>
                 {#if (cell === 'x' || cell === 'o')}
-                <button></button>
+                <button aria-label="Select cell">
+                    <svg viewBox="0 0 100 100">
+                        <use href="#{cell}"></use>
+                    </svg>
+                </button>
                 {:else} {#each [...cell] as hint}
                 <span>{hint}</span>
                 {/each} {/if}

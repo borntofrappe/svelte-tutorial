@@ -26,12 +26,16 @@ table {
 tr:first-of-type td,
 tr td:first-of-type {
     border: none;
-    /* align the cells toward the rest of the table */
-    text-align: right;
-    vertical-align: bottom;
     /* reset the width to have the cell expand to cover the span's size */
     width: initial;
     height: initial;
+}
+/* align the cells toward the rest of the table */
+tr:first-of-type td {
+    vertical-align: bottom;
+}
+tr td:first-of-type {
+    text-align: right;
 }
 /* slightly separate the span elements included in the first column */
 tr td:first-of-type span {
