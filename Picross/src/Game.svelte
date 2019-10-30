@@ -1,9 +1,11 @@
 <script>
     import Form from './Form.svelte';
     import Victory from './Victory.svelte';
-    import { markupTable } from "./utils.js";
+    import { markupTable, compareLetter } from "./utils.js";
     import { createEventDispatcher } from 'svelte';
-    const dispatch = createEventDispatcher();
+    import { fly } from "svelte/transition";
+    import { backInOut } from 'svelte/easing';
+
 
     // table
     export let level;
@@ -15,13 +17,55 @@
 
     // gameplay
     let isDrawing = true;
+    let isPlaying = true;
     function handleChange(e) {
         isDrawing = e.detail === 'Pencil';
     }
-    $:console.log(isDrawing);
+
+    let player = Array(level.length).fill('x').join('');
+
+
+    function handleClick() {
+        if(isPlaying) {
+            const cell = this.getAttribute('data-cell');
+
+            const tool = isDrawing ? 'o' : 'x';
+            const row = this.getAttribute('data-row') - 1;
+            const column = this.getAttribute('data-column') - 1;
+            const index = row * rows + column;
+
+            if(cell === tool) {
+                this.innerHTML = `
+                <svg viewBox="0 0 100 100" width="40" height="40">
+                    <use href="#${cell}"></use>
+                </svg>
+                `;
+                player = [...player.slice(0, index), tool, ...player.slice(index + 1)].join('');
+
+            } else {
+                const color = getComputedStyle(this).backgroundColor;
+                this.style.background = 'hsl(0, 80%, 60%)';
+                let timeout = setTimeout(() => {
+                    this.style.background = color;
+                    clearTimeout(timeout)
+                }, 150);
+                this.innerHTML = '';
+                player = [...player.slice(0, index), 'x', ...player.slice(index + 1)].join('');
+            }
+
+            if(compareLetter('o', level, player)) {
+                isPlaying = false;
+                let timeout = setTimeout(() => {
+                    victory = true;
+                    clearTimeout(timeout);
+                }, 1000);
+            }
+        }
+    }
 
     // victory
     let victory;
+    const dispatch = createEventDispatcher();
     // dispatch a reset event to move the application back to the selection screen
     function handleReset() {
         dispatch('reset');
@@ -77,9 +121,6 @@
 
     /* include a solid border for the rest of the table */
     td {
-        /* have each cell occupy a fixed width and height */
-        width: 45px;
-        height: 45px;
         border: 1px solid hsl(0, 0%, 70%);
     }
     /* change the background of selected buttons */
@@ -96,22 +137,20 @@
         background: hsl(0, 0%, 94%);
     }
 
-    /* have the nested button, occupy the available width and height */
-    td button {
+    /* have the nested button, occupy a fixed width and height */
+    table tr td button {
+        width: 45px;
+        height: 45px;
         display: block;
-        width: 100%;
-        height: 100%;
         background: hsl(0, 0%, 100%);
         border: none;
     }
     /* stretch the svg to cover the width and height of the parent button */
-    td button svg {
-        position: absolute;
-        top: 0%;
-        left: 0%;
+    table tr td button svg {
         display: block;
         width: 100%;
         height: 100%;
+        pointer-events: none;
     }
 
     /* for smaller viewports display the controls atop the table */
@@ -156,19 +195,19 @@
         on:reset="{handleReset}"/>
 {:else}
     <!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
-    <section>
+    <section in:fly="{{ x: -50, duration: 600, easing: backInOut }}">
         <Form on:change="{handleChange}"/>
 
         <!-- table using the 2D array to describe the hints through span elements and the grid through button elements
         the <use> elements are included once the player interacts with the table
         -->
         <table>
-            {#each levelsTable as row}
+            {#each levelsTable as row, indexRow}
             <tr>
-                {#each row as cell}
+                {#each row as cell, indexColumn}
                 <td>
                     {#if (cell === 'x' || cell === 'o')}
-                    <button aria-label="Select cell" on:click="{() => {victory = true;} }">
+                    <button aria-label="Select cell" data-cell="{cell}" data-row="{indexRow}" data-column="{indexColumn}" on:click="{handleClick}">
                         <!-- <svg viewBox="0 0 100 100">
                             <use href="#{cell}"></use>
                         </svg> -->

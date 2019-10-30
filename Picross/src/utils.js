@@ -94,10 +94,24 @@ export function markupTable(level, rows, columns) {
     return levelsTable;
 }
 
+// function creating the data structure for the svg element
 export function markupSVG(level, rows) {
     const levelRows = Array(rows)
     .fill()
     .map((character, row) => [...level.slice(row * rows, row * rows + rows)]);
 
     return levelRows;
+}
+
+
+export function compareLetter(letter, string1, string2) {
+    if(string1.length !== string2.length) {
+        return false;
+    }
+    for(let i = 0; i < string1.length; i += 1) {
+        if((letter === string1[i] || letter === string2[i]) && string1[i] !== string2[i]) {
+            return false;
+        }
+    }
+    return true;
 }

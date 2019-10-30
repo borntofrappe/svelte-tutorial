@@ -2,6 +2,8 @@
     // dispatch a selection event when clicking on one of the buttons
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
+    import { fly } from "svelte/transition";
+    import { backInOut } from "svelte/easing";
 
     function select(selection) {
         dispatch("selection", selection);
@@ -24,6 +26,8 @@
 
 <section>
     {#each options as option, index}
-    <button on:click="{() => select(option)}">{option}</button>
+    <button class="select" on:click="{() => select(option)}" in:fly="{{x: -50, delay: 50 * index, duration: 600, easing: backInOut }}">
+        {option}
+    </button>
     {/each}
 </section>

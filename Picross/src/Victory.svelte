@@ -3,6 +3,8 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
     import { markupSVG } from "./utils.js";
+    import { fly } from "svelte/transition";
+    import { backInOut } from "svelte/easing";
 
     const width = 100;
     const height = 100;
@@ -46,7 +48,7 @@
     }
 </style>
 
-<section>
+<section in:fly="{{ x: -50, duration: 650, easing: backInOut }}">
     <div>
         <h1>{name}</h1>
         <svg viewBox="0 0 {width} {height}" {width} {height}>
@@ -59,5 +61,5 @@
             {/each} {/each}
         </svg>
     </div>
-    <button on:click="{() => {dispatch('reset');} }">Select new level</button>
+    <button class="select" on:click="{() => {dispatch('reset');} }">Select new level</button>
 </section>
