@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
+        <path id="curve--left" d="M 35 25 h -10 a 20 20 0 0 0 0 40 h 10" />
+        <use href="#curve--left" transform="translate(90 0) scale(-1 1)"/>
+        <path d="M 30 45 h 30" />
+    </g>
+</svg>

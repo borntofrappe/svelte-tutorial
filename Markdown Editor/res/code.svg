@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
+        <path id="bracket--left" d="M 30 18 l -30 27 30 27" />
+        <use href="#bracket--left" transform="translate(90 0) scale(-1 1)" />
+    </g>
+</svg>
