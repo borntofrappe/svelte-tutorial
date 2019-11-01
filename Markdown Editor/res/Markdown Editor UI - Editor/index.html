@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Markdown Editor UI - Editor</title>
+    </head>
+    <body>
+        <!-- wrapping container -->
+        <div class="app">
+            <!-- navigation including the controls for the application
+            ! the controls vary according to whether the page displays the editor or the preview
+            for the editor include buttons to
+            1. include code snippet (three backticks followed by a new line and three more backticks)
+            1. include link (square brackets followed by parens)
+            1. download markdown
+            1. preview markdown
+            -->
+            <nav class="controls">
+                <button title="Add code snippet" aria-label="Add code snippet">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+                        <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
+                            <path id="bracket--left" d="M 30 18 l -30 27 30 27" />
+                            <use href="#bracket--left" transform="translate(90 0) scale(-1 1)" />
+                        </g>
+                    </svg>
+                </button>
+                <button title="Add link" aria-label="Add link">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+                        <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
+                            <path id="curve--left" d="M 35 25 h -10 a 20 20 0 0 0 0 40 h 10" />
+                            <use href="#curve--left" transform="translate(90 0) scale(-1 1)" />
+                            <path d="M 30 45 h 30" />
+                        </g>
+                    </svg>
+                </button>
+                <button title="Download markdown" aria-label="Download markdown">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+                        <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
+                            <path d="M 45 0 v 60 l -22 -22 m 22 22 l 22 -22" />
+                            <path d="M 0 60 v 20 a 10 10 0 0 0 10 10 h 70 a 10 10 0 0 0 10 -10 v -20" />
+                        </g>
+                    </svg>
+                </button>
+                <button title="Preview markdown" aria-label="Preview markdown">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40" height="40">
+                        <defs>
+                            <mask id="mask--circle" maskUnits="userSpaceOnUse">
+                                <rect x="0" y="0" width="100" height="100" fill="white" />
+                                <circle cx="50" cy="50" r="24" fill="black" />
+                            </mask>
+                        </defs>
+                        <g mask="url(#mask--circle)">
+                            <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="currentColor">
+                                <path d="M 0 45 c 25 -40 65 -40 90 0 -25 40 -65 40 -90 0" />
+                            </g>
+                        </g>
+                        <g transform="translate(50 50)">
+                            <circle cx="0" cy="0" r="14" fill="currentColor" />
+                        </g>
+                    </svg>
+                </button>
+            </nav>
+
+            <!-- include a text area element with hard coded values -->
+            <textarea class="editor">
+# Svelte Markdown Editor
+
+## [Live Demo]()
+
+## Goal
+
+Create an online editor which allows to compose, preview and download markdown files.
+
+## Notes
+
+I tend to write plenty of markdown files, and [VSCode](https://code.visualstudio.com/) provides an excellent interface for this syntax.
+
+That being said, I'd really like an online alternative. With this project I set out to create such an alternative. It is something which might actually be useful, at least personally, and a perfect excuse to practice with [Svelte](https://svelte.dev) a little bit more.
+
+
+## Design
+
+The UI is inspired by [Svelte](https://svelte.dev) and [Github](https://github.com). The SVG icons have been coded _by hand_ in VSCode, and use mostly `&lt;path&gt;` elements. The following snippet highlights one of
+such icons:
+
+```html
+&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;
+    &lt;g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none"&gt;
+        &lt;path d="M 73 0 l 17 17 -45 45 -17 0 0 -17 45 -45" /&gt;
+        &lt;path d="M 35 10 h -25 a 10 10 0 0 0 -10 10 v 60 a 10 10 0 0 0 10 10 h 60 a 10 10 0 0 0 10 -10 v -25" /&gt;
+    &lt;/g&gt;
+&lt;/svg&gt;
+```
+
+And to top it all off, it is also a good opportunity to include syntax highlighting with [prism.js](https://prismjs.com).
+            </textarea>
+        </div>
+    </body>
+</html>
