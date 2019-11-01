@@ -69,3 +69,9 @@ Create a series of independent applications for a hypothetical smart watch.
 Recreate the basic structure of the popular puzzle game which allows to draw stylized figures with a pixelated look.
 
 **Tags**: svg, table, transition
+
+## Markdown Editor
+
+Create an online editor which allows to compose, preview and download markdown files.
+
+**Tags**: markdown, markup
