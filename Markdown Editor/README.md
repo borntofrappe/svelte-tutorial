@@ -16,7 +16,7 @@
 
 -   [ ] download button
 
--   [ ] sanitize string with DOM purify
+-   [x] sanitize string with DOM purify
 
 ## Goal
 

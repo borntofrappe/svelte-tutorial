@@ -1,22 +1,20 @@
 const initialValue = `# Svelte Markdown Editor
 
-## [Live Demo]()
-
 ## Goal
 
-Create an online editor which allows to compose, preview and download markdown files.
+Create an online editor which allows to compose, download and preview markdown files.
 
 ## Notes
 
-I tend to write plenty of markdown files, and [VSCode](https://code.visualstudio.com/) provides an excellent interface for this syntax.
+I tend to write plenty of markdown files, and while [VSCode](https://code.visualstudio.com/) provides an excellent interface, I'd really like an online alternative for this syntax.
 
-That being said, I'd really like an online alternative. With this project I set out to create such an alternative. It is something which might actually be useful, at least personally, and a perfect excuse to practice with [Svelte](https://svelte.dev) a little bit more.
-
+Enter this project. It is something which might actually be useful, at least personally, and a perfect excuse to practice with [Svelte](https://svelte.dev).
 
 ## Design
 
-The UI is inspired by [Svelte](https://svelte.dev) and [Github](https://github.com). The SVG icons have been coded _by hand_ in VSCode, and use mostly \`<path>\` elements. The following snippet highlights one of
-such icons:
+The UI is inspired by [Svelte's own REPL](https://svelte.dev/repl). The icons have been coded _directly_ in VSCode, stressing over the \`d\` attribute of \`\<path\>\` elements.
+
+Take this one for instance.
 
 \`\`\`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -26,6 +24,19 @@ such icons:
   </g>
 </svg>
 \`\`\`
+
+Can you guess which icon is behind this snippet?
+
+## Script
+
+Aside from those stylish icons, the project uses:
+
+- [marked.js](https://github.com/markedjs/marked) to parse between markdown and markup
+- [DOMPurify](https://github.com/cure53/DOMPurify) for a wee bit o' sanitation.
+
+There are also a couple of niceties to rapidly append a code block with backticks or the syntax for a URL.
+
+It's far from perfect, but to create **README.md** files is already a jump in the right direction.
 `;
 
 
@@ -42,6 +53,6 @@ function fromLocalStorage(key) {
 }
 // utility function storing the existing string of markup in local storage
 export function toLocalStorage(string) {
-    localStorage.setItem('markdown--string', string);
+    localStorage.setItem('markdown--string', DOMPurify.sanitize(string));
 
 }

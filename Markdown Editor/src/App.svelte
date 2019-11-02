@@ -4,14 +4,14 @@
     import { getInitialValue } from "./utils.js";
 
     let markdown = getInitialValue();
-    let showPreview = true;
+    let showPreview = false;
 
     function handleEdit() {
 		showPreview = false;
     }
 
 	function handlePreview(e) {
-		markdown = e.detail;
+        markdown = DOMPurify.sanitize(e.detail);
         showPreview = true;
     }
 
