@@ -1,10 +1,15 @@
 <script>
 	import Editor from './Editor.svelte';
-	import { markdown } from './utils.js';
 	import Preview from './Preview.svelte';
-	import { markup } from './utils.js';
 
+	import { markdown } from './utils.js';
+
+	let value = markdown;
 	let showPreview = true;
+
+	function handleUpdate(e) {
+		value = e.detail;
+	}
 </script>
 
 <style>
@@ -118,8 +123,8 @@
 		</label>
 	</nav>
 	{#if showPreview}
-		<Preview {markup} />
+		<Preview markup={marked(value)} />
 	{:else}
-		<Editor value={markdown} />
+		<Editor markdown={value} on:update={handleUpdate} />
 	{/if}
 </div>
