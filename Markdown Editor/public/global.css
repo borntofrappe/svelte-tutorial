@@ -13,6 +13,35 @@ body {
     align-items: center;
 }
 
+/* display the controls in a row, pushing the last control to the very right end */
+nav {
+    display: flex;
+    align-items: center;
+}
+nav button:last-of-type {
+    margin-left: auto;
+}
+nav button {
+    width: 45px;
+    height: 45px;
+    padding: 12px;
+    background: none;
+    color: inherit;
+    border: none;
+}
+nav button svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+nav button:hover {
+    color: hsl(100, 90%, 30%);
+}
+nav button:focus {
+    outline-color: hsl(100, 90%, 30%);
+}
+
+/* global styles for the preview */
 a {
     color: hsl(100, 90%, 30%);
     font-weight: 700;
@@ -25,7 +54,7 @@ h2 {
     font-weight: 700;
     font-size: 1.5rem;
 }
-/* style the pre and code elements in case prism.js is not present */
+/* style the pre and code elements in case syntax highlighting is not provided through a class (higher specificity) */
 pre {
     overflow-x: auto;
     background: rgb(40, 40, 40);
