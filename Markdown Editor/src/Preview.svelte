@@ -2,12 +2,12 @@
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
 
+    // include the markup through the @html syntax
     export let markup;
 </script>
 
 <style></style>
 
-<!-- show the markup below the navigation bar -->
 <nav>
     <!-- on click dispatch the event to show the edit component -->
     <button on:click="{() => dispatch('edit')}" title="Edit markdown" aria-label="Edit markdown">

@@ -70,8 +70,8 @@ Recreate the basic structure of the popular puzzle game which allows to draw sty
 
 **Tags**: svg, table, transition
 
-## Markdown Editor
+## [Markdown Editor](https://codepen.io/borntofrappe/pen/VwwyGzR)
 
-Create an online editor which allows to compose, preview and download markdown files.
+Create an online editor which allows to compose and preview markdown syntax.
 
-**Tags**: markdown, markup
+**Tags**: markdown, markup, local storage

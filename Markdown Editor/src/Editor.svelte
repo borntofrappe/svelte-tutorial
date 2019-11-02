@@ -2,41 +2,55 @@
     import { createEventDispatcher, onDestroy } from "svelte";
     const dispatch = createEventDispatcher();
     import { toLocalStorage } from "./utils.js";
+
+    // transition to fade in the icon to show the file has been saved
     import { fly } from "svelte/transition";
 
+    // initialize a variable from the markdown file
     export let markdown;
-    let textarea;
     let value = markdown;
-    function handlePreview() {
-        dispatch("preview", value);
+
+    // variable bound to the text area, in order to scroll at the bottom when appending elements
+    let textarea;
+
+    // function adding the input string in the textarea element, and at the point specified by the cursor
+    function updateValue(string) {
+        const { selectionEnd } = textarea;
+        value = `${value.slice(0, selectionEnd)}${string}${value.slice(selectionEnd)}`;
     }
 
+    // following a click on the code button, append a series of backtick
     function handleCode() {
-        value += `\n\`\`\`\n\n\`\`\``;
-        textarea.scrollTop = textarea.scrollHeight;
+        const block = `\n\`\`\`\n\n\`\`\`\n`;
+        updateValue(block);
     }
 
+    // following a click on the link button, append the syntax for url []()
     function handleLink() {
-        value += `[link](url)`;
-        textarea.scrollTop = textarea.scrollHeight;
+        const link = "[link](url)";
+        updateValue(link);
     }
 
-    function handleDownload() {
-        console.log("download");
-    }
-
+    // following a click on the save button toggle a boolean to change the icon and call the function to save to local storage
     let isSaved = false;
     function handleSave() {
         isSaved = true;
         toLocalStorage(value);
     }
+
+    // following the input event on the textarea remove the saved icon to show the default action
     function handleInput(e) {
         if (isSaved) {
             isSaved = false;
         }
     }
+
+    // following a click on the preview button, dispatch the event to show the preview
+    function handlePreview() {
+        // pass the value to the component to update the markdown
+        dispatch("preview", value);
+    }
 </script>
-<style></style>
 
 <nav>
     <button on:click="{handleCode}" title="Add code block" aria-label="Add code block">
@@ -56,14 +70,7 @@
             </g>
         </svg>
     </button>
-    <button on:click="{handleDownload}" title="Download markdown" aria-label="Download markdown">
-        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-            <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
-                <path d="M 45 0 v 60 l -22 -22 m 22 22 l 22 -22" />
-                <path d="M 0 60 v 20 a 10 10 0 0 0 10 10 h 70 a 10 10 0 0 0 10 -10 v -20" />
-            </g>
-        </svg>
-    </button>
+
     <button on:click="{handleSave}" title="Save to local storage" aria-label="Save to local storage">
         {#if isSaved}
         <svg in:fly="{{ duration: 300, delay: 150 }}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
