@@ -1,4 +1,4 @@
-export const markdown = `# Svelte Markdown Editor
+const initialValue = `# Svelte Markdown Editor
 
 ## [Live Demo]()
 
@@ -30,3 +30,20 @@ such icons:
 And to top it all off, it is also a good opportunity to include syntax highlighting with [prism.js](https://prismjs.com).
 `;
 
+
+// utility function returning the initial value for markdown
+// using the value in local storage or the default value described above
+export function getInitialValue() {
+    return fromLocalStorage('markdown--string') || initialValue;
+}
+
+// utility function returning a value from local storage
+function fromLocalStorage(key) {
+    const val = localStorage.getItem(key);
+    return localStorage.getItem(key);
+}
+// utility function storing the existing string of markup in local storage
+export function toLocalStorage(string) {
+    localStorage.setItem('markdown--string', string);
+
+}

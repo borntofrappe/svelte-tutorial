@@ -1,28 +1,15 @@
 <script>
     import { createEventDispatcher } from "svelte";
     const dispatch = createEventDispatcher();
-    export let markdown;
-    let value = markdown;
 
+    export let markdown;
+
+    let value = markdown;
     function handlePreview() {
         dispatch("preview", value);
     }
 </script>
-<style>
-    textarea {
-        padding: 1rem 1.5rem;
-        line-height: 1.75;
-        width: 100%;
-        min-height: 100vh;
-        font-family: "Overpass", sans-serif;
-        font-size: 1rem;
-        resize: none;
-    }
-    textarea:focus {
-        outline: 2px solid hsl(100, 90%, 35%);
-    }
-</style>
-
+<style></style>
 
 <nav>
     <!-- TODO: functionality behind the first three buttons -->
@@ -51,6 +38,7 @@
             </g>
         </svg>
     </button>
+    <!-- TODO: add a button to explicitly save the markdown to local storage -->
 
     <!-- on click dispatch the preview event to show the appropriate component -->
     <button on:click="{handlePreview}" title="Preview markdown" aria-label="Download markdown">

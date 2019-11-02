@@ -13,6 +13,13 @@ body {
     align-items: center;
 }
 
+/* cap the width of the wrapping container */
+.markdown-editor {
+    max-width: 550px;
+    width: 90vw;
+    line-height: 2;
+}
+
 /* display the controls in a row, pushing the last control to the very right end */
 nav {
     display: flex;
@@ -39,6 +46,20 @@ nav button:hover {
 }
 nav button:focus {
     outline-color: hsl(100, 90%, 30%);
+}
+
+/* stretch the textarea to cover the available width and height */
+textarea {
+    padding: 1rem 1.5rem;
+    line-height: 1.75;
+    width: 100%;
+    min-height: 100vh;
+    font-family: "Overpass", sans-serif;
+    font-size: 1rem;
+    resize: none;
+}
+textarea:focus {
+    outline: 2px solid hsl(100, 90%, 35%);
 }
 
 /* global styles for the preview */
