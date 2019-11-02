@@ -1,8 +1,7 @@
 <script>
     import Editor from "./Editor.svelte";
     import Preview from "./Preview.svelte";
-    import { getInitialValue, toLocalStorage } from "./utils.js";
-    import { onDestroy } from "svelte";
+    import { getInitialValue } from "./utils.js";
 
     let markdown = getInitialValue();
     let showPreview = true;
@@ -14,14 +13,7 @@
 	function handlePreview(e) {
 		markdown = e.detail;
         showPreview = true;
-        // along showing the preview update local storage with the new value
-        toLocalStorage(markdown);
     }
-
-    // before the component is destroyed update local storage with the current value
-    onDestroy(() => {
-        toLocalStorage(markdown);
-    });
 
 </script>
 

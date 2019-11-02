@@ -2,6 +2,22 @@
 
 <!-- ## [Live Demo]() -->
 
+## TODO
+
+-   [x] create a save icon
+
+-   [x] create a saved icon (check mark)
+
+-   [x] save button
+
+-   [ ] code button
+
+-   [ ] link button
+
+-   [ ] download button
+
+-   [ ] sanitize string with DOM purify
+
 ## Goal
 
 Create an online editor which allows to compose, preview and download markdown files.
