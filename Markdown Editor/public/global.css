@@ -53,7 +53,7 @@ textarea {
     padding: 1rem 1.5rem;
     line-height: 1.75;
     width: 100%;
-    min-height: 100vh;
+    height: 90vh;
     font-family: "Overpass", sans-serif;
     font-size: 1rem;
     resize: none;
@@ -82,7 +82,7 @@ pre {
     color: hsl(0, 0%, 100%);
     border-radius: 5px;
     margin: 0.5rem 0;
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
 }
 pre code {
     background: none;

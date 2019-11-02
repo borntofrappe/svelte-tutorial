@@ -10,9 +10,9 @@
 
 -   [x] save button
 
--   [ ] code button
+-   [x] code button
 
--   [ ] link button
+-   [x] link button
 
 -   [ ] download button
 

@@ -18,16 +18,14 @@ That being said, I'd really like an online alternative. With this project I set 
 The UI is inspired by [Svelte](https://svelte.dev) and [Github](https://github.com). The SVG icons have been coded _by hand_ in VSCode, and use mostly \`<path>\` elements. The following snippet highlights one of
 such icons:
 
-\`\`\`html
+\`\`\`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
-        <path d="M 73 0 l 17 17 -45 45 -17 0 0 -17 45 -45" />
-        <path d="M 35 10 h -25 a 10 10 0 0 0 -10 10 v 60 a 10 10 0 0 0 10 10 h 60 a 10 10 0 0 0 10 -10 v -25" />
-    </g>
+  <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
+    <path d="M 73 0 l 17 17 -45 45 -17 0 0 -17 45 -45" />
+    <path d="M 35 10 h -25 a 10 10 0 0 0 -10 10 v 60 a 10 10 0 0 0 10 10 h 60 a 10 10 0 0 0 10 -10 v -25" />
+  </g>
 </svg>
 \`\`\`
-
-And to top it all off, it is also a good opportunity to include syntax highlighting with [prism.js](https://prismjs.com).
 `;
 
 

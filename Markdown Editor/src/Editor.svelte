@@ -5,10 +5,24 @@
     import { fly } from "svelte/transition";
 
     export let markdown;
-
+    let textarea;
     let value = markdown;
     function handlePreview() {
         dispatch("preview", value);
+    }
+
+    function handleCode() {
+        value += `\n\`\`\`\n\n\`\`\``;
+        textarea.scrollTop = textarea.scrollHeight;
+    }
+
+    function handleLink() {
+        value += `[link](url)`;
+        textarea.scrollTop = textarea.scrollHeight;
+    }
+
+    function handleDownload() {
+        console.log("download");
     }
 
     let isSaved = false;
@@ -16,7 +30,7 @@
         isSaved = true;
         toLocalStorage(value);
     }
-    function handleInput() {
+    function handleInput(e) {
         if (isSaved) {
             isSaved = false;
         }
@@ -25,7 +39,7 @@
 <style></style>
 
 <nav>
-    <button title="Add code block" aria-label="Add code block">
+    <button on:click="{handleCode}" title="Add code block" aria-label="Add code block">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
                 <path id="bracket--left" d="M 30 18 l -30 27 30 27" />
@@ -33,7 +47,7 @@
             </g>
         </svg>
     </button>
-    <button title="Add link" aria-label="Add link">
+    <button on:click="{handleLink}" title="Add link" aria-label="Add link">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
                 <path id="curve--left" d="M 35 25 h -10 a 20 20 0 0 0 0 40 h 10" />
@@ -42,7 +56,7 @@
             </g>
         </svg>
     </button>
-    <button title="Download markdown" aria-label="Download markdown">
+    <button on:click="{handleDownload}" title="Download markdown" aria-label="Download markdown">
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
             <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
                 <path d="M 45 0 v 60 l -22 -22 m 22 22 l 22 -22" />
@@ -90,4 +104,4 @@
     </button>
 </nav>
 
-<textarea bind:value on:input="{handleInput}"></textarea>
+<textarea bind:this="{textarea}" bind:value on:input="{handleInput}"></textarea>
