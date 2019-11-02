@@ -36,6 +36,9 @@ nav button svg {
 nav button:hover {
     color: hsl(100, 90%, 30%);
 }
+nav button:focus {
+    outline-color: hsl(100, 90%, 30%);
+}
 
 /* include a few values to style the preview
 modify the properties of the elements in the .preview class to tailor the appearance of the preview
