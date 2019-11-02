@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono|Overpass:400,600&display=swap");
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: "Overpass", sans-serif;
+    /* display the content in a horizontally centered column */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a {
+    color: hsl(100, 90%, 30%);
+    font-weight: 700;
+}
+h1 {
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+h2 {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+/* style the pre and code elements in case prism.js is not present */
+pre {
+    overflow-x: auto;
+    background: rgb(40, 40, 40);
+    color: hsl(0, 0%, 100%);
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+}
+pre code {
+    background: none;
+    border-radius: initial;
+    padding-left: initial;
+}
+code {
+    color: hsl(0, 0%, 100%);
+    background: rgb(40, 40, 40);
+    padding: 0.25rem;
+    border-radius: 3px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+}
