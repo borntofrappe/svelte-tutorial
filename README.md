@@ -79,3 +79,5 @@ Create an online editor which allows to compose and preview markdown syntax.
 ## [Tweet Component](https://svelte.dev/repl/2fd524fb5c7f427891269b4d0928ac15?version=3.12.1)
 
 Create a reusable component to share a quote or even introduce an article.
+
+**Tags**: readable, custom store
