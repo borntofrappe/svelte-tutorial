@@ -1,0 +1,196 @@
+/* montserrat 600 for the buttons, 800 for the headings */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:600,800");
+
+/* selected colors */
+:root {
+  --text: #5a5e7c;
+  --highlight: #5a5e7c18;
+  --main: #fff;
+  --right: #46cf82;
+  --wrong: #d84835;
+  --default: #9e8e34;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--highlight) 0,
+    var(--highlight) 30px,
+    transparent 30px,
+    transparent 60px
+  );
+  color: var(--text);
+}
+
+/* display the content in a taller-than-wider container resembling a mobile device */
+.app {
+  /* one single column, horizontally centered */
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  min-height: 70vh;
+  width: 90vw;
+  margin: 1rem auto;
+  line-height: 2;
+  font-family: "Montserrat", sans-serif;
+  background: var(--main);
+  box-shadow: 0 0 0 5px var(--text), 0 1px 15px 1px var(--text);
+  border-radius: 15px;
+  position: relative;
+}
+/* absolute position a pseudo element to the side of the container, resembling a mobile's side button */
+.app:before {
+  position: absolute;
+  content: "";
+  top: 5%;
+  left: 100%;
+  height: 15%;
+  width: 7px;
+  background: var(--text);
+  border-radius: 5px;
+}
+
+/* the app container is divided in two structures
+the heading occupies the available space and positions the text of the h1 element in the bottom right of this section
+*/
+.app .app__heading {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin: 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: 15px 15px 0 0;
+}
+/* the heading nests one span for each letter
+distinguish them visually
+ */
+.app .app__heading span {
+  margin: 0.05rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 5px;
+  color: var(--main);
+  text-shadow: 1px 1px var(--text);
+  /* by default, use the selected default color and set the span elements to be slightly translucent */
+  background: var(--default);
+  opacity: 0.7;
+}
+
+/* define animations which are triggered in the script to notify the user */
+/* show right applies the matching hue to the background */
+@keyframes showRight {
+  to {
+    background: var(--right);
+    opacity: 1;
+  }
+}
+/* show wrong applies the matching hue and a shaking animation before reverting back to the default value (by default the element takes up the properties specified before the animation) */
+@keyframes showWrong {
+  10% {
+    transform: translateX(0.1rem);
+    background: var(--wrong);
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(-0.1rem);
+    background: var(--wrong);
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(0.1rem);
+    background: var(--wrong);
+    opacity: 1;
+  }
+  40% {
+    transform: translateX(-0.1rem);
+    background: var(--wrong);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(0.1rem);
+    background: var(--wrong);
+    opacity: 1;
+  }
+  80% {
+    background: var(--wrong);
+    opacity: 1;
+  }
+}
+
+/* section describing the keyboard */
+.app .app__keyboard {
+  border-top: 2px solid var(--highlight);
+  width: 100%;
+  /* repeat 7 characters per row */
+  display: grid;
+  grid-template-columns: repeat(7, 25px);
+  grid-gap: 1rem;
+  justify-content: center;
+  padding: 2rem 0 1rem;
+}
+
+/* buttons within the grid */
+.app .app__keyboard button {
+  font-weight: 600;
+  font-family: inherit;
+  color: inherit;
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  /* with a slight shadow and a transition for the hover and active states */
+  box-shadow: 0 1px 10px -3px var(--text);
+  transition: all 0.2s ease-out;
+}
+/* on hover call a simple animation to show the box shadow slightly more on the bottom section of the button */
+.app .app__keyboard button:hover {
+  animation: hover 0.25s ease-out forwards;
+}
+@keyframes hover {
+  to {
+    box-shadow: 0 2px 10px -4px var(--text);
+  }
+}
+/* when active call a simple animation changing the shadow to be more prominent on all sides and change the background color */
+/* use this animation also when the buttons have a class of .active (added in the script as a result of a keypress event) */
+.app .app__keyboard button:active,
+.app .app__keyboard button.active {
+  animation: active 0.25s ease-out forwards;
+}
+@keyframes active {
+  to {
+    box-shadow: 0 1px 10px -2px var(--text);
+    background: var(--highlight);
+  }
+}
+
+/* position the container showing the result at the bottom of the main container */
+.app .app__result {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+}
+/* add a simple animation to the heading, which is shown before being hidden again
+this animation matches perfectly the behavior in the script, in which the heading is injected to notify the user
+*/
+.app .app__result h2 {
+  font-weight: 800;
+  opacity: 0;
+  animation: showScore 1.5s ease-out;
+}
+@keyframes showScore {
+  20%,
+  80% {
+    transform: translateY(1rem);
+    opacity: 1;
+  }
+}
