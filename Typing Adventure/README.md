@@ -1,4 +1,4 @@
-# [Typing Adventure](https://svelte.dev/repl/fcdeba361e874366a58c5e809632dfbe?version=3.14.0)
+# [Typing Adventure](https://codepen.io/borntofrappe/full/WNNaGKJ)
 
 ## Goal
 

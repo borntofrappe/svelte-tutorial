@@ -80,6 +80,6 @@ Create an online editor which allows to compose and preview markdown syntax.
 
 Create a reusable component to share a quote or even introduce an article.
 
-## Typing Adventure
+## [Typing Adventure](https://codepen.io/borntofrappe/pen/WNNaGKJ)
 
-Expand from [this concept](https://codepen.io/borntofrappe/pen/bzpQLa) to create an application in which visitors are instructed to type a string.
+Build upon the concept developed [in this pen](https://codepen.io/borntofrappe/pen/bzpQLa) to have an application tracking key strokes and their correctness against a provided string of characters.
