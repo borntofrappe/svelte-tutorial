@@ -1,6 +1,37 @@
 <script>
     const keys = 'qwertyuiopasdfghjklzxcvbnm';
+    import { randomPokemon } from './utils.js';
+    let pokemon = randomPokemon();
+    $: heading = pokemon.split('').map(character => ({
+        id: Math.random(),
+        value: character,
+        correct: false,
+    }));
 
+    function handleKey(key) {
+        const missing = heading.findIndex(character => !character.correct);
+
+        if (key === heading[missing].value.toLowerCase()) {
+            heading[missing].correct = true;
+        } else {
+            heading = heading.map(({ id, value }) => ({
+                id,
+                value,
+                correct: false
+            }));
+        }
+
+        const victory = heading.every(character => character.correct);
+        if (victory) {
+            let timeout = setTimeout(() => {
+                pokemon = randomPokemon();
+            }, 200);
+        }
+    }
+
+    function handleKeydown({ key }) {
+        handleKey(key.toLowerCase());
+    }
 </script>
 
 <style>
@@ -37,7 +68,7 @@
     }
 
     /* styles included once splitting js has had a change to split the actual text */
-    h2.splitting .char {
+    h2 span {
         display: inline-block;
         animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         animation-delay: calc(var(--char-index) * 0.05s + 0.15s);
@@ -60,11 +91,16 @@
         }
     }
 </style>
+<svelte:window on:keydown={handleKeydown} />
 <section>
-    <h2>Articuno</h2>
+    <h2 aria-label={pokemon}>
+        {#each heading as letter, i (letter.id)}
+            <span aria-hidden="true" style="animation-delay: {i * 0.04 + 0.15}s; color: {letter.correct ? 'hsl(130, 70%, 60%)' : 'inherit'}">{letter.value}</span>
+        {/each}
+    </h2>
     <div class="keyboard">
         {#each keys as key}
-            <button>{key}</button>
+            <button on:click={() => handleKey(key)}>{key}</button>
         {/each}
     </div>
 </section>

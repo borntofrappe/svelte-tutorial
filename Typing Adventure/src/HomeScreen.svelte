@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
+
 </script>
 
 <style>
@@ -12,12 +13,10 @@
 
     section button {
         font-family: inherit;
-        background: hsl(0, 0%, 100%);
-        border: 2px solid hsl(0, 0%, 90%);
-        padding: 1rem 1.5rem;
+        background: none;
+        border: none;
         font-size: 1.5rem;
         color: hsl(0, 0%, 20%);
-        box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
     }
 
     section button:focus {
@@ -25,21 +24,12 @@
         box-shadow: initial;
     }
 
-    /* styles included once splitting js has had a change to split the actual text */
-    section.splitting .char {
+    section span {
         display: inline-block;
         animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        animation-delay: calc(var(--char-index) * 50ms + 150ms);
     }
 
-    section.splitting button {
-        background: none;
-        border: none;
-        padding: initial;
-        box-shadow: initial;
-    }
-
-    section.splitting button .char {
+    section button span {
         background: hsl(0, 0%, 100%);
         border: 2px solid hsl(0, 0%, 90%);
         padding: 1rem 1.5rem;
@@ -50,11 +40,11 @@
         position: relative;
     }
 
-    section.splitting button .char+.char {
+    section button span+span {
         border-left: none;
     }
 
-    section.splitting button .char:after {
+    section button span:after {
         content: attr(data-key);
         position: absolute;
         top: 0;
@@ -63,12 +53,12 @@
         margin: 0.1rem;
     }
 
-    section.splitting button .char:hover {
+    section button span:hover {
         background: hsl(0, 0%, 95%);
         box-shadow: initial;
     }
 
-    section.splitting button:focus .char {
+    section button:focus span {
         box-shadow: initial;
     }
 
@@ -88,6 +78,25 @@
 
 
 <section>
-    <h1>Typing<br /> Adventure</h1>
-    <button on:click={()=> {dispatch('play')}}>Play</button>
+    <h1 aria-label="Typing Adventure">
+        {#each 'Typing Adventure' as character, i}
+            {#if character !== ' '}
+                <span aria-hidden="true" style="animation-delay: {i * 0.04 + 0.15}s;">{character}</span>
+            {:else}
+                <br/>
+            {/if}
+        {/each}
+    </h1>
+    <button
+        aria-label="Play"
+        on:click={()=> {dispatch('play')}}>
+            {#each 'Play' as character, i}
+                <span
+                    aria-hidden="true"
+                    data-key={character.charCodeAt(0)}
+                    style="animation-delay: {i * 0.04 + 1}s;">
+                        {character}
+                    </span>
+            {/each}
+    </button>
 </section>
