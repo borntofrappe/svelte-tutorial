@@ -81,3 +81,7 @@ Create an online editor which allows to compose and preview markdown syntax.
 Create a reusable component to share a quote or even introduce an article.
 
 **Tags**: readable, custom store
+
+## [Typing Adventure](https://codepen.io/borntofrappe/pen/WNNaGKJ)
+
+Build upon the concept developed [in this pen](https://codepen.io/borntofrappe/pen/bzpQLa) to have an application tracking key strokes and their correctness against a provided string of characters.
