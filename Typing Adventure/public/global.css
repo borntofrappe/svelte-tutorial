@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700|Catamaran:900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    min-height: 100vh;
+    font-family: 'IBM Plex Mono', monospace;
+    background: url('data:image/svg+xml;utf8,<svg opacity="0.05" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M2.5 2.5h95v95" stroke="currentColor" stroke-width="5" stroke-linecap="square" fill="none"/></svg>'), #DFE7F1;
+    background-size: 50px;
+}
+/* default styles */
+section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+section > * + * {
+    margin-top: 1.5rem;
+}
