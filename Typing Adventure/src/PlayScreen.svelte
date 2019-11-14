@@ -1,37 +1,57 @@
 <script>
-    const keys = 'qwertyuiopasdfghjklzxcvbnm';
-    import { randomPokemon } from './utils.js';
-    let pokemon = randomPokemon();
-    $: heading = pokemon.split('').map(character => ({
+    import { getItem } from './utils.js';
+    import { onDestroy } from 'svelte';
+
+    // set up an object describing the item character by character
+    let item = getItem();
+    let timeout;
+    $: goal = item.split('').map(character => ({
+        // the id allows to include a new set of span elements once the item is re-assigned
         id: Math.random(),
         value: character,
         correct: false,
     }));
 
+    // function receiving as input the character to match against the goal string
     function handleKey(key) {
-        const missing = heading.findIndex(character => !character.correct);
+        // find the first incorrect character
+        const incorrectIndex = goal.findIndex(character => !character.correct);
 
-        if (key === heading[missing].value.toLowerCase()) {
-            heading[missing].correct = true;
+        // if the key matches the character, switch its correct property
+        // else reset every character's correct property to false
+        if (key === goal[incorrectIndex].value.toLowerCase()) {
+            goal[incorrectIndex].correct = true;
         } else {
-            heading = heading.map(({ id, value }) => ({
+            goal = goal.map(({ id, value }) => ({
                 id,
                 value,
                 correct: false
             }));
         }
 
-        const victory = heading.every(character => character.correct);
+        // if every character is correct, establish a victory
+        // following a brief timeout re-assign the item to show a new string
+        const victory = goal.every(character => character.correct);
         if (victory) {
             let timeout = setTimeout(() => {
-                pokemon = randomPokemon();
+                item = getItem();
+                clearTimeout(timeout);
             }, 200);
         }
     }
 
+    // following the keydown event registered on the window call the handleKey function with the matching lowercase key
     function handleKeydown({ key }) {
         handleKey(key.toLowerCase());
     }
+
+
+    onDestroy(() => {
+        clearTimeout(timeout);
+    })
+
+    // string destructured in the .keyboard container to add a button for each character
+    const keys = 'qwertyuiopasdfghjklzxcvbnm\'';
 </script>
 
 <style>
@@ -91,10 +111,12 @@
         }
     }
 </style>
+
 <svelte:window on:keydown={handleKeydown} />
+
 <section>
-    <h2 aria-label={pokemon}>
-        {#each heading as letter, i (letter.id)}
+    <h2 aria-label={item}>
+        {#each goal as letter, i (letter.id)}
             <span aria-hidden="true" style="animation-delay: {i * 0.04 + 0.15}s; color: {letter.correct ? 'hsl(130, 70%, 60%)' : 'inherit'}">{letter.value}</span>
         {/each}
     </h2>

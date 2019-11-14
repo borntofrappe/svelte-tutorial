@@ -1,5 +1,5 @@
-// export a function to return a random item from an array
-const pokemon = [
+// export a function to return a random item from a hard-coded array
+const items = [
     "Abra",
     "Aerodactyl",
     "Alakazam",
@@ -153,4 +153,4 @@ const pokemon = [
   ];
 
 const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-export const randomPokemon = () => randomItem(pokemon);
+export const getItem = () => randomItem(items);
