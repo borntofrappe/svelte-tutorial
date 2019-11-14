@@ -91,7 +91,6 @@
     h2 span {
         display: inline-block;
         animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-        animation-delay: calc(var(--char-index) * 0.05s + 0.15s);
     }
 
     .keyboard {
