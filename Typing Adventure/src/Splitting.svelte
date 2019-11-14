@@ -1,14 +1,16 @@
 <script>
-    export let string;
+    export let split;
 
-    $: object = string.split('').map((character) => ({
-        id: Math.random(),
-        value: character
-    }));
+    $: if (typeof split === 'string') {
+        split = split.split('').map((character) => ({
+            id: Math.random(),
+            value: character,
+        }));
+    }
+
     export let btn = false;
     export let delay = 0;
 
-    console.log(string);
 </script>
 
 <style>
@@ -25,6 +27,10 @@
         color: hsl(0, 0%, 20%);
         box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
         position: relative;
+    }
+
+    span.correct {
+        color: hsl(125, 80%, 45%);
     }
 
     span.btn+span.btn {
@@ -59,14 +65,15 @@
     }
 </style>
 
-{#each object as character, i (character.id)}
-    {#if character.value !== ' '}
+{#each split as unit, i (unit.id)}
+    {#if unit.value !== ' '}
     <span
         class:btn
+        class:correct={unit.correct}
         aria-hidden="true"
-        data-key={character.value.charCodeAt(0)}
+        data-key={unit.value.charCodeAt(0)}
         style="animation-delay: {i * 0.04 + 0.15 + delay}s;'}">
-            {character.value}
+            {unit.value}
     </span>
     {:else}
         <br/>

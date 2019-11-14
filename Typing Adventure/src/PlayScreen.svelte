@@ -1,10 +1,12 @@
 <script>
     import { getItem } from './utils.js';
     import { onDestroy } from 'svelte';
+    import Splitting from './Splitting.svelte';
+
+    let timeout;
 
     // set up an object describing the item character by character
     let item = getItem();
-    let timeout;
     $: goal = item.split('').map(character => ({
         // the id allows to include a new set of span elements once the item is re-assigned
         id: Math.random(),
@@ -40,18 +42,34 @@
         }
     }
 
+
+    // string destructured in the .keyboard container to add a button for each character
+    const keys = 'qwertyuiopasdfghjklzxcvbnm\'.'.split('').map(character => ({
+        value: character,
+        ref: null
+    }));
+
     // following the keydown event registered on the window call the handleKey function with the matching lowercase key
     function handleKeydown({ key }) {
-        handleKey(key.toLowerCase());
+        const button = keys.find(({ value, ref }) => value === key.toLowerCase());
+
+        if (button) {
+            handleKey(button.value);
+            button.ref.style.background = 'hsl(0, 0%, 90%)';
+            let timeoutButton = setTimeout(() => {
+                button.ref.style.background = 'hsl(0, 0%, 100%)';
+                clearTimeout(timeoutButton);
+            }, 150)
+        }
     }
 
 
     onDestroy(() => {
         clearTimeout(timeout);
+        clearTimeout(timeoutButton);
     })
 
-    // string destructured in the .keyboard container to add a button for each character
-    const keys = 'qwertyuiopasdfghjklzxcvbnm\'';
+
 </script>
 
 <style>
@@ -71,10 +89,10 @@
         box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
     }
 
-    section button:hover {
+    section button:hover,
+    section button.active {
         background: hsl(0, 0%, 95%);
         box-shadow: initial;
-
     }
 
     section button:focus {
@@ -84,30 +102,11 @@
     }
 
     section .keyboard {
-        max-width: 650px;
-    }
-
-    /* styles included once splitting js has had a change to split the actual text */
-    h2 span {
-        display: inline-block;
-        animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        max-width: 700px;
     }
 
     .keyboard {
         animation: popIn 0.4s 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-    }
-
-    @keyframes popIn {
-        0% {
-
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        100% {
-            opacity: initial;
-            transform: initial;
-        }
     }
 </style>
 
@@ -115,13 +114,15 @@
 
 <section>
     <h2 aria-label={item}>
-        {#each goal as letter, i (letter.id)}
-            <span aria-hidden="true" style="animation-delay: {i * 0.04 + 0.15}s; color: {letter.correct ? 'hsl(130, 70%, 60%)' : 'inherit'}">{letter.value}</span>
-        {/each}
+        <Splitting split={goal} />
     </h2>
     <div class="keyboard">
-        {#each keys as key}
-            <button on:click={() => handleKey(key)}>{key}</button>
+        {#each keys as key (key.value)}
+            <button
+                bind:this={key.ref}
+                on:click={() => handleKey(key.value)}>
+                {key.value}
+            </button>
         {/each}
     </div>
 </section>

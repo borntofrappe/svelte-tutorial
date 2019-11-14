@@ -28,9 +28,9 @@
 
 <section>
     <h1 aria-label="Typing Adventure">
-        <Splitting string="Typing Adventure" />
+        <Splitting split="Typing Adventure" />
     </h1>
     <button aria-label="Play" on:click={()=> {dispatch('play')}}>
-        <Splitting string="Play" btn={true} delay={0.65} />
+        <Splitting split="Play" btn={true} delay={0.65} />
     </button>
 </section>
