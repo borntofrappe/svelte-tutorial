@@ -1,6 +1,8 @@
 <script>
+    // split is passed as a string or an array of objects (as an object to have more control on the style of the individual span elements)
     export let split;
 
+    // if the input is a string, build an array of objects out of every character
     $: if (typeof split === 'string') {
         split = split.split('').map((character) => ({
             id: Math.random(),
@@ -8,9 +10,9 @@
         }));
     }
 
+    // variable differentiating the appearance of the span elements
     export let btn = false;
     export let delay = 0;
-
 </script>
 
 <style>
@@ -30,7 +32,7 @@
     }
 
     span.correct {
-        color: hsl(125, 80%, 45%);
+        color: hsl(125, 80%, 40%);
     }
 
     span.btn+span.btn {
@@ -65,6 +67,11 @@
     }
 </style>
 
+<!-- return one span element for each object
+add two classes according to the values of
+- btn, to have the span elements styled like a button
+- correct, to have the span painted green
+-->
 {#each split as unit, i (unit.id)}
     {#if unit.value !== ' '}
     <span
