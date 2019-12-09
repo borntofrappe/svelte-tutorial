@@ -85,3 +85,7 @@ Create a reusable component to share a quote or even introduce an article.
 ## [Typing Adventure](https://codepen.io/borntofrappe/pen/WNNaGKJ)
 
 Build upon the concept developed [in this pen](https://codepen.io/borntofrappe/pen/bzpQLa) to have an application tracking key strokes and their correctness against a provided string of characters.
+
+## Relative Search
+
+Highlight the search results for the Tour de France through two simple, yet effective visualizations.
