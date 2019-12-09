@@ -1,4 +1,4 @@
-export default data = {
+export const data = {
     2018: [{
         date: '2018-07-01',
         value: 15,
