@@ -18,6 +18,7 @@
         .range([height, 0]);
 
     const parseTime = d3.timeParse("%Y-%m-%d");
+    const formatTime = d3.timeFormat("%e %B");
 
     const xScale = d3
         .scaleTime()
@@ -34,52 +35,6 @@
         .ticks(5)
         .tickSize(0)
         .tickPadding(5);
-
-    let xAxisGroup;
-    let yAxisGroup;
-
-    $: if (xAxisGroup) {
-        d3.select(xAxisGroup).call(xAxis);
-        const group = d3.select(xAxisGroup).call(xAxis);
-
-        group
-            .select("path")
-            .attr("stroke-width", "0.25")
-            .attr("stroke-linecap", "square");
-        group
-            .selectAll("text")
-            .attr("font-size", "4")
-            .attr("fill", "hsl(0, 0%, 30%)");
-
-        group
-            .selectAll(".tick")
-            .append("path")
-            .attr("fill", "none")
-            .attr("opacity", "0.3")
-            .attr("stroke", "currentColor")
-            .attr("stroke-width", "0.5")
-            .attr("stroke-dasharray", "0.5 2")
-            .attr("d", `M 0 0 v -${height}`);
-    }
-    $: if (yAxisGroup) {
-        const group = d3.select(yAxisGroup).call(yAxis);
-
-        group.select("path").style("display", "none");
-        group
-            .selectAll("text")
-            .attr("font-size", "4")
-            .attr("fill", "hsl(0, 0%, 30%)");
-
-        group
-            .selectAll(".tick")
-            .append("path")
-            .attr("fill", "none")
-            .attr("opacity", "0.3")
-            .attr("stroke", "currentColor")
-            .attr("stroke-width", "0.5")
-            .attr("stroke-dasharray", "0.5 2")
-            .attr("d", `M 0 0 h ${width}`);
-    }
 
     const line = d3
         .line()
@@ -100,6 +55,18 @@
         y: yScale(data[point].value),
         value: data[point].value
     }));
+
+    const minDate = d3.min(data, d => parseTime(d.date));
+    const maxDate = d3.max(data, d => parseTime(d.date));
+    const q1 = d3.quantile(data, 0.25, d => parseTime(d.date));
+    const q2 = d3.quantile(data, 0.5, d => parseTime(d.date));
+    const q3 = d3.quantile(data, 0.75, d => parseTime(d.date));
+
+    const dataPointsX = [minDate, q1, q2, q3, maxDate];
+
+    const dataPointsY = Array(10)
+        .fill()
+        .map((value, index) => (index + 1) * 10);
 </script>
 
 <style>
@@ -128,8 +95,20 @@
         <g transform="translate({margin.top} {margin.left})">
             <g mask="url(#mask-{title.toLowerCase().split(' ').join('-')})">
                 <g class="axes">
-                    <g transform="translate(0 {height})" bind:this="{xAxisGroup}"></g>
-                    <g bind:this="{yAxisGroup}"></g>
+                    <g transform="translate(0 {height})">
+                        <path fill="none" stroke="currentColor" stroke-width="0.5" d="M 0 0 h {width}" />
+                        {#each dataPointsX as dataPointX}
+                        <g transform="translate({xScale(dataPointX)} 0)">
+                            <text font-size="3" text-anchor="middle" y="5">{formatTime(dataPointX)}</text>
+                        </g>
+                        {/each}
+                    </g>
+                    {#each dataPointsY as dataPointY}
+                    <g transform="translate(0 {yScale(dataPointY)})">
+                        <text opacity="0.5" font-size="3" text-anchor="start" x="0" y="-1">{dataPointY}</text>
+                        <path opacity="0.2" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1" d="M 0 0 h {width}" />
+                    </g>
+                    {/each}
                 </g>
 
                 <path fill="none" stroke="currentColor" stroke-width="1" d="{line(data)}" />
