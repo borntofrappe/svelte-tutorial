@@ -26,6 +26,7 @@ export const data = {
     {
         date: '2018-07-07',
         value: 70,
+        start: true,
     },
     {
         date: '2018-07-08',
@@ -114,6 +115,7 @@ export const data = {
     {
         date: '2018-07-29',
         value: 73,
+        end: true,
     },
     {
         date: '2018-07-30',
@@ -150,6 +152,7 @@ export const data = {
     {
         date: '2019-07-06',
         value: 37,
+        start: true,
     },
     {
         date: '2019-07-07',
@@ -238,6 +241,7 @@ export const data = {
     {
         date: '2019-07-28',
         value: 70,
+        end: true,
     },
     {
         date: '2019-07-29',

@@ -72,9 +72,9 @@
 
     let dataPointTooltip = null;
 
-    function handleMouseEnter() {
-        console.log("enter");
-    }
+    const startPeriod = data.findIndex(d => d.start);
+    const endPeriod = data.findIndex(d => d.end);
+    const dataPeriod = data.slice(startPeriod, endPeriod + 1);
 </script>
 
 <style>
@@ -96,9 +96,15 @@
                 <circle fill="hsl(0, 0%, 0%)" stroke="none" r="1.5" cx="{dataPoint.x}" cy="{dataPoint.y}" />
                 {/each}
             </mask>
+            <linearGradient id="gradient-{title.toLowerCase().split(' ').join('-')}" gradientUnits="userSpaceOnUse" spreadMethod="repeat" x1="0" x2="1" y1="0" y2="1">
+                <stop stop-color="currentColor" offset="0.5" />
+                <stop stop-color="hsl(0, 0%, 100%)" offset="0.5" />
+            </linearGradient>
         </defs>
         <g transform="translate({margin.top} {margin.left})">
             <g mask="url(#mask-{title.toLowerCase().split(' ').join('-')})">
+                <path opacity="0.25" fill="url(#gradient-{title.toLowerCase().split(' ').join('-')})" stroke="none" d="{area(dataPeriod)}" />
+
                 <g class="axes">
                     <g transform="translate(0 {height})">
                         <path fill="none" stroke="hsl(0, 0%, 0%)" stroke-width="0.5" d="M 0 0 h {width}" />
