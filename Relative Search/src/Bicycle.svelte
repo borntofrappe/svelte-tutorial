@@ -1,3 +1,9 @@
+<style>
+    svg {
+        height: 0.75em;
+        width: auto;
+    }
+</style>
 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 58" width="100" height="58">
     <g fill="none" stroke="hsl(0, 0%, 0%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="20" cy="38" r="19" />

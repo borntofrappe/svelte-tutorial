@@ -1,3 +1,6 @@
+<script>
+    import Bicycle from "./Bicycle.svelte";
+</script>
 <style>
     header {
         line-height: 1.25;
@@ -15,6 +18,6 @@
     }
 </style>
 <header>
-    <h1>Tour de France</h1>
+    <h1>Tour de France <Bicycle /></h1>
     <h2>Google Trends for the cycling competition</h2>
 </header>
