@@ -24,6 +24,63 @@
         .domain(d3.extent(data, d => parseTime(d.date)))
         .range([0, width]);
 
+    const xAxis = d3
+        .axisBottom(xScale)
+        .ticks(5)
+        .tickSize(0);
+
+    const yAxis = d3
+        .axisLeft(yScale)
+        .ticks(5)
+        .tickSize(0)
+        .tickPadding(5);
+
+    let xAxisGroup;
+    let yAxisGroup;
+
+    $: if (xAxisGroup) {
+        d3.select(xAxisGroup).call(xAxis);
+        const group = d3.select(xAxisGroup).call(xAxis);
+
+        group
+            .select("path")
+            .attr("stroke-width", "0.25")
+            .attr("stroke-linecap", "square");
+        group
+            .selectAll("text")
+            .attr("font-size", "4")
+            .attr("fill", "hsl(0, 0%, 30%)");
+
+        group
+            .selectAll(".tick")
+            .append("path")
+            .attr("fill", "none")
+            .attr("opacity", "0.3")
+            .attr("stroke", "currentColor")
+            .attr("stroke-width", "0.5")
+            .attr("stroke-dasharray", "0.5 2")
+            .attr("d", `M 0 0 v -${height}`);
+    }
+    $: if (yAxisGroup) {
+        const group = d3.select(yAxisGroup).call(yAxis);
+
+        group.select("path").style("display", "none");
+        group
+            .selectAll("text")
+            .attr("font-size", "4")
+            .attr("fill", "hsl(0, 0%, 30%)");
+
+        group
+            .selectAll(".tick")
+            .append("path")
+            .attr("fill", "none")
+            .attr("opacity", "0.3")
+            .attr("stroke", "currentColor")
+            .attr("stroke-width", "0.5")
+            .attr("stroke-dasharray", "0.5 2")
+            .attr("d", `M 0 0 h ${width}`);
+    }
+
     const line = d3
         .line()
         .x(d => xScale(parseTime(d.date)))
@@ -52,6 +109,9 @@
         display: block;
         color: hsl(200, 90%, 45%);
     }
+    .axes {
+        color: hsl(0, 0%, 0%);
+    }
 </style>
 
 <article>
@@ -59,7 +119,7 @@
     <svg {width} {height} viewBox="0 0 {width + (margin.left + margin.right)} {height + (margin.top + margin.bottom)}">
         <defs>
             <mask id="mask-{title.toLowerCase().split(' ').join('-')}">
-                <rect {width} {height} fill="hsl(0, 0%, 100%)" />
+                <rect x="{-margin.left}" y="{-margin.top}" width="{width + (margin.left + margin.right)}" height="{height + (margin.top + margin.bottom)}" fill="hsl(0, 0%, 100%)" />
                 {#each dataPoints as dataPoint}
                 <circle fill="hsl(0, 0%, 0%)" stroke="none" r="1.5" cx="{dataPoint.x}" cy="{dataPoint.y}" />
                 {/each}
@@ -67,6 +127,11 @@
         </defs>
         <g transform="translate({margin.top} {margin.left})">
             <g mask="url(#mask-{title.toLowerCase().split(' ').join('-')})">
+                <g class="axes">
+                    <g transform="translate(0 {height})" bind:this="{xAxisGroup}"></g>
+                    <g bind:this="{yAxisGroup}"></g>
+                </g>
+
                 <path fill="none" stroke="currentColor" stroke-width="1" d="{line(data)}" />
                 <path opacity="0.15" fill="currentColor" stroke="none" d="{area(data)}" />
             </g>
