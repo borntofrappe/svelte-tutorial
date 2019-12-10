@@ -2,7 +2,7 @@
 
 ## Goal
 
-Highlight the search results for the Tour de France through two simple, yet effective visualizations.
+Highlight the google trends for the Tour de France through simple, yet effective and reusable line charts.
 
 ## Notes
 
@@ -20,7 +20,7 @@ Each data point is described as an object detailing the date and the actual valu
 
 ## TODO
 
--   [ ] replace axis with custom solution
+-   [x] replace axis with custom solution
 
     -   remove axes and ticks
     -   add text elements and path elements for a series of data points (for instance every fifth vertically, every other one horizontally)

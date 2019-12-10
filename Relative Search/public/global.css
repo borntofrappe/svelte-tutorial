@@ -7,11 +7,13 @@
 }
 body {
     font-family: "Cabin", sans-serif;
-    max-width: 550px;
-    margin: 1rem auto;
-    padding: 1rem;
 }
 
-body > * + * {
+#root {
+    max-width: 550px;
+    margin: 0.5rem auto;
+    padding: 0 0.5rem;
+}
+#root > * + * {
     margin-top: 1.5rem;
 }

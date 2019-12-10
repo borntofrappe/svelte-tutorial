@@ -64,9 +64,17 @@
 
     const dataPointsX = [minDate, q1, q2, q3, maxDate];
 
-    const dataPointsY = Array(10)
+    const maxValue = d3.max(data, d => d.value);
+    const yTicks = 10;
+    const dataPointsY = Array(Math.floor(maxValue / yTicks))
         .fill()
-        .map((value, index) => (index + 1) * 10);
+        .map((value, index) => (index + 1) * yTicks);
+
+    let dataPointTooltip = null;
+
+    function handleMouseEnter() {
+        console.log("enter");
+    }
 </script>
 
 <style>
@@ -76,14 +84,11 @@
         display: block;
         color: hsl(200, 90%, 45%);
     }
-    .axes {
-        color: hsl(0, 0%, 0%);
-    }
 </style>
 
 <article>
     <h1>{title}</h1>
-    <svg {width} {height} viewBox="0 0 {width + (margin.left + margin.right)} {height + (margin.top + margin.bottom)}">
+    <svg on:mouseout="{() => { dataPointTooltip = null; }}" {width} {height} viewBox="0 0 {width + (margin.left + margin.right)} {height + (margin.top + margin.bottom)}">
         <defs>
             <mask id="mask-{title.toLowerCase().split(' ').join('-')}">
                 <rect x="{-margin.left}" y="{-margin.top}" width="{width + (margin.left + margin.right)}" height="{height + (margin.top + margin.bottom)}" fill="hsl(0, 0%, 100%)" />
@@ -96,17 +101,17 @@
             <g mask="url(#mask-{title.toLowerCase().split(' ').join('-')})">
                 <g class="axes">
                     <g transform="translate(0 {height})">
-                        <path fill="none" stroke="currentColor" stroke-width="0.5" d="M 0 0 h {width}" />
+                        <path fill="none" stroke="hsl(0, 0%, 0%)" stroke-width="0.5" d="M 0 0 h {width}" />
                         {#each dataPointsX as dataPointX}
                         <g transform="translate({xScale(dataPointX)} 0)">
-                            <text font-size="3" text-anchor="middle" y="5">{formatTime(dataPointX)}</text>
+                            <text fill="hsl(0, 0%, 0%)" font-size="3" text-anchor="middle" y="5">{formatTime(dataPointX)}</text>
                         </g>
                         {/each}
                     </g>
                     {#each dataPointsY as dataPointY}
                     <g transform="translate(0 {yScale(dataPointY)})">
-                        <text opacity="0.5" font-size="3" text-anchor="start" x="0" y="-1">{dataPointY}</text>
-                        <path opacity="0.2" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1" d="M 0 0 h {width}" />
+                        <text fill="hsl(0, 0%, 0%)" opacity="0.5" font-size="3" text-anchor="start" x="0" y="-1">{dataPointY}</text>
+                        <path opacity="0.2" fill="none" stroke="hsl(0, 0%, 0%)" stroke-width="0.5" stroke-dasharray="1" d="M 0 0 h {width}" />
                     </g>
                     {/each}
                 </g>
@@ -118,6 +123,20 @@
             {#each dataPoints as dataPoint}
             <circle fill="none" stroke="currentColor" stroke-width="1" r="1.5" cx="{dataPoint.x}" cy="{dataPoint.y}" />
             <text text-anchor="middle" font-size="5" font-weight="bold" fill="currentColor" x="{dataPoint.x}" y="{dataPoint.y - 3}">{dataPoint.value}</text>
+            {/each}
+            <!--  -->
+            {#if dataPointTooltip}
+            <g fill="currentColor" transform="translate({xScale(parseTime(dataPointTooltip.date))} {yScale(dataPointTooltip.value)})">
+                <text text-anchor="middle" font-size="5" font-weight="bold" fill="hsl(0, 0%, 10%)" y="-3">{dataPointTooltip.value}</text>
+                <path opacity="0.75" fill="none" stroke="hsl(0, 0%, 10%)" stroke-width="0.5" stroke-dasharray="1" d="M 0 0 v {height - yScale(dataPointTooltip.value)}" />
+                <circle r="2" fill="hsl(0, 0%, 10%)" />
+            </g>
+            {/if}
+            <!--  -->
+            {#each data as dataPoint, index}
+            <g transform="translate({xScale(parseTime(dataPoint.date))} 0)">
+                <rect on:mouseenter="{() => {dataPointTooltip = data[index]}}" opacity="0" x="-{xScale(parseTime(data[1].date)) / 2}" width="{xScale(parseTime(data[1].date)) - xScale(parseTime(data[0].date))}" {height} />
+            </g>
             {/each}
         </g>
     </svg>
