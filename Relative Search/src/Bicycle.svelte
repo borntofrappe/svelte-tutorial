@@ -1,4 +1,5 @@
 <style>
+    /* icon sized relative to the font-size set on the nearest parent element */
     svg {
         height: 0.75em;
         width: auto;
