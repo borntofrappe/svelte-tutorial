@@ -1,3 +1,5 @@
+// function converting the input integer to a roman numeral
+// using recursion
 export function convertToRoman(num) {
     if (num === 0) {
       return '';

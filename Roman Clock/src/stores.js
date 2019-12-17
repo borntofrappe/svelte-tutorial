@@ -1,11 +1,10 @@
 import { readable } from "svelte/store";
 
-export const time = readable(new Date(), function start(set) {
+// set up a readable store to provide the current date at a second's interval
+export const time = readable(new Date(), set => {
   const interval = setInterval(() => {
     set(new Date());
-  }, 1000);
+  }, 1000)
 
-  return function stop() {
-    clearInterval(interval);
-  };
+  return () => clearInterval(interval);
 });

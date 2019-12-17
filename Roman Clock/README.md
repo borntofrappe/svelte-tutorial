@@ -3,3 +3,15 @@
 ## Goal
 
 Use a readable store and SVG syntax to display the current time in a classic visual.
+
+## Notes
+
+The project is perhaps heavier on SVG syntax than Svelte's own logic, but it does showcase a few features of the compiler:
+
+-   readable store.
+
+-   reactive variables.
+
+-   the motion package.
+
+With regards to this last dependency, there's currently a bug when the number of minutes, or hours, switches back to 0. In this instance the rotation occurs from `330` degrees, backwards.

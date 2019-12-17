@@ -1,12 +1,13 @@
 <script>
     import { convertToRoman } from "./utils.js";
 
-    export let hours = 0;
-    export let minutes = 0;
-
+    // array to describe the roman numerals around the clock's dial
     const numbers = Array(12)
         .fill()
         .map((val, index) => index + 1);
+
+    export let hours = 0;
+    export let minutes = 0;
 </script>
 
 <style>
@@ -24,6 +25,7 @@
         <circle id="inner" r="32.75" />
         <circle id="border-outer" r="47.75" />
         <circle id="border-inner" r="30.75" />
+
         <path id="text-path" d="M 0 -36 a 36 36 0 0 1 0 72 36 36 0 0 1 0 -72 36 36 0 0 1 0 72 36 36 0 0 1 0 -72" />
 
         <mask id="circle--mask">
@@ -56,6 +58,11 @@
     </g>
 
     <g mask="url(#circle--mask)">
+        <!-- include the numbers around the clock's dial
+        initial 25% to avoid cropping
+        25% since the referenced path loops twice around the center
+        -150 degrees as in -120 -30 (to account for the initial offset)
+        -->
         {#each numbers as number, index}
         <g transform="rotate(-150)">
             <text text-anchor="middle" font-size="12">

@@ -9,15 +9,13 @@
         duration: 500
     };
 
+	// initialize hours and minutes t refer to the current time
     let hours = tweened($time.getHours(), options);
     let minutes = tweened($time.getMinutes(), options);
 
+	// update the variables only as the hours and minutes change
     $: hours.set($time.getHours());
     $: minutes.set($time.getMinutes());
-
-    const numbers = Array(12)
-        .fill()
-        .map((val, index) => index + 1);
 </script>
 
 <Clock {hours} {minutes} />
