@@ -91,3 +91,9 @@ Build upon the concept developed [in this pen](https://codepen.io/borntofrappe/p
 Highlight the google trends for the Tour de France through simple, yet effective and reusable line charts.
 
 **Tags**: d3, component
+
+## [Roman Clock](https://svelte.dev/repl/ce67640a4c034cfa8585f3555fff3f8d)
+
+Use a readable store and SVG syntax to display the current time in a classic visual.
+
+**Tags**: readable, svg, motion
