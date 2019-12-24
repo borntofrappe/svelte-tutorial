@@ -97,3 +97,7 @@ Highlight the google trends for the Tour de France through simple, yet effective
 Use a readable store and SVG syntax to display the current time in a classic visual.
 
 **Tags**: readable, svg, motion
+
+## [Star Wars Crawl](https://svelte.dev/repl/545f0f3393954c4e8f06b1c0a8786475)
+
+Create an interactive form allowing to edit and show the opening crawls from a Star Wars movie.
