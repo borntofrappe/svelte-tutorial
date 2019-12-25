@@ -2,7 +2,7 @@
 	import Toggle from './Toggle.svelte';
 	import Crawls from './Crawls.svelte';
 
-	let showCrawls = false;
+	let checked = true;
 	let title = 'The Phantom Menace';
 	let text = 'Turmoil has engulfed the Galactic Republic. The taxation of trade routes to outlying star systems is in dispute. Hoping to resolve the matter with a blockade of deadly battleships, the greedy Trade Federation has stopped all shipping to the small planet of Naboo. While the Congress of the Republic endlessly debates this alarming chain of events, the Supreme Chancellor has secretly dispatched two Jedi Knights, the guardians of peace and justice in the galaxy, to settle the conflict....';
 </script>
@@ -16,7 +16,7 @@
 	div {
 		display: flex;
 		flex-direction: column;
-		max-width: 400px;
+		max-width: 450px;
 		margin: 1rem auto;
 		align-items: center;
 	}
@@ -35,8 +35,8 @@
 </style>
 
 <div>
-	<Toggle on:toggle={(e) => showCrawls = e.detail} />
-	{#if showCrawls}
+	<Toggle {checked} on:toggle={(e) => checked = e.detail} />
+	{#if checked}
 	<Crawls {title} {text} />
 	{:else}
 	<form on:submit|preventDefault>
