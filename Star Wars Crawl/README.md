@@ -15,15 +15,3 @@ To develop the final result, a few smaller projects have been developed and save
 - the Star Wars title, redesigned from the first version first created for a React project.
 
 - a playground to experiment with 3D transform properties. This project ultimately lead me to the markup and property value pairs necessary for the crawling animation.
-
-<!--
-alternative placeholder
-
-The Svelte Project
-
-After much work.
-I finally completed this nifty project.
-Using 3D transform properties, a bit of perspective, and surprisingly enough, _not_ the transition directive.
-
-Just a lovely CSS animation.
--->

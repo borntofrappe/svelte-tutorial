@@ -1,6 +1,8 @@
 <script>
   import Logo from "./Logo.svelte";
-	import { convertToRoman } from "./utils.js";
+  import { convertToRoman } from "./utils.js";
+  import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 
 	export let title;
   export let text;
@@ -83,7 +85,8 @@
 		<Logo />
 	</header>
 
-  <main>
+  <!-- dispatch an event when the animation is complete -->
+  <main on:animationend="{() => dispatch('end')}">
     <h2>
       Episode {episode}
     </h2>
