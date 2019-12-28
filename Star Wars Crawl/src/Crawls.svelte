@@ -1,12 +1,15 @@
 <script>
 	import Logo from './Logo.svelte';
+	import { convertToRoman } from './utils.js';
 	export let title;
 	export let text;
+
+	const episode = convertToRoman(Math.ceil(Math.random() * 100));
 </script>
 
 <style>
-	#screen {
-		color: hsl(205, 100%, 50%);
+	section {
+		color: hsl(60, 100%, 50%);
 		height: 450px;
 		width: 100%;
 		overflow: hidden;
@@ -16,55 +19,38 @@
 		justify-content: center;
 		position: relative;
 	}
-	#logo {
+	div {
 		transform: translateZ(0px);
-		opacity: 0;
+		opacity: 1;
 	}
-
-	#intro {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		display: flex;
-		padding: 1rem;
-	}
-	#intro h2 {
-		margin: auto;
-		line-height: 1.5;
-		font-size: 2rem;
-	}
-
-	#crawl {
-		color: hsl(60, 100%, 50%);
+	main {
 		position: absolute;
 		top: 0;
 		left: 0;
 		transform-origin: 50% 100%;
-		transform: translateZ(250px) rotateX(25deg) translateY(0%);
+		transform: translateZ(250px) rotateX(25deg) translateY(10%);
 		padding: 1rem 0;
 		font-size: 1.5rem;
 	}
-	#crawl h1 {
+	main h1, main h2 {
 		text-align: center;
 		text-transform: uppercase;
 		font-weight: 500;
 	}
-	#crawl p {
+	main p {
 		line-height: 2.5;
 	}
 </style>
 
-<div id="screen">
-	<div id="intro">
-		<h2>A long time ago in a galaxy far, far away....</h2>
-	</div>
+<section>
 	<div id="logo">
 		<Logo />
 	</div>
 
-	<main id="crawl">
+	<main>
+		<h2>
+			Episode {episode}
+		</h2>
 		<h1>
 			{title}
 		</h1>
@@ -72,4 +58,4 @@
 			{text}
 		</p>
 	</main>
-</div>
+</section>
