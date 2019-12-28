@@ -1,4 +1,5 @@
 <style>
+  /* expand the graphic to cover the width of the parent container */
   svg {
     width: 100%;
     height: auto;

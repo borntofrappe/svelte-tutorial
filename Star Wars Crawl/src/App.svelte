@@ -13,6 +13,7 @@
     hsl(0, 0%, 0%);
   background-size: 50px, 100%;
 	}
+	/* display the form + crawls in a horizontally centered column */
 	div {
 		display: flex;
 		flex-direction: column;
@@ -23,6 +24,7 @@
 	div > * + * {
 		margin-top: 1rem;
 	}
+	/* display the contents of the form in a column */
 	form {
 		width: 100%;
 		display: flex;
@@ -34,6 +36,7 @@
 	}
 </style>
 
+<!-- display the toggle, and depending on its state show the animated crawls or the form allowing to change the input values -->
 <div>
 	<Toggle {checked} on:toggle={(e) => checked = e.detail} />
 	{#if checked}
@@ -44,5 +47,4 @@
 		<textarea bind:value={text}></textarea>
 	</form>
 	{/if}
-
 </div>

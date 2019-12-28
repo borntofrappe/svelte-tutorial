@@ -1,5 +1,9 @@
+// function allowing to retrieve a random item from an array
+export function randomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 // function converting the input integer to a roman numeral
-// using recursion
 export function convertToRoman(num) {
   if (num === 0) {
     return '';

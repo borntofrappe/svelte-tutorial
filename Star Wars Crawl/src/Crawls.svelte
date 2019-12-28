@@ -1,39 +1,49 @@
 <script>
   import Logo from "./Logo.svelte";
 	import { convertToRoman } from "./utils.js";
-	import { quartIn, sineInOut } from 'svelte/easing';
 
 	export let title;
   export let text;
-
+  // for the number of the episode pick a random integer at random and convert it to a roman numeral
 	const episode = convertToRoman(Math.ceil(Math.random() * 100));
-
 </script>
 
 <style>
-  section {
+  /* add a perspective to the div container
+  this affects the z translation specified for the logo
+  && the transform values for the crawl's own text
+  */
+  div {
     color: hsl(60, 100%, 50%);
-    height: 450px;
+    height: 350px;
     width: 100%;
+    /* hide the crawl outside of the div container */
     overflow: hidden;
     perspective: 300px;
+    /* center the logo in the div container
+    the crawl is absolute positioned at the bottom of the div
+    */
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
   }
+  /* absolute position the crawl at the bottom of the div */
   main {
-    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
-		min-height: 100%;
+    width: 100%;
+		height: 100%;
+    padding: 1rem 0;
+    /* animate the crawl to scroll upwards */
     transform-origin: 50% 100%;
     transform: rotateX(25deg) translateY(100%);
-    padding: 1rem 0;
 		animation: scrollUpwards 60s linear;
   }
-	div {
+  /* animate the container wrapping the logo to move away from the viewer's perspective */
+	header {
+    /* specify a different timing function for the opacity, to retain higher values for a longer stretch of time */
 		animation-name: moveFurther, fadeOut;
 		animation-timing-function: cubic-bezier(0.59,-0.01,0.75,0.02), cubic-bezier(0.895, 0.03, 0.685, 0.22);
 		animation-duration: 8s;
@@ -49,6 +59,7 @@
     line-height: 2.5;
   }
 
+  /* the animations are triggered as soon as the components are rendered */
 	@keyframes moveFurther {
 		to {
 			transform: translateZ(-1500px);
@@ -67,10 +78,10 @@
 	}
 </style>
 
-<section>
-	<div>
+<div>
+	<header>
 		<Logo />
-	</div>
+	</header>
 
   <main>
     <h2>
@@ -83,4 +94,4 @@
       {text}
     </p>
   </main>
-</section>
+</div>
