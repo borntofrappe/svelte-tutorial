@@ -8,18 +8,10 @@ Create an interactive form allowing to edit and show the opening crawls from a S
 
 This project begun while developing a toggle out of a light saber, and is deeply inspired by [this article @lemondefr](https://www.lemonde.fr/pixels/article/2019/12/18/star-wars-vous-voulez-davantage-d-episodes-generez-un-scenario-avec-notre-starwarsotron_6023326_4408996.html).
 
-You can find the toggle in the **res** folder, using SVG syntax ans CSS transition properties to show the blue-colored saber.
+To develop the final result, a few smaller projects have been developed and saved in the **res** folder:
 
-In addition to this project, I also re-designed the "Star Wars" title I first designed for a separate React project. In the **res** folder I added this resource, and you can find its first version [on codesandbox](https://4p7l5.codesandbox.io/).
+- the toggle, using SVG syntax ans CSS transition properties to show a blue-colored saber.
 
-<!--
-alternative placeholder
+- the Star Wars title, redesigned from the first version first created for a React project.
 
-The Svelte Project
-
-After much work.
-I finally completed this nifty project.
-Using 3D transform properties, a bit of perspective, and surprisingly enough, _not_ the transition directive.
-
-Just a lovely CSS animation.
--->
+- a playground to experiment with 3D transform properties. This project ultimately lead me to the markup and property value pairs necessary for the crawling animation.

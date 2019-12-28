@@ -1,0 +1,56 @@
+:root {
+  --rotation: 0deg;
+  --translation: 0%;
+  --origin: 100%;
+}
+body {
+  background: url("data:image/svg+xml,%3Csvg opacity='0.2' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3Ccircle id='circle' r='1' fill='hsl(0, 0%25, 100%25)' /%3E%3C/defs%3E%3Cuse href='%23circle' x='50' y='50' /%3E%3Cuse href='%23circle' x='150' y='50' /%3E%3Cuse href='%23circle' x='50' y='150' /%3E%3Cuse href='%23circle' x='150' y='150' /%3E%3Cuse href='%23circle' transform='translate(100 100) scale(2.5)' /%3E%3C/svg%3E"),
+    hsl(0, 0%, 0%);
+  background-size: 50px, 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+label {
+  display: flex;
+  align-items: center;
+}
+label input {
+  margin: 0 1rem;
+}
+label + label {
+  margin-top: 1rem;
+}
+div {
+  color: hsl(60, 100%, 50%);
+  width: 95vw;
+  max-width: 420px;
+  margin: 1rem auto;
+  height: 450px;
+  overflow: hidden;
+  perspective: 300px;
+}
+main {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* with a variable height the 3D transform properties force the size of the text dependant on the length of the text itself
+  with a fixed height, even if the content spills below the container, the translation affects the container with a fixed size
+  */
+  height: 100%;
+  transform-origin: 50% var(--origin);
+  transform: rotateX(var(--rotation)) translateY(var(--translation));
+  padding: 1rem 0;
+}
+main h1,
+main h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+main p {
+  line-height: 2.5;
+}
