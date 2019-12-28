@@ -15,7 +15,7 @@
   let hue = randomItem(sabers);
 
   // text included in the graphic and the the aria-label attribute
-  $: label = checked ? "Edit Crawls" : "Show Crawls";
+  $: label = checked ? "Edit Crawl" : "Show Crawl";
 
   // instead of aCSS transition, create two variables with the svelte's motion module
   const options = {
@@ -53,6 +53,7 @@
   label input + svg {
     height: 25px;
     width: auto;
+    max-width: 100%;
     display: block;
     filter: drop-shadow(4px 0 8px hsla(0, 0%, 100%, 0));
     transition: filter 0.25s ease-in-out;

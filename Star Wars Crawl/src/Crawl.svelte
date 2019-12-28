@@ -41,14 +41,14 @@
     /* animate the crawl to scroll upwards */
     transform-origin: 50% 100%;
     transform: rotateX(25deg) translateY(100%);
-		animation: scrollUpwards 60s linear;
+		animation: scrollUpwards 50s linear;
   }
   /* animate the container wrapping the logo to move away from the viewer's perspective */
 	header {
     /* specify a different timing function for the opacity, to retain higher values for a longer stretch of time */
 		animation-name: moveFurther, fadeOut;
 		animation-timing-function: cubic-bezier(0.59,-0.01,0.75,0.02), cubic-bezier(0.895, 0.03, 0.685, 0.22);
-		animation-duration: 8s;
+		animation-duration: 7s;
 		animation-fill-mode: forwards;
 	}
   main h1,

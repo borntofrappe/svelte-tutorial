@@ -1,6 +1,6 @@
 <script>
   import Toggle from "./Toggle.svelte";
-  import Crawls from "./Crawls.svelte";
+  import Crawl from "./Crawl.svelte";
 
   let checked = false;
   let title = "The Phantom Menace";
@@ -14,11 +14,12 @@
       hsl(0, 0%, 0%);
     background-size: 50px, 100%;
   }
-  /* display the form + crawls in a horizontally centered column */
+  /* display the form + crawl in a horizontally centered column */
   div {
     display: flex;
     flex-direction: column;
     max-width: 420px;
+    width: 95vw;
     margin: 1rem auto;
     align-items: center;
   }
@@ -37,11 +38,11 @@
   }
 </style>
 
-<!-- display the toggle, and depending on its state show the animated crawls or the form allowing to change the input values -->
+<!-- display the toggle, and depending on its state show the animated crawl or the form allowing to change the input values -->
 <div>
   <Toggle {checked} on:toggle="{(e) => checked = e.detail}" /> {#if checked}
   <!-- following the end event reset checked to false -->
-  <Crawls on:end="{() => {checked = false;}}" {title} {text} /> {:else}
+  <Crawl on:end="{() => {checked = false;}}" {title} {text} /> {:else}
   <form on:submit|preventDefault>
     <input type="text" bind:value="{title}" />
     <textarea bind:value="{text}"></textarea>
