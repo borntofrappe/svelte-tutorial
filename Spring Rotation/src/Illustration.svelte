@@ -4,6 +4,7 @@
 
 <style>
   svg {
+    padding: 1rem;
     display: block;
     width: 100%;
     height: auto;
