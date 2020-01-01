@@ -101,3 +101,7 @@ Use a readable store and SVG syntax to display the current time in a classic vis
 ## [Star Wars Crawl](https://svelte.dev/repl/545f0f3393954c4e8f06b1c0a8786475)
 
 Create an interactive form allowing to edit and show the opening crawls from a Star Wars movie.
+
+## [Spring Rotation](https://svelte.dev/repl/952381e99df740498465cc53139c09aa)
+
+Update an SVG with 3D transform properties and the spring module.
