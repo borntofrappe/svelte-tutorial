@@ -1,30 +1,20 @@
 <script>
   import Illustration from "./Illustration.svelte";
   import { createEventDispatcher } from "svelte";
-  import { telephoneCheck } from "./utils.js";
-
   const dispatch = createEventDispatcher();
 
   export let name;
   export let title;
   export let phone;
-  export let isValid;
 
-  $: isValid = telephoneCheck(phone);
   $: dispatch("update", {
     name,
     title,
-    phone,
-    isValid,
+    phone
   });
 </script>
 
 <style>
-  form {
-    background: hsl(220, 2%, 10%);
-		color: hsl(30, 85%, 90%);
-    padding: 1.5rem 2rem;
-  }
   form > * + * {
     margin-top: 1rem;
   }
@@ -56,8 +46,6 @@
 </style>
 
 <form on:submit|preventDefault>
-	<Illustration {isValid} />
-
   <label>
     Name
     <input type="text" id="name" name="name" bind:value="{name}" />
