@@ -1,69 +1,65 @@
 <script>
-  import { spring } from "svelte/motion";
   import Illustration from "./Illustration.svelte";
   import Form from "./Form.svelte";
-  import { telephoneCheck } from "./utils.js";
+  import Card from "./Card.svelte";
 
 	let contact = {
 		name: 'George Cartwright',
 		title: 'Hen Supervisor',
 		phone: '1 (134) 756 4258',
-	}
-	let isValid = telephoneCheck(contact.phone);
-
-	function handleSubmit(e) {
-		const { detail } = e;
-		console.log(e);
+		isValid: true
 	}
 
-  const angle = 20;
-  let rotation = spring({
-    x: 0,
-    y: 0,
-  });
+	let isSubmitted = false;
 
-  function handleMousemove({ x, y }) {
-		const { innerWidth: width, innerHeight: height } = window;
-		// [0,1] range
-		const px = x / width;
-		const py = y / height;
-		// [-1,1] range
-		const rx = px * 2 - 1;
-		const ry = py * 2 - 1;
+	function handleUpdate(e) {
+		const { name, title, phone, isValid } = e.detail;
+		contact = {
+			name,
+			title,
+			phone,
+			isValid
+		}
+	};
 
-		// from the API, a second object allows to customize how fast the properties reach the final value
-		// https://svelte.dev/docs#spring
-		rotation.set(
-			{
-				x: rx,
-				y: ry
-			},
-			{ soft: 0.4 }
-		);
-  }
 </script>
 
 <style>
-  :global(body) {
-    perspective: 400px;
-	}
 	div {
-		width: 280px;
-		background: hsl(220, 2%, 10%);
-		color: hsl(30, 85%, 90%);
-		padding: 1.5rem 2rem;
-		transform: translateZ(0px) rotate3d(0, 0, 0, 20deg);
+		width: 300px;
+		perspective: 400px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
+	div > * + * {
+		margin-top: 1.5rem;
+	}
+
+	button {
+		display: block;
+    color: hsl(0, 0%, 100%);
+    background: none;
+    border: 1px solid currentColor;
+    padding: 0.5rem 1rem;
+    letter-spacing: 2px;
+    font-family: inherit;
+    text-transform: uppercase;
+  }
 </style>
 
-<!-- <svelte:window on:mousemove="{handleMousemove}"></svelte:window> -->
-<!-- style="transform: translateZ(-50px) rotate3d({$rotation.y * -1}, {$rotation.x}, 0, {angle}deg);" -->
 <div>
-	<Illustration {isValid} />
-	<Form
-		on:phone="{(e) => isValid = telephoneCheck(e.detail)}"
-		on:submit={handleSubmit}
-		{...contact} />
+	{#if isSubmitted}
+		<Card {...contact} />
+	{:else}
+		<Form
+			on:update="{handleUpdate}"
+			{...contact} />
+	{/if}
+
+	<button on:click="{() => isSubmitted = !isSubmitted}">
+		{isSubmitted ? 'Edit' : 'Submit'}
+	</button>
 </div>
 
 

@@ -1,25 +1,29 @@
 <script>
+  import Illustration from "./Illustration.svelte";
   import { createEventDispatcher } from "svelte";
+  import { telephoneCheck } from "./utils.js";
+
   const dispatch = createEventDispatcher();
 
   export let name;
   export let title;
   export let phone;
+  export let isValid;
 
-  $: dispatch("phone", phone);
-
-  function handleSubmit() {
-    dispatch("submit", {
-      name,
-      title,
-      phone
-    });
-  }
+  $: isValid = telephoneCheck(phone);
+  $: dispatch("update", {
+    name,
+    title,
+    phone,
+    isValid,
+  });
 </script>
 
 <style>
   form {
-    position: relative;
+    background: hsl(220, 2%, 10%);
+		color: hsl(30, 85%, 90%);
+    padding: 1.5rem 2rem;
   }
   form > * + * {
     margin-top: 1rem;
@@ -28,7 +32,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     letter-spacing: 1px;
     color: hsl(0, 0%, 80%);
     line-height: 2;
@@ -38,8 +42,8 @@
     border: none;
     font-family: inherit;
     color: inherit;
-    padding: 0.25rem 0.75rem;
-    background: hsl(0, 0%, 25%);
+    padding: 0.5rem 0.75rem;
+    background: hsl(0, 0%, 20%);
     outline: none;
     font-size: 1rem;
   }
@@ -49,24 +53,11 @@
   input::selection {
     background: hsl(0, 0%, 25%);
   }
-
-  button {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    color: hsl(0, 0%, 100%);
-    background: none;
-    border: 1px solid currentColor;
-    padding: 0.5rem 1rem;
-    letter-spacing: 2px;
-    font-family: inherit;
-    text-transform: uppercase;
-    font-weight: 300;
-  }
 </style>
 
-<form on:submit|preventDefault="{handleSubmit}">
+<form on:submit|preventDefault>
+	<Illustration {isValid} />
+
   <label>
     Name
     <input type="text" id="name" name="name" bind:value="{name}" />
@@ -79,8 +70,4 @@
     US Phone
     <input type="text" id="phone" name="phone" bind:value="{phone}" />
   </label>
-
-  <button>
-    Submit
-  </button>
 </form>
