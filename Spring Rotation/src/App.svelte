@@ -1,13 +1,15 @@
 <script>
   import { spring } from "svelte/motion";
+	import Illustration from "./Illustration.svelte";
+	import { telephoneCheck } from "./utils.js";
 
-  const angle = 30;
+  const angle = 20;
   let rotation = spring({
     x: 0,
     y: 0
   });
 
-  function handleMouseMove({ x, y }) {
+  function handleMousemove({ x, y }) {
     const { innerWidth: width, innerHeight: height } = window;
     // [0,1] range
     const px = x / width;
@@ -23,41 +25,62 @@
         x: rx,
         y: ry
       },
-      { soft: 0.7 }
+      { soft: 0.4 }
     );
-  }
+	}
+
+	let isValid = false;
+	let phone = '1 (134) 756 4258';
+
+	$: isValid = telephoneCheck(phone);
+
 </script>
 
 <style>
   :global(body) {
     perspective: 400px;
   }
-  svg {
-    padding: 1.5rem 2rem;
-    background: hsl(220, 2%, 10%);
+  form {
+		background: hsl(220, 2%, 10%);
     color: hsl(30, 85%, 90%);
-    display: block;
+    padding: 1.5rem 2rem;
     width: 300px;
-    height: auto;
     transform: translateZ(-50px) rotate3d(0, 0, 0, 25deg);
-  }
+	}
+	form > * + * {
+		margin-top: 1rem;
+	}
+	label {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		font-size: 0.8rem;
+		letter-spacing: 1px;
+		color: hsl(0, 0%, 80%);
+		line-height: 2;
+	}
+	input {
+		width: 100%;
+		border: none;
+		font-family: inherit;
+		color: inherit;
+		padding: 0.2rem 0.8rem;
+		background: hsl(0, 0%, 25%);
+		outline: none;
+		font-size: 1rem;
+	}
+	input:focus {
+    background: hsl(0, 0%, 15%);
+	}
 </style>
 
-<svelte:window on:mousemove="{handleMouseMove}"></svelte:window>
-<svg style="transform: translateZ(-50px) rotate3d({$rotation.y * -1}, {$rotation.x}, 0, {angle}deg)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 65" width="110" height="65">
-  <rect id="line--half" x="55" width="55" height="5" fill="currentColor" />
-  <use href="#line--half" y="10" />
-  <use href="#line--half" y="20" />
-  <use href="#line--half" y="30" />
-  <rect id="line" y="40" width="110" height="5" fill="currentColor" />
-  <use href="#line" y="10" />
-  <use href="#line" y="20" />
-  <g id="stars">
-    <path id="star" transform="translate(10 10)" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="currentColor" d="M 0 -5 L 3.25 5 -5 -1.25 5 -1.25 -3.25 5z" />
-    <use href="#star" x="17.5" />
-    <use href="#star" x="35" />
-  </g>
-  <use href="#stars" y="20" />
-  <use href="#star" x="26.25" y="10" />
-  <use href="#star" x="8.75" y="10" />
-</svg>
+<svelte:window on:mousemove="{handleMousemove}"></svelte:window>
+
+<form e:preventDefault style="transform: translateZ(-50px) rotate3d({$rotation.y * -1}, {$rotation.x}, 0, {angle}deg)">
+	<Illustration {isValid}/>
+	<label>
+		US Phone
+		<input type="text" bind:value="{phone}" on:change="{(e) => phone = e.target.value}"/>
+	</label>
+
+</form>
