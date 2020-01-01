@@ -1,5 +1,7 @@
 <script>
-  export let isValid = false;
+  import { telephoneCheck } from "./utils.js";
+
+  export let phone;
 </script>
 
 <style>
@@ -12,7 +14,7 @@
 </style>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 65" width="110" height="65">
-  {#if isValid}
+  {#if telephoneCheck(phone)}
   <rect id="line--half" x="55" width="55" height="5" fill="currentColor" />
   <use href="#line--half" y="10" />
   <use href="#line--half" y="20" />

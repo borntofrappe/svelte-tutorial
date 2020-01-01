@@ -15,17 +15,24 @@
 </script>
 
 <style>
+  form {
+    color: hsl(30, 85%, 90%);
+    background: hsl(220, 2%, 10%);
+    padding: 1.5rem 2rem;
+		backface-visibility: hidden;
+  }
   form > * + * {
     margin-top: 1rem;
   }
   label {
+    white-space: nowrap;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    font-size: 0.85rem;
     letter-spacing: 1px;
-    color: hsl(0, 0%, 80%);
+    color: hsl(0, 0%, 100%);
     line-height: 2;
+    font-weight: 300;
   }
   input {
     width: 100%;
@@ -46,16 +53,17 @@
 </style>
 
 <form on:submit|preventDefault>
+  <Illustration {phone} />
   <label>
     Name
-    <input type="text" id="name" name="name" bind:value="{name}" />
+    <input maxlength="20" type="text" id="name" name="name" bind:value="{name}" />
   </label>
   <label>
     Title
-    <input type="text" id="title" name="title" bind:value="{title}" />
+    <input maxlength="20" type="text" id="title" name="title" bind:value="{title}" />
   </label>
   <label>
     US Phone
-    <input type="text" id="phone" name="phone" bind:value="{phone}" />
+    <input maxlength="20" type="text" id="phone" name="phone" bind:value="{phone}" />
   </label>
 </form>

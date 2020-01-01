@@ -1,16 +1,13 @@
 <script>
   import { spring } from "svelte/motion";
-  import Illustration from "./Illustration.svelte";
-  import Form from "./Form.svelte";
-  import Card from "./Card.svelte";
-  import { telephoneCheck } from "./utils.js";
+	import Front from './Front.svelte';
+	import Back from './Back.svelte';
 
 	let contact = {
-		name: 'George Cartwright',
-		title: 'Hen Supervisor',
-		phone: '1 (134) 756 4258',
+		name: 'Cosmo Kramer',
+		title: 'Movie Phone',
+		phone: '1 (555) 555 3455',
 	}
-	$: isValid = telephoneCheck(contact.phone);
 
 	function handleUpdate(e) {
 		const { name, title, phone } = e.detail;
@@ -21,75 +18,42 @@
 		}
 	};
 
-	let isSubmitted = false;
+	const options = {
+		stiffness: 0.05,
+		damping: 0.6,
+	}
+	const softness = {
+		soft: 0.7
+	}
+	const rotation = spring({
+		y: 0,
+		z: 0
+	}, options);
+	let isRotated = true;
 
-	const angle = 20;
-  let rotation = spring({
-    x: 0,
-    y: 0
-  });
-  let translation = spring(0);
-
-	$: if(!isSubmitted) {
-		translation.set(0);
+	$: if(isRotated) {
 		rotation.set({
-			x: 0,
+			y: 180,
+			z: 450,
+		}, softness);
+	} else {
+		rotation.set({
 			y: 0,
-		});
+			z: 0,
+		}, softness);
 	}
-
-	function handleSubmit() {
-		isSubmitted = !isSubmitted;
-		if(!isSubmitted) {
-				translation.set(0);
-				rotation.set({
-				x: 0,
-				y: 0,
-			});
-		}
-	}
-
-  function handleMousemove({ x, y }) {
-		if(isSubmitted) {
-    const { innerWidth: width, innerHeight: height } = window;
-    // [0,1] range
-    const px = x / width;
-    const py = y / height;
-    // [-1,1] range
-    const rx = px * 2 - 1;
-    const ry = (py * 2 - 1) * -1;
-
-    // from the API, a second object allows to customize how fast the properties reach the final value
-    // https://svelte.dev/docs#spring
-    rotation.set(
-      {
-        x: ry,
-        y: rx
-      }
-    );
-
-    const cx = Math.abs((x - width / 2) / (width / 2));
-    const cy= Math.abs((y - height / 2) / (height / 2));
-    const z = Math.sqrt(Math.pow(cx, 2) + Math.pow(cy, 2));
-
-    translation.set(z * 200 * -1 - 50);
-		}
-  }
 
 </script>
 
 <style>
 	:global(body) {
-		perspective: 400px;
+		perspective: 600px;
 	}
 	div {
-		width: 300px;
-    color: hsl(30, 85%, 90%);
-		background: hsl(220, 2%, 10%);
-		padding: 1.5rem 2rem;
-		transform: translateZ(0px) rotate3d(0, 0, 0, 20deg);
+		width: 280px;
 		position: relative;
-		transition: transform 0.1s ease-in-out;
+		transform: rotateY(0deg) rotateZ(0deg);
+		transform-style: preserve-3d;
 	}
 	div > * + * {
 		margin-top: 1.5rem;
@@ -107,20 +71,12 @@
   }
 </style>
 
-<svelte:window on:mousemove="{handleMousemove}"></svelte:window>
-<div style="transform: translateZ({$translation}px) rotate3d({$rotation.x}, {$rotation.y}, 0, {angle}deg);">
-	<Illustration {isValid} />
-	{#if isSubmitted}
-		<Card {...contact} />
-	{:else}
-		<Form
-			on:update="{handleUpdate}"
-			{...contact} />
-	{/if}
-
+<div style="transform: rotateY({$rotation.y}deg) rotateZ({$rotation.z}deg)">
+	<Front on:update="{handleUpdate}" {...contact}/>
+	<Back {...contact} />
 </div>
 
-<button on:click="{handleSubmit}">
-	{isSubmitted ? 'Edit' : 'Submit'}
+<button on:click="{() => isRotated = !isRotated}">
+	Rotate
 </button>
 
