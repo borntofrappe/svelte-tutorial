@@ -1,17 +1,8 @@
 <script>
   import { telephoneCheck } from "./utils.js";
-
+  // show the us flag if the input number matches a valid US phone number
   export let phone;
 </script>
-
-<style>
-  svg {
-    padding: 1rem;
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-</style>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 65" width="110" height="65">
   {#if telephoneCheck(phone)}

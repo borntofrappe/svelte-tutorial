@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Kanit:700&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/* center the card in the viewport */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: hsl(0, 0%, 100%);
+  background: hsl(220, 5%, 5%);
+  font-family: "Josefin Sans", sans-serif;
+  /* perspective for the 3d rotation */
+  perspective: 600px;
+}
+/* parent container for the two sides of the card */
+div {
+  width: 280px;
+  position: relative;
+  transform: rotateY(0deg) rotateZ(0deg);
+  transform-style: preserve-3d;
+}
+div > * + * {
+  margin-top: 1.5rem;
+}
+
+button {
+  margin-top: 1.2rem;
+  color: inherit;
+  background: none;
+  border: 1px solid currentColor;
+  padding: 0.5rem 1rem;
+  letter-spacing: 2px;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+/* backface visibility to hide the elements as they are flipped around the y axis */
+form,
+main {
+  color: hsl(30, 85%, 90%);
+  background: hsl(220, 2%, 10%);
+  padding: 1.5rem 2rem;
+  backface-visibility: hidden;
+}
+
+/* absolute position the back of the card to consider the space allocated to the form */
+main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* styles for the front */
+form > * + * {
+  margin-top: 1rem;
+}
+label {
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  letter-spacing: 1px;
+  color: hsl(0, 0%, 100%);
+  line-height: 2;
+  font-weight: 300;
+}
+input {
+  width: 100%;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  padding: 0.5rem 0.75rem;
+  background: hsl(0, 0%, 20%);
+  outline: none;
+  font-size: 1rem;
+}
+input:focus {
+  background: hsl(0, 0%, 15%);
+}
+input::selection {
+  background: hsl(0, 0%, 25%);
+}
+
+/* styles for the back
+rotate the nested container to show the information on the side
+this is rather brittle, but does the trick
+*/
+main section {
+  transform: rotate(90deg);
+}
+
+main section > * + * {
+  line-height: 2;
+  text-align: center;
+}
+h1 {
+  font-family: "Kanit", sans-serif;
+  letter-spacing: 2px;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+h2,
+h3 {
+  font-weight: 300;
+}
+h3 {
+  font-size: 1rem;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
