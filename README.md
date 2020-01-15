@@ -105,3 +105,7 @@ Create an interactive form allowing to edit and show the opening crawls from a S
 ## [Contact US](https://njbcg.codesandbox.io/)
 
 Create an interactive contact card, editing and displaying the input information on two opposing sides.
+
+## Arithmetic Formatter
+
+Compute basic arithmetic operations and animate the solution with SVG syntax.
