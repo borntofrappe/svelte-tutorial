@@ -7,7 +7,6 @@
 }
 body {
   font-family: "Gaegu", cursive;
-  min-height: 100vh;
   background: hsl(0, 0%, 8%);
   color: hsl(0, 0%, 96%);
   display: flex;

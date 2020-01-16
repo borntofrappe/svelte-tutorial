@@ -106,6 +106,6 @@ Create an interactive form allowing to edit and show the opening crawls from a S
 
 Create an interactive contact card, editing and displaying the input information on two opposing sides.
 
-## [Arithmetic Formatter](https://svelte.dev/repl/730b7da509b74438a9d1c4bc6306b52f)
+## [Basic Arithmetic](https://svelte.dev/repl/730b7da509b74438a9d1c4bc6306b52f)
 
-Compute basic arithmetic operations and animate the solution with SVG syntax.
+Compute basic arithmetic operations and animate the solution with a staggered animation.

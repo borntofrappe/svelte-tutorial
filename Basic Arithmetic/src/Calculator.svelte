@@ -19,10 +19,16 @@
 
 <style>
   form {
-    display: grid;
-    grid-template-columns: 5rem 7rem;
-    grid-auto-rows: 5rem;
-    grid-gap: 1.5rem;
+    max-width: 10rem;
+  }
+  @supports (display: grid) {
+    form {
+      max-width: initial;
+      display: grid;
+      grid-template-columns: 5rem 7rem;
+      grid-auto-rows: 5rem;
+      grid-gap: 1.5rem;
+    }
   }
   input:first-of-type,
   button {
@@ -53,7 +59,8 @@
     outline: none;
     box-shadow: 0 0 0.1rem hsl(0, 0%, 2%), 0.1rem 0.2rem 0.1rem -0.1rem hsl(0, 0%, 2%), 0 0rem 0.1rem hsl(0, 0%, 10%);
   }
-  input::selection {
+  input::selection,
+  button::selection {
     background: hsla(0, 0%, 90%, 0.2);
   }
   select option {
