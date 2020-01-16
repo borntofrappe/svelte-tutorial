@@ -1,61 +1,61 @@
 <script>
-  let num1 = 0;
-  let num2 = 0;
-  let operator = "+";
+  import Form from './Form.svelte'
+  import { randomInt } from "./utils.js"
+
+
+  let num1 = randomInt()
+  let operator = "+"
+  let num2 = randomInt()
+
+  $: result = operator === "+" ? num1 + num2 : num1 - num2
+  $: digits = result.toString().split("").map((value) => ({
+    value,
+    id: Math.random(),
+  }))
+
+  function handleUpdate({detail}) {
+    num1 = detail.num1
+    operator = detail.operator
+    num2 = detail.num2
+  }
 </script>
 
 <style>
-  form {
-    display: grid;
-    grid-template-columns: 5rem 8rem;
-    grid-auto-rows: 5rem;
+  div {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-  input:first-of-type,
-  button {
-    grid-column: span 2;
+  div > * + * {
+    margin-top: 1rem;
   }
-  input,
-  select,
-  button {
-    padding: 0.5rem;
-    margin: 0.5rem;
-    color: inherit;
-    font-family: inherit;
-    font-weight: bold;
-    font-size: 2.5rem;
-    text-align: right;
-    border: none;
-    background: inherit;
-    transition: all 0.5s ease-in-out;
-    box-shadow: 0 0 0.3rem hsl(0, 0%, 0%), 0.1rem 0.2rem 0.3rem hsl(0, 0%, 0%), 0.1rem -0.2rem 0.3rem hsl(0, 0%, 10%);
+  p {
+    align-self: flex-end;
+    font-size: 3rem;
+    overflow: hidden;
   }
-  input:focus,
-  select:focus,
-  button:focus,
-  input:hover,
-  select:hover,
-  button:hover {
-    outline: none;
-    box-shadow: 0 0 0.1rem hsl(0, 0%, 0%), 0.1rem 0.2rem 0.1rem -0.1rem hsl(0, 0%, 0%), 0.1rem -0.1rem 0.1rem hsl(0, 0%, 10%);
+  p span {
+    display: inline-block;
+    position: relative;
+    animation: scrollIn 0.5s ease-in-out both;
   }
-  input::selection {
-    background: hsl(0, 0%, 50%);
-  }
-  select option {
-    background: hsl(0, 0%, 5%);
-    color: hsl(0, 0%, 96%);
-  }
-  button {
-    text-align: center;
+  @keyframes scrollIn {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
   }
 </style>
 
-<form on:submit|preventDefault>
-  <input type="number" bind:value="{num1}" min="0" max="9999" step="1" />
-  <select bind:value="{operator}">
-    <option value="+">+</option>
-    <option value="-">-</option>
-  </select>
-  <input type="number" bind:value="{num2}" min="0" max="9999" step="1" />
-  <button>=</button>
-</form>
+<div>
+  <Form on:update="{handleUpdate}" {num1} {num2} {operator} />
+    <p>
+      {#each digits as digit, index (digit.id)}
+        <span style="animation-delay: {0.1 * index}s;">{digit.value}</span>
+      {/each}
+    </p>
+</div>
