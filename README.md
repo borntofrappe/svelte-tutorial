@@ -109,3 +109,7 @@ Create an interactive contact card, editing and displaying the input information
 ## [Basic Arithmetic](https://svelte.dev/repl/730b7da509b74438a9d1c4bc6306b52f)
 
 Compute basic arithmetic operations and animate the solution with a staggered animation.
+
+## Icon Maker
+
+Create icons of different size using the Canvas API and the Path2D interface. Experimental.
