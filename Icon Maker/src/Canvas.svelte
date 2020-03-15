@@ -4,13 +4,16 @@
   const dispatch = createEventDispatcher();
 
   export let size;
-
+  export let color;
   // variable bound to the canvas element
   let canvas;
   $: if (canvas) {
     // the delay seems to fix the overlap between the change in size and the paint operation
     const timeout = setTimeout(() => {
       const context = canvas.getContext("2d");
+
+      context.clearRect(0, 0, size, size);
+      context.save();
 
       /* recreate icon.svg with the Path2D interface
       !! experimental !!
@@ -22,14 +25,16 @@
 
       // appearance
       context.lineWidth = 8;
-      context.fillStyle = "hsl(0, 0%, 10%)";
-      context.strokeStyle = "hsl(0, 0%, 10%)";
+      context.fillStyle = color;
+      context.strokeStyle = color;
       context.lineCap = "round";
       context.lineJoin = "round";
 
       const path = new Path2D("M 0 -15 c 5 -30 45 -30 45 0 q 0 25 -45 55 q -45 -30 -45 -55 c 0 -30 40 -30 45 0");
       context.stroke(path);
       context.fill(path);
+
+      context.restore();
 
       // context.restore();
       dispatch("draw", canvas.toDataURL("image/png"));

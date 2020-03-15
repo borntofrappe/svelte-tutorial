@@ -110,6 +110,6 @@ Create an interactive contact card, editing and displaying the input information
 
 Compute basic arithmetic operations and animate the solution with a staggered animation.
 
-## Icon Maker
+## [Icon Maker](https://svelte.dev/repl/44a0394acb4f408cb0115958c0fd76f6)
 
-Create icons of different size using the Canvas API and the Path2D interface. Experimental.
+Create icons of different size using the Canvas API and the experimental Path2D interface.
