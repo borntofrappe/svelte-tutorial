@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100" width="42" height="42">
+  <g stroke="currentColor"  stroke-linejoin="round" stroke-linecap="round">
+    <g transform="scale(0.8)">
+      <g stroke-width="16" fill="none">
+        <g transform="translate(0 13.5)">
+          <path d="M 34 0 h -68"/>
+          <path transform="rotate(45)" d="M 40 0 h -80"/>
+          <path transform="rotate(-45)" d="M 40 0 h -80"/>
+        </g>
+      </g>
+      <g stroke-width="8" fill="currentColor">
+        <path  d="M -0 -46 a 17 17 0 0 1 17 17 h -34 a 17 17 0 0 1 17 -17" />
+        <path  d="M -0 -10 h 25 v 25 a 25 25 0 0 1 -50 0 v -25 z" />
+      </g>
+    </g>
+  </g>
+</svg>

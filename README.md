@@ -113,3 +113,7 @@ Compute basic arithmetic operations and animate the solution with a staggered an
 ## [Icon Maker](https://svelte.dev/repl/44a0394acb4f408cb0115958c0fd76f6)
 
 Create icons of different size using the Canvas API and the experimental Path2D interface.
+
+## [Spring Motion](https://svelte.dev/repl/27163986809341a5a7c97cbc4746d01b)
+
+Practice with the svelte/motion module and spring animation.
