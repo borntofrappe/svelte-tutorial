@@ -117,3 +117,7 @@ Create icons of different size using the Canvas API and the experimental Path2D 
 ## [Spring Motion](https://svelte.dev/repl/27163986809341a5a7c97cbc4746d01b)
 
 Practice with the svelte/motion module and spring animation.
+
+## Termometer App
+
+Recreate a mobile application allowing to describe the temperature in a given range.
