@@ -118,6 +118,6 @@ Create icons of different size using the Canvas API and the experimental Path2D 
 
 Practice with the svelte/motion module and spring animation.
 
-## Termometer App
+## [Thermometer App](https://codesandbox.io/s/thermometer-app-h8rho)
 
-Recreate a mobile application allowing to describe the temperature in a given range.
+Explore the reactive nature of Svelte, to create an interactive application describing the temperature in a given range.

@@ -2,8 +2,6 @@
 	import Display from './Display.svelte';
 	import Toggle from './Toggle.svelte';
 
-	let isDark = false;
-
 	let value = 50;
 	let min = 0;
 	let max = 100;
@@ -16,8 +14,9 @@
 		value = max;
 	}
 
+	// change the color palette according to the input of type checkbox
+	let isDark = false;
 	let main;
-
 	$: if(main && isDark) {
 		main.style.setProperty('color', 'var(--moon-text)');
 		main.style.setProperty('background', 'var(--moon-bg)');
@@ -30,6 +29,7 @@
 
 <main bind:this={main}>
 	<Toggle on:checked={() => isDark = !isDark} />
+	
 	<Display {value} {min} {max} />
 
 	<hr />
@@ -64,41 +64,49 @@
 		flex-direction: column;
 		color: var(--color);
 		background: var(--background);
-		transition: all 0.25s ease-in-out;
-		box-shadow: 0 0.1rem 1.5rem -1.25rem hsl(0, 0%, 20%);
+		transition: color 0.25s ease-in-out, background 0.25s ease-in-out;
+		box-shadow: 0 0.1rem 1.5rem -1.25rem hsla(0, 0%, 0%, 0.2);
 	}
+
 	main > * + * {
 		margin-top: 1.5rem;
 	}
+
 	:global(main > label) {
 		align-self: flex-end;
 	}
+
 	:global(main > svg) {
 		align-self: center;
 		width: 90%;
 		height: auto;
 		display: block;
 	}
+
 	hr {
 		opacity: 0.2;
 	}
+
 	form > * + * {
 		margin-top: 0.75rem;
 	}
+
 	form label {
 		display: grid;
 		grid-template-columns: 3fr 1fr;
 	}
+
 	form label h2 {
 		grid-column: 1/-1;
 		font-weight: 600;
 		font-size: 1.1rem;
 	}
+
 	form label p {
 		font-size: 1rem;
 		align-self: center;
-		
 	}
+
 	form label input {
 		color: inherit;
 		align-self: center;

@@ -1,10 +1,10 @@
 <script>
+  import icons from './icons.js';
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
 
-  import icons from './icons.js';
+  // dispatch the checked event whenever the input is toggled
   let checked;
-
   $: dispatch('checked', checked);
 </script>
 
@@ -24,17 +24,20 @@
     width: 1.75rem;
     height: 1.75rem;
   }
+
   label svg {
     display: block;
     width: 100%;
     height: auto;
   }
+
   .visibility-hidden {
     width: 0;
     height: 0;
     opacity: 0;
     position: absolute;
   }
+
   label input {
     position: absolute;
     top: 0;
