@@ -1,5 +1,5 @@
 <script>
-  const bases = Array(8)
+  const exponents = Array(8)
     .fill()
     .map((d, i, { length }) => 2 ** (length - (i + 1)));
 
@@ -8,10 +8,20 @@
   $: number = digits.reduce((acc, curr) => acc + curr, 0);
   $: disabled = !digits.some((digit) => digit !== 0);
 
-  function shiftBit() {
+  function shiftBitRight() {
     digits = digits.reduce(
       (acc, curr) =>
         Math.floor(curr / 2) !== 0 ? [...acc, Math.floor(curr / 2)] : [...acc],
+      []
+    );
+  }
+
+  function shiftBitLeft() {
+    digits = digits.reduce(
+      (acc, curr) =>
+        curr !== 2 ** (exponents.length - 1)
+          ? [...acc, Math.floor(curr * 2)]
+          : [...acc],
       []
     );
   }
@@ -56,7 +66,18 @@
   label input:checked + svg {
     filter: grayscale(0);
   }
+
+  p {
+    font-size: 3rem;
+  }
+
+  div {
+    display: flex;
+    gap: 0 1.5rem;
+  }
+
   button {
+    text-transform: capitalize;
     letter-spacing: 1px;
     box-shadow: 0 0 0 2px currentColor;
     border: none;
@@ -85,10 +106,10 @@
 </style>
 
 <form on:submit|preventDefault>
-  {#each bases as base}
+  {#each exponents as exponent}
     <label>
-      <span class="visually-hidden">2 to the power of {base}</span>
-      <input type="checkbox" bind:group={digits} value={base} />
+      <span class="visually-hidden">2 to the power of {exponent}</span>
+      <input type="checkbox" bind:group={digits} value={exponent} />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-22.5 -37.5 45 52"
@@ -118,4 +139,7 @@
 </form>
 
 <p>{number}</p>
-<button {disabled} on:click={shiftBit}>Shift Bit &gt;&gt;</button>
+<div>
+  <button {disabled} on:click={shiftBitLeft}>Left shift &lt;&lt;</button>
+  <button {disabled} on:click={shiftBitRight}>Right shift &gt;&gt;</button>
+</div>
