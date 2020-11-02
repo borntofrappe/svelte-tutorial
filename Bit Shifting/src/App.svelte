@@ -7,6 +7,16 @@
 
   $: number = digits.reduce((acc, curr) => acc + curr, 0);
   $: disabled = !digits.some((digit) => digit !== 0);
+
+  function shiftBit() {
+    digits = digits.reduce(
+      (acc, curr) =>
+        Math.floor(curr / 2) !== 0 ? [...acc, Math.floor(curr / 2)] : [...acc],
+      []
+    );
+  }
+
+  $: console.log(digits);
 </script>
 
 <style>
@@ -108,4 +118,4 @@
 </form>
 
 <p>{number}</p>
-<button {disabled}>Shift Bit &gt;&gt;</button>
+<button {disabled} on:click={shiftBit}>Shift Bit &gt;&gt;</button>
