@@ -1,12 +1,12 @@
 <script>
-  const exponents = Array(8)
+  const operands = Array(8)
     .fill()
     .map((d, i, { length }) => 2 ** (length - (i + 1)));
 
   let digits = [];
 
   $: number = digits.reduce((acc, curr) => acc + curr, 0);
-  $: disabled = !digits.some((digit) => digit !== 0);
+  $: disabled = digits.length === 0;
 
   function shiftBitRight() {
     digits = digits.reduce(
@@ -19,9 +19,7 @@
   function shiftBitLeft() {
     digits = digits.reduce(
       (acc, curr) =>
-        curr !== 2 ** (exponents.length - 1)
-          ? [...acc, Math.floor(curr * 2)]
-          : [...acc],
+        curr !== 2 ** (operands.length - 1) ? [...acc, curr * 2] : [...acc],
       []
     );
   }
@@ -37,14 +35,17 @@
     justify-content: center;
     align-items: center;
   }
+
   :global(body > * + *) {
     margin-top: 1.25rem;
   }
+
   form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
+
   label {
     display: inline-flex;
     flex-direction: column-reverse;
@@ -106,10 +107,10 @@
 </style>
 
 <form on:submit|preventDefault>
-  {#each exponents as exponent}
+  {#each operands as operand}
     <label>
-      <span class="visually-hidden">2 to the power of {exponent}</span>
-      <input type="checkbox" bind:group={digits} value={exponent} />
+      <span class="visually-hidden">2 to the power of {operand}</span>
+      <input type="checkbox" bind:group={digits} value={operand} />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="-22.5 -37.5 45 52"
