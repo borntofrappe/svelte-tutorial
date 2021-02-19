@@ -125,3 +125,7 @@ Explore the reactive nature of Svelte, to create an interactive application desc
 ## [Bit Shifting](https://svelte.dev/repl/a3bd24b328ce4f318b7b045381faf6a4)
 
 Experiment with group bindings and reactive declarations, to illustrate a binary counter and how the bitwise operators `<<` and `>>` work.
+
+## Line Drawing Grid
+
+Draw an interactive SVG element, which can be modified with a mouse or touch event.

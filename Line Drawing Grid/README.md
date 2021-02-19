@@ -1,0 +1,3 @@
+# Line Drawing Grid
+
+This project is inspired by a specific article from [Red Blob Games](https://www.redblobgames.com), discussing [how to draw a line with a series of connecting points](https://www.redblobgames.com/grids/line-drawing.html#orthogonal-steps). The post details different methods to achieve the pixelated design, but for this specific demo, it does so with a series of interactive SVG elements. The goal is to here recreate such a feature. It is likely that the focus is as much on SVG syntax as it is on Svelte, but the benefits of the compiler should be apparent in the moment you manage event listeners.
