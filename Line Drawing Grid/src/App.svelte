@@ -27,10 +27,39 @@
       const cellSize = Math.floor(width / columns);
       const column = Math.floor((e.clientX - x) / cellSize);
       const row = Math.floor((e.clientY - y) / cellSize);
-      edges[selectedEdge].column = Math.max(0, Math.min(column, columns - 1));
-      edges[selectedEdge].row = Math.max(0, Math.min(row, rows - 1));
+      if (
+        (edges[selectedEdge].column !== column ||
+          edges[selectedEdge].row !== row) &&
+        column >= 0 &&
+        column < columns &&
+        row >= 0 &&
+        row < rows
+      ) {
+        edges[selectedEdge].column = column;
+        edges[selectedEdge].row = row;
+      }
     }
   }
+
+  function getPoints(edges) {
+    const dc = edges[0].column - edges[1].column;
+    const dr = edges[0].row - edges[1].row;
+    const d = Math.max(Math.abs(dc), Math.abs(dr));
+
+    if (d > 1) {
+      const c = edges[1].column;
+      const r = edges[1].row;
+
+      return Array(d - 1)
+        .fill()
+        .map((p, i) => [
+          c + Math.floor(((i + 1) * dc) / d),
+          r + Math.floor(((i + 1) * dr) / d),
+        ]);
+    }
+    return [];
+  }
+  $: points = getPoints(edges);
 </script>
 
 <main>
@@ -66,6 +95,19 @@
       <rect {width} {height} fill="url(#pattern-grid)" />
     </g>
 
+    <g class="line-points">
+      {#each points as point}
+        <g transform="translate({point[0] * cellSize} {point[1] * cellSize})">
+          <rect
+            fill="currentColor"
+            stroke="currentColor"
+            width={cellSize}
+            height={cellSize}
+          />
+        </g>
+      {/each}
+    </g>
+
     <g class="line-edges">
       {#each edges as edge, i}
         <g
@@ -73,14 +115,13 @@
           transform="translate({edge.column * cellSize} {edge.row * cellSize})"
         >
           <rect
-            fill="#5926a1"
+            fill="currentColor"
             stroke="currentColor"
-            stroke-width="1"
             width={cellSize}
             height={cellSize}
           />
           <circle
-            fill="#f161d1"
+            fill="#e7a7fc"
             cx={cellSize / 2}
             cy={cellSize / 2}
             r={cellSize / 4}

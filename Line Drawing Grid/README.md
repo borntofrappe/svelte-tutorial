@@ -107,3 +107,7 @@ const column = Math.floor((e.clientX - x) / cellSize);
 ```
 
 _Please note:_ I can't understand why, but it is possible for the column to exceed the acceptable range of `[0, columns - 1]`. I use `Math.min` and `Math.max` to avoid this undesirable situation.
+
+## Points
+
+On the basis of the edges, it is finally necessary to create.
