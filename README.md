@@ -126,6 +126,6 @@ Explore the reactive nature of Svelte, to create an interactive application desc
 
 Experiment with group bindings and reactive declarations, to illustrate a binary counter and how the bitwise operators `<<` and `>>` work.
 
-## Line Drawing Grid
+## [Line Drawing Grid](https://svelte.dev/repl/cec6ed73541f43699ef0a154019ecac5)
 
-Draw an interactive SVG element, which can be modified with a mouse or touch event.
+Draw an interactive SVG element, which can be modified with mouse input.

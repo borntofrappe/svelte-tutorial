@@ -3,6 +3,7 @@
   export let rows = 10;
   const cellSize = 20;
 
+  // necessary to have the `<pattern>` with a unique identifier
   const id = Math.random();
   const width = columns * cellSize;
   const height = rows * cellSize;
@@ -55,8 +56,8 @@
       return Array(d - 1)
         .fill()
         .map((p, i) => [
-          c + Math.floor(((i + 1) * dc) / d),
-          r + Math.floor(((i + 1) * dr) / d),
+          c + Math.floor((i + 1) * (dc / d)),
+          r + Math.floor((i + 1) * (dr / d)),
         ]);
     }
     return [];
@@ -126,7 +127,7 @@
           cy={cellSize / 2}
           r={cellSize / 4}
         />
-        <!-- increase the interactable area for the edge -->
+        <!-- increase the interactable area for the edges -->
         <circle
           opacity="0"
           cx={cellSize / 2}
