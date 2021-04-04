@@ -129,3 +129,7 @@ Experiment with group bindings and reactive declarations, to illustrate a binary
 ## [Line Drawing Grid](https://svelte.dev/repl/cec6ed73541f43699ef0a154019ecac5)
 
 Draw an interactive SVG element, which can be modified with mouse input.
+
+## Single Page App
+
+Lean on Sapper and then SvelteKit to develop a single page app with multiple routes.
