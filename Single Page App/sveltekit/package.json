@@ -1,0 +1,23 @@
+{
+	"name": "sveltekit",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"start": "svelte-kit start",
+		"lint": "prettier --check . && eslint --ignore-path .gitignore .",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-node": "next",
+		"@sveltejs/kit": "next",
+		"svelte": "^3.29.0",
+		"vite": "^2.1.0",
+		"eslint": "^7.22.0",
+		"eslint-plugin-svelte3": "^3.1.0",
+		"prettier": "~2.2.1",
+		"prettier-plugin-svelte": "^2.2.0",
+		"eslint-config-prettier": "^8.1.0"
+	},
+	"type": "module"
+}
