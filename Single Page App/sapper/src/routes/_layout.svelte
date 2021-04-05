@@ -28,6 +28,7 @@
     width: 90vw;
     padding: 2em;
     align-self: center;
+    line-height: 1.75;
   }
 
   div :global(footer) {

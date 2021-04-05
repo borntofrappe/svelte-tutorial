@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono&family=Overpass:wght@300;400;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -23,13 +23,26 @@ h1,
 h2 {
   font-weight: 700;
 }
+
 h3,
 h4 {
   font-weight: 400;
 }
+
 p,
-a {
+a,
+ul {
   font-weight: 300;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+code {
+  font-family: 'Overpass Mono', monospace;
 }
 
 .visually-hidden:not(:focus):not(:active) {

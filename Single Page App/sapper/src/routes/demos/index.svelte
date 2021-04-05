@@ -70,11 +70,9 @@
   }
 
   /* a {
-    text-decoration: none;
     border-bottom: 1px solid currentColor;
     display: inline-block;
     margin: 2rem 0.5rem 1rem;
     font-size: 1.25rem;
-    color: inherit;
   } */
 </style>

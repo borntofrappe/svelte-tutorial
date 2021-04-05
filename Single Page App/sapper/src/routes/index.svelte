@@ -33,9 +33,6 @@
   }
 
   a {
-    color: inherit;
-    text-decoration: none;
     font-weight: 600;
-    border-bottom: 1px solid currentColor;
   }
 </style>

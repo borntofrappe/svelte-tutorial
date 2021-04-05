@@ -25,9 +25,8 @@
   }
 
   a {
-    color: inherit;
+    border-bottom: none;
     text-transform: capitalize;
-    text-decoration: none;
     padding: 1em 0.5em;
     transition: color 0.2s ease-out;
   }
