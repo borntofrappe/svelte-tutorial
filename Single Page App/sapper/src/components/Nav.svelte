@@ -3,72 +3,40 @@
 </script>
 
 <nav>
-  <ul>
-    <li>
-      <a aria-current={segment === undefined ? 'page' : undefined} href="."
-        >home</a
-      >
-    </li>
-    <li>
-      <a aria-current={segment === 'about' ? 'page' : undefined} href="about"
-        >about</a
-      >
-    </li>
-
-    <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-    <li>
-      <a
-        rel="prefetch"
-        aria-current={segment === 'demos' ? 'page' : undefined}
-        href="demos">demos</a
-      >
-    </li>
-  </ul>
+  <a aria-current={segment === undefined ? 'page' : undefined} href=".">home</a>
+  <a
+    rel="prefetch"
+    aria-current={segment === 'demos' ? 'page' : undefined}
+    href="demos">demos</a
+  >
+  <a aria-current={segment === 'about' ? 'page' : undefined} href="about"
+    >about</a
+  >
 </nav>
 
 <style>
   nav {
-    border-bottom: 1px solid rgba(255, 62, 0, 0.1);
+    box-shadow: 0 2px 5px hsla(0, 0%, 0%, 0.1);
     font-weight: 300;
     padding: 0 1em;
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  /* clearfix */
-  ul::after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-
-  li {
-    display: block;
-    float: left;
-  }
-
-  [aria-current] {
-    position: relative;
-    display: inline-block;
-  }
-
-  [aria-current]::after {
-    position: absolute;
-    content: '';
-    width: calc(100% - 1em);
-    height: 2px;
-    background-color: rgb(255, 62, 0);
-    display: block;
-    bottom: -1px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
   a {
+    color: inherit;
+    text-transform: capitalize;
     text-decoration: none;
     padding: 1em 0.5em;
-    display: block;
+    transition: color 0.2s ease-out;
+  }
+
+  a:hover {
+    color: hsl(204, 100%, 63%);
+  }
+
+  [aria-current] {
+    color: hsl(15, 100%, 50%);
   }
 </style>

@@ -1,22 +1,36 @@
 <script>
   import Nav from '../components/Nav.svelte';
+  import Footer from '../components/Footer.svelte';
 
   export let segment;
 </script>
 
-<Nav {segment} />
+<div>
+  <Nav {segment} />
 
-<main>
-  <slot />
-</main>
+  <main>
+    <slot />
+  </main>
+
+  <Footer />
+</div>
 
 <style>
+  div {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
   main {
     position: relative;
-    max-width: 56em;
-    background-color: white;
+    max-width: 62em;
+    width: 90vw;
     padding: 2em;
-    margin: 0 auto;
-    box-sizing: border-box;
+    align-self: center;
+  }
+
+  div :global(footer) {
+    margin-top: auto;
   }
 </style>
