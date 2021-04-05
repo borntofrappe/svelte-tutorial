@@ -8,14 +8,16 @@
 
   async function handleSubmit() {
     if (title && description && details && href) {
-      const res = await fetch('demos.json', {
+      fetch('demos.json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, description, details, href }),
       });
 
-      await res.json();
-      goto('demos');
+      const res = await fetch('demos.json');
+      const demos = await res.json();
+      const { id } = demos[demos.length - 1];
+      goto(`demos/${id}`);
     }
   }
 </script>

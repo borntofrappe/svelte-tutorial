@@ -1,5 +1,9 @@
+<script>
+  const year = new Date().getFullYear();
+</script>
+
 <footer>
-  <p>2021. A good year for developing Svelte applications.</p>
+  <p>{year}. A good year for developing Svelte applications.</p>
 </footer>
 
 <style>

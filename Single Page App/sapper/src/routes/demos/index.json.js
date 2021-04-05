@@ -7,6 +7,4 @@ export function get(req, res, next) {
 export function post(req, res, next) {
   const { title, description, details, href } = req.body;
   demos.push({title, description, details, href, id: demos.length});
-
-  res.end(JSON.stringify(demos))
 }

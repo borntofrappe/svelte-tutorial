@@ -21,15 +21,23 @@
   export let href;
 </script>
 
-<h1>{title}</h1>
-{@html details}
-<a target="_blank" {href}>Live demo</a>
+<div>
+  <h1>{title}</h1>
+  {@html details}
+  <a target="_blank" {href}>Live demo</a>
+</div>
 
 <style>
+  div > :global(* + *) {
+    margin-top: 0.5rem;
+  }
+
   h1 {
     font-size: 2.5rem;
   }
+
   a {
+    display: inline-block;
     font-size: 1.5rem;
   }
 
