@@ -17,12 +17,12 @@
 
 <script>
   export let title;
-  export let html;
+  export let details;
   export let href;
 </script>
 
 <h1>{title}</h1>
-{@html html}
+{@html details}
 <a target="_blank" {href}>Live demo</a>
 
 <style>

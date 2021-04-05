@@ -25,7 +25,7 @@
   {/each}
 </section>
 
-<!-- <a href="demos/create"
+<a href="demos/add"
   >Add new demo
 
   <svg viewBox="0 0 100 100" width="1em" height="1em">
@@ -44,7 +44,8 @@
       </g>
     </g>
   </svg>
-</a> -->
+</a>
+
 <style>
   section {
     display: grid;
@@ -69,10 +70,10 @@
     background: hsl(204, 100%, 63%);
   }
 
-  /* a {
+  a {
     border-bottom: 1px solid currentColor;
     display: inline-block;
     margin: 2rem 0.5rem 1rem;
     font-size: 1.25rem;
-  } */
+  }
 </style>

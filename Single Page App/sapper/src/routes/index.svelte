@@ -1,3 +1,19 @@
+<script context="module">
+  export async function preload() {
+    const res = await this.fetch('/demos.json');
+    const demos = await res.json();
+
+    return {
+      demos,
+    };
+  }
+</script>
+
+<script>
+  export let demos;
+  const { id } = demos[Math.floor(Math.random() * demos.length)];
+</script>
+
 <svelte:head>
   <title>Svelte Showcase</title>
 </svelte:head>
@@ -8,7 +24,7 @@
 <figure>
   <img alt="Svelte Logo" src="/logo-192.png" />
   <figcaption>
-    <a href="demos">Try your luck</a>
+    <a rel="prefetch" href="demos/{id}">Try your luck</a>
   </figcaption>
 </figure>
 
