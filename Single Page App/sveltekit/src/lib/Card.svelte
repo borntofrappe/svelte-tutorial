@@ -1,13 +1,13 @@
 <script>
 	export let title;
 	export let description;
-	export let href;
+	export let id;
 </script>
 
 <article>
 	<h2>{title}</h2>
 	<p>{description}</p>
-	<a {href}>Check out more</a>
+	<a href="demos/{id}">Check out more</a>
 </article>
 
 <style>
