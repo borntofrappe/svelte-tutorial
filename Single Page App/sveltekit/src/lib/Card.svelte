@@ -7,7 +7,7 @@
 <article>
 	<h2>{title}</h2>
 	<p>{description}</p>
-	<a href="demos/{id}">Check out more</a>
+	<a sveltekit:prefetch href="demos/{id}">Check out more</a>
 </article>
 
 <style>

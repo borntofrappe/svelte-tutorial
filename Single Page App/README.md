@@ -10,7 +10,7 @@ SvelteKit is fundamentally the evolution of Sapper, and the soon-to-be recommend
 
 ## Project
 
-Inspired by [this Sapper Tutorial](https://youtube.com/playlist?list=PL4cUxeGkcC9gdr4Qhx83gBBcID-KMe-PQ), the goal is to develop a single page app highlighting a series of demos built with Svelte. Just like in the tutorial, the application focuses on a few routes — home, demos, about — and a few components — nav, footer, card. A set of demos is included from a server route, but it is also possible to add new links with a form. This last feature is however and mostly tentative, and works just to illustrate how to perform a POST request; a complete application would bother sanitizing the input, making sure the form receives valid strings for the different fields.
+Inspired by [this Sapper Tutorial from _The Net Ninja_](https://youtube.com/playlist?list=PL4cUxeGkcC9gdr4Qhx83gBBcID-KMe-PQ), the goal is to develop a single page app highlighting a series of demos built with Svelte. Just like in the tutorial, the application focuses on a few routes — home, demos, about — and a few components — nav, footer, card. A set of demos is included from a server route, but it is also possible to add new links with a form. This last feature is however and mostly tentative, and works just to illustrate how to perform a POST request; a complete application would bother sanitizing the input, making sure the form receives valid strings for the different fields.
 
 ## Sapper
 
@@ -258,10 +258,184 @@ As the fetch request is performed, it is finally helpful to redirect the user to
 </script>
 ```
 
-## Resources
+## SvelteKit
 
-- [Sapper](https://sapper.svelte.dev/)
+[The documentation](https://kit.svelte.dev/docs#introduction-getting-started) describes the instructions necessary to set up a sveltekit environment. There is a special mention to the `@next` suffix, which at the time of writing is meant to be temporary.
 
-- [SvelteKit](https://kit.svelte.dev/)
+```bash
+mkdir sveltekit
+cd sveltekit
+npm init svelte@next
+```
 
-- [Sapper Tutorial from _The Net Ninja_](https://youtube.com/playlist?list=PL4cUxeGkcC9gdr4Qhx83gBBcID-KMe-PQ)
+The initialization is performed through a series of questions, which are answered in the following manner:
+
+- no to TypeScript
+
+- CSS for styling
+
+- yes to eslint
+
+- yes to prettier
+
+The folder structure is eerily similar to that of sapper with a `static` and `src` folder. However, components are saved in a `lib` directory, and there is no file describing the behavior of the application on the server and on the client. This last omission is due to the fact that SvalteKit drops the rollup bundler in favor of vite.
+
+### Nav
+
+`<Nav>` is updated in how the component retrieves the information regarding the current page, the `segment` variable. The layout file does not receive a `segment` property, and the value is instead retrieved from the page and the `$app/stores` module.
+
+```js
+import { page } from '$app/stores';
+```
+
+`page` describes a readable store with information regarding the page. `$page` details an object with various fields, among which `path`, which describes the URL.
+
+```js
+<a aria-current={$page.path === '/' ? 'page' : undefined} href="/">
+  home
+</a>
+```
+
+### Dollar sign
+
+The dollar sign `$` in a string works as a convenient way to refer to a file in the `src` folder.
+
+```js
+import Nav from '$lib/Nav.svelte';
+```
+
+### load
+
+The functionality included in the `preload` function is now included in a `load` function.
+
+```js
+<script context="module">export async function load() {}</script>
+```
+
+Once more, the script with a `context` attribute of type `module` runs before the regular script for the component.
+
+### fetch
+
+A fetch request is performed with a method made available through the `load` function.
+
+```js
+export async function load({ fetch }) {}
+```
+
+### get demos
+
+A `get` function responds to a fetch request by receiving an object with several fields
+
+```js
+export function get(res) {
+  /* {
+      host, 
+      method, 
+      headers: { cookie, authorization }, 
+      path, 
+      body, 
+      query, 
+      params, 
+      context
+    }
+  */
+}
+```
+
+It is possible to pass extra information through the various fields, but to retrieve the set of demos, there is no need to specify any value.
+
+Most importantly, the data returned by the `get` function is included in an object with a field `body`.
+
+```js
+return {
+  body: {
+    demos,
+  },
+};
+```
+
+It is then enough to destructure the information from the response.
+
+```js
+export async function load({ fetch }) {
+  const res = await fetch('demos.json');
+  const { demos } = await res.json();
+}
+```
+
+### props
+
+Props from the `load` function are passed to a component in an object with a field of `props`.
+
+```js
+return {
+  props: {
+    demos,
+  },
+};
+```
+
+### get demo
+
+To retrieve the data for a specific demo I've implemented two different approaches:
+
+1. perform a fetch request to a custom `.json` file
+
+   ```js
+   const res = await fetch(`/demos/${id}.json`);
+   ```
+
+   The approach works similarly to the sapper demo, where a `[id].json.js` file receives the `id` through the `params` object.
+
+   ```js
+   export function get({ params }) {
+     const { id } = params;
+     // find demo
+   }
+   ```
+
+2. perform a fetch request to `index.json.js`, but with a query parameter
+
+   ```js
+   const res = await fetch(`/demos.json?id=${id}`);
+   ```
+
+   Here the idea is to modify the `get` method responsible for returning the entire set of demos. When the function receives a `query`, the `id` is retrieved with the `query.get` function to find the specific demo.
+
+   ```js
+   export function get({ query }) {
+     if (query.has('id')) {
+       const id = query.get('id');
+       // find demo
+     }
+
+     // no query, return the demos
+   }
+   ```
+
+### goto
+
+The `goto` method is available from `$app/navigation` module.
+
+```js
+import { goto } from '$app/navigation';
+```
+
+### prefetch
+
+The `rel` attribute with a type of `prefetch` is substituted with a syntax custom to the kit, and specifically with `sveltekit:pretch`.
+
+```html
+<!-- <a rel="prefetch"href="demos/{id}">Check out more</a> -->
+<a sveltekit:prefetch href="demos/{id}">Check out more</a>
+```
+
+### post
+
+The post request is implemented exactly as in the sapper demo, and is actually an opportunity to realize how the `fetch` method is not included through the library, but through the `window` object.
+
+```js
+fetch('/demos.json', {});
+```
+
+The instruction doesn't result in an error because the code runs as a result of a `submit` event, and therefore only on the client side.

@@ -4,7 +4,6 @@ export function get({query}) {
   if(query.has('id')) {
     const id = query.get('id');
     const demo = demos.find(d => d.id === parseInt(id, 10));
-    console.log(id)
 
     if(demo) {
       return {
@@ -18,6 +17,7 @@ export function get({query}) {
       status: 404
     }
   }
+  
   return {
     body: {
       demos

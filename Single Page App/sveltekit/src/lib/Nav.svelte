@@ -4,7 +4,7 @@
 
 <nav>
 	<a aria-current={$page.path === '/' ? 'page' : undefined} href="/">home</a>
-	<a aria-current={$page.path === '/demos' ? 'page' : undefined} rel="prefetch" href="/demos"
+	<a aria-current={$page.path === '/demos' ? 'page' : undefined} sveltekit:prefetch href="/demos"
 		>demos</a
 	>
 	<a aria-current={$page.path === '/about' ? 'page' : undefined} href="/about">about</a>
