@@ -19,5 +19,8 @@
 		"prettier-plugin-svelte": "^2.2.0",
 		"eslint-config-prettier": "^8.1.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"body-parser": "^1.19.0"
+	}
 }

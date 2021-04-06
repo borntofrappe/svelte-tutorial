@@ -24,3 +24,8 @@ export function get({query}) {
     }
   }
 }
+
+export function post(req) {
+  const { title, description, details, href } = req.body;
+  demos.push({title, description, details, href, id: demos.length});
+}

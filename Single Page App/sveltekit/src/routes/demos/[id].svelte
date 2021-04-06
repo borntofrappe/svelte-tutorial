@@ -28,7 +28,9 @@
 
 <div>
 	<h1>{title}</h1>
-	{@html details}
+	<div>
+		{@html details}
+	</div>
 	<a target="_blank" {href}>Live demo</a>
 </div>
 
