@@ -1,4 +1,3 @@
-/* include global styles for the layout of the application */
 @import url('https://fonts.googleapis.com/css?family=Mukta:400,500&display=swap');
 
 * {
@@ -52,6 +51,7 @@ body {
     /* align the .chart to the beginning of the row, to avoid stretching the element when the sibling .spreadsheet becomes taller */
     .container .chart {
       grid-area: chart;
+      align-self: start;
     }
 
     /* remove the margin applied by default between the flex children */
@@ -94,4 +94,87 @@ describe a card layout with a white background and considerable padding
   bottom: 0;
   right: 0;
   transform: rotate(10deg);
+}
+
+/* first component
+separate the direct children vertically */
+.container .input > * + * {
+  margin-top: 1rem;
+}
+/* have the textarea expand to cover the width of the container, and a fixed height */
+.container .input textarea {
+  display: block;
+  width: 100%;
+  height: 200px;
+  font-family: inherit;
+  resize: none;
+  font-size: 1rem;
+  padding: 0.5rem;
+  line-height: 1.5;
+  /* style the outline with a color matching the palette */
+  border: 2px solid hsl(210, 90%, 85%);
+  outline-color: hsl(210, 90%, 60%);
+}
+/* display the .controls button in a row */
+.container .input .controls {
+  display: flex;
+  align-items: center;
+}
+/* separate the buttons horizontally */
+.container .input .controls > * + * {
+  margin-left: 0.75rem;
+}
+/* style the buttons to have opposing color and background values */
+.container .input .controls button {
+  padding: 0.25rem 1rem;
+  color: hsl(0, 0%, 100%);
+  background: hsl(210, 90%, 55%);
+  border: 2px solid hsl(210, 90%, 55%);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline-color: hsl(210, 90%, 60%);
+}
+.container .input .controls button:last-of-type {
+  color: hsl(210, 90%, 55%);
+  background: hsl(0, 0%, 100%);
+}
+
+/* second component
+dedicate half a width to each column */
+.container .spreadsheet table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  table-layout: fixed;
+}
+.container .spreadsheet table tr {
+  line-height: 2.5;
+}
+.container .spreadsheet table tr th {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  width: 50%;
+  background: hsl(210, 90%, 60%);
+  border-bottom: 2px solid hsl(210, 90%, 50%);
+  color: hsl(0, 0%, 100%);
+  font-weight: 500;
+}
+/* alternate the background color of the cells describing the data */
+.container .spreadsheet table tr:nth-of-type(even) td {
+  background: hsl(210, 90%, 88%);
+}
+.container .spreadsheet table tr:nth-of-type(odd) td {
+  background: hsl(210, 90%, 96%);
+}
+
+/* third component
+have the svg expand to cover the available width and height */
+.container .chart .graphic {
+  width: 100%;
+  height: auto;
+  color: hsl(210, 90%, 55%);
+}
+.container .chart .graphic text {
+  color: hsl(240, 70%, 5%);
 }

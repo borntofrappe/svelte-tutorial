@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Word Frequency - UI</title>
+  </head>
+  <body>
+    <!-- svg icons used throughout the project, in the corner of each meaningful container -->
+    <svg style="display: none" viewBox="0 0 100 100" width="40" height="40">
+      <!-- ! each symbol has its own viewbox -->
+      <symbol id="keyboard" viewBox="0 0 100 60">
+        <rect
+          x="0"
+          y="0"
+          width="100"
+          height="60"
+          rx="5"
+          fill="hsl(210, 90%, 75%)"
+        ></rect>
+        <g id="keys">
+          <rect
+            id="key"
+            x="14"
+            y="10"
+            width="12"
+            height="10"
+            rx="2"
+            fill="hsl(210, 90%, 60%)"
+          ></rect>
+          <use href="#key" transform="translate(20 0)"></use>
+          <use href="#key" transform="translate(40 0)"></use>
+          <use href="#key" transform="translate(60 0)"></use>
+        </g>
+        <use href="#keys" transform="translate(0 15)"></use>
+        <use href="#keys" transform="translate(0 30)"></use>
+        <rect
+          transform="translate(34 30)"
+          x="0"
+          y="10"
+          width="32"
+          height="10"
+          rx="2"
+          fill="hsl(210, 90%, 60%)"
+        ></rect>
+      </symbol>
+      <symbol id="table" viewBox="0 0 90 100">
+        <rect
+          x="0"
+          y="0"
+          width="90"
+          height="100"
+          rx="5"
+          fill="hsl(210, 90%, 75%)"
+        ></rect>
+        <rect
+          id="row"
+          x="15"
+          y="19.5"
+          width="60"
+          height="6"
+          fill="hsl(210, 90%, 60%)"
+        ></rect>
+        <use
+          id="tone"
+          href="#row"
+          transform="translate(0 20)"
+          opacity="0.7"
+        ></use>
+        <!-- apparently it is possible to use another <use> element -->
+        <use href="#row" transform="translate(0 40)"></use>
+        <use href="#tone" transform="translate(0 40)"></use>
+      </symbol>
+
+      <symbol id="chart" viewBox="0 0 100 100">
+        <rect
+          x="0"
+          y="0"
+          width="100"
+          height="100"
+          rx="5"
+          fill="hsl(210, 90%, 75%)"
+        ></rect>
+        <g fill="hsl(210, 90%, 60%)">
+          <rect x="20" y="15" width="60" height="12" rx="2"></rect>
+          <rect x="20" y="41.5" width="30" height="12" rx="2"></rect>
+          <rect x="20" y="68" width="20" height="12" rx="2"></rect>
+          <circle cx="66" cy="66" r="14"></circle>
+        </g>
+      </symbol>
+    </svg>
+
+    <!-- in a wrapper container specify three areas for the three components
+        - main, describing a textarea and button elements to interact with the application
+        - section, nesting the table highglighting the words by frequency
+        - section, including the svg visually relating the same frequency
+        -->
+    <div class="container">
+      <main class="input">
+        <svg class="icon" viewBox="0 0 100 60" width="75" height="45">
+          <use href="#keyboard"></use>
+        </svg>
+        <textarea></textarea>
+        <div class="controls">
+          <button>Count words</button>
+          <button>Load sample</button>
+        </div>
+      </main>
+      <section class="spreadsheet">
+        <svg class="icon" viewBox="0 0 90 100" width="45" height="50">
+          <use href="#table"></use>
+        </svg>
+        <!-- ! hard coded values
+                ultimately the table is populated with the words retrieved from the textarea element
+                -->
+        <table>
+          <tr>
+            <th>Word</th>
+            <th>Frequency</th>
+          </tr>
+          <tr>
+            <td>This</td>
+            <td>5</td>
+          </tr>
+          <tr>
+            <td>That</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Dog</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>Cat</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Hamster</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>Parrot</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Tuna</td>
+            <td>1</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="chart" style="position: relative">
+        <svg class="icon" viewBox="0 0 100 100" width="50" height="50">
+          <use href="#chart"></use>
+        </svg>
+        <!-- ! hard coded values
+                ultimately a lollipop || bar chart || pie chaert is created on the basis of the words and their frequency
+                -->
+        <svg class="graphic" viewBox="0 0 100 100" width="300" height="300">
+          <g transform="translate(10 12.5)">
+            <path
+              d="M 0 0 v 80"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="0.5"
+            ></path>
+            <g transform="translate(0 10)">
+              <path
+                d="M 0 0 h 60"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              ></path>
+              <g transform="translate(60 0)">
+                <circle cx="0" cy="0" r="2" fill="currentColor"></circle>
+                <text x="5" y="0" dominant-baseline="middle" font-size="4.5">
+                  This
+                </text>
+              </g>
+            </g>
+            <g transform="translate(0 25)">
+              <path
+                d="M 0 0 h 50"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              ></path>
+              <g transform="translate(50 0)">
+                <circle cx="0" cy="0" r="2" fill="currentColor"></circle>
+                <text x="5" y="0" dominant-baseline="middle" font-size="4.5">
+                  That
+                </text>
+              </g>
+            </g>
+            <g transform="translate(0 40)">
+              <path
+                d="M 0 0 h 40"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              ></path>
+              <g transform="translate(40 0)">
+                <circle cx="0" cy="0" r="2" fill="currentColor"></circle>
+                <text x="5" y="0" dominant-baseline="middle" font-size="4.5">
+                  Dog
+                </text>
+              </g>
+            </g>
+            <g transform="translate(0 55)">
+              <path
+                d="M 0 0 h 35"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              ></path>
+              <g transform="translate(35 0)">
+                <circle cx="0" cy="0" r="2" fill="currentColor"></circle>
+                <text x="5" y="0" dominant-baseline="middle" font-size="4.5">
+                  Cat
+                </text>
+              </g>
+            </g>
+            <g transform="translate(0 70)">
+              <path
+                d="M 0 0 h 30"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+              ></path>
+              <g transform="translate(30 0)">
+                <circle cx="0" cy="0" r="2" fill="currentColor"></circle>
+                <text x="5" y="0" dominant-baseline="middle" font-size="4.5">
+                  Other
+                </text>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </section>
+    </div>
+  </body>
+</html>

@@ -4,29 +4,27 @@ A series of projects to practice with Svelte.
 
 ## [Light Bright](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42)
 
-A light bright app to introduce Svelte and focus on a few core features: components, reactivity, events, event dispatchers.
+Create a light bright app to introduce Svelte and focus on a few core features: components, reactivity, events, event dispatchers.
 
 ## [Strongman](https://svelte.dev/repl/c234f8c4626440179c710f0c65cabfca)
 
-A silly button allowing to raise a mallet and strike the puck of a carnival machine, all the while illustrating Svelte reactivity and built-in motion functions.
+Animate an SVG asset describing a carnival machine to illustrate Svelte reactivity and built-in motion functions.
 
 ## [Tournament Bracket](https://svelte.dev/repl/4941cafa6eee409d947716816190222f)
 
-Bracket highlighting the stages for a hypothetical sport competition, taking advantage of the `<svelte:self>` component and a custom store.
+Hihglight stages for a hypothetical sport competition through the `<svelte:self>` component and a custom store.
 
 ## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
-A basic CRUD application to add, update, delete key value pairs. Highlight the items through D3 and two elementary visualizations.
+Create a basic CRUD application to add, update, delete key value pairs. Highlight the items through D3 and two elementary visualizations.
 
 ## [Stopwatch](https://svelte.dev/repl/591aff801e1d47498afdc2738fea4485)
 
-An application to track the passing of time and the gap between laps.
+Track the passing of time and the gap between laps.
 
 ## [Word Frequency](https://codepen.io/borntofrappe/pen/QWWWqQM)
 
-Elaborate the absolute frequency for every word included in a textarea element. Highlight the result through a table and a pie chart.
-
-**Tags**: each, d3, fetch, animation
+Analyse the absolute frequency of words included through a `<textarea>` element with a table and a pie chart.
 
 ## [Wind Chill Index](https://codepen.io/borntofrappe/pen/WNNrrJg)
 
