@@ -1,8 +1,11 @@
 # [Wind Chill Index](https://codepen.io/borntofrappe/full/WNNrrJg)
 
-## Goal
+## How to Run
 
-Compute the wind chill index on the basis of the input temperature and speed. Differentiate the result according to the chosen unit of measure.
+```bash
+npm install
+npm run dev
+```
 
 ## Notes
 
@@ -12,10 +15,10 @@ The project begun with the repl before moving locally to work with rollup and in
 
 ### Design
 
-In the **res** folder you find the icons drawn for the input elements of type number. They are meant to be transitioned as the respective elements are focused on. You also find the markup and stylesheet describing the UI for the application, developed in two stints:
+In the `res` I developed the UI of the application in two stints:
 
--   First UI describes a first attempt at creating a pleasing layout.
+- `First UI` describes a basic layout with HTML elements
 
--   Final UI describes the second and final version, incorporating the Zdog library to create a pseudo-3d graphic.
+- `Final UI` incorporates the Zdog library to create a pseudo-3d graphic
 
-The graphic itself is developed [right here](https://github.com/borntofrappe/Front-End-Practice/tree/master/Zdog%20Chicken) and is live [right here](https://codepen.io/borntofrappe/details/Baajmzy).
+The `.svg` icons are actually created for the first UI, with the idea of updating their appearance as the `<input>` elements of type `number` receive focus. That being said, the syntax for `anemometer.svg` is repurposed in the Zdog graphic. The graphic has been developed developed [in this project](https://github.com/borntofrappe/Front-End-Practice/tree/master/Zdog%20Chicken), and is highlighted [in this pen](https://codepen.io/borntofrappe/details/Baajmzy) for good measure.

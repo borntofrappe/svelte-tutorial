@@ -28,9 +28,7 @@ Analyse the absolute frequency of words included through a `<textarea>` element 
 
 ## [Wind Chill Index](https://codepen.io/borntofrappe/pen/WNNrrJg)
 
-Compute the wind chill index on the basis of the input temperature and speed. Differentiate the result according to the chosen unit of measure.
-
-**Tags**: form, dispatch, spread
+Compute the wind chill index on the basis of the input temperature and speed.
 
 ## [Concentration](https://codepen.io/borntofrappe/pen/yLLVNME)
 

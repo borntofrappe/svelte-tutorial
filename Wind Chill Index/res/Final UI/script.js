@@ -194,3 +194,8 @@ animate();
 element.addEventListener('click', () => {
   isAnimated = !isAnimated;
 });
+
+// prevent the default submit event
+document
+  .querySelector('form')
+  .addEventListener('submit', (e) => e.preventDefault());
