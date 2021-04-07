@@ -1,65 +1,65 @@
 /* styles which are meant to be global
 mostly connected to the body or the layout of the .stopwatch container
 */
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300|Open+Sans:400&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300|Open+Sans:400&display=swap');
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    background: hsl(0, 0%, 95%);
-    color: hsl(0, 0%, 20%);
-    font-family: "Open Sans", sans-serif;
-    /* center the .stopwatch container in the viewport */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  background: hsl(0, 0%, 97%);
+  color: hsl(0, 0%, 20%);
+  font-family: 'Open Sans', sans-serif;
+  /* center the .stopwatch container in the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 /* display the content of the .stopwatch container in a column */
 .stopwatch {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .stopwatch > * + * {
-    margin-top: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 /* for devices supporting css grid */
 @supports (display: grid) {
-    /* for larger viewports */
-    @media (min-width: 600px) {
-        /* display the svg, ul and .controls in a grid
+  /* for larger viewports */
+  @media (min-width: 600px) {
+    /* display the svg, ul and .controls in a grid
 
 			|   svg  |  ul           |
 			|   svg  |   .controls   |
 		*/
-        .stopwatch {
-            display: grid;
-            grid-gap: 20px 50px;
-            grid-template-columns: 300px 250px;
-            grid-template-rows: 225px auto;
-            grid-template-areas: "watch list" "watch controls";
-            justify-content: space-between;
-        }
-        .stopwatch svg {
-            grid-area: watch;
-            align-self: center;
-        }
-        .stopwatch ul {
-            grid-area: list;
-        }
-        .stopwatch .controls {
-            grid-area: controls;
-            align-self: center;
-        }
-        .stopwatch > * + * {
-            margin-top: 0;
-        }
+    .stopwatch {
+      display: grid;
+      grid-gap: 20px 50px;
+      grid-template-columns: 300px 250px;
+      grid-template-rows: 225px auto;
+      grid-template-areas: 'watch list' 'watch controls';
+      justify-content: space-between;
     }
+    .stopwatch svg {
+      grid-area: watch;
+      align-self: center;
+    }
+    .stopwatch ul {
+      grid-area: list;
+    }
+    .stopwatch .controls {
+      grid-area: controls;
+      align-self: center;
+    }
+    .stopwatch > * + * {
+      margin-top: 0;
+    }
+  }
 }

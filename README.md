@@ -16,13 +16,11 @@ Bracket highlighting the stages for a hypothetical sport competition, taking adv
 
 ## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
-Create a basic CRUD application to add, update, delete key value pairs. Highlight the items through D3 and two elementary visualizations.
+A basic CRUD application to add, update, delete key value pairs. Highlight the items through D3 and two elementary visualizations.
 
 ## [Stopwatch](https://svelte.dev/repl/591aff801e1d47498afdc2738fea4485)
 
-Create an application allowing to track the passing of time and the lapse between laps.
-
-**Tags**: setInterval, store, readable, animation, conditional statements
+An application to track the passing of time and the gap between laps.
 
 ## [Word Frequency](https://codepen.io/borntofrappe/pen/QWWWqQM)
 

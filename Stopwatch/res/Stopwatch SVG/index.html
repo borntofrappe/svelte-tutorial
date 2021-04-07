@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="style.css" />
-        <title>Stopwatch SVG</title>
-    </head>
-    <body>
-        <svg viewBox="0 0 100 100" width="400" height="400">
-            <!-- center the elements in the svg -->
-            <g transform="translate(50 50)">
-                <!-- for the dial include a circle with a dashed stroke
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Stopwatch SVG</title>
+  </head>
+  <body>
+    <svg viewBox="0 0 100 100" width="400" height="400">
+      <!-- center the elements in the svg -->
+      <g transform="translate(50 50)">
+        <!-- for the dial include a circle with a dashed stroke
                     ! the dash begins from (0, 0), which means the dial would be asymmetric
                     to solve this include a mirrored copy with the same pattern
 
@@ -20,44 +20,89 @@
                     length of dashes (n 120) : 263.76 / 120 = 2.198
                     2.198 allocated to the dash and to the empty space in between
                     -->
-                <circle id="dial" cx="0" cy="0" r="42" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="0.3 1.898"></circle>
-                <use href="#dial" transform="scale(-1 1)"></use>
+        <circle
+          id="dial"
+          cx="0"
+          cy="0"
+          r="42"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-dasharray="0.3 1.898"
+        ></circle>
+        <use href="#dial" transform="scale(-1 1)"></use>
 
-                <!-- for the minutes dial, include an arrow pointing toward the dashes -->
-                <g class="rotate" transform="rotate(0)">
-                    <!-- rotate this group to have the arrow rotate around the center -->
-                    <g transform="translate(0 -50)">
-                        <path d="M -2.25 0 h 4.5 l -2.25 2.5 l -2.25 -2.5" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"></path>
-                    </g>
-                </g>
-                <!-- the mark is included for each lap -->
-                <g transform="rotate(45)">
-                    <!-- rotate this group to match the rotation of the arrow when the lap button is pressed -->
-                    <g class="mark" transform="translate(0 0)" opacity="0">
-                        <!-- animate this group to move the mark toward the center -->
-                        <g transform="translate(0 -38)">
-                            <circle r="1" fill="currentColor"></circle>
-                        </g>
-                    </g>
-                </g>
+        <!-- for the minutes dial, include an arrow pointing toward the dashes -->
+        <g class="rotate" transform="rotate(0)">
+          <!-- rotate this group to have the arrow rotate around the center -->
+          <g transform="translate(0 -50)">
+            <path
+              d="M -2.25 0 h 4.5 l -2.25 2.5 l -2.25 -2.5"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="1"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+            ></path>
+          </g>
+        </g>
+        <!-- the mark is included for each lap -->
+        <g transform="rotate(45)">
+          <!-- rotate this group to match the rotation of the arrow when the lap button is pressed -->
+          <g class="mark" transform="translate(0 0)" opacity="0">
+            <!-- animate this group to move the mark toward the center -->
+            <g transform="translate(0 -38)">
+              <circle r="1" fill="currentColor"></circle>
+            </g>
+          </g>
+        </g>
 
-                <!-- for the seconds dial, include an additional circle with a line rotating more frequently -->
-                <g transform="translate(0 20)">
-                    <g class="rotate" transform="rotate(0)" style="animation-duration: 1s;">
-                        <!-- rotate this group to have the line rotate around the center-->
-                        <path d="M 0 -1 v -4.5" fill="none" stroke="currentColor" stroke-width="0.4" stroke-linejoin="round" stroke-linecap="round"></path>
-                    </g>
-                    <circle r="7" fill="none" stroke="currentColor" stroke-width="0.4"></circle>
-                    <circle r="1" fill="none" stroke="currentColor" stroke-width="0.4"></circle>
-                </g>
+        <!-- for the seconds dial, include an additional circle with a line rotating more frequently -->
+        <g transform="translate(0 20)">
+          <g
+            class="rotate"
+            transform="rotate(0)"
+            style="animation-duration: 1s"
+          >
+            <!-- rotate this group to have the line rotate around the center-->
+            <path
+              d="M 0 -1 v -4.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="0.4"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+            ></path>
+          </g>
+          <circle
+            r="7"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="0.4"
+          ></circle>
+          <circle
+            r="1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="0.4"
+          ></circle>
+        </g>
 
-                <!-- update the text with the number of minutes and seconds and tens of a seconds
+        <!-- update the text with the number of minutes and seconds and tens of a seconds
                 00:12.8
                 -->
-                <text text-anchor="middle" fill="currentColor" dominant-baseline="middle" font-size="10" style="font-weight: 300; letter-spacing: 1px;">00:00.0</text>
-            </g>
-        </svg>
+        <text
+          text-anchor="middle"
+          fill="currentColor"
+          dominant-baseline="middle"
+          font-size="10"
+          style="font-weight: 300; letter-spacing: 1px"
+        >
+          00:00.0
+        </text>
+      </g>
+    </svg>
 
-        <script src="script.js"></script>
-    </body>
+    <script src="script.js"></script>
+  </body>
 </html>

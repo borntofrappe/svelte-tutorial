@@ -1,98 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="style.css" />
-        <title>Stopwatch UI</title>
-    </head>
-    <body>
-        <!-- the stopwatch is made up of three parts
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Stopwatch UI</title>
+  </head>
+  <body>
+    <!-- the stopwatch is made up of three parts
             - svg graphic describing the time
             - list of recorded laps
             - button allowing to start/pause/reset/record a lap
 
         -->
-        <div class="stopwatch">
-            <!-- SVG GRAPHIC -->
-            <!-- include hard-coded values for the rotation/position of the dial's elements
+    <div class="stopwatch">
+      <!-- SVG GRAPHIC -->
+      <!-- include hard-coded values for the rotation/position of the dial's elements
             in the final application these should be tailored to the number of minutes/seconds/tens of a seconds
             -->
-            <svg viewBox="0 0 100 100" width="300" height="300">
-                <g transform="translate(50 50)">
-                    <circle id="dial" cx="0" cy="0" r="42" fill="none" stroke="currentColor" stroke-width="5" stroke-dasharray="0.3 1.898"></circle>
-                    <use href="#dial" transform="scale(-1 1)"></use>
+      <svg viewBox="0 0 100 100" width="300" height="300">
+        <g transform="translate(50 50)">
+          <circle
+            id="dial"
+            cx="0"
+            cy="0"
+            r="42"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="5"
+            stroke-dasharray="0.3 1.898"
+          ></circle>
+          <use href="#dial" transform="scale(-1 1)"></use>
 
-                    <g class="rotate" transform="rotate(91)">
-                        <!-- hard-coded value -->
-                        <g transform="translate(0 -50)">
-                            <path d="M -2.25 0 h 4.5 l -2.25 2.5 l -2.25 -2.5" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linejoin="round" stroke-linecap="round"></path>
-                        </g>
-                    </g>
-                    <g transform="rotate(90)">
-                        <!-- hard-coded value -->
-                        <g class="mark" transform="translate(0 2)" opacity="1">
-                            <!-- hard-coded value -->
-                            <g transform="translate(0 -38)">
-                                <circle r="1" fill="currentColor"></circle>
-                            </g>
-                        </g>
-                    </g>
+          <g class="rotate" transform="rotate(91)">
+            <!-- hard-coded value -->
+            <g transform="translate(0 -50)">
+              <path
+                d="M -2.25 0 h 4.5 l -2.25 2.5 l -2.25 -2.5"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="1"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+              ></path>
+            </g>
+          </g>
+          <g transform="rotate(90)">
+            <!-- hard-coded value -->
+            <g class="mark" transform="translate(0 2)" opacity="1">
+              <!-- hard-coded value -->
+              <g transform="translate(0 -38)">
+                <circle r="1" fill="currentColor"></circle>
+              </g>
+            </g>
+          </g>
 
-                    <g transform="translate(0 20)">
-                        <g class="rotate" transform="rotate(300)">
-                            <!-- hard-coded value -->
-                            <path d="M 0 -1 v -4.5" fill="none" stroke="currentColor" stroke-width="0.4" stroke-linejoin="round" stroke-linecap="round"></path>
-                        </g>
-                        <circle r="7" fill="none" stroke="currentColor" stroke-width="0.4"></circle>
-                        <circle r="1" fill="none" stroke="currentColor" stroke-width="0.4"></circle>
-                    </g>
+          <g transform="translate(0 20)">
+            <g class="rotate" transform="rotate(300)">
+              <!-- hard-coded value -->
+              <path
+                d="M 0 -1 v -4.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="0.4"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+              ></path>
+            </g>
+            <circle
+              r="7"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="0.4"
+            ></circle>
+            <circle
+              r="1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="0.4"
+            ></circle>
+          </g>
 
-                    <!-- hard-coded value -->
-                    <text text-anchor="middle" fill="currentColor" dominant-baseline="middle" font-size="10" style="font-weight: 300; letter-spacing: 1px;">00:15.8</text>
-                </g>
-            </svg>
+          <!-- hard-coded value -->
+          <text
+            text-anchor="middle"
+            fill="currentColor"
+            dominant-baseline="middle"
+            font-size="10"
+            style="font-weight: 300; letter-spacing: 1px"
+          >
+            00:15.8
+          </text>
+        </g>
+      </svg>
 
-            <!-- LIST OF LAPS
+      <!-- LIST OF LAPS
             new laps are recorded at the top of the list
             -->
-            <ul>
-                <li>
-                    <h2>5 <sup>Lap</sup></h2>
-                    <h3>00:15.8</h3>
-                    <h4>+00:02.7</h4>
-                </li>
-                <li>
-                    <h2>4 <sup>Lap</sup></h2>
-                    <h3>00:13.1</h3>
-                    <h4>+00:03.1</h4>
-                </li>
-                <li>
-                    <h2>3 <sup>Lap</sup></h2>
-                    <h3>00:10.0</h3>
-                    <h4>+00:03.3</h4>
-                </li>
-                <li>
-                    <h2>2 <sup>Lap</sup></h2>
-                    <h3>00:06.7</h3>
-                    <h4>+00:03.5</h4>
-                </li>
-                <li>
-                    <h2>1 <sup>Lap</sup></h2>
-                    <h3>00:03.2</h3>
-                    <h4>+00:03.2</h4>
-                </li>
-            </ul>
+      <ul>
+        <li>
+          <h2>5 <sup>Lap</sup></h2>
+          <h3>00:15.8</h3>
+          <h4>+00:02.7</h4>
+        </li>
+        <li>
+          <h2>4 <sup>Lap</sup></h2>
+          <h3>00:13.1</h3>
+          <h4>+00:03.1</h4>
+        </li>
+        <li>
+          <h2>3 <sup>Lap</sup></h2>
+          <h3>00:10.0</h3>
+          <h4>+00:03.3</h4>
+        </li>
+        <li>
+          <h2>2 <sup>Lap</sup></h2>
+          <h3>00:06.7</h3>
+          <h4>+00:03.5</h4>
+        </li>
+        <li>
+          <h2>1 <sup>Lap</sup></h2>
+          <h3>00:03.2</h3>
+          <h4>+00:03.2</h4>
+        </li>
+      </ul>
 
-            <!-- CONTROL BUTTON(S)
+      <!-- CONTROL BUTTON(S)
             the text ultimately changes as the button is pressed
             ! it is possible for the .controls to contain 2 buttons, in which instance the two should be positioned side by side
             -->
-            <div class="controls">
-                <!-- <button>Reset</button> -->
-                <button>Start</button>
-            </div>
-        </div>
-    </body>
+      <div class="controls">
+        <!-- <button>Reset</button> -->
+        <button>Start</button>
+      </div>
+    </div>
+  </body>
 </html>

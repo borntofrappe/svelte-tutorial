@@ -1,46 +1,46 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:300&display=swap');
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 body {
-    min-height: 100vh;
-    background: hsl(0, 0%, 95%);
-    color: hsl(0, 0%, 5%);
-    display: grid;
-    place-items: center;
-    font-family: "Roboto Mono", monospace;
+  min-height: 100vh;
+  background: hsl(0, 0%, 95%);
+  color: hsl(0, 0%, 5%);
+  display: grid;
+  place-items: center;
+  font-family: 'Roboto Mono', monospace;
 }
 /* rotate the selected group linearly
 for the seconds dial the duration is toned down to 1s
 */
 .rotate {
-    animation: rotate 60s linear infinite;
+  animation: rotate 60s linear infinite;
 }
 @keyframes rotate {
-    to {
-        transform: rotate(1turn);
-    }
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 /* animate the mark to temporarily show the circle
 ! this is experimental and should otherwise occur following a click on the lap button
 */
 .mark {
-    animation: mark 0.75s 7.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: mark 0.75s 7.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 @keyframes mark {
-    0% {
-        opacity: 0;
-    }
-    30%,
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(2px);
-    }
+  0% {
+    opacity: 0;
+  }
+  30%,
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
 }
