@@ -34,11 +34,11 @@ Compute the wind chill index on the basis of the input temperature and speed.
 
 Create a memory-based game in which cards are flipped and matched in pairs.
 
+<!-- MISSING RESOURCES -->
+
 ## [Infinity Maze](https://codepen.io/borntofrappe/pen/pooeyww)
 
-An experiment with SVG syntax and the Aldous-Broder algorithm to create an endless game in which the player moves within the boundaries of a maze to reach a goal.
-
-**Tags**: svg, algorithm, motion, grid, promise
+Experiment with SVG syntax and the Aldous-Broder algorithm to create a game where the player moves within the boundaries of a maze to reach a goal.
 
 ## [Smart Watch](https://codepen.io/borntofrappe/pen/bGGWMBx)
 

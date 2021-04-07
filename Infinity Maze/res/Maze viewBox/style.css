@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/* center the svg in the viewport */
+body {
+  background: hsl(0, 0%, 95%);
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+button {
+  border: none;
+  background: hsl(180, 70%, 50%);
+  color: inherit;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 1rem;
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+}
