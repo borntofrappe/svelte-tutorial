@@ -1,18 +1,14 @@
 # [Light Bright](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42?version=3.12.1)
 
+The project is inspired by [a take-home project](https://learn.freecodecamp.org/coding-interview-prep/take-home-projects/build-a-light-bright-app/) from [freeCodeCamp](freecodecamp.org).
 
-1. install the necessary packages:
+## How to Run
 
-    ```code
-    npm install
-    ```
+```bash
+npm install
+npm run dev
+```
 
-1. run the development environment:
+## Helpful Resources
 
-    ```
-    npm run dev
-    ```
-
-    The application will be made available at `http://localhost:5000`
-
-1. have fun. [The tutorial](https://svelte.dev/tutorial) is a great place to start, while [the API reference](https://svelte.dev/docs) will give you more details.
+[The tutorial on svelte.dev](https://svelte.dev/tutorial) is a great place to start. [The official docs](https://svelte.dev/docs) detail the API and the specific features, like the event dispatcher.

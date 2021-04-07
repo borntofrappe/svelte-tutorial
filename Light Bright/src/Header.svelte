@@ -1,3 +1,1 @@
-<h1>
-    Light-Bright
-</h1>
+<h1>Light-Bright</h1>
