@@ -44,8 +44,6 @@ Experiment with SVG syntax and the Aldous-Broder algorithm to create a game wher
 
 Create a series of independent applications for a hypothetical smart watch.
 
-**Tags**: svg, components
-
 ## [Picross](https://codepen.io/borntofrappe/pen/yLLPBMr)
 
 Recreate the basic structure of the popular puzzle game which allows to draw stylized figures with a pixelated look.

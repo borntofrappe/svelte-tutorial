@@ -1,98 +1,105 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 /* center the watch in the viewport */
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: hsl(0, 0%, 90%);
-    background-repeat: no-repeat;
-    background-position: 100% 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: hsl(0, 0%, 90%);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
 }
 /* position the display and controls side by side */
 .watch {
-    display: flex;
-    align-items: center;
-    filter: drop-shadow(0 0 0.65rem hsl(0, 0%, 90%));
-    /* give the watch a fixed height, picked up by the nested components */
-    height: 18rem;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 0 0.65rem hsl(0, 0%, 90%));
+  /* give the watch a fixed height, picked up by the nested components */
+  height: 18rem;
 }
 /* give the display a fixed width
 ! give the same height to the
  */
 .display {
-    width: 18rem;
-    height: 100%;
-    padding: 2rem 1.5rem;
-    background: hsl(0, 0%, 95%);
-    /* include the strap of the watch with a solid gradient */
-    background: linear-gradient(to right, transparent 25%, hsl(0, 0%, 5%) 25%, hsl(0, 0%, 5%) 75%, transparent 75%), hsl(0, 0%, 100%);
+  width: 18rem;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  background: hsl(0, 0%, 95%);
+  /* include the strap of the watch with a solid gradient */
+  background: linear-gradient(
+      to right,
+      transparent 25%,
+      hsl(0, 0%, 5%) 25%,
+      hsl(0, 0%, 5%) 75%,
+      transparent 75%
+    ),
+    hsl(0, 0%, 100%);
 }
 /* add two pseudo elements to transition between the gadgets with a curtain closing and opening on the screen */
 .screen {
-    width: 100%;
-    height: 100%;
-    background: hsl(120, 30%, 58%);
-    border: 0.25rem solid hsl(0, 0%, 5%);
-    position: relative;
+  width: 100%;
+  height: 100%;
+  background: hsl(120, 30%, 58%);
+  border: 0.25rem solid hsl(0, 0%, 5%);
+  position: relative;
 }
 .screen:before,
 .screen:after {
-    content: "";
-    position: absolute;
-    left: 0%;
-    width: 100%;
-    height: 50%;
-    background: hsl(0, 0%, 5%);
-    transform: scaleY(0);
-    /* animation included as a proof of concept
+  content: '';
+  position: absolute;
+  left: 0%;
+  width: 100%;
+  height: 50%;
+  background: hsl(0, 0%, 5%);
+  transform: scaleY(0);
+  /* animation included as a proof of concept
     eventually the transition occurs while the gadgets are swapped
     */
-    animation: blink 0.5s 1s ease-in-out 2 alternate;
+  animation: blink 0.5s 1s ease-in-out 2 alternate;
 }
 .screen:before {
-    top: 0%;
-    transform-origin: 50% 0%;
+  top: 0%;
+  transform-origin: 50% 0%;
 }
 .screen:after {
-    bottom: 0%;
-    transform-origin: 50% 100%;
+  bottom: 0%;
+  transform-origin: 50% 100%;
 }
 @keyframes blink {
-    to {
-        transform: scaleY(1);
-    }
+  to {
+    transform: scaleY(1);
+  }
 }
 
 .controls {
-    width: 5rem;
-    height: 100%;
-    padding: 3rem 2rem;
-    padding-left: 0rem;
-    background: hsl(0, 0%, 100%);
-    border-radius: 0 5rem 5rem 0;
-    /* display the buttons in a column */
-    display: flex;
-    flex-direction: column;
+  width: 5rem;
+  height: 100%;
+  padding: 3rem 2rem;
+  padding-left: 0rem;
+  background: hsl(0, 0%, 100%);
+  border-radius: 0 5rem 5rem 0;
+  /* display the buttons in a column */
+  display: flex;
+  flex-direction: column;
 }
 /* have each button take up half the available height */
 .controls button {
-    background: hsl(360, 85%, 65%);
-    border: 0.25rem solid hsl(0, 0%, 5%);
-    flex-grow: 1;
+  background: hsl(360, 85%, 65%);
+  border: 0.25rem solid hsl(0, 0%, 5%);
+  flex-grow: 1;
 }
 .controls button:active {
-    filter: brightness(95%);
+  filter: brightness(95%);
 }
 .controls button:first-of-type {
-    border-top-right-radius: 2rem;
-    border-bottom: none;
+  border-top-right-radius: 2rem;
+  border-bottom: none;
 }
 .controls button:last-of-type {
-    border-bottom-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
