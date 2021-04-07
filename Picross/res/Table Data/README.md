@@ -21,19 +21,19 @@ From the starting point, a string of 25 characters, it is possible to describe t
 // pick the characters in groups of `rows`
 const rows = 5;
 const levelRows = Array(rows)
-    .fill()
-    .map((character, row) => [...level.slice(row * rows, row * rows + rows)]);
+  .fill()
+  .map((character, row) => [...level.slice(row * rows, row * rows + rows)]);
 
 // 2D array describing the level according to its columns
 // pick every `column`th character
 const columns = 5;
 const levelColumns = Array(columns)
-    .fill()
-    .map((character, column) =>
-        Array(columns)
-            .fill()
-            .map((item, col) => level[column + columns * col])
-    );
+  .fill()
+  .map((character, column) =>
+    Array(columns)
+      .fill()
+      .map((item, col) => level[column + columns * col])
+  );
 ```
 
 ## Rows' hints
@@ -41,31 +41,31 @@ const levelColumns = Array(columns)
 This is where a reducer function is included to describe the number of contiguous `o` characters. The idea is to build an array of integers. Considering the characters of an hypothetical string, such a structure can be computed as follows:
 
 ```js
-const row = ["o", "x", "o", "o", "x"];
+const row = ['o', 'x', 'o', 'o', 'x'];
 const hint = row.reduce(
-    (acc, curr) => {
-        const { character, hints } = acc;
-        if (curr === "o") {
-            if (character === "o") {
-                hints[hints.length - 1] += 1;
-            } else {
-                hints.push(1);
-            }
-            return {
-                character: "o",
-                hints
-            };
-        }
-
-        return {
-            character: "x",
-            hints
-        };
-    },
-    {
-        character: "",
-        hints: []
+  (acc, curr) => {
+    const { character, hints } = acc;
+    if (curr === 'o') {
+      if (character === 'o') {
+        hints[hints.length - 1] += 1;
+      } else {
+        hints.push(1);
+      }
+      return {
+        character: 'o',
+        hints,
+      };
     }
+
+    return {
+      character: 'x',
+      hints,
+    };
+  },
+  {
+    character: '',
+    hints: [],
+  }
 );
 ```
 
@@ -74,37 +74,37 @@ Notice how the array is empty if the input string is without `o` characters. In 
 The previous snippet covers the hint for a single row. Expanded to every row, the logic allows to include the desired string _before_ the items describing the content of the table.
 
 ```js
-const tableRows = levelRows.map(row => {
-    // array describing contiguous 'o' characters
-    const hint = row.reduce(
-        (acc, curr) => {
-            const { character, hints } = acc;
-            if (curr === "o") {
-                if (character === "o") {
-                    hints[hints.length - 1] += 1;
-                } else {
-                    hints.push(1);
-                }
-                return {
-                    character: "o",
-                    hints
-                };
-            }
-
-            return {
-                character: "x",
-                hints
-            };
-        },
-        {
-            character: "",
-            hints: []
+const tableRows = levelRows.map((row) => {
+  // array describing contiguous 'o' characters
+  const hint = row.reduce(
+    (acc, curr) => {
+      const { character, hints } = acc;
+      if (curr === 'o') {
+        if (character === 'o') {
+          hints[hints.length - 1] += 1;
+        } else {
+          hints.push(1);
         }
-    ).hints;
+        return {
+          character: 'o',
+          hints,
+        };
+      }
 
-    // if the array is empty include a default `0` value
-    const hintsRow = hint.length === 0 ? "0" : hint.join("");
-    return [hintsRow, ...row];
+      return {
+        character: 'x',
+        hints,
+      };
+    },
+    {
+      character: '',
+      hints: [],
+    }
+  ).hints;
+
+  // if the array is empty include a default `0` value
+  const hintsRow = hint.length === 0 ? '0' : hint.join('');
+  return [hintsRow, ...row];
 });
 ```
 
@@ -118,41 +118,41 @@ The goal here is not to include a string value before every row, but to include 
 
 ```js
 const hintsColumns = [
-    // empty string to "skip" the first column
-    "",
-    // array of strings describing the hints for the columns
-    // ! spread the array to have the items as siblings of the empty string
-    ...levelColumns.map(column => {
-        // contiguous 'o' characters
-        const hint = column.reduce(
-            (acc, curr) => {
-                const { character, hints } = acc;
-                if (curr === "o") {
-                    if (character === "o") {
-                        hints[hints.length - 1] += 1;
-                    } else {
-                        hints.push(1);
-                    }
-                    return {
-                        character: "o",
-                        hints
-                    };
-                }
+  // empty string to "skip" the first column
+  '',
+  // array of strings describing the hints for the columns
+  // ! spread the array to have the items as siblings of the empty string
+  ...levelColumns.map((column) => {
+    // contiguous 'o' characters
+    const hint = column.reduce(
+      (acc, curr) => {
+        const { character, hints } = acc;
+        if (curr === 'o') {
+          if (character === 'o') {
+            hints[hints.length - 1] += 1;
+          } else {
+            hints.push(1);
+          }
+          return {
+            character: 'o',
+            hints,
+          };
+        }
 
-                return {
-                    character: "x",
-                    hints
-                };
-            },
-            {
-                character: "",
-                hints: []
-            }
-        );
-        // string describing the contiguous o characters
-        // ! include a default value in case the array is empty (meaning there are only 'x' characters)
-        return hint.hints.length === 0 ? "0" : hint.hints.join("");
-    })
+        return {
+          character: 'x',
+          hints,
+        };
+      },
+      {
+        character: '',
+        hints: [],
+      }
+    );
+    // string describing the contiguous o characters
+    // ! include a default value in case the array is empty (meaning there are only 'x' characters)
+    return hint.hints.length === 0 ? '0' : hint.hints.join('');
+  }),
 ];
 ```
 

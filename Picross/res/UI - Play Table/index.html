@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Picross UI - Play Table</title>
+  </head>
+  <body>
+    <!-- in a wrapping container describe a container for the input elements and the table with the actual level -->
+    <section>
+      <!-- input of type radio using an svg graphic to describe the two modalities of the game -->
+      <div>
+        <label aria-label="Select pencil" for="pencil">
+          <!-- by default check the first input -->
+          <input type="radio" name="tool" id="pencil" checked />
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+          >
+            <g stroke="none" fill="currentColor">
+              <path d="M 0 100 h 30 l 70 -70 l -30 -30 l -70 70"></path>
+            </g>
+          </svg>
+        </label>
+
+        <label aria-label="Select eraser" for="easer">
+          <input type="radio" name="tool" id="erase" />
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+          >
+            <g stroke="none" fill="currentColor">
+              <path
+                d="M 0 0 h 20 l 30 30 l 30 -30 h 20 v 20 l -30 30 l 30 30 v 20 h -20 l -30 -30 l -30 30 h -20 v -20 l 30 -30 l -30 -30"
+              ></path>
+            </g>
+          </svg>
+        </label>
+      </div>
+
+      <!-- for the table, the idea is to include one button element for each square in the grid making up the level
+                    on top of these buttons, a series of cells are included to describe the structure of the grid (see game-play)
+            -->
+      <table>
+        <!-- row describing the "hints" for the different columns -->
+        <tr>
+          <!-- empty cell to push the "hints" to the right on top of the connected buttons -->
+          <td></td>
+          <!-- actual hints
+                    ! these are hard-coded value which should actually describe the column/row
+                    -->
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+        </tr>
+        <!-- rows of buttons
+                prepend each series of button with a cell describing the "hints" of the row
+                -->
+        <tr>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+          <td>
+            <button></button>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </body>
+</html>

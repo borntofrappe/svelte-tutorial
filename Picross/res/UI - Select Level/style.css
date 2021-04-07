@@ -1,3 +1,4 @@
+/* ! colors subject to change */
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap');
 
 * {
@@ -8,17 +9,17 @@
 body {
   background: radial-gradient(
       ellipse at 100% 100%,
-      hsl(220, 95%, 90%),
+      hsl(220, 95%, 95%),
       transparent
     ),
     repeating-linear-gradient(
-      to bottom,
-      hsl(220, 95%, 50%) 0px,
-      hsl(220, 95%, 50%) 3px,
-      hsl(220, 70%, 70%) 3px,
-      hsl(220, 70%, 75%) 6px
-    ),
-    #303e61;
+        to bottom,
+        hsl(220, 95%, 50%) 0px,
+        hsl(220, 95%, 50%) 3px,
+        hsl(220, 95%, 70%) 3px,
+        hsl(220, 95%, 75%) 6px
+      )
+      #303e61;
   color: hsl(0, 0%, 5%);
   font-family: 'IBM Plex Mono', monospace;
   /* center in the viewport */
@@ -28,8 +29,17 @@ body {
   justify-content: center;
   align-items: center;
 }
-/* include global property-value pairs for the buttons with a specific class */
-.btn {
+
+/* display the buttons in a column */
+section {
+  display: flex;
+  flex-direction: column;
+}
+section > * + * {
+  margin-top: 1rem;
+}
+/* use these property-value pairs for every button in the other states */
+button {
   padding: 0.5rem 1rem;
   color: hsl(0, 0%, 5%);
   border: 4px solid currentColor;
@@ -41,7 +51,7 @@ body {
   position: relative;
   z-index: 5;
 }
-.btn:before {
+button:before {
   content: '';
   position: absolute;
   top: 0;

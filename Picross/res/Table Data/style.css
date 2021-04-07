@@ -1,89 +1,89 @@
 /* ! colors subject to change */
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap');
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 body {
-    color: hsl(0, 0%, 5%);
-    font-family: "IBM Plex Mono", monospace;
-    /* center in the viewport */
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  color: hsl(0, 0%, 5%);
+  font-family: 'IBM Plex Mono', monospace;
+  /* center in the viewport */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* collapse the borders */
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 /* remove the borders for the cells representing the "hints" */
 tr:first-of-type td,
 tr td:first-of-type {
-    border: none;
-    /* reset the width to have the cell expand to cover the span's size */
-    width: initial;
-    height: initial;
+  border: none;
+  /* reset the width to have the cell expand to cover the span's size */
+  width: initial;
+  height: initial;
 }
 /* align the cells toward the rest of the table */
 tr:first-of-type td {
-    vertical-align: bottom;
+  vertical-align: bottom;
 }
 tr td:first-of-type {
-    text-align: right;
+  text-align: right;
 }
 /* slightly separate the span elements included in the first column */
 tr td:first-of-type span {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 /* position the span elements included in the first row atop one another */
 tr:first-of-type td span {
-    display: block;
-    text-align: center;
-    margin-bottom: 0.5rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 /* style the span elements */
 tr td span {
-    font-weight: 700;
-    font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.25rem;
 }
 
 /* include a solid border for the rest of the table */
 td {
-    border: 1px solid hsl(0, 0%, 70%);
-    /* have each cell occupy a fixed width and height */
-    width: 45px;
-    height: 45px;
+  border: 1px solid hsl(0, 0%, 70%);
+  /* have each cell occupy a fixed width and height */
+  width: 45px;
+  height: 45px;
 }
 /* change the background of selected buttons */
 table td:nth-of-type(odd) button {
-    background: hsl(0, 0%, 100%);
+  background: hsl(0, 0%, 100%);
 }
 table td:nth-of-type(even) button {
-    background: hsl(0, 0%, 96%);
+  background: hsl(0, 0%, 96%);
 }
 table tr:nth-last-of-type(odd) td:nth-last-of-type(odd) button {
-    background: hsl(0, 0%, 98%);
+  background: hsl(0, 0%, 98%);
 }
 table tr:nth-last-of-type(odd) td:nth-last-of-type(even) button {
-    background: hsl(0, 0%, 94%);
+  background: hsl(0, 0%, 94%);
 }
 
 /* have the nested button, or svg element, occupy the available width and height */
 td button {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background: hsl(0, 0%, 100%);
-    border: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: hsl(0, 0%, 100%);
+  border: none;
 }
 td svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
