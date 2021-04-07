@@ -8,9 +8,7 @@ A light bright app to introduce Svelte and focus on a few core features: compone
 
 ## [Strongman](https://svelte.dev/repl/c234f8c4626440179c710f0c65cabfca)
 
-A silly button allowing to raise a mallet and strike the puck of a carnival machine. Using SVG syntax, svelte reactivity and built-in motion functions.
-
-**Tags**: reactivity, motion, spring, subscribe, tweened
+A silly button allowing to raise a mallet and strike the puck of a carnival machine, all the while illustrating Svelte reactivity and built-in motion functions.
 
 ## [Sport Bracket](https://svelte.dev/repl/4941cafa6eee409d947716816190222f)
 
