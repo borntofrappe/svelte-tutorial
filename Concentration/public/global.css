@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap');
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 body {
-    min-height: 100vh;
-    color: hsl(340, 5%, 20%);
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.1" width="100" height="100" fill="hsl(340, 10%, 30%)"><path d="M21.5 18.938a8 8 0 0113.856-8q6 10.392-3.856 25.32-17.856 1.072-23.856-9.32a8 8 0 0113.856-8M67 11.144L87.124 18 83 38.856 62.876 32zM77.5 79.33a14 14 0 01-5.49 20.49l25.98-15a14 14 0 01-20.49-5.49 9 9 0 01-15.588 9 9 9 0 0115.588-9 9 9 0 01-9-15.588 9 9 0 019 15.588 9 9 0 0115.588-9 9 9 0 01-15.588 9M27.5 79.33a14 14 0 01-5.49 20.49l25.98-15a14 14 0 01-20.49-5.49 8 8 0 01-13.856 8q-5-8.66 3.856-25.32 18.856.66 23.856 9.32a8 8 0 01-13.856 8"/></svg>'),
-        hsl(340, 10%, 5%);
-    font-family: "Noto Sans JP", sans-serif;
-    font-weight: 400;
+  min-height: 100vh;
+  color: hsl(340, 5%, 20%);
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="0.1" width="100" height="100" fill="hsl(340, 10%, 30%)"><path d="M21.5 18.938a8 8 0 0113.856-8q6 10.392-3.856 25.32-17.856 1.072-23.856-9.32a8 8 0 0113.856-8M67 11.144L87.124 18 83 38.856 62.876 32zM77.5 79.33a14 14 0 01-5.49 20.49l25.98-15a14 14 0 01-20.49-5.49 9 9 0 01-15.588 9 9 9 0 0115.588-9 9 9 0 01-9-15.588 9 9 0 019 15.588 9 9 0 0115.588-9 9 9 0 01-15.588 9M27.5 79.33a14 14 0 01-5.49 20.49l25.98-15a14 14 0 01-20.49-5.49 8 8 0 01-13.856 8q-5-8.66 3.856-25.32 18.856.66 23.856 9.32a8 8 0 01-13.856 8"/></svg>'),
+    hsl(340, 10%, 5%);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
 }
