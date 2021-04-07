@@ -10,11 +10,9 @@ A light bright app to introduce Svelte and focus on a few core features: compone
 
 A silly button allowing to raise a mallet and strike the puck of a carnival machine, all the while illustrating Svelte reactivity and built-in motion functions.
 
-## [Sport Bracket](https://svelte.dev/repl/4941cafa6eee409d947716816190222f)
+## [Tournament Bracket](https://svelte.dev/repl/4941cafa6eee409d947716816190222f)
 
-Describe the eliminatory stages for a hypothetical sport competition, taking advantage of the `<svelte:self>` component.
-
-**Tags**: self, store, custom store
+Bracket highlighting the stages for a hypothetical sport competition, taking advantage of the `<svelte:self>` component and a custom store.
 
 ## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
