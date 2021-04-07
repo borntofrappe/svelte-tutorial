@@ -1,39 +1,39 @@
-@import url("https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700&display=swap');
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    min-height: 100vh;
-    color: hsl(240, 25%, 95%);
-    background: hsl(240, 25%, 20%);
-    font-family: "IBM Plex Mono", monospace;
-    padding: 3rem;
+  min-height: 100vh;
+  color: hsl(240, 25%, 95%);
+  background: hsl(240, 25%, 20%);
+  font-family: 'IBM Plex Mono', monospace;
+  padding: 3rem;
 }
 /* absolute position the icon in the top left corner of the heading */
 h1 {
-    position: relative;
-    font-size: 2.25rem;
-    padding: 0.25rem;
-    font-weight: 400;
+  position: relative;
+  font-size: 2.25rem;
+  padding: 0.25rem;
+  font-weight: 400;
 }
 .icon {
-    position: absolute;
-    top: 0%;
-    right: 100%;
-    transform: translateY(-50%);
-    display: block;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 0.75rem;
-    background: hsla(240, 25%, 50%, 0.3);
+  position: absolute;
+  top: 0%;
+  right: 100%;
+  transform: translateY(-50%);
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: hsla(240, 25%, 50%, 0.3);
 }
 .icon svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 0 3px hsla(240, 25%, 0%, 0.5));
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 3px hsla(240, 25%, 0%, 0.5));
 }

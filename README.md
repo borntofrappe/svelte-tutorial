@@ -16,9 +16,7 @@ Bracket highlighting the stages for a hypothetical sport competition, taking adv
 
 ## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
-Create a CRUD application to add/update/delete key value pairs. Highlight the items through D3 and two visualizations.
-
-**Tags**: bind, custom store, crud, d3
+Create a basic CRUD application to add, update, delete key value pairs. Highlight the items through D3 and two elementary visualizations.
 
 ## [Stopwatch](https://svelte.dev/repl/591aff801e1d47498afdc2738fea4485)
 

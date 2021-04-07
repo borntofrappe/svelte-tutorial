@@ -36,7 +36,7 @@ function formatInput(input) {
 
 // create a custom store fulfilling the CRUD operations
 function createItems(initialItems) {
-    const { subscribe, set, update } = writable(initialItems);
+    const { subscribe, update } = writable(initialItems);
 
     return {
         subscribe,

@@ -1,93 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <link rel="stylesheet" href="style.css" />
-        <title>List Items</title>
-    </head>
-    <body>
-        <!-- icons used throughout the project -->
-        <svg viewBox="0 0 100 100" width="40" height="40" style="display: none;">
-            <symbol id="list">
-                <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round">
-                    <path d="M 50 35 h 20"></path>
-                    <path d="M 30 50 h 40"></path>
-                    <path d="M 30 65 h 20"></path>
-                </g>
-            </symbol>
-            <symbol id="delete">
-                <g transform="translate(50 50)">
-                    <g transform="rotate(45)">
-                        <g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round">
-                            <path d="M 0 -20 v 40 m -20 -20 h 40"></path>
-                        </g>
-                    </g>
-                </g>
-            </symbol>
-        </svg>
-        <!-- display the items following a heading -->
-        <section>
-            <!-- in the heading include a span element with an icon visually connected to the section -->
-            <h1>
-                <span class="icon">
-                    <svg viewBox="0 0 100 100" width="40" height="40">
-                        <use href="#list"></use>
-                    </svg>
-                </span>
-                Big ol' list
-            </h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>List Items</title>
+  </head>
+  <body>
+    <!-- icons used throughout the project -->
+    <svg viewBox="0 0 100 100" width="40" height="40" style="display: none">
+      <symbol id="list">
+        <g
+          fill="none"
+          stroke="currentColor"
+          stroke-width="7"
+          stroke-linecap="round"
+        >
+          <path d="M 50 35 h 20"></path>
+          <path d="M 30 50 h 40"></path>
+          <path d="M 30 65 h 20"></path>
+        </g>
+      </symbol>
+      <symbol id="delete">
+        <g transform="translate(50 50)">
+          <g transform="rotate(45)">
+            <g
+              fill="none"
+              stroke="currentColor"
+              stroke-width="10"
+              stroke-linecap="round"
+            >
+              <path d="M 0 -20 v 40 m -20 -20 h 40"></path>
+            </g>
+          </g>
+        </g>
+      </symbol>
+    </svg>
+    <!-- display the items following a heading -->
+    <section>
+      <!-- in the heading include a span element with an icon visually connected to the section -->
+      <h1>
+        <span class="icon">
+          <svg viewBox="0 0 100 100" width="40" height="40">
+            <use href="#list"></use>
+          </svg>
+        </span>
+        Big ol' list
+      </h1>
 
-            <!-- display the articles in a grid, specifying the name and numerical values in a column -->
-            <main>
-                <article style="border-color: hsl(50, 80%, 50%)">
-                    <h2>Apples</h2>
-                    <p>20</p>
-                    <!-- for each article add a button to delete the item -->
-                    <button>
-                        <svg viewBox="0 0 100 100" width="30" height="30">
-                            <use href="#delete"></use>
-                        </svg>
-                    </button>
-                </article>
-                <article style="border-color: hsl(0, 40%, 40%)">
-                    <h2>Grapes</h2>
-                    <p>15</p>
-                    <button>
-                        <svg viewBox="0 0 100 100" width="30" height="30">
-                            <use href="#delete"></use>
-                        </svg>
-                    </button>
-                </article>
-                <article style="border-color: hsl(30, 60%, 46%)">
-                    <h2>Bananas</h2>
-                    <p>10</p>
-                    <button>
-                        <svg viewBox="0 0 100 100" width="30" height="30">
-                            <use href="#delete"></use>
-                        </svg>
-                    </button>
-                </article>
-                <article style="border-color:hsl(200, 40%, 42%)">
-                    <h2>Peaches</h2>
-                    <p>8</p>
-                    <button>
-                        <svg viewBox="0 0 100 100" width="30" height="30">
-                            <use href="#delete"></use>
-                        </svg>
-                    </button>
-                </article>
-                <article style="border-color: hsl(220, 35%, 40%)">
-                    <h2>Apricots</h2>
-                    <p>5</p>
-                    <button>
-                        <svg viewBox="0 0 100 100" width="30" height="30">
-                            <use href="#delete"></use>
-                        </svg>
-                    </button>
-                </article>
-            </main>
-        </section>
-    </body>
+      <!-- display the articles in a grid, specifying the name and numerical values in a column -->
+      <main>
+        <article style="border-color: hsl(50, 80%, 50%)">
+          <h2>Apples</h2>
+          <p>20</p>
+          <!-- for each article add a button to delete the item -->
+          <button>
+            <svg viewBox="0 0 100 100" width="30" height="30">
+              <use href="#delete"></use>
+            </svg>
+          </button>
+        </article>
+        <article style="border-color: hsl(0, 40%, 40%)">
+          <h2>Grapes</h2>
+          <p>15</p>
+          <button>
+            <svg viewBox="0 0 100 100" width="30" height="30">
+              <use href="#delete"></use>
+            </svg>
+          </button>
+        </article>
+        <article style="border-color: hsl(30, 60%, 46%)">
+          <h2>Bananas</h2>
+          <p>10</p>
+          <button>
+            <svg viewBox="0 0 100 100" width="30" height="30">
+              <use href="#delete"></use>
+            </svg>
+          </button>
+        </article>
+        <article style="border-color: hsl(200, 40%, 42%)">
+          <h2>Peaches</h2>
+          <p>8</p>
+          <button>
+            <svg viewBox="0 0 100 100" width="30" height="30">
+              <use href="#delete"></use>
+            </svg>
+          </button>
+        </article>
+        <article style="border-color: hsl(220, 35%, 40%)">
+          <h2>Apricots</h2>
+          <p>5</p>
+          <button>
+            <svg viewBox="0 0 100 100" width="30" height="30">
+              <use href="#delete"></use>
+            </svg>
+          </button>
+        </article>
+      </main>
+    </section>
+  </body>
 </html>
