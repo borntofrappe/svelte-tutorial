@@ -80,7 +80,7 @@ Create an interactive contact card, editing and displaying the input information
 
 ## [Basic Arithmetic](https://svelte.dev/repl/730b7da509b74438a9d1c4bc6306b52f)
 
-Compute basic arithmetic operations and animate the solution with a staggered animation.
+Compute basic arithmetic operations and animate the solution with a staggered motion.
 
 ## [Icon Maker](https://svelte.dev/repl/44a0394acb4f408cb0115958c0fd76f6)
 
