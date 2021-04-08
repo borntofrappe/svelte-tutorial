@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Kanit:700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:300,400|Kanit:700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -14,7 +14,7 @@ body {
   align-items: center;
   color: hsl(0, 0%, 100%);
   background: hsl(220, 5%, 5%);
-  font-family: "Josefin Sans", sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   /* perspective for the 3d rotation */
   perspective: 600px;
 }
@@ -105,7 +105,7 @@ main section > * + * {
   text-align: center;
 }
 h1 {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   letter-spacing: 2px;
   font-size: 1.5rem;
   font-weight: 700;
