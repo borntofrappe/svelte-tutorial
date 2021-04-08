@@ -62,11 +62,9 @@ Create a reusable component to share a quote or even introduce an article.
 
 Build upon the concept developed [in this pen](https://codepen.io/borntofrappe/pen/bzpQLa) to have an application tracking key strokes and their correctness against a provided string of characters.
 
-## [Line Chart(s)](https://codesandbox.io/s/svelte-line-charts-spuqv)
+## [Line Charts](https://codesandbox.io/s/svelte-line-charts-spuqv)
 
 Highlight the google trends for the Tour de France through simple, yet effective and reusable line charts.
-
-**Tags**: d3, component
 
 ## [Roman Clock](https://svelte.dev/repl/ce67640a4c034cfa8585f3555fff3f8d)
 
