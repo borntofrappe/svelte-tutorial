@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Gaegu:400,700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Gaegu:400,700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -6,7 +6,7 @@
   padding: 0;
 }
 body {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
   background: hsl(0, 0%, 8%);
   color: hsl(0, 0%, 96%);
   display: flex;

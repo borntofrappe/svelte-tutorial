@@ -1,6 +1,13 @@
 <script>
   export let digits;
 </script>
+
+<p>
+  {#each digits as digit, index (digit.id)}
+    <span style="animation-delay: {0.05 * index}s;">{digit.value}</span>
+  {/each}
+</p>
+
 <style>
   p {
     padding: 0.5rem 0;
@@ -25,8 +32,3 @@
     }
   }
 </style>
-<p>
-  {#each digits as digit, index (digit.id)}
-  <span style="animation-delay: {0.05 * index}s;">{digit.value}</span>
-  {/each}
-</p>
