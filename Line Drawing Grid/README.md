@@ -209,7 +209,7 @@ const cellSize = 20;
 
 Having a fixed size doesn't influence the appearance of the grid, but this is because the `<svg>` element is ultimately scaled to fill the width of its parent container. Without this stylistic choice, grid of different rows and columns would have a different width and height.
 
-A dedicated component requires a couple of modifications to the code. First, the styling applied to the nested SVG requires the use of the `:global()` selector. 
+A dedicated component requires a couple of modifications to the code. First, the styling applied to the nested SVG requires the use of the `:global()` selector.
 
 ```css
 :global(main svg) {
@@ -244,9 +244,9 @@ The value is then injected in the DOM in the `id` attribute of the `<pattern>` e
   id="pattern-grid-{id}">
 </pattern>
 
-<rect 
-  {width} 
-  {height} 
+<rect
+  {width}
+  {height}
   fill="url(#pattern-grid-{id})" />
 ```
 

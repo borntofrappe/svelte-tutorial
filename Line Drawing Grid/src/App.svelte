@@ -1,5 +1,8 @@
 <script>
   import Grid from './Grid.svelte';
+
+  const columns = 10;
+  const rows = 10;
 </script>
 
 <main>
@@ -7,8 +10,8 @@
   <h2>Default</h2>
   <Grid />
   <hr />
-  <h2>Custom (10 columns and rows)</h2>
-  <Grid columns={10} rows={10} />
+  <h2>Custom ({columns} columns and {rows} rows)</h2>
+  <Grid {columns} {rows} />
 </main>
 
 <style>
@@ -29,7 +32,7 @@
   }
 
   main h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: normal;
   }
 
@@ -37,6 +40,6 @@
     display: block;
     width: 100%;
     height: auto;
-    box-shadow: 0 0 0 1px currentColor;
+    border: 1px solid currentColor;
   }
 </style>
