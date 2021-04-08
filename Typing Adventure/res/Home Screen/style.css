@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,700|Catamaran:900&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  min-height: 100vh;
+  font-family: 'IBM Plex Mono', monospace;
+  background: url('data:image/svg+xml;utf8,<svg opacity="0.05" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M2.5 2.5h95v95" stroke="currentColor" stroke-width="5" stroke-linecap="square" fill="none"/></svg>'),
+    #dfe7f1;
+  background-size: 50px;
+}
+/* default styles */
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+section > * + * {
+  margin-top: 1.5rem;
+}
+
+section h1 {
+  font-family: 'Catamaran', sans-serif;
+  font-size: 3.5rem;
+  letter-spacing: 0.01rem;
+}
+section button {
+  font-family: inherit;
+  background: hsl(0, 0%, 100%);
+  border: 2px solid hsl(0, 0%, 90%);
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  color: hsl(0, 0%, 20%);
+  box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
+}
+section button:focus {
+  outline: 2px solid hsl(0, 0%, 20%);
+  box-shadow: initial;
+}
+
+/* styles included once splitting js has had a change to split the actual text */
+section.splitting .char {
+  display: inline-block;
+  animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation-delay: calc(var(--char-index) * 50ms + 150ms);
+}
+
+section.splitting button {
+  background: none;
+  border: none;
+  padding: initial;
+  box-shadow: initial;
+}
+section.splitting button .char {
+  background: hsl(0, 0%, 100%);
+  border: 2px solid hsl(0, 0%, 90%);
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  color: hsl(0, 0%, 20%);
+  box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
+  animation-delay: calc(var(--char-index) * 50ms + 650ms);
+  position: relative;
+}
+section.splitting button .char + .char {
+  border-left: none;
+}
+section.splitting button .char:after {
+  content: attr(data-key);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.75rem;
+  margin: 0.1rem;
+}
+section.splitting button .char:hover {
+  background: hsl(0, 0%, 95%);
+  box-shadow: initial;
+}
+section.splitting button:focus .char {
+  box-shadow: initial;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: initial;
+    transform: initial;
+  }
+}

@@ -1,5 +1,7 @@
 # svelte-tutorial
 
+<!-- ADD HOW TO RUN INSTRUCTIONS FROM TYPING ADVENTURE -->
+
 A series of projects to practice with Svelte.
 
 ## [Light Bright](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42)
@@ -55,8 +57,6 @@ Create an online editor which allows to compose and preview markdown syntax.
 ## [Tweet Component](https://svelte.dev/repl/2fd524fb5c7f427891269b4d0928ac15?version=3.12.1)
 
 Create a reusable component to share a quote or even introduce an article.
-
-**Tags**: readable, custom store
 
 ## [Typing Adventure](https://codepen.io/borntofrappe/pen/WNNaGKJ)
 

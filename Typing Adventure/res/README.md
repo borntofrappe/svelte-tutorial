@@ -1,4 +1,4 @@
-# Typing Adventure - UI
+# Typing Adventure UI
 
 A few notes on the design behind the two screen developed for the final application.
 
@@ -11,10 +11,9 @@ The page describing the home screen should introduce the application and most im
 A section describing a heading and a button. Almost trivial.
 
 ```html
-
 <section>
-    <h1>Typing<br/>Adventure</h1>
-    <button>Play</button>
+  <h1>Typing<br />Adventure</h1>
+  <button>Play</button>
 </section>
 ```
 
@@ -40,18 +39,18 @@ As the text is split however, and possibly, the property value pairs are moved t
 
 ```css
 section.splitting button {
-    background: none;
-    border: none;
-    padding: initial;
-    box-shadow: initial;
+  background: none;
+  border: none;
+  padding: initial;
+  box-shadow: initial;
 }
 section.splitting button .char {
-    background: hsl(0, 0%, 100%);
-    border: 2px solid hsl(0, 0%, 90%);
-    padding: 1rem 1.5rem;
-    font-size: 1.5rem;
-    color: hsl(0, 0%, 20%);
-    box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
+  background: hsl(0, 0%, 100%);
+  border: 2px solid hsl(0, 0%, 90%);
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  color: hsl(0, 0%, 20%);
+  box-shadow: 0 1px 5px hsl(0, 0%, 0%, 0.2);
 }
 ```
 
@@ -63,8 +62,8 @@ It is finally here that the styles specified for the container with a class of `
 
 ```js
 if (window.Splitting) {
-    const target = document.querySelector('section');
-    Splitting({ target });
+  const target = document.querySelector('section');
+  Splitting({ target });
 }
 ```
 
@@ -84,19 +83,18 @@ This allows to already split the text described both in the heading and the butt
 
 ```css
 section.splitting button .char:after {
-    content: attr(data-key);
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: 0.75rem;
-    margin: 0.1rem;
+  content: attr(data-key);
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.75rem;
+  margin: 0.1rem;
 }
 ```
 
 ### Accessibility
 
 Inspired by [this post](https://css-irl.info/how-to-accessibly-split-text/) I included an attribute of `data-label` on the heading and button, and I specified an `aria-hidden` attribute on each span element describing the individual words to hide them from assistive technologies.
-
 
 ## Play Screen
 
@@ -110,7 +108,9 @@ The script is thusly updated to focus the use of Splitting JS on the heading onl
 // add a button for each character in the qwerty string describing the keyboard
 const keyboard = document.querySelector('.keyboard');
 const keys = 'qwertyuiopasdfghjklzxcvbnm';
-keyboard.innerHTML = [...keys].map(char => `<button>${char}</button>`).join('');
+keyboard.innerHTML = [...keys]
+  .map((char) => `<button>${char}</button>`)
+  .join('');
 ```
 
 Ultimately, it is necessary to consider a `click` event, but since the project is mostly devoted to the appearance of the play screen, these three lines suffice to detail the keyboard.
