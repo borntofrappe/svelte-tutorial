@@ -88,7 +88,7 @@ Create icons of different size using the Canvas API and the experimental Path2D 
 
 ## [Spring Motion](https://svelte.dev/repl/27163986809341a5a7c97cbc4746d01b)
 
-Practice with the svelte/motion module and spring animation.
+Practice with the motion module and spring animation.
 
 ## [Thermometer App](https://codesandbox.io/s/thermometer-app-h8rho)
 
