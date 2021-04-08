@@ -1,76 +1,132 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-        <title>Tweet Component</title>
+    <title>Tweet Component</title>
 
-        <link rel="stylesheet" href="/global.css" />
-        <link rel="stylesheet" href="/bundle.css" />
+    <link rel="icon" type="image/png" href="/icon.svg" />
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/build/bundle.css" />
 
-        <script defer src="/bundle.js"></script>
-    </head>
+    <script defer src="/build/bundle.js"></script>
+  </head>
 
-    <body>
-        <!-- assets used in the project -->
-        <svg style="display: none;" viewBox="0 0 100 100">
-            <!-- profile picture -->
-            <symbol id="avatar">
-                <g transform="translate(50 50)">
-                    <g>
-                        <!-- body -->
-                        <g stroke="hsl(0, 25%, 95%)" fill="hsl(0, 25%, 95%)" stroke-linejoin="round" stroke-linecap="round">
-                            <path stroke-width="10" d="M -20 35 l 2.5 -45 a 17.5 17.5 0 0 1 35 0 l 2.5 45"></path>
-                            <path d="M -15 35 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0"></path>
-                        </g>
-                        <!-- comb -->
-                        <g fill="hsl(350, 75%, 50%)" stroke="hsl(350, 75%, 50%)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-                            <path d="M 0 -25 c -3 -5 -6 -23 0 -23 c 6 0 3 18 0 23"></path>
-                            <path d="M 0 18 c -5 5 -8 30 0 30 c 8 0 5 -23 0 -30"></path>
-                        </g>
-                        <!-- beak -->
-                        <g stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-                            <g transform="translate(0 5)">
-                                <path fill="hsl(35, 95%, 50%)" stroke="hsl(35, 95%, 50%)" d="M 0 0 q -7.5 0 -15 9 q 7.5 7.5 15 7.5 q 7.5 0 15 -7.5 q -7.5 -9 -15 -9"></path>
-                                <path fill="hsl(35, 100%, 60%)" stroke="hsl(35, 100%, 60%)" d="M 0 0 q -7.5 0 -15 9 a 70 70 0 0 0 30 0 q -7.5 -9 -15 -9"></path>
-                            </g>
-                        </g>
-                        <!-- eyes -->
-                        <g fill="hsl(205, 15%, 15%)">
-                            <circle cx="-15" cy="0" r="3.5"></circle>
-                            <circle cx="15" cy="0" r="3.5"></circle>
-                        </g>
-                    </g>
-                </g>
-            </symbol>
-            <!-- reply -->
-            <symbol id="reply">
-                <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
-                    <path d="M 90 75 v -5 a 40 40 0 0 0 -40 -40 h -50 l 25 -25 m -25 25 l 25 25" />
-                </g>
-            </symbol>
-            <!-- retweet -->
-            <symbol id="retweet">
-                <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
-                    <path id="retweet--line" d="M 12 15 h 56 a 10 10 0 0 1 10 10 v 30 l 12 -12 m -12 12 l -12 -12" />
-                    <use href="#retweet--line" transform="translate(90 90) scale(-1 -1)" />
-                </g>
-            </symbol>
-            <!-- like -->
-            <symbol id="like">
-                <g transform="translate(5 5)" stroke-width="10" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" fill="none">
-                    <path d="M 45 33.75 a 22.5 22.5 0 0 1 45 0 q 0 25 -45 50 q -45 -25 -45 -50 a 22.5 22.5 0 0 1 45 0" />
-                </g>
-            </symbol>
-            <!-- options -->
-            <symbol id="options">
-                <g transform="translate(10 50)" fill="currentColor">
-                    <circle id="options--circle" cx="0" cy="0" r="10" />
-                    <use href="#options--circle" transform="translate(40 0)" />
-                    <use href="#options--circle" transform="translate(80 0)" />
-                </g>
-            </symbol>
-        </svg>
-    </body>
+  <body>
+    <!-- assets used in the project -->
+    <svg style="display: none" viewBox="0 0 100 100">
+      <!-- profile picture -->
+      <symbol id="avatar">
+        <g transform="translate(50 50)">
+          <g>
+            <!-- body -->
+            <g
+              stroke="hsl(0, 25%, 95%)"
+              fill="hsl(0, 25%, 95%)"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+            >
+              <path
+                stroke-width="10"
+                d="M -20 35 l 2.5 -45 a 17.5 17.5 0 0 1 35 0 l 2.5 45"
+              ></path>
+              <path
+                d="M -15 35 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0 a 5 5 0 0 0 10 0"
+              ></path>
+            </g>
+            <!-- comb -->
+            <g
+              fill="hsl(350, 75%, 50%)"
+              stroke="hsl(350, 75%, 50%)"
+              stroke-width="4"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+            >
+              <path d="M 0 -25 c -3 -5 -6 -23 0 -23 c 6 0 3 18 0 23"></path>
+              <path d="M 0 18 c -5 5 -8 30 0 30 c 8 0 5 -23 0 -30"></path>
+            </g>
+            <!-- beak -->
+            <g stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+              <g transform="translate(0 5)">
+                <path
+                  fill="hsl(35, 95%, 50%)"
+                  stroke="hsl(35, 95%, 50%)"
+                  d="M 0 0 q -7.5 0 -15 9 q 7.5 7.5 15 7.5 q 7.5 0 15 -7.5 q -7.5 -9 -15 -9"
+                ></path>
+                <path
+                  fill="hsl(35, 100%, 60%)"
+                  stroke="hsl(35, 100%, 60%)"
+                  d="M 0 0 q -7.5 0 -15 9 a 70 70 0 0 0 30 0 q -7.5 -9 -15 -9"
+                ></path>
+              </g>
+            </g>
+            <!-- eyes -->
+            <g fill="hsl(205, 15%, 15%)">
+              <circle cx="-15" cy="0" r="3.5"></circle>
+              <circle cx="15" cy="0" r="3.5"></circle>
+            </g>
+          </g>
+        </g>
+      </symbol>
+      <!-- reply -->
+      <symbol id="reply">
+        <g
+          transform="translate(5 5)"
+          stroke-width="10"
+          stroke="currentColor"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          fill="none"
+        >
+          <path
+            d="M 90 75 v -5 a 40 40 0 0 0 -40 -40 h -50 l 25 -25 m -25 25 l 25 25"
+          />
+        </g>
+      </symbol>
+      <!-- retweet -->
+      <symbol id="retweet">
+        <g
+          transform="translate(5 5)"
+          stroke-width="10"
+          stroke="currentColor"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          fill="none"
+        >
+          <path
+            id="retweet--line"
+            d="M 12 15 h 56 a 10 10 0 0 1 10 10 v 30 l 12 -12 m -12 12 l -12 -12"
+          />
+          <use
+            href="#retweet--line"
+            transform="translate(90 90) scale(-1 -1)"
+          />
+        </g>
+      </symbol>
+      <!-- like -->
+      <symbol id="like">
+        <g
+          transform="translate(5 5)"
+          stroke-width="10"
+          stroke="currentColor"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          fill="none"
+        >
+          <path
+            d="M 45 33.75 a 22.5 22.5 0 0 1 45 0 q 0 25 -45 50 q -45 -25 -45 -50 a 22.5 22.5 0 0 1 45 0"
+          />
+        </g>
+      </symbol>
+      <!-- options -->
+      <symbol id="options">
+        <g transform="translate(10 50)" fill="currentColor">
+          <circle id="options--circle" cx="0" cy="0" r="10" />
+          <use href="#options--circle" transform="translate(40 0)" />
+          <use href="#options--circle" transform="translate(80 0)" />
+        </g>
+      </symbol>
+    </svg>
+  </body>
 </html>

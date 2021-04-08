@@ -8,8 +8,8 @@ const props = {
   up to seven arguments
    year month (0-11) day hours minutes seconds milliseconds
   */
-  date: '2019 10 5 18 47 20',
-  message: 'Creating a reusable component for hopefully my soon-to-be blog. With a readable store to update the timestamp!',
+  date: '2021 3 8 10 17 52',
+  message: 'Creating a reusable component for a hypothetical blog. With a readable store to update the timestamp!',
 };
 
 
