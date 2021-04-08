@@ -1,4 +1,4 @@
-# Bit Shifting
+# [Bit Shifting](https://svelte.dev/repl/a3bd24b328ce4f318b7b045381faf6a4)
 
 This project begun as a way to replicate [a demo](https://github.com/borntofrappe/code/tree/master/Bit%20Shifting) introduced in the [borntofrappe/code](https://github.com/borntofrappe/code) repository, to illustrate a binary counter and how the bitwise operator `>>`.
 
