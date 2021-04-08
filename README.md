@@ -92,7 +92,7 @@ Practice with the motion module and spring animation.
 
 ## [Thermometer App](https://codesandbox.io/s/thermometer-app-h8rho)
 
-Explore the reactive nature of Svelte, to create an interactive application describing the temperature in a given range.
+Explore the reactive nature of Svelte to create an interactive application describing the temperature in a given range.
 
 ## [Bit Shifting](https://svelte.dev/repl/a3bd24b328ce4f318b7b045381faf6a4)
 

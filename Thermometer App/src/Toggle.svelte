@@ -10,10 +10,12 @@
 
 <label>
   {#if checked}
-  <span class="visibility-hidden">Switch to light palette</span>
-  {@html icons.sun} {:else}
-  <span class="visibility-hidden">Switch to dark palette</span>
-  {@html icons.moon} {/if}
+    <span class="visibility-hidden">Switch to light palette</span>
+    {@html icons.sun}
+  {:else}
+    <span class="visibility-hidden">Switch to dark palette</span>
+    {@html icons.moon}
+  {/if}
 
   <input type="checkbox" bind:checked />
 </label>
@@ -25,7 +27,7 @@
     height: 1.75rem;
   }
 
-  label svg {
+  label :global(svg) {
     display: block;
     width: 100%;
     height: auto;

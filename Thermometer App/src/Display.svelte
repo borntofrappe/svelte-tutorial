@@ -75,19 +75,20 @@
   >
     {value}°
   </text>
+
   <text
     fill="currentColor"
-    text-anchor="middle"
     style="word-spacing: -1px;"
     y="16"
     font-size="8"
     font-weight="600"
   >
-    {min} - {max}
+    <tspan x="-2" text-anchor="end">{min}</tspan>
+    <tspan x="2" text-anchor="start">{max}</tspan>
   </text>
 
   <path
-    d="{arc()}"
+    d={arc()}
     fill="none"
     stroke="url(#gradient-highlight)"
     stroke-width="8"
