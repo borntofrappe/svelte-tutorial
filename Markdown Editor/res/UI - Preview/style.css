@@ -12,15 +12,6 @@ body {
   flex-direction: column;
   align-items: center;
 }
-
-/* cap the width of the wrapping container */
-.markdown-editor {
-  max-width: 600px;
-  width: 90vw;
-  line-height: 2.25;
-  padding: 1rem;
-}
-
 /* display the controls in a row, pushing the last control to the very right end */
 nav {
   display: flex;
@@ -43,62 +34,52 @@ nav button svg {
   display: block;
 }
 nav button:hover {
-  color: hsl(100, 90%, 35%);
+  color: hsl(100, 90%, 30%);
 }
 nav button:focus {
-  outline-color: hsl(100, 90%, 35%);
+  outline-color: hsl(100, 90%, 30%);
 }
 
-/* stretch the textarea to cover the available width and a fixed portion of the height */
-textarea {
-  padding: 1rem;
-  line-height: 1.5;
-  width: 100%;
-  height: 80vh;
-  font-family: 'Overpass', sans-serif;
-  font-size: 1rem;
-  resize: none;
+/* include a few values to style the preview
+modify the properties of the elements in the .preview class to tailor the appearance of the preview
+*/
+.preview {
+  line-height: 2;
+  max-width: 550px;
+  width: 90vw;
+  padding: 0 1.5rem;
 }
-textarea:focus {
-  outline: 2px solid hsl(100, 90%, 35%);
-}
-
-/* styles for the preview */
-a {
-  color: hsl(100, 90%, 35%);
+.preview a {
+  color: hsl(100, 90%, 30%);
   font-weight: 700;
 }
-h1 {
+.preview h1 {
   font-weight: 700;
   font-size: 1.75rem;
 }
-h2 {
+.preview h2 {
   font-weight: 700;
   font-size: 1.5rem;
 }
-/* style the pre and code elements in case syntax highlighting is not provided through a class (higher specificity) */
-pre {
+/* style the pre and code elements in case prism.js is not present */
+.preview pre {
   overflow-x: auto;
   background: rgb(40, 40, 40);
   color: hsl(0, 0%, 100%);
   border-radius: 5px;
   margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
 }
-pre code {
+.preview pre code {
   background: none;
   border-radius: initial;
   padding-left: initial;
 }
-code {
+.preview code {
   color: hsl(0, 0%, 100%);
   background: rgb(40, 40, 40);
   padding: 0.25rem;
   border-radius: 3px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.8rem;
-}
-
-ul {
-  list-style-position: inside;
 }

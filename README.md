@@ -48,13 +48,9 @@ Create a series of independent applications for a hypothetical smart watch.
 
 Recreate the basic structure of the popular puzzle game which allows to draw stylized figures with a pixelated look.
 
-**Tags**: svg, table, transition
-
 ## [Markdown Editor](https://codepen.io/borntofrappe/pen/VwwyGzR)
 
 Create an online editor which allows to compose and preview markdown syntax.
-
-**Tags**: markdown, markup, local storage
 
 ## [Tweet Component](https://svelte.dev/repl/2fd524fb5c7f427891269b4d0928ac15?version=3.12.1)
 

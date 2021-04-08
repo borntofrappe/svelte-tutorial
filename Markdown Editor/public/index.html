@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-        <title>Markdown Editor</title>
+    <title>Markdown Editor</title>
 
-        <link rel="stylesheet" href="/global.css" />
-        <link rel="stylesheet" href="/bundle.css" />
+    <link rel="icon" type="image/png" href="/icon.svg" />
+    <link rel="stylesheet" href="/global.css" />
+    <link rel="stylesheet" href="/build/bundle.css" />
 
-        <!-- import marked and dompurify -->
-        <script defer src="https://unpkg.com/marked@0.7.0/lib/marked.js"></script>
-        <script defer src="https://unpkg.com/dompurify@2.0.7/dist/purify.min.js"></script>
-        <script defer src="/bundle.js"></script>
-    </head>
+    <!-- import marked and dompurify -->
+    <script defer src="https://unpkg.com/marked@2.0.1/lib/marked.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/dompurify@2.2.7/dist/purify.min.js"
+    ></script>
 
-    <body></body>
+    <script defer src="/build/bundle.js"></script>
+  </head>
+
+  <body></body>
 </html>
