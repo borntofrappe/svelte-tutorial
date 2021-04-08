@@ -1,13 +1,13 @@
 <script>
-  import { tweened } from "svelte/motion";
-  import { circInOut } from "svelte/easing";
-  import { createEventDispatcher } from "svelte";
-  import { randomItem } from "./utils.js";
+  import { tweened } from 'svelte/motion';
+  import { circInOut } from 'svelte/easing';
+  import { createEventDispatcher } from 'svelte';
+  import { randomItem } from './utils.js';
 
   // the idea is to dispatch a _toggle_ event when the checkbox is toggled
   const dispatch = createEventDispatcher();
   export let checked = false;
-  $: dispatch("toggle", checked);
+  $: dispatch('toggle', checked);
 
   // hue describing the color of the saber
   // the idea is to update the hue every time the checkbox is toggled to true
@@ -15,12 +15,12 @@
   let hue = randomItem(sabers);
 
   // text included in the graphic and the the aria-label attribute
-  $: label = checked ? "Edit Crawl" : "Show Crawl";
+  $: label = checked ? 'Edit Crawl' : 'Show Crawl';
 
   // instead of aCSS transition, create two variables with the svelte's motion module
   const options = {
     duration: 500,
-    easing: circInOut
+    easing: circInOut,
   };
   let translateText = tweened(0, options);
   let offsetStroke = tweened(49, options);
@@ -36,6 +36,49 @@
     offsetStroke.set(49);
   }
 </script>
+
+<label>
+  <input bind:checked aria-label={label} type="checkbox" />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3 98 6">
+    <g
+      transform="translate(12.25 0)"
+      stroke-linecap="round"
+      fill="none"
+      stroke="hsl({hue}, 100%, 65%)"
+      stroke-width="3.5"
+    >
+      <path
+        id="saber"
+        d="M 0 0 h 48"
+        stroke-dasharray="49"
+        stroke-dashoffset={$offsetStroke}
+      />
+    </g>
+    <g fill="hsl(0, 0%, 80%)" stroke="none">
+      <path
+        d="M 0 0 a 2.5 2.5 0 0 1 2.5 -2.5 h 13 v 5 h -13 a 2.5 2.5 0 0 1 -2.5 -2.5"
+      />
+    </g>
+    <g id="bands" opacity="0.5" fill="hsl(0, 0%, 40%)" stroke="none">
+      <g transform="translate(5 0)">
+        <rect y="-3" width="4" height="1.5" rx="0.75" />
+        <rect y="-0.75" width="4" height="1.5" rx="0.75" />
+        <rect y="1.5" width="4" height="1.5" rx="0.75" />
+      </g>
+      <rect x="11" y="-3" width="2.5" height="6" rx="1.25" />
+    </g>
+    <g transform="translate(20 0)">
+      <g id="text" transform="translate({$translateText} 0)">
+        <text
+          fill="hsl(0, 0%, 100%)"
+          y="1.2"
+          font-size="4"
+          style="font-family: monospace; letter-spacing: 0.5px;">{label}</text
+        >
+      </g>
+    </g>
+  </svg>
+</label>
 
 <style>
   /* position the the input element above the label */
@@ -72,28 +115,3 @@
     opacity: 1;
   }
 </style>
-
-<label>
-  <input bind:checked aria-label="{label}" type="checkbox" />
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3 98 6">
-    <g transform="translate(12.25 0)" stroke-linecap="round" fill="none" stroke="hsl({hue}, 100%, 65%)" stroke-width="3.5">
-      <path id="saber" d="M 0 0 h 48" stroke-dasharray="49" stroke-dashoffset="{$offsetStroke}" />
-    </g>
-    <g fill="hsl(0, 0%, 80%)" stroke="none">
-      <path d="M 0 0 a 2.5 2.5 0 0 1 2.5 -2.5 h 13 v 5 h -13 a 2.5 2.5 0 0 1 -2.5 -2.5" />
-    </g>
-    <g id="bands" opacity="0.5" fill="hsl(0, 0%, 40%)" stroke="none">
-      <g transform="translate(5 0)">
-        <rect y="-3" width="4" height="1.5" rx="0.75" />
-        <rect y="-0.75" width="4" height="1.5" rx="0.75" />
-        <rect y="1.5" width="4" height="1.5" rx="0.75" />
-      </g>
-      <rect x="11" y="-3" width="2.5" height="6" rx="1.25" />
-    </g>
-    <g transform="translate(20 0)">
-      <g id="text" transform="translate({$translateText} 0)">
-        <text fill="hsl(0, 0%, 100%)" y="1.2" font-size="4" style="font-family: monospace; letter-spacing: 0.5px;">{label}</text>
-      </g>
-    </g>
-  </svg>
-</label>

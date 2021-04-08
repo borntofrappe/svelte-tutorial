@@ -1,12 +1,32 @@
 <script>
-  import Toggle from "./Toggle.svelte";
-  import Crawl from "./Crawl.svelte";
+  import Toggle from './Toggle.svelte';
+  import Crawl from './Crawl.svelte';
 
   let checked = false;
-  let title = "The Phantom Menace";
+  let title = 'The Phantom Menace';
   let text =
-    "Turmoil has engulfed the Galactic Republic. The taxation of trade routes to outlying star systems is in dispute. Hoping to resolve the matter with a blockade of deadly battleships, the greedy Trade Federation has stopped all shipping to the small planet of Naboo. While the Congress of the Republic endlessly debates this alarming chain of events, the Supreme Chancellor has secretly dispatched two Jedi Knights, the guardians of peace and justice in the galaxy, to settle the conflict....";
+    'Turmoil has engulfed the Galactic Republic. The taxation of trade routes to outlying star systems is in dispute. Hoping to resolve the matter with a blockade of deadly battleships, the greedy Trade Federation has stopped all shipping to the small planet of Naboo. While the Congress of the Republic endlessly debates this alarming chain of events, the Supreme Chancellor has secretly dispatched two Jedi Knights, the guardians of peace and justice in the galaxy, to settle the conflict....';
 </script>
+
+<!-- display the toggle, and depending on its state show the animated crawl or the form allowing to change the input values -->
+<div>
+  <Toggle {checked} on:toggle={(e) => (checked = e.detail)} />
+  {#if checked}
+    <!-- following the end event reset checked to false -->
+    <Crawl
+      on:end={() => {
+        checked = false;
+      }}
+      {title}
+      {text}
+    />
+  {:else}
+    <form on:submit|preventDefault>
+      <input type="text" bind:value={title} />
+      <textarea bind:value={text} />
+    </form>
+  {/if}
+</div>
 
 <style>
   :global(body) {
@@ -23,7 +43,7 @@
     margin: 1rem auto;
     align-items: center;
   }
-  div > * + * {
+  div > :global(* + *) {
     margin-top: 1rem;
   }
   /* display the contents of the form in a column */
@@ -37,15 +57,3 @@
     resize: none;
   }
 </style>
-
-<!-- display the toggle, and depending on its state show the animated crawl or the form allowing to change the input values -->
-<div>
-  <Toggle {checked} on:toggle="{(e) => checked = e.detail}" /> {#if checked}
-  <!-- following the end event reset checked to false -->
-  <Crawl on:end="{() => {checked = false;}}" {title} {text} /> {:else}
-  <form on:submit|preventDefault>
-    <input type="text" bind:value="{title}" />
-    <textarea bind:value="{text}"></textarea>
-  </form>
-  {/if}
-</div>

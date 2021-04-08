@@ -1,23 +1,105 @@
-# Star Wars Crawl
+*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
-## Links
+---
 
-- [Svelte's REPL](https://svelte.dev/repl/545f0f3393954c4e8f06b1c0a8786475)
+# svelte app
 
-- [CodeSandbox Demo](https://qbguo.codesandbox.io/)
+This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
 
-## Goal
+To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-Create an interactive form allowing to edit and show the opening crawls from a Star Wars movie.
+```bash
+npx degit sveltejs/template svelte-app
+cd svelte-app
+```
 
-## Notes
+*Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
-This project begun while developing a toggle out of a light saber, and is deeply inspired by [this article @lemondefr](https://www.lemonde.fr/pixels/article/2019/12/18/star-wars-vous-voulez-davantage-d-episodes-generez-un-scenario-avec-notre-starwarsotron_6023326_4408996.html).
 
-To develop the final result, a few smaller projects have been developed and saved in the **res** folder:
+## Get started
 
-- the toggle, using SVG syntax ans CSS transition properties to show a blue-colored saber.
+Install the dependencies...
 
-- the Star Wars title, redesigned from the first version first created for a React project.
+```bash
+cd svelte-app
+npm install
+```
 
-- a playground to experiment with 3D transform properties. This project ultimately lead me to the markup and property value pairs necessary for the crawling animation.
+...then start [Rollup](https://rollupjs.org):
+
+```bash
+npm run dev
+```
+
+Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+
+By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
+
+If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
+
+## Building and running in production mode
+
+To create an optimised version of the app:
+
+```bash
+npm run build
+```
+
+You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+
+
+## Single-page app mode
+
+By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+
+If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+
+```js
+"start": "sirv public --single"
+```
+
+## Using TypeScript
+
+This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
+
+```bash
+node scripts/setupTypeScript.js
+```
+
+Or remove the script via:
+
+```bash
+rm scripts/setupTypeScript.js
+```
+
+## Deploying to the web
+
+### With [Vercel](https://vercel.com)
+
+Install `vercel` if you haven't already:
+
+```bash
+npm install -g vercel
+```
+
+Then, from within your project folder:
+
+```bash
+cd public
+vercel deploy --name my-project
+```
+
+### With [surge](https://surge.sh/)
+
+Install `surge` if you haven't already:
+
+```bash
+npm install -g surge
+```
+
+Then, from within your project folder:
+
+```bash
+npm run build
+surge public my-project.surge.sh
+```
