@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Concentration - Card UI</title>
+  </head>
+  <body>
+    <!-- markup
+        article, wrapping container
+            div, front
+            div, back
+            button
+
+        the button is stretched to cover the size of the entire article, so to react to a click event on the entire surface
+        -->
+    <article class="card">
+      <div class="face front">
+        <h1>5<span style="color: red">♦</span></h1>
+      </div>
+      <div class="face back"></div>
+      <button aria-label="Flip card"></button>
+    </article>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,8 +1,26 @@
 # svelte-tutorial
 
-<!-- ADD HOW TO RUN INSTRUCTIONS FROM TYPING ADVENTURE -->
-
 A series of projects to practice with Svelte.
+
+Each project should have a link redirecting to a live demo. That being said, it is possible to set up an environment to run the projects locally:
+
+1. move into the desired folder
+
+   ```bash
+   cd "Light Bright"
+   ```
+
+2. install the necessary packages
+
+   ```bash
+   npm install
+   ```
+
+3. `npm run dev`
+
+   ```bash
+   npm run dev
+   ```
 
 ## [Light Bright](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42)
 
@@ -35,8 +53,6 @@ Compute the wind chill index on the basis of the input temperature and speed.
 ## [Concentration](https://codepen.io/borntofrappe/pen/yLLVNME)
 
 Create a memory-based game in which cards are flipped and matched in pairs.
-
-<!-- MISSING RESOURCES -->
 
 ## [Infinity Maze](https://codepen.io/borntofrappe/pen/pooeyww)
 
