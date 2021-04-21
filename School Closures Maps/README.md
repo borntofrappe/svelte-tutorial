@@ -8,7 +8,7 @@ Similarly to the cited project, the data is retrieved from the [UNESCO website](
 
 ## npm
 
-The project relies on the `d3` and `topojson` libraries. With a production website it would be fitting to install only the necessary `d3-` modules, but to explore the library it is more convenient to include the full version.
+The maps rely on the `d3` and `topojson` libraries. With a production website it would be fitting to install only the necessary `d3-` modules, but to explore the library it is more convenient to include the full version.
 
 ```bash
 npm install d3
@@ -17,13 +17,13 @@ npm install topojson
 
 ## rollup
 
-To include data from a `.csv` file it is necessary to update the configuration behind the rollup bundler. Most practically, this means installing the `@rollup/plugin-dsv` plugin.
+To include data from a `.csv` file it is necessary to update the rollup bundler. Most practically, this means installing the `@rollup/plugin-dsv` plugin.
 
 ```bash
 npm install @rollup/plugin-dsv --save-dev
 ```
 
-In `rollup.config.js` then, the plugin is included in a `plugin` field.
+With the package installed, the plugin is included in the `plugin` field of `rollup.config.js`.
 
 ```js
 import dsv from '@rollup/plugin-dsv';
@@ -35,7 +35,7 @@ export default {
 This is all that is necessary to then import the data in array format.
 
 ```js
-import data from '../static/covid_impact_education.csv';
+import data from '../data/covid_impact_education.csv';
 ```
 
 ### warn
@@ -81,3 +81,27 @@ In a more refined example, the block can be used to provide a default visual whi
 <!-- error visual -->
 {/await}
 ```
+
+## Binding
+
+The second demo, `Interactive Dasboard`, provides a solid example of the binding allowed by Svelte. The input of type `checkbox` is bound to a boolean to toggle the animation.
+
+```html
+<script>
+  let isAnimating = false;
+</script>
+
+<input type="checkbox" bind:checked="{isAnimating}" />
+```
+
+The input of type `range` is instead bound to the integer value describing the day.
+
+```html
+<script>
+  let day = 0;
+</script>
+
+<input bind:value="{day}" type="range" min="{0}" max="{dates.length" - 1} />
+```
+
+The animation ultimately calls a function which updates the `day` variable, and this highlights how the binding goes both ways: update `day` to have the change highlighted in the slider, update the slider to change the day.

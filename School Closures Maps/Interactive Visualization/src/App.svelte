@@ -66,7 +66,7 @@
 </script>
 
 <svelte:head>
-  <title>Interactive Dashboard</title>
+  <title>Interactive Visualization</title>
 </svelte:head>
 
 <section>

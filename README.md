@@ -124,4 +124,4 @@ Lean on Sapper and then SvelteKit to develop a single page app with multiple rou
 
 ## School Closures Maps
 
-Highlight school closure at a global scale with a choropleth map and an interactive dashboard.
+Highlight school closure at a global scale with a choropleth map and an interactive visualization.
