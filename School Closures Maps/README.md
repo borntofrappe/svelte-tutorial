@@ -4,7 +4,7 @@ The project can be considered a continuation of [School Closures Choropleth Map]
 
 A first visualization tries to replicate the cited choropleth map, to introduce how the mapping libraries are incorporated in Svelte. A second visualization includes the map in an interactive dashboard.
 
-Here I try to annotate a note or two of a few aspects I'd like to remember.
+Similarly to the cited project, the data is retrieved from the [UNESCO website](https://en.unesco.org/covid19/educationresponse), and the source is modified to have a unique identifier matching that available from the topojson object necessary to draw the world.
 
 ## npm
 
