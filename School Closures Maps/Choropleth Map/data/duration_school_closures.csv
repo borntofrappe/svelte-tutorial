@@ -1,0 +1,211 @@
+id,country,weeks
+004,Afghanistan,31
+008,Albania,24
+012,Algeria,21
+020,Andorra,16
+024,Angola,46
+660,Anguilla,16
+028,Antigua and Barbuda,41
+032,Argentina,46
+051,Armenia,12
+533,Aruba,13
+036,Australia,27
+040,Austria,27
+031,Azerbaijan,37
+044,Bahamas,41
+048,Bahrain,44
+050,Bangladesh,47
+052,Barbados,31
+112,Belarus,0
+056,Belgium,15
+084,Belize,38
+204,Benin,15
+060,Bermuda,29
+064,Bhutan,49
+068,Bolivia,47
+070,Bosnia and Herzegovina,38
+072,Botswana,20
+076,Brazil,44
+092,British Virgin Islands,40
+096,Brunei Darussalam,17
+100,Bulgaria,32
+854,Burkina Faso,14
+108,Burundi,0
+132,Cabo Verde,20
+116,Cambodia,29
+120,Cameroon,18
+124,Canada,40
+136,Cayman Islands,17
+140,Central African republic,23
+148,Chad,28
+152,Chile,44
+156,China,27
+170,Colombia,43
+174,Comoros,35
+178,Congo,26
+184,Cook Islands,4
+188,Costa Rica,46
+384,Cote d'Ivoire,13
+191,Croatia,10
+192,Cuba,24
+531,Curaçao,9
+196,Cyprus,25
+203,Czechia,38
+408,Democratic People's Republic of Korea,36
+180,Democratic Republic of the Congo,33
+208,Denmark,23
+262,Djibouti,7
+212,Dominica,17
+214,Dominican Republic,32
+218,Ecuador,44
+818,Egypt,19
+222,El Salvador,45
+226,Equatorial Guinea,22
+232,Eritrea,49
+233,Estonia,16
+748,Eswatini,49
+231,Ethiopia,31
+234,Faroe Islands,7
+242,Fiji,13
+246,Finland,23
+250,France,10
+266,Gabon,21
+270,Gambia,28
+268,Georgia,32
+276,Germany,28
+288,Ghana,40
+292,Gibraltar,20
+300,Greece,32
+304,Greenland,4
+308,Grenada,45
+320,Guatemala,45
+324,Guinea,22
+624,Guinea-Bissau,23
+328,Guyana,45
+332,Haiti,31
+340,Honduras,46
+348,Hungary,33
+352,Iceland,6
+356,India,51
+360,Indonesia,48
+364,Iran,45
+368,Iraq,50
+372,Ireland,26
+376,Israel,33
+380,Italy,35
+388,Jamaica,37
+392,Japan,11
+400,Jordan,42
+398,Kazakhstan,36
+404,Kenya,37
+296,Kiribati,3
+414,Kuwait,42
+417,Kyrgyzstan,38
+418,Lao PDR,19
+428,Latvia,36
+422,Lebanon,37
+426,Lesotho,41
+430,Liberia,37
+434,Libya,40
+438,Liechtenstein,13
+440,Lithuania,29
+442,Luxembourg,15
+450,Madagascar,16
+454,Malawi,26
+458,Malaysia,35
+462,Maldives,16
+466,Mali,17
+470,Malta,19
+584,Marshall Islands,2
+478,Mauritania,23
+480,Mauritius,8
+484,Mexico,44
+583,Micronesia,24
+492,Monaco,13
+496,Mongolia,34
+499,Montenegro,36
+500,Montserrat,22
+504,Morocco,21
+508,Mozambique,45
+104,Myanmar,48
+516,Namibia,25
+520,Nauru,0
+524,Nepal,53
+528,Netherlands,22
+554,New Zealand,9
+558,Nicaragua,15
+562,Niger,16
+566,Nigeria,24
+570,Niue,1
+807,North Macedonia,43
+578,Norway,19
+512,Oman,26
+586,Pakistan,33
+585,Palau,8
+275,Palestine,49
+591,Panama,46
+598,Papua New Guinea,6
+600,Paraguay,40
+604,Peru,42
+608,Philippines,34
+616,Poland,35
+620,Portugal,21
+634,Qatar,41
+410,Republic of Korea,41
+498,Republic of Moldova,16
+642,Romania,32
+643,Russian Federation,13
+646,Rwanda,47
+659,Saint Kitts and Nevis,11
+662,Saint Lucia,40
+670,Saint Vincent and the Grenadines,28
+882,Samoa,4
+674,San Marino,33
+678,São Tomé and Príncipe,19
+682,Saudi Arabia,41
+686,Senegal,22
+688,Serbia,34
+690,Seychelles,19
+694,Sierra Leone,14
+702,Singapore,11
+663,Saint Marteen,28
+703,Slovakia,37
+705,Slovenia,34
+090,Solomon Islands,7
+706,Somalia,15
+710,South Africa,29
+728,South Sudan,49
+724,Spain,15
+144,Sri Lanka,43
+729,Sudan,22
+740,Suriname,20
+744,Svalbard,19
+752,Sweden,23
+756,Switzerland,6
+760,Syrian Arab Republic,29
+762,Tajikistan,0
+764,Thailand,25
+626,Timor-Leste,11
+768,Togo,14
+772,Tokelau,4
+776,Tonga,3
+780,Trinidad and Tobago,40
+788,Tunisia,28
+792,Turkey,38
+795,Turkmenistan,0
+796,Turks and Caicos Island,21
+798,Tuvalu,12
+800,Uganda,50
+804,Ukraine,19
+784,United Arab Emirates,42
+826,United Kingdom of Great Britain and Northern Ireland,27
+834,United Republic of Tanzania,15
+840,United States of America,47
+858,Uruguay,27
+860,Uzbekistan,12
+548,Vanuatu,4
+862,Venezuela,38
+704,Viet Nam,14
+887,Yemen,19
+894,Zambia,18
+716,Zimbabwe,34
