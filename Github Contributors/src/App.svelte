@@ -1,32 +1,29 @@
 <script>
   import Contributor from './Contributor.svelte';
+  import { data } from './data.js';
 
-  const data = [
-    {
-      name: 'Rachel',
-      commits: 232,
-      additions: 2100,
-      deletions: 1925,
-    },
-    {
-      name: 'John',
-      commits: 198,
-      additions: 1225,
-      deletions: 1176,
-    },
-    {
-      name: 'Eliza',
-      commits: 14,
-      additions: 178,
-      deletions: 152,
-    },
-    {
-      name: 'Timothy',
-      commits: 8,
-      additions: 98,
-      deletions: 77,
-    },
-  ];
+  const dataContributors = Object.entries(
+    data.reduce((acc, curr) => {
+      const { name, additions, deletions } = curr;
+      if (acc[name]) {
+        acc[name].commits += 1;
+        acc[name].additions += additions;
+        acc[name].deletions += deletions;
+      } else {
+        acc[name] = {
+          commits: 1,
+          additions,
+          deletions,
+        };
+      }
+      return acc;
+    }, {})
+  )
+    .map(([name, d]) => ({
+      name,
+      ...d,
+    }))
+    .sort((a, b) => (a.commits < b.commits ? 1 : -1));
 </script>
 
 <svelte:head>
@@ -48,7 +45,7 @@
 </svg>
 
 <div>
-  {#each data as d, index}
+  {#each dataContributors as d, index}
     <Contributor {...d} index={index + 1} />
   {/each}
 </div>
