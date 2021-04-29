@@ -11,3 +11,18 @@ The visualization is composed of two main areas: a line chart highlighting the n
 In the `res` folder I dedicate a couple of projects to the building blocks of the application:
 
 - `Contributor` describes the design of the component for individual contributors.
+
+- `Data Contributions` tries to create the data ultimately necessary for the visualization.
+
+  `data` is built to be an array of objects detailing a name, date, as well as a number of additions and deletions.
+
+  ```js
+  /*
+  name,
+  date,
+  additions,
+  deletions
+  */
+  ```
+
+  The idea is to have each object represent a commit. Ultimately, the line chart(s) will consider the number of commits based on the date. In the specific demo, the data considers the different names to reproduce the component for each contributor.
