@@ -1,9 +1,8 @@
 <script>
   export let name;
   export let index;
+  export let totals;
   export let commits;
-  export let additions;
-  export let deletions;
 </script>
 
 <article>
@@ -16,9 +15,9 @@
     <span>#{index}</span>
   </p>
   <p class="history">
-    <span>{commits} commits</span>
-    <span class="addition">{additions} ++</span>
-    <span class="deletion">{deletions} --</span>
+    <span>{totals.commits} commits</span>
+    <span class="addition">{totals.additions} ++</span>
+    <span class="deletion">{totals.deletions} --</span>
   </p>
   <svg class="viz" viewBox="0 0 400 200" width="400" height="200" />
 </article>

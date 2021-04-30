@@ -125,7 +125,3 @@ Lean on Sapper and then SvelteKit to develop a single page app with multiple rou
 ## School Closures Maps
 
 Highlight school closure at a global scale with a choropleth map and an interactive visualization.
-
-## [Github Contributors]()
-
-Replicate the line chart(s) proposed by github to highlight the contributors to a public repository.

@@ -64,6 +64,12 @@ const dataNames = Object.entries(
   }, {})
 ).map(([name, commits]) => ({
   name,
+  totals: commits.reduce((acc, curr) => {
+    acc.commits = acc.commits ? acc.commits + 1 : 1;
+    acc.additions = acc.additions ? acc.additions + curr.additions : curr.additions;
+    acc.deletions = acc.deletions ? acc.deletions + curr.deletions : curr.deletions;
+    return acc;
+  }, {}),
   commits: Object.entries(
     commits.reduce((acc, curr) => {
       const { date, additions, deletions } = curr;
@@ -84,7 +90,7 @@ const dataNames = Object.entries(
     date,
     ...d,
   })),
-}));
+})).sort((a, b) => a.totals.commits < b.totals.commits ? 1 : -1);
 
 const dimensions = {
   width: 1000,
@@ -131,6 +137,7 @@ const areaGenerator = d3
 const root = d3.select('main');
 
 dataNames.forEach(({ commits }) => {
+
   const wrapper = root
     .append('svg')
     .attr('width', dimensions.width)

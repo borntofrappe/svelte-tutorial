@@ -1,17 +1,17 @@
 <script>
-  import Contributor from './Contributor.svelte';
   import { data } from './data.js';
-  console.log(data);
+  import Contributions from './Contributions.svelte';
+  // import Contributors from './Contributors.svelte';
 
-  const dataContributors = Object.entries(
+  const dataContributions = Object.entries(
     data.reduce((acc, curr) => {
-      const { name, additions, deletions } = curr;
-      if (acc[name]) {
-        acc[name].commits += 1;
-        acc[name].additions += additions;
-        acc[name].deletions += deletions;
+      const { date, additions, deletions } = curr;
+      if (acc[date]) {
+        acc[date].commits += 1;
+        acc[date].additions += additions;
+        acc[date].deletions += deletions;
       } else {
-        acc[name] = {
+        acc[date] = {
           commits: 1,
           additions,
           deletions,
@@ -19,12 +19,10 @@
       }
       return acc;
     }, {})
-  )
-    .map(([name, d]) => ({
-      name,
-      ...d,
-    }))
-    .sort((a, b) => (a.commits < b.commits ? 1 : -1));
+  ).map(([date, d]) => ({
+    date,
+    ...d,
+  }));
 </script>
 
 <svelte:head>
@@ -46,9 +44,8 @@
 </svg>
 
 <div>
-  {#each dataContributors as d, index}
-    <Contributor {...d} index={index + 1} />
-  {/each}
+  <Contributions data={dataContributions} />
+  <!-- <Contributors /> -->
 </div>
 
 <style>
@@ -56,9 +53,5 @@
     max-width: 700px;
     width: 90vw;
     margin: 1rem auto;
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(auto-fit, 325px);
-    justify-content: center;
   }
 </style>

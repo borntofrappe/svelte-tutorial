@@ -11,12 +11,13 @@ function getData() {
     'Lani',
     'Annabeth',
     'Tara',
+    'Fitz',
   ];
 
   const randomInt = (max = 100, min = 0) =>
     Math.floor(Math.random() * (max - min)) + min;
 
-  const days = 45;
+  const days = 31;
   const endDate = new Date();
   const data = [];
 
@@ -24,7 +25,7 @@ function getData() {
     names.forEach((name, index) => {
       const date = new Date(endDate);
       date.setDate(endDate.getDate() - day);
-      const max = Math.floor((index ** 4 + 1 + Math.abs(day - days / 2)) ** 0.2);
+      const max = Math.floor(index ** 1.2);
       const commits = randomInt(max, Math.floor(max / 5));
       for (let commit = 0; commit < commits; commit += 1) {
         const additions = randomInt(commits * 8, commits * 5);
