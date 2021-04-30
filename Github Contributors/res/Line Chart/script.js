@@ -9,12 +9,13 @@ function getData() {
     'Lani',
     'Annabeth',
     'Tara',
+    'Fitz',
   ];
 
   const randomInt = (max = 100, min = 0) =>
     Math.floor(Math.random() * (max - min)) + min;
 
-  const days = 45;
+  const days = 31;
   const endDate = new Date();
   const data = [];
 
@@ -22,8 +23,8 @@ function getData() {
     names.forEach((name, index) => {
       const date = new Date(endDate);
       date.setDate(endDate.getDate() - day);
-      const max = Math.floor((index + 1 + Math.abs(day - days / 2)) ** 0.5);
-      const commits = randomInt(max, max / 10);
+      const max = Math.floor(index ** 1.25);
+      const commits = randomInt(max, Math.floor(max / 5));
       for (let commit = 0; commit < commits; commit += 1) {
         const additions = randomInt(commits * 8, commits * 5);
         const deletions = randomInt(commits * 8, commits * 4);
@@ -38,7 +39,6 @@ function getData() {
   }
   return data;
 }
-
 const data = getData();
 
 const dataDays = Object.entries(
@@ -98,6 +98,10 @@ const wrapper = root
     dimensions.height,
   ]);
 
+const axisGroup = wrapper.append('g');
+const dataGroup = wrapper.append('g');
+const highlightGroup = wrapper.append('g');
+
 const xScale = d3
   .scaleTime()
   .domain(dates)
@@ -111,18 +115,16 @@ const yScale = d3
 
 const xAxis = d3
   .axisBottom(xScale)
-  .ticks(10)
+  .ticks(8)
   .tickSize(0)
   .tickPadding(10)
   .tickFormat(d => d3.timeFormat('%B %-d')(new Date(d)));
+
 const yAxis = d3
   .axisLeft(yScale)
   .ticks(4)
   .tickSize(0)
   .tickPadding(18);
-
-const axisGroup = wrapper.append('g');
-const dataGroup = wrapper.append('g');
 
 axisGroup
   .append('g')
@@ -134,7 +136,7 @@ const yAxisGroup = axisGroup.append('g').call(yAxis);
 axisGroup
   .selectAll('text')
   .attr('fill', 'currentColor')
-  .attr('font-size', 19);
+  .attr('font-size', 17);
 
 axisGroup.selectAll('path').remove();
 
@@ -157,3 +159,55 @@ dataGroup
   .append('path')
   .attr('fill', '#28a74577')
   .attr('d', areaGenerator(dataDays));
+
+const highlight = {
+  isMousedown: false,
+  isDragging: false,
+  coords: [0, 0],
+  draggingCoords: [0, 0, 0],
+  isResizing: false,
+};
+
+highlightGroup
+  .append('rect')
+  .attr('opacity', 0.2)
+  .attr('height', dimensions.boundedHeight)
+  .attr('fill', 'hsl(0, 0%, 14%)');
+
+wrapper
+  .append('rect')
+  .style('cursor', 'crosshair')
+  .attr('width', dimensions.boundedWidth)
+  .attr('height', dimensions.boundedHeight)
+  .attr('opacity', 0)
+  .on('mousedown', event => {
+    highlight.isMousedown = true;
+    const [x] = d3.pointer(event);
+    highlight.coords = [x, x];
+    root.select('h1').text(dates.map(date => formatDate(date)).join(' - '));
+    highlightGroup.select('rect').attr('width', 0);
+  })
+  .on('mouseup', () => {
+    highlight.isMousedown = false;
+    // here you'd consider the subset
+  })
+  .on('mouseleave', () => {
+    highlight.isMousedown = false;
+    // here you'd consider the subset
+  })
+  .on('mousemove', event => {
+    if (highlight.isMousedown) {
+      const [x] = d3.pointer(event);
+      highlight.coords[1] = x;
+      const [x0, x1] = d3.extent(highlight.coords);
+      highlightGroup.attr('transform', `translate(${x0} 0)`);
+
+      highlightGroup.select('rect').attr('width', x1 - x0);
+
+      const startDate = xScale.invert(x0);
+      const endDate = xScale.invert(x1);
+      root
+        .select('h1')
+        .text([startDate, endDate].map(date => formatDate(date)).join(' - '));
+    }
+  });

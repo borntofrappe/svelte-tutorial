@@ -30,3 +30,7 @@ In the `res` folder I dedicate a couple of projects to the building blocks of th
 - `Line Chart` leans on D3 to map the contributions by date and commits.
 
   When recreating the visualization for the different contributors, the chart should be modified in color, `#fb8532`, and also in termsof vertical scale, from 0 up to the maximum number of commits recorded by one contributor.
+
+- `Line Charts` replicates the visualization, but for individual contributors.
+
+  The goal is to here show how the code needs to adjust to the different dataset.

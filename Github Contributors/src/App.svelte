@@ -1,6 +1,7 @@
 <script>
   import Contributor from './Contributor.svelte';
   import { data } from './data.js';
+  console.log(data);
 
   const dataContributors = Object.entries(
     data.reduce((acc, curr) => {
