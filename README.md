@@ -125,3 +125,7 @@ Lean on Sapper and then SvelteKit to develop a single page app with multiple rou
 ## School Closures Maps
 
 Highlight school closure at a global scale with a choropleth map and an interactive dashboard.
+
+## [Await](https://svelte.dev/repl/763b2f9f567542eb92ef913fcca1574a?version=3.38.1)
+
+Illustrate the syntax for the `await` block.
