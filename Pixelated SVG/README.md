@@ -1,105 +1,22 @@
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+## [Pixelated SVG](https://svelte.dev/repl/c10d39e4e247479f88f4381ca4a3eec2?version=3.38.1)
 
----
+## Notes
 
-# svelte app
+The goal of this demo is to provide an environment to produce pixelated vector graphics, that is `.svg` files made up entirely of rectangles. Thanks to Svelte and two-way binding, it is possible to rapidly have the canvas expand or contract to consider a variable number of columns, rows, as well as a different size for the individual cells.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+### Data URL
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+It is possible to download an `.svg` file with the shapes described in the canvas and thanks to an anchor link with an attribute of `download`. The `href` attribute refers to a data URL, which includes a string describing the `<svg>` element following a prescribed sequence, `data:image/svg+xml,`.
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
+The feature doesn't work in the REPL as the environment blocks the download option.
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+### tick
 
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
-npm run dev
-```
-
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-
-## Single-page app mode
-
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
-
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+The [`tick` method](https://svelte.dev/tutorial/tick) is useful to have the `href` attribute consider the `<svg>` element _after_ the DOM has a chance to be updated.
 
 ```js
-"start": "sirv public --single"
+await tick();
+href = getDataUrl(canvas);
 ```
 
-## Using TypeScript
-
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
-
-```bash
-node scripts/setupTypeScript.js
-```
-
-Or remove the script via:
-
-```bash
-rm scripts/setupTypeScript.js
-```
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
-
-```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public my-project.surge.sh
-```
+Without this precaution the data URL will refer to the element without the last modification.

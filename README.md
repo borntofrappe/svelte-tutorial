@@ -130,7 +130,7 @@ Highlight school closure at a global scale with a choropleth map and an interact
 
 Illustrate the syntax for the `await` block.
 
-## [Pixelated SVG]()
+## [Pixelated SVG](https://svelte.dev/repl/c10d39e4e247479f88f4381ca4a3eec2?version=3.38.1)
 
 Create vector graphics with a pixelated look.
 
