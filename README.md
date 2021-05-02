@@ -129,3 +129,11 @@ Highlight school closure at a global scale with a choropleth map and an interact
 ## [Await](https://svelte.dev/repl/763b2f9f567542eb92ef913fcca1574a?version=3.38.1)
 
 Illustrate the syntax for the `await` block.
+
+## [Pixelated SVG]()
+
+Create vector graphics with a pixelated look.
+
+<!-- ## [Checkbox inputs]
+
+Illustrate how to bind `<input>` elements of type `checkbox` -->
