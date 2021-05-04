@@ -138,6 +138,6 @@ Create vector graphics with a pixelated look.
 
 Illustrate how to bind `<input>` elements of type `checkbox` -->
 
-## [Colorful Building Bl.ocks](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.1)
+## [Colorful Building Bl.ocks]()
 
-Highlight the colors used by different projects created with blockbuilder to celebrate the 10 year anniversary of the D3 library.
+Celebrate the D3 library by visualizing the colors behind the bl.ocks created with the blockbuilder platform.

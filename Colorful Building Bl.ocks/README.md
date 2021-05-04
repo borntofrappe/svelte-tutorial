@@ -2,12 +2,8 @@
 
 ## Notes
 
-To celebrate the 10th anniversary the community around the D3 proposed to create a visualization centered on the library itself. With this project I intend to create a belated entry to such an initiative. The goal is to show the colors used by projects created with [blockbuilder](https://blockbuilder.org/), a site responsible for the early stages of D3, within a `<canvas>` element. The colors are however and only highlighted following a neat animation with the `viewBox` of an `<svg>` element.
+To celebrate the 10th anniversary of [D3.js](https://d3js.org/), [the D3 community proposed](https://d3js.community/d3-parade-2021) to create a visualization with the data visualization library as the subject. With this project I intend to create a belated entry to such an initiative.
 
-## Useful Links
+The goal is to consider the [Blockbuilder Search Data](https://observablehq.com/@enjalot/blockbuilder-search-data) and specifically the endpoint describing the colors used in the different blocks, `blocks-colors.json`.
 
-- [D3 Parade 2021](https://d3js.community/d3-parade-2021)
-
-- [Blockbuilder Search Data](https://observablehq.com/@enjalot/blockbuilder-search-data)
-
-- [Pixelated SVG](https://svelte.dev/repl/c10d39e4e247479f88f4381ca4a3eec2?version=3.38.1)
+_Please note:_ the plan I have for the visualization is complex enough to warrant a few smaller demos, which are developed in Svelte's own REPL. Here I document the efforts as I try to make the plan a reality.
