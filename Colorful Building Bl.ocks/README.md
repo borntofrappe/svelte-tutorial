@@ -63,3 +63,33 @@ The visualization incorporates an `<svg>` element created with one of the projec
   ```html
   <svg viewBox="{Object.values($viewBox)}"></svg>
   ```
+
+### [Colors Treemap](https://svelte.dev/repl/b2c64c05fbd641b191407c84e6b688fa?version=3)
+
+Once the visualization is able to render a visual for each bl.ock, describing the most prominent color, the idea is to allow for exploration in the form of a tooltip. Following a click, the tooltip describes a few features of the individual project: the name, description, and also all the colors (not just the most used). `d3-hierarchy` is here helpful to build a treemap to illustrate the absolute frequency of the colors. A hard-coded object is used to illustrate the concept.
+
+The most important step of the demo concerns how the data is structure. The colors are ultimately received with an object describing the color through keys, the frequency through the corresponding values. A hierarchy needs a structure with at least one root element
+
+```js
+{
+		name: 'Colors',
+		children: []
+}
+```
+
+`children` then contains an array with the colors described with objects
+
+```js
+[
+  {
+    color: '#222222',
+    value: 3,
+  },
+  {
+    color: '#ffffff',
+    value: 1,
+  },
+];
+```
+
+This structure is enough to have a hierarchy for the treemap layout. Take notice that the `treemap` function specifies a padding to better distinguish the individual tiles; the tiles are separated to see a `<rect/>` underneath, which is especially useful when a color matches the background.
