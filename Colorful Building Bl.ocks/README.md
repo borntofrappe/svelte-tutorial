@@ -103,3 +103,27 @@ In the `<script>` notice that I implement the feature with two alternative metho
 - with `requestedAnimationFrame` the scale is computed on the basis of `start` and `timestamp`; `start` is necessary to consider when the animation starts
 
 - `d3.timer` provides the number of milliseconds in the argument of the callback function; it is enough to consider the argument relative to the desired duration
+
+### [canvas Blocks](https://svelte.dev/repl/15ecc14fd48f43fa9ad6bfef98a406a0?version=3.38.2)
+
+While `canvas Squares` animates a series of rectangles starting from a set of hard-coded colors, it is ultimately necessary to consider the colors from the desired dataset, `blocks-colors.json`. The demo complies with this necessity by fetching the data with `d3.json` and considering for each datapoint the most used color.
+
+`d3.json` works asynchronously, so it is necessary to include the instruction in an `async` function and execute the code from the `onMount` method.
+
+```js
+async function drawCanvas() {
+  // fetch and draw
+}
+
+onMount(() => {
+  drawCanvas();
+});
+```
+
+Take note that in the REPL I decided to comment the function responsible for fetching the data and drawing the corresponding rectangles. `d3.json` fetches a very large JSON object and I wanted the request to be the result of conscious effort instead of running the code immediately.
+
+```js
+onMount(() => {
+  // drawCanvas();
+});
+```
