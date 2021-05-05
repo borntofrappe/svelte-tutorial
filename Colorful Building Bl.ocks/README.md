@@ -93,3 +93,13 @@ The most important step of the demo concerns how the data is structure. The colo
 ```
 
 This structure is enough to have a hierarchy for the treemap layout. Take notice that the `treemap` function specifies a padding to better distinguish the individual tiles; the tiles are separated to see a `<rect/>` underneath, which is especially useful when a color matches the background.
+
+### [canvas Squares](https://svelte.dev/repl/41e881707219450ab6d5d17ad05b1ec8?version=3.38.2)
+
+The demo is focused on rendering a series of squares in a `<canvas>` element with an animation. The goal is to have canvas divvied up in rows and columns, and have the squares scale progressively to cover the entire surface.
+
+In the `<script>` notice that I implement the feature with two alternative methods. with `requestAnimationFrame` and with `d3-timer`. The drawing logic is the same, requiring the `fillRect` function, so that the difference boils down to how the scale is computed:
+
+- with `requestedAnimationFrame` the scale is computed on the basis of `start` and `timestamp`; `start` is necessary to consider when the animation starts
+
+- `d3.timer` provides the number of milliseconds in the argument of the callback function; it is enough to consider the argument relative to the desired duration
