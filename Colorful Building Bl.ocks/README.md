@@ -8,7 +8,7 @@ The goal is to consider the [Blockbuilder Search Data](https://observablehq.com/
 
 _Please note:_ the plan I have for the visualization is complex enough to warrant a few smaller demos, which are developed in Svelte's own REPL. Here I document the efforts as I try to make the plan a reality.
 
-### [viewBox transition](https://svelte.dev/repl/df0f8d719d8443a89c7fcca52920b7e3?version=3.38.2)
+### [viewBox Transition](https://svelte.dev/repl/df0f8d719d8443a89c7fcca52920b7e3?version=3.38.2)
 
 The visualization incorporates an `<svg>` element created with one of the projects created in this repository, `Pixelated SVG`. The visual describes the string _'Colorful building bl.ocks'_ with a series of rectangle elements, and the idea is to update the `viewBox` attribute to focus the attention on the dot separating the 'bl' and 'ocks' letters. Svelte comes in handy to transition the four values of the attribute, and the demo showcases how:
 
@@ -64,7 +64,7 @@ The visualization incorporates an `<svg>` element created with one of the projec
   <svg viewBox="{Object.values($viewBox)}"></svg>
   ```
 
-### [Colors Treemap](https://svelte.dev/repl/b2c64c05fbd641b191407c84e6b688fa?version=3)
+### [treemap Colors](https://svelte.dev/repl/b2c64c05fbd641b191407c84e6b688fa?version=3.38.2)
 
 Once the visualization is able to render a visual for each bl.ock, describing the most prominent color, the idea is to allow for exploration in the form of a tooltip. Following a click, the tooltip describes a few features of the individual project: the name, description, and also all the colors (not just the most used). `d3-hierarchy` is here helpful to build a treemap to illustrate the absolute frequency of the colors. A hard-coded object is used to illustrate the concept.
 
@@ -120,10 +120,12 @@ onMount(() => {
 });
 ```
 
-Take note that in the REPL I decided to comment the function responsible for fetching the data and drawing the corresponding rectangles. `d3.json` fetches a very large JSON object and I wanted the request to be the result of conscious effort instead of running the code immediately.
+Take note that in the REPL I decided to comment the function responsible for fetching the data and drawing the corresponding rectangles.
 
 ```js
 onMount(() => {
   // drawCanvas();
 });
 ```
+
+`d3.json` fetches a very large JSON object and I wanted the request to be the result of conscious effort instead of running the code immediately. The precaution is not present in the local demo since it is necessary to install the packages and then explicitly run the project on localhost.
