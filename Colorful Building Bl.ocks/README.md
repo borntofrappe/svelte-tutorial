@@ -129,3 +129,9 @@ onMount(() => {
 ```
 
 `d3.json` fetches a very large JSON object and I wanted the request to be the result of conscious effort instead of running the code immediately. The precaution is not present in the local demo since it is necessary to install the packages and then explicitly run the project on localhost.
+
+### [Highlight Component](https://svelte.dev/repl/f92e7d25d67c4e2685c9fce55c1fb87f?version=3.38.2)
+
+The visualization described in `treemapColors` is ultimately included in a component shown when selecting a specific project. This demo focused on the component by describing its overall structure, format and style.
+
+The specific demo has an `<input>` element of type `checkbox` to toggle the component and relies on `d3-time-format` to provide the date in a convenient format.
