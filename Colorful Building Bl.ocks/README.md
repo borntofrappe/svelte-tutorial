@@ -8,7 +8,9 @@ The goal is to consider the [Blockbuilder Search Data](https://observablehq.com/
 
 _Please note:_ the plan I have for the visualization is complex enough to warrant a few smaller demos, which are developed in Svelte's own REPL. Here I document the efforts as I try to make the plan a reality.
 
-### [viewBox Transition](https://svelte.dev/repl/df0f8d719d8443a89c7fcca52920b7e3?version=3.38.2)
+### Smaller Demos
+
+#### [viewBox Transition](https://svelte.dev/repl/df0f8d719d8443a89c7fcca52920b7e3?version=3.38.2)
 
 The visualization incorporates an `<svg>` element created with one of the projects created in this repository, `Pixelated SVG`. The visual describes the string _'Colorful building bl.ocks'_ with a series of rectangle elements, and the idea is to update the `viewBox` attribute to focus the attention on the dot separating the 'bl' and 'ocks' letters. Svelte comes in handy to transition the four values of the attribute, and the demo showcases how:
 
@@ -64,7 +66,7 @@ The visualization incorporates an `<svg>` element created with one of the projec
   <svg viewBox="{Object.values($viewBox)}"></svg>
   ```
 
-### [treemap Colors](https://svelte.dev/repl/b2c64c05fbd641b191407c84e6b688fa?version=3.38.2)
+#### [treemap Colors](https://svelte.dev/repl/b2c64c05fbd641b191407c84e6b688fa?version=3.38.2)
 
 Once the visualization is able to render a visual for each bl.ock, describing the most prominent color, the idea is to allow for exploration in the form of a tooltip. Following a click, the tooltip describes a few features of the individual project: the name, description, and also all the colors (not just the most used). `d3-hierarchy` is here helpful to build a treemap to illustrate the absolute frequency of the colors. A hard-coded object is used to illustrate the concept.
 
@@ -94,7 +96,7 @@ The most important step of the demo concerns how the data is structure. The colo
 
 This structure is enough to have a hierarchy for the treemap layout. Take notice that the `treemap` function specifies a padding to better distinguish the individual tiles; the tiles are separated to see a `<rect/>` underneath, which is especially useful when a color matches the background.
 
-### [canvas Squares](https://svelte.dev/repl/41e881707219450ab6d5d17ad05b1ec8?version=3.38.2)
+#### [canvas Squares](https://svelte.dev/repl/41e881707219450ab6d5d17ad05b1ec8?version=3.38.2)
 
 The demo is focused on rendering a series of squares in a `<canvas>` element with an animation. The goal is to have canvas divvied up in rows and columns, and have the squares scale progressively to cover the entire surface.
 
@@ -104,7 +106,7 @@ In the `<script>` notice that I implement the feature with two alternative metho
 
 - `d3.timer` provides the number of milliseconds in the argument of the callback function; it is enough to consider the argument relative to the desired duration
 
-### [canvas Blocks](https://svelte.dev/repl/15ecc14fd48f43fa9ad6bfef98a406a0?version=3.38.2)
+#### [canvas Blocks](https://svelte.dev/repl/15ecc14fd48f43fa9ad6bfef98a406a0?version=3.38.2)
 
 While `canvas Squares` animates a series of rectangles starting from a set of hard-coded colors, it is ultimately necessary to consider the colors from the desired dataset, `blocks-colors.json`. The demo complies with this necessity by fetching the data with `d3.json` and considering for each datapoint the most used color.
 
@@ -130,8 +132,10 @@ onMount(() => {
 
 `d3.json` fetches a very large JSON object and I wanted the request to be the result of conscious effort instead of running the code immediately. The precaution is not present in the local demo since it is necessary to install the packages and then explicitly run the project on localhost.
 
-### [Highlight Component](https://svelte.dev/repl/f92e7d25d67c4e2685c9fce55c1fb87f?version=3.38.2)
+#### [Highlight Component](https://svelte.dev/repl/f92e7d25d67c4e2685c9fce55c1fb87f?version=3.38.2)
 
 The visualization described in `treemapColors` is ultimately included in a component shown when selecting a specific project. This demo focused on the component by describing its overall structure, format and style.
 
 The specific demo has an `<input>` element of type `checkbox` to toggle the component and relies on `d3-time-format` to provide the date in a convenient format.
+
+### [Final Demo](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)

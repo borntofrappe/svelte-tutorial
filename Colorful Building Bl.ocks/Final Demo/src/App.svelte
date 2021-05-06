@@ -1,0 +1,330 @@
+<script>
+	import { tweened } from 'svelte/motion'
+	import { cubicInOut as easing } from 'svelte/easing'
+	import { fly, fade } from 'svelte/transition'
+	import { timer } from 'd3-timer';
+	import { min } from 'd3-array';
+	import { json } from 'd3-fetch';
+	import Highlight from './Highlight.svelte';
+	
+	const duration = 1250;
+	const viewBoxes = [
+		{
+			x: 0,
+			y: 0,
+			width: 550,
+			height: 170
+		},
+		{
+			x: 360,
+			y: 130,
+			width: 10,
+			height: 10
+		}
+	]
+
+	const viewBox = tweened(viewBoxes[0], {
+		easing,
+		duration
+	})
+	
+	let svg;
+	let canvas;
+	
+	let data;
+	let blocks;
+	let highlight;
+	let error;
+	
+	let isExploring;
+	let isSuccessful;
+	
+	async function drawCanvas(width, height) {
+		canvas.width = width;
+		canvas.height = height;
+		
+		try {
+			data = await json('https://storage.googleapis.com/bb-search-data/parsed/blocks-colors.json?')
+		}
+		catch(err) {
+			console.log(err);
+			error = err;
+			return;
+		} 
+		
+		isSuccessful = true;
+		
+		const size = width;
+		const dimensions = Math.floor(Math.sqrt(data.length));
+		const cellSize = size / dimensions;
+		
+		blocks = data.map(({ colors }, i, { length }) => 	{
+			const column = (i % dimensions);
+			const row = Math.floor(i / dimensions);
+
+			return {
+					color: Object.entries(colors).sort((a, b) => a[1] < b[1] ? 1 : -1)[0][0],
+					column,
+					row,
+				}
+		})
+
+		const context = canvas.getContext('2d');
+		
+		const t = timer(function(elapsed) {
+			const scale = min([1, (elapsed / duration)]);
+
+			context.clearRect(0, 0, size, size);
+			for(const { color, column, row } of blocks) {
+				context.fillStyle = color;
+				context.fillRect((column * cellSize) - (cellSize / 2) * (scale - 1), (row * cellSize) - (cellSize / 2) * (scale - 1), cellSize * scale, cellSize * scale);
+			}
+
+			if(scale === 1) {
+				t.stop();
+			}
+		});		
+	}
+	
+	function handleInput() {
+		isExploring = true;
+		const promise = viewBox.set(viewBoxes[1])
+		promise
+			.then((d) => {
+			const { width, height } = svg.getBoundingClientRect();
+			
+			drawCanvas(width, height)
+		})
+	}
+	
+	function handleResize(e) {
+		if(!isSuccessful) return;
+		
+		const { width, height } = svg.getBoundingClientRect();
+		if(canvas.width !== width) {
+			canvas.width = width;
+			canvas.height = height;
+			
+			const context = canvas.getContext('2d');
+			const size = width;
+			const dimensions = Math.floor(Math.sqrt(data.length));
+			const cellSize = size / dimensions;
+			
+			context.clearRect(0, 0, size, size);
+			for(const { color, column, row } of blocks) {
+				context.fillStyle = color;
+				context.fillRect((column * cellSize) - cellSize / 2, (row * cellSize) - cellSize / 2, cellSize, cellSize);
+			}
+		}
+	}
+	
+	function handleClick(e) {
+		if (!isSuccessful) return;
+		
+		const { x, y, width, height } = canvas.getBoundingClientRect();
+		const { clientX, clientY } = e;
+		const dimensions = Math.floor(Math.sqrt(data.length));
+		const size = width;
+		const cellSize = size / dimensions;
+		const column = Math.floor((clientX - x) / cellSize)
+		const row = Math.floor((clientY - y) / cellSize)
+		
+		const top = (row * cellSize + cellSize / 2) / size * 100;
+		const left = (column * cellSize + cellSize / 2) / size * 100;
+		highlight = {
+			left: `${left}%`,
+			top: `${top}%`,
+			data: {...data[column + row * dimensions]}
+		};
+	}
+	
+</script>
+
+<style>
+	:global(*) {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+	:global(body) {
+		background: hsl(0, 0%, 100%);
+		color: hsl(0, 0%, 20%);
+		line-height: 1.5;
+		min-height: 100vh;
+	}
+	
+	:global(::selection) {
+		background: hsla(0, 0%, 20%, 0.25);
+	}
+	
+	:global(.visually-hidden:not(:focus):not(:active)) {
+		clip: rect(0 0 0 0); 
+		clip-path: inset(50%);
+		height: 1px;
+		overflow: hidden;
+		position: absolute;
+		white-space: nowrap; 
+		width: 1px;
+	}
+	
+	div {
+		max-width: 700px;
+		width: 90vw;
+		margin: 1rem auto;
+	}
+	
+	div > * + * {
+		margin-top: 1em;
+	}
+	
+	main {
+		max-width: 600px;
+		width: 90vw;
+		max-height: 600px;
+		height: 90vw;
+		margin: 2rem auto;
+		position: relative;
+		text-align: center;
+	}
+	
+	@supports(aspect-ratio: 1/1) {
+		main {
+			max-height: initial;
+			height: initial;
+			aspect-ratio: 1/1;
+		}
+	}
+	
+	main div {
+		max-width: 320px;
+		width: 90vw;
+		margin: initial;
+		position: absolute;
+		transform: translate(-50%, 10px);
+		text-align: initial;
+		font-size: 0.95rem;
+		padding: 0.5rem 1rem;
+		color: hsl(0, 0%, 10%);
+		background: hsl(0, 0%, 100%);
+		border: 3px solid currentColor;
+	}
+	
+	main div::before,
+	main div::after {
+		content: '';
+		position: absolute;
+		bottom: 100%;
+		left: 50%;
+		pointer-events: none;
+	}
+	
+	main div::before {
+		transform: translate(-50%, -5px);
+		width: 10px;
+		height: 10px;
+		border: 2px solid currentColor;
+		background: none;
+	}
+	
+	main div::after {
+		transform: translateX(-50%);
+		width: 20px;
+		height: 10px;
+		background: currentColor;
+		clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
+	}
+	
+	main div > :global(* + *) {
+		margin-top: 0.5em;
+	}
+	
+	svg {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+	
+	canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	
+	button {
+		margin: 1.5rem 1rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		border: 1px solid currentColor;
+		background: none;
+		color: inherit;
+		padding: 0.5rem 0.75rem;
+	}
+	
+	footer > * + * {
+		margin-top: 0.5em;
+	}
+</style>
+ 
+<svelte:window on:resize={handleResize} on:click={() => {if(highlight) highlight = null;}} />
+
+<div>
+	<p class="visually-hidden">
+		<em>Please note</em>: the demo relies on visuals introduced with <code>svg</code> and <code>canvas</code> elements.
+	</p>
+	<p>
+		<a href="https://blockbuilder.org/">Blockbuilder</a> is a now deprecated platform which played a foundational role in the development of the d3 <a href="https://d3js.org/">library</a> and <a href="https://d3js.community">community</a>. Introduced as an <q cite="https://blockbuilder.org/">in-browser code editor built for creating and sharing d3.js examples</q>, the site is responsible for thousands of informative and intriguing demos, affectionately described as <em>bl.ocks</em>.
+	</p>
+	<p>
+		Informative, intriguing, and full of color.
+	</p>
+	
+	<p>
+		<em>Which color</em>? Let's try to answer this question with a quick exploration of a <a href="https://observablehq.com/@enjalot/blockbuilder-search-data">very rich dataset</a>.
+	</p>
+	
+	<main>
+		<svg bind:this={svg} xmlns="http://www.w3.org/2000/svg" viewBox="{Object.values($viewBox)}"><g fill="currentColor" stroke="currentColor"><rect x="70" y="110" width="10" height="10"></rect><rect x="70" y="120" width="10" height="10"></rect><rect x="70" y="130" width="10" height="10"></rect><rect x="80" y="130" width="10" height="10"></rect><rect x="90" y="130" width="10" height="10"></rect><rect x="90" y="120" width="10" height="10"></rect><rect x="90" y="110" width="10" height="10"></rect><rect x="110" y="110" width="10" height="10"></rect><rect x="110" y="120" width="10" height="10"></rect><rect x="110" y="130" width="10" height="10"></rect><rect x="110" y="90" width="10" height="10"></rect><rect x="130" y="90" width="10" height="10"></rect><rect x="130" y="100" width="10" height="10"></rect><rect x="130" y="110" width="10" height="10"></rect><rect x="130" y="120" width="10" height="10"></rect><rect x="130" y="130" width="10" height="10"></rect><rect x="170" y="90" width="10" height="10"></rect><rect x="170" y="100" width="10" height="10"></rect><rect x="170" y="110" width="10" height="10"></rect><rect x="170" y="120" width="10" height="10"></rect><rect x="170" y="130" width="10" height="10"></rect><rect x="160" y="130" width="10" height="10"></rect><rect x="150" y="130" width="10" height="10"></rect><rect x="150" y="120" width="10" height="10"></rect><rect x="150" y="110" width="10" height="10"></rect><rect x="160" y="110" width="10" height="10"></rect><rect x="30" y="90" width="10" height="10"></rect><rect x="30" y="100" width="10" height="10"></rect><rect x="30" y="110" width="10" height="10"></rect><rect x="30" y="120" width="10" height="10"></rect><rect x="30" y="130" width="10" height="10"></rect><rect x="40" y="130" width="10" height="10"></rect><rect x="50" y="130" width="10" height="10"></rect><rect x="50" y="120" width="10" height="10"></rect><rect x="50" y="110" width="10" height="10"></rect><rect x="40" y="110" width="10" height="10"></rect><rect x="190" y="110" width="10" height="10"></rect><rect x="190" y="120" width="10" height="10"></rect><rect x="190" y="130" width="10" height="10"></rect><rect x="190" y="90" width="10" height="10"></rect><rect x="210" y="110" width="10" height="10"></rect><rect x="210" y="120" width="10" height="10"></rect><rect x="210" y="130" width="10" height="10"></rect><rect x="220" y="110" width="10" height="10"></rect><rect x="230" y="110" width="10" height="10"></rect><rect x="230" y="120" width="10" height="10"></rect><rect x="230" y="130" width="10" height="10"></rect><rect x="250" y="110" width="10" height="10"></rect><rect x="250" y="120" width="10" height="10"></rect><rect x="250" y="130" width="10" height="10"></rect><rect x="260" y="130" width="10" height="10"></rect><rect x="270" y="130" width="10" height="10"></rect><rect x="270" y="120" width="10" height="10"></rect><rect x="270" y="110" width="10" height="10"></rect><rect x="260" y="110" width="10" height="10"></rect><rect x="270" y="140" width="10" height="10"></rect><rect x="270" y="150" width="10" height="10"></rect><rect x="260" y="150" width="10" height="10"></rect><rect x="250" y="150" width="10" height="10"></rect><rect x="300" y="90" width="10" height="10"></rect><rect x="300" y="100" width="10" height="10"></rect><rect x="300" y="110" width="10" height="10"></rect><rect x="300" y="120" width="10" height="10"></rect><rect x="300" y="130" width="10" height="10"></rect><rect x="310" y="130" width="10" height="10"></rect><rect x="320" y="130" width="10" height="10"></rect><rect x="320" y="120" width="10" height="10"></rect><rect x="320" y="110" width="10" height="10"></rect><rect x="310" y="110" width="10" height="10"></rect><rect x="340" y="90" width="10" height="10"></rect><rect x="340" y="100" width="10" height="10"></rect><rect x="340" y="110" width="10" height="10"></rect><rect x="340" y="120" width="10" height="10"></rect><rect x="340" y="130" width="10" height="10"></rect><rect x="360" y="130" width="10" height="10"></rect><rect x="380" y="110" width="10" height="10"></rect><rect x="380" y="120" width="10" height="10"></rect><rect x="380" y="130" width="10" height="10"></rect><rect x="390" y="130" width="10" height="10"></rect><rect x="400" y="130" width="10" height="10"></rect><rect x="400" y="120" width="10" height="10"></rect><rect x="400" y="110" width="10" height="10"></rect><rect x="390" y="110" width="10" height="10"></rect><rect x="440" y="110" width="10" height="10"></rect><rect x="430" y="110" width="10" height="10"></rect><rect x="420" y="110" width="10" height="10"></rect><rect x="420" y="120" width="10" height="10"></rect><rect x="420" y="130" width="10" height="10"></rect><rect x="430" y="130" width="10" height="10"></rect><rect x="440" y="130" width="10" height="10"></rect><rect x="460" y="130" width="10" height="10"></rect><rect x="460" y="120" width="10" height="10"></rect><rect x="460" y="110" width="10" height="10"></rect><rect x="460" y="100" width="10" height="10"></rect><rect x="480" y="110" width="10" height="10"></rect><rect x="480" y="130" width="10" height="10"></rect><rect x="470" y="120" width="10" height="10"></rect><rect x="510" y="100" width="10" height="10"></rect><rect x="500" y="110" width="10" height="10"></rect><rect x="510" y="120" width="10" height="10"></rect><rect x="500" y="130" width="10" height="10"></rect><rect x="30" y="50" width="10" height="10"></rect><rect x="30" y="40" width="10" height="10"></rect><rect x="30" y="30" width="10" height="10"></rect><rect x="30" y="20" width="10" height="10"></rect><rect x="30" y="10" width="10" height="10"></rect><rect x="40" y="10" width="10" height="10"></rect><rect x="50" y="10" width="10" height="10"></rect><rect x="60" y="10" width="10" height="10"></rect><rect x="30" y="60" width="10" height="10"></rect><rect x="40" y="60" width="10" height="10"></rect><rect x="50" y="60" width="10" height="10"></rect><rect x="60" y="60" width="10" height="10"></rect><rect x="80" y="40" width="10" height="10"></rect><rect x="80" y="50" width="10" height="10"></rect><rect x="80" y="60" width="10" height="10"></rect><rect x="90" y="60" width="10" height="10"></rect><rect x="100" y="60" width="10" height="10"></rect><rect x="100" y="50" width="10" height="10"></rect><rect x="100" y="40" width="10" height="10"></rect><rect x="90" y="40" width="10" height="10"></rect><rect x="120" y="20" width="10" height="10"></rect><rect x="120" y="30" width="10" height="10"></rect><rect x="120" y="40" width="10" height="10"></rect><rect x="120" y="50" width="10" height="10"></rect><rect x="120" y="60" width="10" height="10"></rect><rect x="140" y="40" width="10" height="10"></rect><rect x="140" y="50" width="10" height="10"></rect><rect x="140" y="60" width="10" height="10"></rect><rect x="150" y="60" width="10" height="10"></rect><rect x="160" y="60" width="10" height="10"></rect><rect x="160" y="50" width="10" height="10"></rect><rect x="160" y="40" width="10" height="10"></rect><rect x="150" y="40" width="10" height="10"></rect><rect x="180" y="60" width="10" height="10"></rect><rect x="180" y="50" width="10" height="10"></rect><rect x="180" y="40" width="10" height="10"></rect><rect x="190" y="40" width="10" height="10"></rect><rect x="230" y="20" width="10" height="10"></rect><rect x="210" y="60" width="10" height="10"></rect><rect x="210" y="50" width="10" height="10"></rect><rect x="210" y="40" width="10" height="10"></rect><rect x="210" y="30" width="10" height="10"></rect><rect x="220" y="20" width="10" height="10"></rect><rect x="220" y="40" width="10" height="10"></rect><rect x="240" y="40" width="10" height="10"></rect><rect x="240" y="50" width="10" height="10"></rect><rect x="240" y="60" width="10" height="10"></rect><rect x="250" y="60" width="10" height="10"></rect><rect x="260" y="60" width="10" height="10"></rect><rect x="260" y="50" width="10" height="10"></rect><rect x="260" y="40" width="10" height="10"></rect><rect x="280" y="20" width="10" height="10"></rect><rect x="280" y="30" width="10" height="10"></rect><rect x="280" y="40" width="10" height="10"></rect><rect x="280" y="50" width="10" height="10"></rect><rect x="280" y="60" width="10" height="10"></rect></g></svg>
+
+		{#if isExploring}
+			<canvas
+					bind:this={canvas}
+					in:fly={{delay: duration}} 
+					on:click|stopPropagation={handleClick}
+					 />
+			{#if highlight}
+				<div in:fly={{x: -200}} out:fly={{x: 200}} style="top: {highlight.top}; left: {highlight.left};" on:click|stopPropagation>
+					<Highlight {...highlight.data} />
+				</div>
+			{/if}
+		{:else}
+			<button on:click={handleInput} out:fade>
+				Explore colors
+			</button>
+		{/if}
+	</main>
+	
+	{#if isSuccessful}
+		<footer in:fly={{ y: -50, delay: duration }}>
+			<h2>
+				What's this?
+			</h2>
+			<p>
+				The canvas describes the color most frequently used by every single bl.ock.
+			</p>
+			<p>
+				Try selecting a specific pixel to highlight the matching project.
+			</p>
+		</footer>
+	{:else if error}
+		<footer in:fly={{ y: -50, delay: duration }}>
+			<pre><code>{error}</code></pre>
+			<p>
+				Unfortunately, we weren't able to fetch the desired data.
+			</p>
+			<p>
+				Try refreshing the page, or contacting <a href="https://twitter.com/borntofrappe">borntofrappe</a> for more information.
+			</p>
+		</footer>
+	{/if}
+</div>
