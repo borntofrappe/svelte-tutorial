@@ -10,18 +10,19 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
-    "d3-array": "latest",
-    "d3-fetch": "latest",
-    "d3-format": "^3.0.0",
-    "d3-hierarchy": "latest",
-    "d3-time-format": "latest",
-    "d3-timer": "latest",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "d3-timer": "latest",
+    "d3-array": "latest",
+    "d3-fetch": "latest",
+    "d3-format": "latest",
+    "d3-hierarchy": "latest",
+    "d3-time-format": "latest",
+    "d3-scale-chromatic": "latest"
   },
   "dependencies": {
     "sirv-cli": "^1.0.0"
