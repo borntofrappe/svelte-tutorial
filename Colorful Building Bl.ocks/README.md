@@ -138,4 +138,10 @@ The visualization described in `treemapColors` is ultimately included in a compo
 
 The specific demo has an `<input>` element of type `checkbox` to toggle the component and relies on `d3-time-format` to provide the date in a convenient format.
 
+#### [Colorful Blocks](https://svelte.dev/repl/727983571cf443eab883669193f371bf?version=3.38.2)
+
+In this rather small demo I set out to create an `<svg>` element with a series of adjacent squares, animated on hover and colored with a function from the `d3-scale-chromatic` module.
+
+The visual is meant to support how the demo studies the colors of the bl.ocks,
+
 ### [Final Demo](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)
