@@ -50,7 +50,7 @@
 </style>
 
 <p>
-	On <time datetime="{date}">{formatDate(date)}</time>, <span class="highlight">{userId}</span> created <span class="highlight">{description}</span>, a bl.ock with <strong>{dataColors.children.length}</strong> {dataColors.children.length === 1 ? 'color' : 'colors'}
+	<span class="highlight">{userId}</span> created <a class="highlight" href="https://blockbuilder.org/{userId}/{id}" target="_blank">{description}</a> on <time datetime="{date}">{formatDate(date)}</time>, making use of <strong>{dataColors.children.length}</strong> {dataColors.children.length === 1 ? 'color' : 'colors'}.
 </p>
 
 <svg viewBox="0 0 {width} {height}" width="300" height="150">
