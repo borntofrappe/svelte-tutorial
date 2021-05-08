@@ -1,12 +1,12 @@
-# Colorful Building Bl.ocks
+# [Colorful Building Bl.ocks](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)
 
 ## Notes
 
-To celebrate the 10th anniversary of [D3.js](https://d3js.org/), [the D3 community proposed](https://d3js.community/d3-parade-2021) to create a visualization with the data visualization library as the subject. With this project I intend to create a belated entry to such an initiative.
+To celebrate the [10th anniversary](https://d3js.community/d3-10) of the [d3 library](https://d3js.org/), the community proposed [d3 Parade 2021](https://d3js.community/d3-parade-2021) with the goal of creating data visualizations focused on d3.
 
-The goal is to consider the [Blockbuilder Search Data](https://observablehq.com/@enjalot/blockbuilder-search-data) and specifically the endpoint describing the colors used in the different blocks, `blocks-colors.json`.
+The goal of this project is to participate to the initiative exploring the bl.ocks created through [Blockbuilder](https://blockbuilder.org/) and more specifically their color. The [dataset](https://observablehq.com/@enjalot/blockbuilder-search-data?ui=classic) is curated by the d3 community to provide a rather sizable JSON file with every single color used by every single bl.ock. The data is mapped to a canvas element, describing the color most frequently used by each bl.ock, and later a treemap visualization to detail all the colors for the selected block.
 
-_Please note:_ the plan I have for the visualization is complex enough to warrant a few smaller demos, which are developed in Svelte's own REPL. Here I document the efforts as I try to make the plan a reality.
+_Please note:_ the visualization is complex enough to warrant a few smaller demos, which are developed in Svelte's own REPL.
 
 ### Smaller Demos
 
@@ -68,7 +68,7 @@ The visualization incorporates an `<svg>` element created with one of the projec
 
 #### [treemap Colors](https://svelte.dev/repl/b2c64c05fbd641b191407c84e6b688fa?version=3.38.2)
 
-Once the visualization is able to render a visual for each bl.ock, describing the most prominent color, the idea is to allow for exploration in the form of a tooltip. Following a click, the tooltip describes a few features of the individual project: the name, description, and also all the colors (not just the most used). `d3-hierarchy` is here helpful to build a treemap to illustrate the absolute frequency of the colors. A hard-coded object is used to illustrate the concept.
+Once the visualization is able to render a visual for each bl.ock, describing the most prominent color, the idea is to allow for exploration in the form of a tooltip. Following a click, the component describes a few features of the individual project: the name, description, and also all the colors used by the selected demo. `d3-hierarchy` is helpful to build a treemap to illustrate the absolute frequency of the colors. A hard-coded object is used to illustrate the concept.
 
 The most important step of the demo concerns how the data is structure. The colors are ultimately received with an object describing the color through keys, the frequency through the corresponding values. A hierarchy needs a structure with at least one root element
 
@@ -134,7 +134,7 @@ onMount(() => {
 
 #### [Highlight Component](https://svelte.dev/repl/f92e7d25d67c4e2685c9fce55c1fb87f?version=3.38.2)
 
-The visualization described in `treemapColors` is ultimately included in a component shown when selecting a specific project. This demo focused on the component by describing its overall structure, format and style.
+The visualization described in `treemapColors` is ultimately included in a component shown when selecting a specific project. This demo focuses on the visual by describing its overall structure, format and style.
 
 The specific demo has an `<input>` element of type `checkbox` to toggle the component and relies on `d3-time-format` to provide the date in a convenient format.
 
@@ -145,3 +145,33 @@ In this rather small demo I set out to create an `<svg>` element with a series o
 The visual is meant to support how the demo studies the colors of the bl.ocks,
 
 ### [Final Demo](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)
+
+The demos are condensed in a project explaining the visualization and the dataset.
+
+Anchor links and buttons are styled to provide more color. On hover and focus, the elements loop through 10 colors of the rainbow, retrieved with `d3.interpolateRainbow`.
+
+```js
+const rainbow = Array(10)
+  .fill()
+  .map((_, i, { length }) => d3.interpolateRainbow(i / rainbow));
+/*
+[
+rgb(110, 64, 170),
+rgb(191, 60, 175),
+rgb(254, 75, 131),
+rgb(255, 120, 71),
+rgb(226, 183, 47),
+rgb(175, 240, 91),
+rgb(82, 246, 103),
+rgb(29, 223, 163),
+rgb(35, 171, 216),
+rgb(76, 110, 219),
+]
+*/
+```
+
+The container housing the `<svg>` and `<canvas>` includes an additional `<svg>` element, shown if the fetch request fails. In this instance the idea is to show the logo for the d3 library on top of the otherwise working canvas.
+
+A footer is also included to describe the visualization, or lack thereof.
+
+_Please note_: beside Svelte's own REPL, the demo is recreated on [codesandbox](https://codesandbox.io/s/colorful-building-blocks-5f14s).

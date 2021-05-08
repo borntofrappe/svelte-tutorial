@@ -134,10 +134,6 @@ Illustrate the syntax for the `await` block.
 
 Create vector graphics with a pixelated look.
 
-<!-- ## [Checkbox inputs]
-
-Illustrate how to bind `<input>` elements of type `checkbox` -->
-
 ## [Colorful Building Bl.ocks](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)
 
 Celebrate the anniversary of D3 library by highlight the colors of the bl.ocks created through blockbuilder.
