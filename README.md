@@ -137,3 +137,7 @@ Create vector graphics with a pixelated look.
 ## [Colorful Building Bl.ocks](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)
 
 Celebrate the anniversary of D3 library by highlight the colors of the bl.ocks created through blockbuilder.
+
+## Two Way Binding
+
+Illustrate how Svelte binds the state to HTML elements.
