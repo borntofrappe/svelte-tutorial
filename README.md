@@ -141,3 +141,7 @@ Celebrate the anniversary of D3 library by highlight the colors of the bl.ocks c
 ## [Two Way Binding](https://svelte.dev/repl/a471604a71ce4f5886974b2f54f537e0?version=3.38.2)
 
 Illustrate how Svelte binds the state to HTML elements.
+
+## Repeating Color Scheme
+
+Toggle between two color schemes without user input.
