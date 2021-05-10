@@ -145,3 +145,7 @@ Illustrate how Svelte binds the state to HTML elements.
 ## [Repeating Color Scheme](https://svelte.dev/repl/86b5830e793c482fa1ad074cbb281202?version=3.38.2)
 
 Toggle between two color schemes without user input.
+
+## [Pokemon Search](https://svelte.dev/repl/8593b0e8b60e4a78900ff4ff584a03a2?version=3.38.2)
+
+Fetch information from an external API to create a functional, if basic, search application.
