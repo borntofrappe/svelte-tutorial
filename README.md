@@ -150,6 +150,6 @@ Toggle between two color schemes without user input.
 
 Fetch information from an external API to create a functional, if basic, search application.
 
-## Github Contributions
+## [Github Contributions](https://svelte.dev/repl/756596b4f3af4f02bf23e572159f159c?version=3.38.2)
 
 Highlight the contributions to a public repository in terms of commits.
