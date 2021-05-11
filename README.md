@@ -149,3 +149,7 @@ Toggle between two color schemes without user input.
 ## [Pokemon Search](https://svelte.dev/repl/8593b0e8b60e4a78900ff4ff584a03a2?version=3.38.2)
 
 Fetch information from an external API to create a functional, if basic, search application.
+
+## Github Contributions
+
+Highlight the contributions to a public repository in terms of commits.
