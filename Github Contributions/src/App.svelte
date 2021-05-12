@@ -1,18 +1,23 @@
 <script>
-  import data from './data.js';
+  // https://github.com/sveltejs/kit/graphs/contributors
   import { setContext } from 'svelte';
+  import Contributions from './Contributions.svelte';
   import Contributors from './Contributors.svelte';
-  import Cumulative from './Cumulative.svelte';
-  import { timeParse, timeFormat } from 'd3-time-format';
+  import { timeParse } from 'd3-time-format';
 
-  setContext('data', data);
   setContext('timeParse', timeParse('%Y-%m-%d'));
-  setContext('timeFormat', timeFormat('%b %d'));
-  setContext('datesFormat', timeFormat('%b %d, %Y'));
+  /* metric:
+	|key | metric    |
+	|----|-----------|
+	|c	 | commits   |
+	|a	 | additions |
+	|d	 | deletions |
+	*/
+  setContext('metric', 'c');
 </script>
 
 <div>
-  <Cumulative />
+  <Contributions />
   <Contributors />
 </div>
 
@@ -22,10 +27,12 @@
     margin: 0;
     padding: 0;
   }
+
   :global(body) {
     padding: 0;
     color: hsl(0, 0%, 20%);
   }
+
   :global(.visually-hidden:not(:focus):not(:active)) {
     clip: rect(0 0 0 0);
     clip-path: inset(50%);
@@ -35,9 +42,11 @@
     position: absolute;
     white-space: nowrap;
   }
+
   div {
-    max-width: 750px;
-    width: 90vw;
+    max-width: 650px;
+    width: 95vw;
+    padding: 0 1rem;
     margin: 1rem auto;
   }
 

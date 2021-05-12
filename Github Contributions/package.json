@@ -19,7 +19,6 @@
     "d3-time-format": "latest",
     "d3-array": "latest",
     "d3-scale": "latest",
-    "d3-axis": "latest",
     "d3-shape": "latest"
   },
   "dependencies": {

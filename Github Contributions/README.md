@@ -2,4 +2,4 @@
 
 ## Notes
 
-Consider the contributions recorded by Github [on the repository devoted to sveltekit](https://github.com/sveltejs/kit/graphs/contributors?from=2020-10-11&to=2021-05-11&type=c). The goal of this project is to replicate the visualization with the D3 library and a series of components.
+Consider the way Github highlights the contributions to public repositories, for instance the contributions to [sveltekit](https://github.com/sveltejs/kit/graphs/contributors?from=2020-10-11&to=2021-05-11&type=c). The goal of this project is to replicate the visual with a series of area charts.

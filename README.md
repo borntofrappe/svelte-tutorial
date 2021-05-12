@@ -152,4 +152,4 @@ Fetch information from an external API to create a functional, if basic, search 
 
 ## [Github Contributions](https://svelte.dev/repl/756596b4f3af4f02bf23e572159f159c?version=3.38.2)
 
-Highlight the contributions to a public repository in terms of commits.
+Highlight the contributions to a public repository with a series of area charts.

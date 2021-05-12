@@ -1,17 +1,23 @@
 <script>
+  import { getContext } from 'svelte';
+  const timeParse = getContext('timeParse');
+  const metric = getContext('metric');
+  const metricAccessor = (d) => d[metric];
+
   import AreaChart from './AreaChart.svelte';
   export let name;
   export let src;
   export let href;
   export let position;
-  export let commits;
-  export let additions;
-  export let deletions;
+  export let c;
+  export let a;
+  export let d;
   export let weeks;
 
-  export let max;
-  const xAccessor = (d) => d.w;
-  const yAccessor = (d) => d.c;
+  export let upperBound;
+  const xAccessor = (d) => timeParse(d.w);
+  const yAccessor = metricAccessor;
+  const fill = '#fb8532';
 </script>
 
 <article>
@@ -22,12 +28,12 @@
     <span>#{position}</span>
   </p>
   <p class="history">
-    <span>{commits} commits</span>
-    <span class="additions">{additions} ++</span>
-    <span class="deletions">{deletions} --</span>
+    <span>{c} commits</span>
+    <span class="additions">{a} ++</span>
+    <span class="deletions">{d} --</span>
   </p>
 
-  <AreaChart data={weeks} {max} {xAccessor} {yAccessor} />
+  <AreaChart data={weeks} {upperBound} {xAccessor} {yAccessor} {fill} />
 </article>
 
 <style>
@@ -44,10 +50,12 @@
 
   h2 {
     grid-area: name;
+    align-self: end;
   }
 
   .position {
     grid-area: position;
+    align-self: end;
   }
 
   .history {
@@ -66,12 +74,12 @@
   }
 
   article > * {
-    padding: 0.25rem 0.5rem;
+    padding: 0rem 0.5rem;
   }
 
   img {
     box-sizing: initial;
-    transform: scale(0.75);
+    transform: scale(0.7);
     border-radius: 50%;
     justify-self: center;
     align-self: center;
@@ -84,7 +92,7 @@
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .history > * + * {
@@ -100,13 +108,13 @@
   }
 
   article > :global(svg) {
-    border-top: 1px solid hsl(0, 0%, 82%);
+    border-top: 1px solid hsl(0, 0%, 86%);
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
     width: 100%;
     height: auto;
     display: block;
     padding: 0.25rem 0.5rem 0.75rem;
-    background: hsl(0, 0%, 96%);
+    background: hsl(0, 0%, 97%);
   }
 </style>
