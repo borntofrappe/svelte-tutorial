@@ -44,7 +44,7 @@
   }
 
   div {
-    max-width: 650px;
+    max-width: 700px;
     width: 95vw;
     padding: 0 1rem;
     margin: 1rem auto;

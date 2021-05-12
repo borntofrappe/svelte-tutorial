@@ -51,7 +51,7 @@
   width={dimensions.width}
   height={dimensions.height}
 >
-  <g fill="currentColor" transform="translate()">
+  <g fill="currentColor">
     <g text-anchor="end" dominant-baseline="middle" font-size="12">
       {#each yTicks as tick}
         <g transform="translate(-5 {yScale(tick)})">

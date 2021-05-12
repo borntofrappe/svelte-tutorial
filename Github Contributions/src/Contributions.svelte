@@ -50,11 +50,13 @@
   };
 </script>
 
-<main>
+<header>
   <h1>
     {dates.join(' - ')}
   </h1>
-  <hr />
+</header>
+
+<main>
   <p>Contributions to master, excluding merge commits and bot accounts</p>
   <AreaChart
     data={cumulative}
@@ -67,6 +69,25 @@
 </main>
 
 <style>
+  header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 0.25rem 0;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.35;
+  }
+
   main {
     width: 100%;
   }
@@ -78,11 +99,6 @@
   h1 {
     font-weight: 400;
     font-size: 1.3rem;
-  }
-
-  hr {
-    background: currentColor;
-    opacity: 0.5;
   }
 
   p {

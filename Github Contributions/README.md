@@ -24,9 +24,9 @@ const timeParse = getContext('timeParse');
 
 In the project the feature allows to rely on the same parsing function in the `<Contributions />` and `<Contributors />` components.
 
-### Area Chart
+### [Area Chart](https://svelte.dev/repl/bc91f9fa82c84ac1bc2d4f8d230bbc2c?version=3.38.2)
 
-The component is important enough that I decided to devote [a REPL](https://svelte.dev/repl/bc91f9fa82c84ac1bc2d4f8d230bbc2c?version=3.38.2) to its development. Take notice of the purpose of the `upperBound` variable:
+The component is important enough that I decided to devote a REPL to its development. Take notice of the purpose of the `upperBound` variable:
 
 - `yAccessor` is included to retrieve the value plotted on the y axis, and it is used to find the maximum value in the input dataset.
 
