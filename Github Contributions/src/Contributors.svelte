@@ -1,13 +1,14 @@
 <script>
+  import dataset from './dataset.js';
+  import { metric } from './stores.js';
   import { getContext } from 'svelte';
-  import data from './data.js';
+  const timeParse = getContext('timeParse');
+
   import Contributor from './Contributor.svelte';
 
-  const metric = getContext('metric');
-  const metricAccessor = (d) => d[metric];
   const baseUrl = 'https://github.com';
 
-  const contributors = data
+  let contributors = dataset
     .map(({ total: c, author, weeks }) => {
       const { login: name, avatar: src, path } = author;
       const a = weeks.reduce((acc, curr) => acc + curr.a, 0);
@@ -24,22 +25,49 @@
       };
     })
     .sort((a, b) => {
-      if (metricAccessor(a) === metricAccessor(b)) {
-        const breakEvenMetric = metric === 'c' ? 'a' : 'c';
+      const m = $metric;
+      if (a[m] === b[m]) {
+        const breakEvenMetric = m === 'c' ? 'a' : 'c';
         return a[breakEvenMetric] < b[breakEvenMetric] ? 1 : -1;
       }
-      return metricAccessor(a) < metricAccessor(b) ? 1 : -1;
+      return a[m] < b[m] ? 1 : -1;
     });
 
-  const upperBound = contributors[0].weeks.reduce(
-    (acc, d) => (metricAccessor(d) > acc ? metricAccessor(d) : acc),
-    0
-  );
+  $: upperBound = contributors
+    .map(({ weeks }) =>
+      weeks.reduce(
+        (acc, curr) => (curr[$metric] > acc ? curr[$metric] : acc),
+        0
+      )
+    )
+    .reduce((acc, curr) => (curr > acc ? curr : acc), 0);
+
+  $: if ($metric) {
+    contributors = [...contributors].sort((a, b) => {
+      const m = $metric;
+      if (a[m] === b[m]) {
+        const breakEvenMetric = m === 'c' ? 'a' : 'c';
+        return a[breakEvenMetric] < b[breakEvenMetric] ? 1 : -1;
+      }
+      return a[m] < b[m] ? 1 : -1;
+    });
+  }
+
+  const xAccessor = (d) => timeParse(d.w);
+  const yAccessor = (d) => d[$metric];
+  const fill = '#fb8532';
 </script>
 
 <section>
   {#each contributors as contributor, i}
-    <Contributor {...contributor} position={i + 1} {upperBound} />
+    <Contributor
+      {...contributor}
+      position={i + 1}
+      {upperBound}
+      {xAccessor}
+      {yAccessor}
+      {fill}
+    />
   {/each}
 </section>
 

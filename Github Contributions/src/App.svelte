@@ -6,14 +6,6 @@
   import { timeParse } from 'd3-time-format';
 
   setContext('timeParse', timeParse('%Y-%m-%d'));
-  /* metric:
-	|key | metric    |
-	|----|-----------|
-	|c	 | commits   |
-	|a	 | additions |
-	|d	 | deletions |
-	*/
-  setContext('metric', 'c');
 </script>
 
 <div>

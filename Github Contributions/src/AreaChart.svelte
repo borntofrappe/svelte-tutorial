@@ -20,29 +20,33 @@
       left: 50,
     },
   };
-  export let upperBound = max(data, yAccessor);
+  export let upperBound;
+
+  $: if (!upperBound && data) {
+    upperBound = max(data, yAccessor);
+  }
 
   dimensions.boundedWidth =
     dimensions.width - (dimensions.margin.left + dimensions.margin.right);
   dimensions.boundedHeight =
     dimensions.height - (dimensions.margin.top + dimensions.margin.bottom);
 
-  const xScale = scaleTime()
+  $: xScale = scaleTime()
     .domain(extent(data, xAccessor))
     .range([0, dimensions.boundedWidth]);
 
-  const yScale = scaleLinear()
+  $: yScale = scaleLinear()
     .domain([0, upperBound])
     .range([dimensions.boundedHeight, 0]);
 
-  const areaGenerator = area()
+  $: areaGenerator = area()
     .x((d) => xScale(xAccessor(d)))
     .y0(dimensions.boundedHeight)
     .y1((d) => yScale(yAccessor(d)))
     .curve(curve);
 
-  const yTicks = yScale.ticks(4);
-  const xTicks = xScale.ticks(5);
+  $: yTicks = yScale.ticks(4);
+  $: xTicks = xScale.ticks(5);
 </script>
 
 <svg

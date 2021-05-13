@@ -1,10 +1,6 @@
 <script>
-  import { getContext } from 'svelte';
-  const timeParse = getContext('timeParse');
-  const metric = getContext('metric');
-  const metricAccessor = (d) => d[metric];
-
   import AreaChart from './AreaChart.svelte';
+
   export let name;
   export let src;
   export let href;
@@ -15,9 +11,9 @@
   export let weeks;
 
   export let upperBound;
-  const xAccessor = (d) => timeParse(d.w);
-  const yAccessor = metricAccessor;
-  const fill = '#fb8532';
+  export let xAccessor;
+  export let yAccessor;
+  export let fill;
 </script>
 
 <article>
