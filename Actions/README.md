@@ -58,3 +58,37 @@ return {
 ```
 
 This last instruction is necessary to avoid potential memory leaks.
+
+## [Lazy Load Images](https://svelte.dev/repl/e81a037c763a4556a8b08d4302f84b7c?version=3.38.2)
+
+Following [this insightful article on CSS Tricks](https://css-tricks.com/the-complete-guide-to-lazy-loading-images/), `lazy` and `lazyAll` functions lean on the intersection observer API to target `<img />` elements. When the images are in the viewport, the idea is to use the value stored in the `data-src` attribute for the `src` attribute, which triggers the loading of the visual.
+
+It is possible to consider the `data-src` attribute in at least two ways:
+
+1. with `node.getAttribute()`
+
+   ```js
+   node.getAttribute('data-src');
+   ```
+
+2. with `node.dataset`
+
+   ```js
+   node.dataset.src;
+   ```
+
+It is also possible to set the `src` attribute in at least two ways:
+
+1. with `node.setAttribute()`
+
+   ```js
+   node.setAttribute('src', dataSrc);
+   ```
+
+2. directly with `node.src`
+
+   ```js
+   node.src = dataSrc;
+   ```
+
+The difference between `lazy` and `lazyAll` is straightforward: the first function assumes the `:use` directive is included on individual images; the second function considers instead a container element, like a `<div>` to target all the nested images.
