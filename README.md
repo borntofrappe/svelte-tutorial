@@ -156,4 +156,4 @@ Highlight the contributions to a public repository with a series of area charts.
 
 ## Actions
 
-Explore the actions and the `:use` directive with a series of demos.
+Explore actions and the `:use` directive with a series of demos. Consider for instance how to [lazy load images](https://svelte.dev/repl/e81a037c763a4556a8b08d4302f84b7c?version=3.38.2) or [show more information with a tooltip](https://svelte.dev/repl/a4682e449f0a4478aa4a24a804d9fe7c?version=3.38.2).
