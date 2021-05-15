@@ -92,3 +92,41 @@ It is also possible to set the `src` attribute in at least two ways:
    ```
 
 The difference between `lazy` and `lazyAll` is straightforward: the first function assumes the `:use` directive is included on individual images; the second function considers instead a container element, like a `<div>` to target all the nested images.
+
+In both instances `params` is used to customize the intersection observer API.
+
+```js
+const observer = new IntersectionObserver(observation, params);
+```
+
+Try changing `threshold` or `rootMargin` to confirm how the images are lazily loaded on scroll.
+
+## [Tooltip](https://svelte.dev/repl/a4682e449f0a4478aa4a24a804d9fe7c?version=3.38.2)
+
+Building on the foundations provided by the `Append` example, the `use:tooltip` directive allows to show additional information when hovering or focusing on specific elements. After a few iterations, I've settled on a rather intriguing solution where the action shows the input string above the icon of a magnifying glass. The icon itself is added with a pseudo element at the end of the element designated to have a tooltip.
+
+As mentioned, the demo contemplates both mouse and keyboard input. To consider keyboard navigation, the selected elements are attributed a `tabindex` attribute, which makes them selectable.
+
+```js
+node.setAttribute('tabindex', 0);
+```
+
+The instruction is included at the very beginning of the tooltip function, and sets up the feature similarly to the `.tooltip` class.
+
+```js
+node.classList.add('tooltip');
+```
+
+It is through this class that the node sets the `position` to `relative`, to absolute position the information from the node, and then includes the cited icon.
+
+```css
+:global(.tooltip) {
+  position: relative;
+}
+
+:global(.tooltip::after) {
+  content: url('data:image/svg+xml,%3Csvg ... %3C/svg%3E');
+}
+```
+
+_Please note:_ the solution shows but one possible way to show more information on hover and on focus. There's plenty of room for improvement, from the appearance of the tooltip to how the feature fits with screen readers or more broadly respect accessibility concerns.
