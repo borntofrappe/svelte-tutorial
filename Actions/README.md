@@ -2,6 +2,8 @@
 
 Svelte explains [actions](https://svelte.dev/tutorial/actions) as _element-level lifecycle functions_, and introduces the concept with two demos: a pannable, draggable box and a button reacting to a long press. Here I try to understand the actions with additional projects.
 
+_Please note:_ there's plenty of room for improvement, from the style of the features to how the logic fits with the larger web environment. Consider for instance what happens when JavaScript is not enabled, especially in the demo lazy loading the images, or again how screen readers examine the content hidden from sight, especially in the tooltip demo.
+
 ## [Append](https://svelte.dev/repl/a716e80bc6e04442a461aa906a0ccb15?version=3.38.2)
 
 This is a trivial example, but helps to introduce actions and the `:use` directive. The goal is to append a string when the user hovers on a specific HTML element.
@@ -129,4 +131,60 @@ It is through this class that the node sets the `position` to `relative`, to abs
 }
 ```
 
-_Please note:_ the solution shows but one possible way to show more information on hover and on focus. There's plenty of room for improvement, from the appearance of the tooltip to how the feature fits with screen readers or more broadly respect accessibility concerns.
+## [Selection](https://svelte.dev/repl/cae85a6878114dd1a88d9fabd9f61742?version=3.38.2)
+
+Based on the [selection API](https://developer.mozilla.org/en-US/docs/Web/API/Selection), the action allows to select the content of a series of elements to share a particular string of text on Twitter. The API is experimental, so that it is immediately necessary to check if the feature is supported.
+
+```js
+export function selection(node, params) {
+  if (!getSelection()) return;
+}
+```
+
+In this instance the function is terminated prematurely and nothing happens. Past this check, the selection is checked following the `mouseup` event, on the node itself, but also the window. The listeners are set following the `mousedown` event, this time solely on the node.
+
+```js
+function handleMousedown() {
+  node.addEventListener('mouseup', handleMouseup);
+  window.addEventListener('mouseup', handleMouseup);
+}
+```
+
+`handleMouseup` extracts the text from the selected container, and there's a bit of logic to make sure `text` considers the entire string from start to end. This is complicated by the fact that the selection API provides a `startContainer` and `endContainer`.
+
+```js
+const { startContainer, endContainer } = getSelection().getRangeAt(0);
+```
+
+The containers might not be the same, as the elements benefiting from the action might nest additional HTML elements. This means extracting the text is not as simple as considering `startOffset` and `endOffset`.
+
+```js
+const { startOffset, endOffset } = getSelection().getRangeAt(0);
+```
+
+When the selection spans over multiple elements `startOffset` describes the beginning of `startContainer`, while `endOffset` the end of `endContainer`. If there are containers in between, it is necessary to consider the entirety of their content.
+
+Once `text` is extracted, and trimmed, it is finally included in the `href` attribute of an anchor link element, which is then appended to the `<body />`.
+
+```js
+const child = document.createElement('a');
+child.setAttribute('href', `https://twitter.com/intent/tweet?text=${text}`);
+```
+
+The element itself is absolute positioned where the `mousedown` was first registered.
+
+```js
+let x, y;
+function handleMousedown({ pageX, pageY }) {
+  x = pageX;
+  y = pageY;
+}
+
+function handleMouseup() {
+  // ...
+  child.style.left = `${x}px`;
+  child.style.top = `${y}px`;
+}
+```
+
+This works as a rough estimate, but creates issues when the window is resized. To work around to this complication the anchor link is removed also when the window recorsd the `resize` event.
