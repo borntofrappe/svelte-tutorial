@@ -126,10 +126,6 @@ Lean on Sapper and then SvelteKit to develop a single page app with multiple rou
 
 Highlight school closure at a global scale with a choropleth map and an interactive dashboard.
 
-## [Await](https://svelte.dev/repl/763b2f9f567542eb92ef913fcca1574a?version=3.38.1)
-
-Illustrate the syntax for the `await` block.
-
 ## [Pixelated SVG](https://svelte.dev/repl/c10d39e4e247479f88f4381ca4a3eec2?version=3.38.1)
 
 Create vector graphics with a pixelated look.
@@ -146,9 +142,9 @@ Illustrate how Svelte binds the state to HTML elements.
 
 Toggle between two color schemes without user input.
 
-## [Pokemon Search](https://svelte.dev/repl/8593b0e8b60e4a78900ff4ff584a03a2?version=3.38.2)
+## Await
 
-Fetch information from an external API to create a functional, if basic, search application.
+Illustrate the syntax for the `await` block with a couple of demos. [Fetch world data](https://svelte.dev/repl/763b2f9f567542eb92ef913fcca1574a?version=3.38.1), or again [search for a specific pokemon](https://svelte.dev/repl/8593b0e8b60e4a78900ff4ff584a03a2?version=3.38.2).
 
 ## [Github Contributions](https://svelte.dev/repl/756596b4f3af4f02bf23e572159f159c?version=3.38.2)
 
@@ -156,4 +152,4 @@ Highlight the contributions to a public repository with a series of area charts.
 
 ## Actions
 
-Explore actions and the `:use` directive with a series of demos. Consider for instance how to [lazy load images](https://svelte.dev/repl/e81a037c763a4556a8b08d4302f84b7c?version=3.38.2) or [show more information with a tooltip](https://svelte.dev/repl/a4682e449f0a4478aa4a24a804d9fe7c?version=3.38.2).
+Explore the `:use` directive with a series of demos. Create actions to [lazy load images](https://svelte.dev/repl/e81a037c763a4556a8b08d4302f84b7c?version=3.38.2), [show more information with a tooltip](https://svelte.dev/repl/a4682e449f0a4478aa4a24a804d9fe7c?version=3.38.2), [share a selection on twitter](https://svelte.dev/repl/cae85a6878114dd1a88d9fabd9f61742?version=3.38.2).
