@@ -59,3 +59,27 @@ const interval = setInterval(() => {
   set(new Date());
 }, 1000);
 ```
+
+### [Event Forwarding and Component Binding](https://svelte.dev/repl/48eec86cb34e438eaab62ebbcea53f97?version=3.38.2)
+
+The application includes a keypad similar to that one introduced in the tutorial. Here I try to replicate the demo in the tutorial with [component binding](https://svelte.dev/tutorial/component-bindings) and [event forwarding](https://svelte.dev/tutorial/dom-event-forwarding).
+
+By binding `value`, the variable is up to date with the variable set up in the nested component.
+
+```svelte
+<Input
+  bind:value
+/>
+```
+
+By listening to the `submit` event, the component is able to forward the event set on the individual `<form>` element.
+
+```svelte
+<Input on:submit={() => {  /* do something */ }} />
+```
+
+With regards to the `<Input />` component, consider the following:
+
+- `preventDefault` modifies the event to call `e.preventDefault`
+
+- the `<form>` element includes a multitude of buttons, but only one is assigned a type of `submit`. The other buttons are assigned a type of `button` to avoid submitting the form with every interaction
