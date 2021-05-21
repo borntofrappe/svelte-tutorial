@@ -1,16 +1,25 @@
 <script>
-  import Keypad from './Keypad.svelte';
+  import Input from './Input.svelte';
+  import Timer from './Timer.svelte';
 
   let seconds;
-  $: console.log(seconds);
 </script>
 
 <div>
-  <Keypad
-    on:countdown={(e) => {
-      seconds = e.detail;
-    }}
-  />
+  {#if !seconds}
+    <Input
+      on:countdown={(e) => {
+        seconds = e.detail;
+      }}
+    />
+  {:else}
+    <Timer
+      {seconds}
+      on:new={() => {
+        seconds = null;
+      }}
+    />
+  {/if}
 </div>
 
 <style>
