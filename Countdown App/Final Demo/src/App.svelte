@@ -24,7 +24,8 @@
 
 <style>
   div {
-    max-width: 270px;
+    max-width: 300px;
     margin: 1rem auto;
+    padding: 1rem;
   }
 </style>

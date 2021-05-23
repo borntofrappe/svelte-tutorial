@@ -1,4 +1,6 @@
 <script>
+  import { fly } from 'svelte/transition';
+
   export let value = '';
 
   const select = (v) => {
@@ -9,7 +11,7 @@
   };
 </script>
 
-<form on:submit|preventDefault>
+<form in:fly={{ y: -10, delay: 120 }} on:submit|preventDefault>
   {#each Array(10).fill() as _, i}
     <button type="button" on:click={() => select(i)}>
       {i}

@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
+  import { fly } from 'svelte/transition';
 
   import Input from './Input.svelte';
 
@@ -29,7 +30,7 @@
   }
 </script>
 
-<header>
+<header in:fly={{ y: -5 }}>
   <h1 class:translucent={!value}>
     {@html timeMarkup}
   </h1>
@@ -56,8 +57,6 @@
   </button>
 </header>
 
-<hr />
-
 <Input bind:value on:submit={handleSubmit} />
 
 <style>
@@ -65,7 +64,19 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.5rem 0;
+    padding-bottom: 0.5rem;
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    opacity: 0.3;
   }
 
   h1 {
@@ -102,11 +113,6 @@
   button:hover,
   button:focus {
     opacity: 1;
-  }
-
-  hr {
-    transform: scaleY(0.5);
-    opacity: 0.5;
   }
 
   button svg {
