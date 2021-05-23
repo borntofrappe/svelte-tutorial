@@ -1,11 +1,10 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
-  import { fly } from 'svelte/transition';
-
-  import { onDestroy } from 'svelte';
+  import { createEventDispatcher, onDestroy } from 'svelte';
   import { tweened } from 'svelte/motion';
   import { linear as easing } from 'svelte/easing';
+  import { fly } from 'svelte/transition';
+
+  const dispatch = createEventDispatcher();
 
   export let countdown;
 
@@ -28,11 +27,11 @@
   let isResetting;
   const duration = 1000;
 
-  let offset = tweened(0, { duration, easing });
-  let rotation = tweened(0, { duration, easing });
+  let offset = tweened(1, { duration, easing });
+  let rotation = tweened(360, { duration, easing });
 
-  $: offset.set(1 - Math.max(count - 1, 0) / countdown);
-  $: rotation.set((1 - Math.max(count - 1, 0) / countdown) * 360);
+  $: offset.set(Math.max(count - 1, 0) / countdown);
+  $: rotation.set((Math.max(count - 1, 0) / countdown) * 360);
 
   function handleNew() {
     clearInterval(interval);
@@ -43,23 +42,23 @@
     now = Date.now();
     end = now + count * 1000;
     interval = setInterval(updateTimer, 1000);
-    offset.set(1 - Math.max(count - 1, 0) / countdown);
-    rotation.set((1 - Math.max(count - 1, 0) / countdown) * 360);
+    offset.set(Math.max(count - 1, 0) / countdown);
+    rotation.set((Math.max(count - 1, 0) / countdown) * 360);
     isPaused = false;
   }
 
   function handlePause() {
-    offset.set(1 - count / countdown);
-    rotation.set((1 - count / countdown) * 360);
+    offset.set(count / countdown);
+    rotation.set((count / countdown) * 360);
     clearInterval(interval);
     isPaused = true;
   }
 
   function handleReset() {
+    clearInterval(interval);
     isResetting = true;
     isPaused = false;
-    clearInterval(interval);
-    Promise.all([offset.set(0), rotation.set(0)]).then(() => {
+    Promise.all([offset.set(1), rotation.set(360)]).then(() => {
       isResetting = false;
       now = Date.now();
       end = now + countdown * 1000;
@@ -82,21 +81,19 @@
   <svg in:fly={{ y: -5 }} viewBox="-50 -50 100 100" width="250" height="250">
     <title>Remaining seconds: {count}</title>
     <g fill="none" stroke="currentColor" stroke-width="2">
-      <circle stroke="hsl(208, 100%, 50%)" r="46" />
+      <circle stroke="currentColor" r="46" />
       <path
-        stroke="currentColor"
-        d="M 0 -46 a 46 46 0 0 1 0 92 46 46 0 0 1 0 -92"
+        stroke="hsl(208, 100%, 50%)"
+        d="M 0 -46 a 46 46 0 0 0 0 92 46 46 0 0 0 0 -92"
         pathLength="1"
         stroke-dasharray="1"
         stroke-dashoffset={$offset}
       />
     </g>
     <g fill="hsl(208, 100%, 50%)" stroke="none">
-      <g transform="scale(-1 1)">
-        <g transform="rotate({$rotation})">
-          <g transform="translate(0 -46)">
-            <circle r="4" />
-          </g>
+      <g transform="rotate({$rotation})">
+        <g transform="translate(0 -46)">
+          <circle r="4" />
         </g>
       </g>
     </g>
@@ -111,6 +108,7 @@
         {#each Object.entries({ h, m, s }) as [key, value], i}
           {#if countdown >= 60 ** (2 - i)}
             <tspan dx="3" font-weight="bold">{padValue(value)}</tspan><tspan
+              dx="0.5"
               font-size="7">{key}</tspan
             >
           {/if}
@@ -187,6 +185,7 @@
   }
 
   button:nth-of-type(odd) {
+    width: max-content;
     font-size: 0.9rem;
     color: inherit;
     border: none;

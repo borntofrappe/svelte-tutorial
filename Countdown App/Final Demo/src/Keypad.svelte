@@ -1,9 +1,9 @@
 <script>
   import { createEventDispatcher } from 'svelte';
-  const dispatch = createEventDispatcher();
   import { fly } from 'svelte/transition';
-
   import Input from './Input.svelte';
+
+  const dispatch = createEventDispatcher();
 
   let value;
 
@@ -83,7 +83,7 @@
     font-size: 1.75rem;
     flex-grow: 1;
     text-align: center;
-    font-weight: initial;
+    font-weight: bold;
     letter-spacing: 1px;
     word-spacing: 0.5rem;
     transition: opacity 0.2s ease-in-out;
@@ -94,6 +94,7 @@
   }
 
   h1 :global(span) {
+    font-weight: initial;
     font-size: 1rem;
     margin-left: 0.15rem;
   }
