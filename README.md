@@ -157,3 +157,7 @@ Explore the `:use` directive with a series of demos. Create actions to [lazy loa
 ## [Countdown App](https://svelte.dev/repl/a19df6f013434e01bb990349843af288?version=3.38.2)
 
 Lean on component binding and tween animation to count down an arbitrary number of hours, minutes and seconds.
+
+## Loto Seal
+
+Take advantage of reactive declarations and a custom CSS transition to search for the Loto seal in the page.
