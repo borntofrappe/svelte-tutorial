@@ -161,3 +161,7 @@ Lean on component binding and tween animation to count down an arbitrary number 
 ## [Loto Seal](https://svelte.dev/repl/0ef0f010c62c492081bd3e8ce1b5f160?version=3.38.2)
 
 Take advantage of reactive declarations and a custom CSS transition to search for the Loto seal in the page.
+
+## Binding Typewriter
+
+Introduce a JS transition while binding the state of input elements of type `checkbox` and `radio`.
