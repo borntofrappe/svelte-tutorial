@@ -164,4 +164,4 @@ Take advantage of reactive declarations and a custom CSS transition to search fo
 
 ## Binding Typewriter
 
-Introduce a JS transition while binding the state of input elements of type `checkbox` and `radio`.
+Introduce a JS transition while binding the state of input elements of type [`checkbox`](https://svelte.dev/repl/d6a041928cc14550bca2cb0eb25772ad?version=3) and [`radio`](https://svelte.dev/repl/e3b4a6f5d1db4e6eb7e71cd461fd5ff6?version=3.38.2).
