@@ -1,6 +1,7 @@
 <script>
   import data from './data.js';
   import Table from './Table.svelte';
+  import Points from './Points.svelte';
 </script>
 
 <div>
@@ -13,7 +14,10 @@
     for the <time datetime="2020-09-12">2020</time> to
     <time datetime="2021-05-23">2021</time> season of the Premier League competition.
   </p>
+
   <Table {data} />
+
+  <Points {data} />
 </div>
 
 <style>
