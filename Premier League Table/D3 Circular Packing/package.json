@@ -19,7 +19,8 @@
     "d3-array": "latest",
     "d3-scale": "latest",
     "d3-interpolate": "latest",
-    "d3-hierarchy": "latest"
+    "d3-hierarchy": "latest",
+    "d3-scale-chromatic": "latest"
   },
   "dependencies": {
     "sirv-cli": "^1.0.0"
