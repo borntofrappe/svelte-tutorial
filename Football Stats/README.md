@@ -1,6 +1,6 @@
-# Premier League Table
+# [Football Stats](https://svelte.dev/repl/2bd49c76c94e4b7d823d3df8afd8eefd?version=3.38.2)
 
-Wikipedia highlights the 2020 to 2021 season of the [Premier League]() with a table dense of information. The goal of this project is to repurpose the data with different visualizations.
+Wikipedia highlights the 2020 to 2021 season of the [Premier League](https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table) with a table dense of information. The goal of this project is to repurpose the data with different visualizations.
 
 _Please note:_ I developed smaller demos with Svelte's own REPL to focus on the d3-specific logic.
 
@@ -88,3 +88,7 @@ To draw the nodes, a hierarchy provides several helper functions, like `.nodes()
 ```
 
 `data` describes the original data point, and allows to retrieve the value, or name if need be.
+
+## Final Demo
+
+The demo incorporates a table exactly like the one proposed [on wikipedia](https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table). The `<Table />` component proves a useful exercise with Svelte `each` block.

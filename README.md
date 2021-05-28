@@ -166,6 +166,6 @@ Take advantage of reactive declarations and a custom CSS transition to search fo
 
 Introduce a JS transition while binding the state of input elements of type [`checkbox`](https://svelte.dev/repl/d6a041928cc14550bca2cb0eb25772ad?version=3) and [`radio`](https://svelte.dev/repl/e3b4a6f5d1db4e6eb7e71cd461fd5ff6?version=3.38.2).
 
-## Premier League Table
+## [Football Stats](https://svelte.dev/repl/2bd49c76c94e4b7d823d3df8afd8eefd?version=3.38.2)
 
-Hihglight the results of a football competition with different visualizations.
+Hihglight the data for the season of a football competition with multiple visualizations.
