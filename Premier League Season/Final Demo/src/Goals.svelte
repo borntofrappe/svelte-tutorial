@@ -1,5 +1,5 @@
 <script>
-  import Soccerplot from './Soccerplot.svelte';
+  import Footballplot from './Footballplot.svelte';
 
   export let data;
 </script>
@@ -12,7 +12,7 @@
     goals made and the number of matches won.
   </p>
 
-  <Soccerplot
+  <Footballplot
     data={data.map(({ team, won, goals }) => ({ team, x: won, y: goals[0] }))}
     x="Won"
     y="GF"
@@ -23,7 +23,7 @@
     and the number of matches lost.
   </p>
 
-  <Soccerplot
+  <Footballplot
     data={data.map(({ team, lost, goals }) => ({ team, x: lost, y: goals[1] }))}
     x="Lost"
     y="GA"
@@ -34,7 +34,7 @@
     less than obvious.
   </p>
 
-  <Soccerplot
+  <Footballplot
     data={data.map(({ team, goals }) => ({ team, x: goals[1], y: goals[0] }))}
     x="GA"
     y="GF"

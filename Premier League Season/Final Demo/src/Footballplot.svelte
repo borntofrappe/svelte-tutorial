@@ -1,6 +1,5 @@
 <script>
-  import { scaleLinear, scaleSequential } from 'd3-scale';
-  import { interpolateYlGnBu as interpolator } from 'd3-scale-chromatic';
+  import { scaleLinear } from 'd3-scale';
   import { hexbin } from 'd3-hexbin';
   import { max, extent, range } from 'd3-array';
 
@@ -61,7 +60,6 @@
 
   const maxLength = max(hexbinData, ({ length }) => length);
 
-  const colorScale = scaleSequential(interpolator).domain([1, maxLength]);
   const radiusScale = scaleLinear().domain([1, maxLength]).range(radii);
 
   let highlight = Math.floor(Math.random() * hexbinData.length);
@@ -74,13 +72,6 @@
   height={dimensions.height}
 >
   <g transform="translate({dimensions.margin.left} {dimensions.margin.top})">
-    <g font-weight="bold">
-      <text
-        x={dimensions.boundedWidth + dimensions.padding * 2 + 8}
-        y={dimensions.boundedHeight + dimensions.padding}>{x}</text
-      >
-      <text y="-8">{y}</text>
-    </g>
     <!-- highlight -->
     <path
       fill="none"
@@ -110,6 +101,14 @@
       </g>
     </g>
 
+    <g font-weight="bold">
+      <text
+        x={dimensions.boundedWidth + dimensions.padding * 2 + 8}
+        y={dimensions.boundedHeight + dimensions.padding}>{x}</text
+      >
+      <text y="-8">{y}</text>
+    </g>
+
     <path
       fill="none"
       stroke="currentColor"
@@ -122,8 +121,9 @@
     />
 
     <g transform="translate({dimensions.padding} {dimensions.padding})">
-      <g fill="none" stroke="currentColor">
-        <g stroke-width="0.5" opacity="0.3">
+      <!-- axis -->
+      <g fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.3">
+        <g>
           {#each xTicks as xTick}
             <g transform="translate({xScale(xTick)} 0)">
               <path
@@ -133,7 +133,7 @@
             </g>
           {/each}
         </g>
-        <g stroke-width="0.5" opacity="0.3">
+        <g>
           {#each yTicks as yTick}
             <g transform="translate(0 {yScale(yTick)})">
               <path
@@ -144,6 +144,7 @@
           {/each}
         </g>
       </g>
+      <!-- viz -->
       <g>
         {#each hexbinData as { x, y, length }, i}
           <g transform="translate({x} {y})" opacity={i === highlight ? 1 : 0.3}>

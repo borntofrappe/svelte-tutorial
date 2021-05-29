@@ -1,4 +1,4 @@
-# [Football Stats](https://svelte.dev/repl/2bd49c76c94e4b7d823d3df8afd8eefd?version=3.38.2)
+# [Premier League Season](https://codesandbox.io/s/premier-league-season-mror6)
 
 Wikipedia highlights the 2020 to 2021 season of the [Premier League](https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table) with a table dense of information. The goal of this project is to repurpose the data with different visualizations.
 
