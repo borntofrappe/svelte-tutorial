@@ -2,6 +2,7 @@
   import data from './data.js';
   import Table from './Table.svelte';
   import Points from './Points.svelte';
+  import Goals from './Goals.svelte';
 </script>
 
 <div>
@@ -18,6 +19,8 @@
   <Table {data} />
 
   <Points {data} />
+
+  <Goals {data} />
 </div>
 
 <style>
