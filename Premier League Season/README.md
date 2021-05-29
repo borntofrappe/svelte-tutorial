@@ -1,4 +1,4 @@
-# [Premier League Season](https://codesandbox.io/s/premier-league-season-mror6)
+# [Premier League Season](https://svelte.dev/repl/2bd49c76c94e4b7d823d3df8afd8eefd?version=3.38.2)
 
 Wikipedia highlights the 2020 to 2021 season of the [Premier League](https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table) with a table dense of information. The goal of this project is to repurpose the data with different visualizations.
 
@@ -91,4 +91,16 @@ To draw the nodes, a hierarchy provides several helper functions, like `.nodes()
 
 ## Final Demo
 
-The demo incorporates a table exactly like the one proposed [on wikipedia](https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table). The `<Table />` component proves a useful exercise with Svelte `each` block.
+The project starts with a table similar to the one proposed [on wikipedia](https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table). The `<Table />` component provides a useful exercise with Svelte `each` and `if` blocks.
+
+Past the table, `Points.svelte` considers the points scored by the different teams with a circular pack. Instead of rendering circles with a solid color, however, the `<circle />` elements benefit from a `fill` referencing a `<pattern />` element.
+
+```html
+<circle fill="url(#p)" />
+```
+
+The SVG syntax is beyond the scope of this project, but suffice it to say that the pattern actually describes a non-repeating pattern to draw a ball with a series of hexagons. The pattern is helpful to have the visual scale to the size of whichever element uses it.
+
+Next to the visualization, a series of `<text>` element highlight a specific data point with additional information. By default the project highlights a team at random, but when hovering on a specific value, the metrics are updated to match the selection.
+
+Finally, `Goals.svelte`, but most importantly `Footballbin.svelte` focus on the correlation between the goals scored, taken and other variables with a hexbin. Once again, and instead of rendering regular hexagons, the bins are highlighted with the pattern of the football. Moreover, the data points are surrounded by a frame hinting at a goal post and layered on a series of grid lines to evoke the goal post net. Exactly like the circular packing component, the visualization includes a series of `<text>` element with more details on the chosen bin.

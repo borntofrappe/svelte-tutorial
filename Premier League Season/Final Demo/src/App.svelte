@@ -49,7 +49,7 @@
 </svg>
 
 <div>
-  <h1>Football Stats</h1>
+  <h1>Premier League Season</h1>
   <p>
     Let's consider the <a
       href="https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League#League_table"
