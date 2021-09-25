@@ -169,3 +169,7 @@ Introduce a JS transition while binding the state of input elements of type [`ch
 ## [Premier League Season](https://svelte.dev/repl/2bd49c76c94e4b7d823d3df8afd8eefd?version=3.38.2)
 
 Repurpose the information proposed for the league table of a popular football competition.
+
+## [High-speed Trains](https://svelte.dev/repl/0b1c85f4e13a4c53bf3bf381eb59c7bf?version=3.43.0)
+
+Highlight how high-speed trains reduced travel times between Paris and other populous French cities.
