@@ -173,3 +173,7 @@ Repurpose the information proposed for the league table of a popular football co
 ## [High-speed Trains](https://svelte.dev/repl/0b1c85f4e13a4c53bf3bf381eb59c7bf?version=3.43.0)
 
 Highlight how high-speed trains reduced travel times between Paris and other populous French cities.
+
+## [F1 Tyres](https://svelte.dev/repl/f500057f49ba407cbc9f1d094a107e4e?version=3.43.0)
+
+Analyse the degradation and offset of different tyre compounds, with column charts and generative visualizations.
