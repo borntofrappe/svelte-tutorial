@@ -77,7 +77,7 @@ The `demos` folder illustrates how to generate pages comes from data retrieved f
   In the specific demo, the `get` function returns a JSON object based on the imported data
 
   ```js
-  import { demos } from './_data.js';
+  import { demos } from "./_data.js";
 
   export function get(req, res, next) {
     res.end(JSON.stringify(demos));
@@ -182,7 +182,7 @@ else if (res.status === 404) {
 The request is processed through `[id].json.js`, similarly to `index.json.js`, but for a single demo. The file defines a `get` function which considers the `id` received through the fetch request.
 
 ```js
-import { demos } from './_data.js';
+import { demos } from "./_data.js";
 
 export function get(req, res, next) {
   const { id } = req.params;
@@ -195,7 +195,7 @@ Based on the `id` and whether the `demos` array has an item with a matching valu
 const demo = demos.find((d) => d.id === parseInt(id, 10));
 
 if (demo) {
-  res.setHeader('Content-Type', 'applications/json');
+  res.setHeader("Content-Type", "applications/json");
   res.end(JSON.stringify(demo));
 }
 ```
@@ -218,9 +218,9 @@ The input is not processed in any sort of way, which means the feature is by con
 Following the `submit` event, the `handleSubmit` function performs a POST request with the necessary fields.
 
 ```js
-fetch('demos.json', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+fetch("demos.json", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ title, description, details, href }),
 });
 ```
@@ -228,7 +228,7 @@ fetch('demos.json', {
 The request is performed by `app.svelte`, and is processed in `index.json.js` with a `post` function. It is however necessary to first install `body-parser`, to process the request with a `json` function.
 
 ```js
-import { json } from 'body-parser';
+import { json } from "body-parser";
 
 polka() // You can also use Express
   .use(
@@ -251,7 +251,7 @@ As the fetch request is performed, it is finally helpful to redirect the user to
 
 ```html
 <script>
-  import { goto } from '@sapper/app';
+  import { goto } from "@sapper/app";
 
   // find id of the most recent demo
   goto(`demos/${id}`);
@@ -285,13 +285,13 @@ The folder structure is eerily similar to that of sapper with a `static` and `sr
 `<Nav>` is updated in how the component retrieves the information regarding the current page, the `segment` variable. The layout file does not receive a `segment` property, and the value is instead retrieved from the page and the `$app/stores` module.
 
 ```js
-import { page } from '$app/stores';
+import { page } from "$app/stores";
 ```
 
 `page` describes a readable store with information regarding the page. `$page` details an object with various fields, among which `path`, which describes the URL.
 
 ```js
-<a aria-current={$page.path === '/' ? 'page' : undefined} href="/">
+<a aria-current={$page.path === "/" ? "page" : undefined} href="/">
   home
 </a>
 ```
@@ -301,7 +301,7 @@ import { page } from '$app/stores';
 The dollar sign `$` in a string works as a convenient way to refer to a file in the `src` folder.
 
 ```js
-import Nav from '$lib/Nav.svelte';
+import Nav from "$lib/Nav.svelte";
 ```
 
 ### load
@@ -358,7 +358,7 @@ It is then enough to destructure the information from the response.
 
 ```js
 export async function load({ fetch }) {
-  const res = await fetch('demos.json');
+  const res = await fetch("demos.json");
   const { demos } = await res.json();
 }
 ```
@@ -404,8 +404,8 @@ To retrieve the data for a specific demo I've implemented two different approach
 
    ```js
    export function get({ query }) {
-     if (query.has('id')) {
-       const id = query.get('id');
+     if (query.has("id")) {
+       const id = query.get("id");
        // find demo
      }
 
@@ -418,7 +418,7 @@ To retrieve the data for a specific demo I've implemented two different approach
 The `goto` method is available from `$app/navigation` module.
 
 ```js
-import { goto } from '$app/navigation';
+import { goto } from "$app/navigation";
 ```
 
 ### prefetch
@@ -435,7 +435,26 @@ The `rel` attribute with a type of `prefetch` is substituted with a syntax custo
 The post request is implemented exactly as in the sapper demo, and is actually an opportunity to realize how the `fetch` method is not included through the library, but through the `window` object.
 
 ```js
-fetch('/demos.json', {});
+fetch("/demos.json", {});
 ```
 
 The instruction doesn't result in an error because the code runs as a result of a `submit` event, and therefore only on the client side.
+
+## Update
+
+I revisited the project to ensure that:
+
+1. the sapper demo has a `package-lock.json` file
+
+2. the sveltekit demo refers to the version of the kit available at the time of the project
+
+   ```json
+   {
+     "devDependencies": {
+       "@sveltejs/adapter-node": "1.0.0-next.12",
+       "@sveltejs/kit": "1.0.0-next.71"
+     }
+   }
+   ```
+
+   Without this specific mention the risk is to install versions with breaking changes.
