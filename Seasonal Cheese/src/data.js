@@ -799,4 +799,4 @@ export default [
     beginning: 9,
     end: 12,
   },
-];
+].sort((a, b) => (a.name > b.name ? 1 : -1));
