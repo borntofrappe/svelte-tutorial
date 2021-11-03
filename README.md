@@ -177,3 +177,7 @@ Highlight how high-speed trains reduced travel times between Paris and other pop
 ## [F1 Tyres](https://svelte.dev/repl/f500057f49ba407cbc9f1d094a107e4e?version=3.43.0)
 
 Analyse the degradation and offset of different tyre compounds, with column charts and generative visualizations.
+
+## [Seasonal Cheese](https://svelte.dev/repl/138eb5cbb131409c8d09845567b1f1ec?version=3.44.1)
+
+Highlight the most appropriate months for a collection of cheeses.
