@@ -181,3 +181,7 @@ Analyse the degradation and offset of different tyre compounds, with column char
 ## [Seasonal Cheese](https://svelte.dev/repl/138eb5cbb131409c8d09845567b1f1ec?version=3.44.1)
 
 Highlight the seasonality of some types of cheese, with reactive declarations and input binding.
+
+## [World Coordinates](https://svelte.dev/repl/bbb26de08d694a89bdf7077688d23f62?version=3.44.2)
+
+Create a playground to retrieve world coordinates for geographical visualizations.
