@@ -185,3 +185,7 @@ Highlight the seasonality of some types of cheese, with reactive declarations an
 ## [World Coordinates](https://svelte.dev/repl/bbb26de08d694a89bdf7077688d23f62?version=3.44.2)
 
 Create a playground to retrieve world coordinates for geographical visualizations.
+
+## Dowsing Machine
+
+Recreate a minigame from the Pokewalker system, a small device connected to two titles in the Pokemon series.
