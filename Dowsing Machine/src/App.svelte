@@ -1,39 +1,47 @@
 <script>
+  const initialMessage = "Discover an item!";
+  const initialGuesses = 2;
+
   const patches = 5;
 
   let patch = 0;
-  let secret = Math.floor(Math.random() * patches);
+  let itemPatch = Math.floor(Math.random() * patches);
+  let selectedPatches = [];
 
   let isGuessing = false;
   let isFound = false;
-  let guesses = 2;
-  let message = "Discover an item!";
+  let guessesLeft = initialGuesses;
+  let currentMessage = initialMessage;
 
   function handleSubmit() {
     if (isGuessing) return;
 
-    if (guesses === 0 || isFound) {
+    if (guessesLeft === 0 || isFound) {
+      selectedPatches = [];
       isGuessing = false;
       isFound = false;
-      secret = Math.floor(Math.random() * patches);
-      guesses = 2;
-      message = "Discover an item!";
+      itemPatch = Math.floor(Math.random() * patches);
+      guessesLeft = initialGuesses;
+      currentMessage = initialMessage;
       // reset
-    } else {
+    } else if (!selectedPatches.includes(patch)) {
       isGuessing = true;
     }
   }
 
-  function handleAnimation() {
-    console.log("shake");
-    guesses = guesses - 1;
-    if (patch === secret) {
+  function handleAnimationend() {
+    selectedPatches = [...selectedPatches, patch];
+    guessesLeft = guessesLeft - 1;
+    if (patch === itemPatch) {
       isFound = true;
-      message = "Found it!";
-    } else if (guesses === 0) {
-      message = "Out of luck...";
+      currentMessage = "Found it!";
+    } else if (guessesLeft === 0) {
+      isFound = true;
+      currentMessage = "Out of luck...";
     } else {
-      message = `It's ${Math.abs(patch - secret) > 1 ? "far away" : "close"}!`;
+      currentMessage = `It's ${
+        Math.abs(patch - itemPatch) > 1 ? "far away" : "close"
+      }!`;
     }
     isGuessing = false;
   }
@@ -119,23 +127,28 @@
       <use href="#location" />
     </svg>
 
-    <h1>{message}</h1>
+    <h1>{currentMessage}</h1>
 
     <h2>
       Left:
-      <span>{guesses}</span>
+      <span>{guessesLeft}</span>
     </h2>
 
-    <div class:isGuessing on:animationend={handleAnimation}>
+    <div class:isGuessing on:animationend={handleAnimationend}>
       {#each Array(patches).fill() as _, i}
         <label class:active={patch === i}>
           <span class="visually-hidden">Select patch {i}</span>
           <input type="radio" name="patches" bind:group={patch} value={i} />
-          <svg viewBox="0 0 120 100" width="12" height="10">
+          <svg
+            class:selectedPatches={selectedPatches.includes(i)}
+            viewBox="0 0 120 100"
+            width="12"
+            height="10"
+          >
             <use href="#bush" />
           </svg>
 
-          {#if secret === i && isFound}
+          {#if itemPatch === i && isFound}
             <svg id="found-item" viewBox="0 0 120 100" width="18" height="15">
               <use href="#item" />
             </svg>
@@ -264,6 +277,10 @@
     height: auto;
   }
 
+  label svg.selectedPatches {
+    opacity: 0.5;
+  }
+
   label > svg:nth-of-type(2) {
     position: absolute;
     bottom: 100%;
@@ -285,10 +302,6 @@
     background: #1a1a13;
     clip-path: polygon(0% 80%, 40% 40%, 60% 40%, 100% 80%, 100% 100%, 0% 100%);
     animation: none;
-  }
-
-  .visually-hidden {
-    display: none;
   }
 
   h1 {
@@ -339,5 +352,15 @@
     67% {
       transform: translateY(-0.1rem);
     }
+  }
+
+  .visually-hidden:not(:focus):not(:active) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
   }
 </style>
