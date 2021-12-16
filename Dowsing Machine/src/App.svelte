@@ -1,6 +1,42 @@
 <script>
+  const patches = 5;
+
   let patch = 0;
+  let secret = Math.floor(Math.random() * patches);
+
+  let isGuessing = false;
+  let isFound = false;
   let guesses = 2;
+  let message = "Discover an item!";
+
+  function handleSubmit() {
+    if (isGuessing) return;
+
+    if (guesses === 0 || isFound) {
+      isGuessing = false;
+      isFound = false;
+      secret = Math.floor(Math.random() * patches);
+      guesses = 2;
+      message = "Discover an item!";
+      // reset
+    } else {
+      isGuessing = true;
+    }
+  }
+
+  function handleAnimation() {
+    console.log("shake");
+    guesses = guesses - 1;
+    if (patch === secret) {
+      isFound = true;
+      message = "Found it!";
+    } else if (guesses === 0) {
+      message = "Out of luck...";
+    } else {
+      message = `It's ${Math.abs(patch - secret) > 1 ? "far away" : "close"}!`;
+    }
+    isGuessing = false;
+  }
 </script>
 
 <svg style="display: none;" viewBox="0 0 100 100">
@@ -77,34 +113,46 @@
   </symbol>
 </svg>
 
-<form on:submit|preventDefault>
+<form on:submit|preventDefault={handleSubmit}>
   <main>
     <svg viewBox="0 0 150 100" width="50" height="33.33">
       <use href="#location" />
     </svg>
 
-    <h1>Discover an item!</h1>
+    <h1>{message}</h1>
 
     <h2>
       Left:
       <span>{guesses}</span>
     </h2>
 
-    <div>
-      {#each Array(5).fill() as _, i}
+    <div class:isGuessing on:animationend={handleAnimation}>
+      {#each Array(patches).fill() as _, i}
         <label class:active={patch === i}>
           <span class="visually-hidden">Select patch {i}</span>
           <input type="radio" name="patches" bind:group={patch} value={i} />
           <svg viewBox="0 0 120 100" width="12" height="10">
             <use href="#bush" />
           </svg>
+
+          {#if secret === i && isFound}
+            <svg id="found-item" viewBox="0 0 120 100" width="18" height="15">
+              <use href="#item" />
+            </svg>
+          {/if}
         </label>
       {/each}
     </div>
   </main>
 
   <div>
-    <button type="button">
+    <button
+      type="button"
+      on:click={() => {
+        if (isGuessing) return;
+        patch = Math.max(0, patch - 1);
+      }}
+    >
       <span class="visually-hidden">Left patch</span>
       <svg
         style="transform: rotateY(180deg)"
@@ -120,7 +168,13 @@
       <span class="visually-hidden">Select patch</span>
     </button>
 
-    <button type="button">
+    <button
+      type="button"
+      on:click={() => {
+        if (isGuessing) return;
+        patch = Math.min(patches - 1, patch + 1);
+      }}
+    >
       <span class="visually-hidden">Right patch</span>
       <svg viewBox="0 0 100 100" width="15" height="15">
         <use href="#arrow" />
@@ -204,10 +258,20 @@
     opacity: 0;
   }
 
-  label svg {
+  label > svg:nth-of-type(1) {
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  label > svg:nth-of-type(2) {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, -0.2rem);
+    width: 80%;
+    height: auto;
+    display: block;
   }
 
   label.active::before {
@@ -262,5 +326,18 @@
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  .isGuessing .active > svg {
+    animation: shake 1s step-start;
+  }
+
+  @keyframes shake {
+    33% {
+      transform: translateY(0.1rem);
+    }
+    67% {
+      transform: translateY(-0.1rem);
+    }
   }
 </style>
