@@ -186,6 +186,6 @@ Highlight the seasonality of some types of cheese, with reactive declarations an
 
 Create a playground to retrieve world coordinates for geographical visualizations.
 
-## Dowsing Machine
+## [Dowsing Machine](https://svelte.dev/repl/77a677bc6ecc466d86769369913fea7d?version=3.44.3)
 
-Recreate a minigame from the Pokewalker system, a small device connected to two titles in the Pokemon series.
+Recreate a small game from the Pokéwalker, a small device connected to two titles of the Pokemon series, highlighting Svelte's surgical reactivity.

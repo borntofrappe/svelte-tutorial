@@ -122,8 +122,8 @@
   </symbol>
 </svg>
 
-<main>
-  <form on:submit|preventDefault>
+<form on:submit|preventDefault={handleGuess}>
+  <main>
     <svg viewBox="0 0 150 100" width="50" height="33.33">
       <use href="#location" />
     </svg>
@@ -157,10 +157,11 @@
         </label>
       {/each}
     </fieldset>
-  </form>
+  </main>
 
   <div>
     <button
+      type="button"
       on:click={() => {
         if (isGuessing) return;
         patch = Math.max(0, patch - 1);
@@ -177,11 +178,12 @@
       </svg>
     </button>
 
-    <button on:click={handleGuess}>
+    <button type="submit">
       <span class="visually-hidden">Reveal patch {patch}</span>
     </button>
 
     <button
+      type="button"
       on:click={() => {
         if (isGuessing) return;
         patch = Math.min(patches - 1, patch + 1);
@@ -195,7 +197,7 @@
       </svg>
     </button>
   </div>
-</main>
+</form>
 
 <style>
   :global(*) {
@@ -224,69 +226,69 @@
     accent-color: currentColor;
   }
 
-  main {
+  form {
     display: flex;
     flex-direction: column;
     gap: 1.25rem 0;
   }
 
-  main > div {
+  form > div {
     align-self: center;
   }
 
-  form {
+  main {
     display: flex;
     flex-direction: column;
   }
 
-  form fieldset {
+  main fieldset {
     margin: 1.75rem 0 1rem;
   }
 
-  form > svg {
+  main > svg {
     width: 3rem;
     height: auto;
     display: block;
   }
 
-  form h1 {
+  main h1 {
     order: 1;
   }
 
   @supports (display: grid) {
-    form {
+    main {
       flex-direction: initial;
     }
 
-    form h1 {
+    main h1 {
       order: initial;
     }
 
-    form {
+    main {
       display: grid;
       grid-template-columns: 3rem 1fr;
       gap: 0 0.25rem;
     }
 
-    form > svg {
+    main > svg {
       width: 100%;
     }
 
-    form h1 {
+    main h1 {
       grid-row: 3;
     }
 
-    form h2 {
+    main h2 {
       align-self: end;
     }
 
-    form h1,
-    form fieldset {
+    main h1,
+    main fieldset {
       grid-column: 1/-1;
     }
   }
 
-  main {
+  form {
     width: 20rem;
     height: 20rem;
     padding: 3.75rem;
@@ -302,7 +304,7 @@
       0 0.1rem 0.7rem -0.4rem hsla(0, 0%, 0%, 0.5);
   }
 
-  form {
+  main {
     padding: 0.5rem;
     background: hsl(60, 20%, 49%);
     border: 0.3rem solid currentColor;
