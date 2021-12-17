@@ -1,0 +1,229 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: hsl(0, 0%, 20%);
+  background: hsl(0, 0%, 96%);
+  accent-color: currentColor;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@supports (display: grid) {
+  body {
+    flex-direction: initial;
+    justify-content: initial;
+    align-items: initial;
+  }
+
+  body {
+    display: grid;
+    place-items: center;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem 0;
+}
+
+main > div {
+  align-self: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form fieldset {
+  margin: 1.75rem 0 1rem;
+}
+
+form > svg {
+  width: 3rem;
+  height: auto;
+  display: block;
+}
+
+form h1 {
+  order: 1;
+}
+
+@supports (display: grid) {
+  form {
+    flex-direction: initial;
+  }
+
+  form h1 {
+    order: initial;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0 0.25rem;
+  }
+
+  form > svg {
+    width: 100%;
+  }
+
+  form h1 {
+    grid-row: 3;
+  }
+
+  form h2 {
+    align-self: end;
+  }
+
+  form h1,
+  form fieldset {
+    grid-column: 1/-1;
+  }
+}
+
+main {
+  width: 20rem;
+  height: 20rem;
+  padding: 3.75rem;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    hsl(344, 93%, 50%) 48%,
+    hsl(240, 25%, 21%) 48%,
+    hsl(240, 25%, 21%) 52%,
+    hsl(0, 0%, 96%) 52%
+  );
+  box-shadow: 0 0 0.25rem hsla(0, 0%, 0%, 0.25),
+    0 0.1rem 0.7rem -0.4rem hsla(0, 0%, 0%, 0.5);
+}
+
+form {
+  padding: 0.5rem;
+  background: hsl(60, 20%, 49%);
+  border: 0.3rem solid currentColor;
+  border-radius: 0.4rem;
+}
+
+h1 {
+  font-size: 1rem;
+  padding: 0.2rem;
+  border: 0.15rem solid currentColor;
+  border-radius: 0.2rem;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  justify-content: center;
+  gap: 0 0.5rem;
+}
+
+label {
+  position: relative;
+  width: 1.5rem;
+}
+
+label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+label > svg:nth-of-type(1) {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+label > svg:nth-of-type(2) {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -0.2rem);
+  width: 80%;
+  height: auto;
+  display: block;
+}
+
+label:nth-of-type(1) > svg:nth-of-type(1),
+label:nth-of-type(4) > svg:nth-of-type(1) {
+  opacity: 0.5;
+}
+
+label:nth-of-type(4)::before {
+  position: absolute;
+  content: "";
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 0.7rem;
+  height: 0.7rem;
+  background: currentColor;
+  clip-path: polygon(0% 80%, 40% 40%, 60% 40%, 100% 80%, 100% 100%, 0% 100%);
+  animation: none;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0 1rem;
+}
+
+button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  padding: 0.4rem;
+  border: none;
+  background: none;
+  box-shadow: 0 0rem 0.1rem hsla(0, 0%, 0%, 0.25),
+    0 0.1rem 0.5rem -0.2rem hsla(0, 0%, 0%, 0.45);
+}
+
+button:nth-of-type(2) {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+button svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}

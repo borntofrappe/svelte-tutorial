@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dowsing Machine</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <svg style="display: none" viewBox="0 0 100 100">
+      <symbol id="tree" viewBox="0 0 150 100">
+        <g fill="currentColor">
+          <rect x="0" y="36" width="17" height="16" />
+          <rect x="4" y="32" width="9" height="28" />
+        </g>
+      </symbol>
+
+      <symbol id="house" viewBox="0 0 150 100">
+        <g stroke="currentColor" stroke-width="5">
+          <path d="M 16.5 43 v 10" fill="none" />
+          <path
+            d="M 2.5 38 h 40 l -10 -10 h -20 l -10 10"
+            fill="currentColor"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+          />
+          <rect x="7.5" y="38" width="30" height="20" fill="none" />
+        </g>
+      </symbol>
+
+      <symbol id="location" viewBox="0 0 150 100">
+        <use transform="translate(5 0) " href="#tree" />
+        <use transform="translate(30 0) " href="#house" />
+        <use transform="translate(80 0) " href="#tree" />
+        <use transform="translate(105 0) " href="#house" />
+
+        <line
+          x1="0"
+          x2="150"
+          y1="60"
+          y2="60"
+          stroke="currentColor"
+          stroke-width="5"
+        />
+        <rect
+          opacity="0.3"
+          x="0"
+          y="60"
+          width="150"
+          height="40"
+          fill="currentColor"
+        />
+      </symbol>
+
+      <symbol id="bush" viewBox="0 0 120 100">
+        <path
+          d="M 2.5 30 q 5 50 20 67.5 h 75 q 15 -17.5 20 -67.5 q -15 10 -25 30 q 5 -30 0 -50 q -20 10 -32.5 40 q -12.5 -30 -32.5 -40 q -5 20 0 50 q -10 -20 -25 -30"
+          fill="currentColor"
+          stroke="currentColor"
+          stroke-width="5"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+        />
+      </symbol>
+
+      <symbol id="arrow" viewBox="0 0 100 100">
+        <path opacity="0.2" d="M 20 0 l 70 50 l -70 50" fill="currentColor" />
+      </symbol>
+
+      <symbol id="item" viewBox="0 0 120 100">
+        <g stroke="currentColor" stroke-width="5">
+          <path
+            d="M 25 37.5 v -10 l 25 -25 h 20 l 25 25 v 10"
+            fill="currentColor"
+          />
+          <g fill="none">
+            <rect x="25" y="37.5" width="50" height="60" />
+            <rect x="75" y="37.5" width="20" height="60" />
+          </g>
+        </g>
+      </symbol>
+    </svg>
+
+    <main>
+      <form>
+        <svg viewBox="0 0 150 100" width="50" height="33.33">
+          <use href="#location" />
+        </svg>
+
+        <h1>Out of luck...</h1>
+
+        <h2>
+          Left:
+          <span>0</span>
+        </h2>
+
+        <fieldset>
+          <label>
+            <span class="visually-hidden">Select patch 0</span>
+            <input type="radio" name="patch" value="0" />
+            <svg viewBox="0 0 120 100" width="12" height="10">
+              <use href="#bush" />
+            </svg>
+          </label>
+          <label>
+            <span class="visually-hidden">Select patch 1</span>
+            <input type="radio" name="patch" value="1" />
+            <svg viewBox="0 0 120 100" width="12" height="10">
+              <use href="#bush" />
+            </svg>
+
+            <svg id="found-item" viewBox="0 0 120 100" width="18" height="15">
+              <use href="#item" />
+            </svg>
+          </label>
+          <label>
+            <span class="visually-hidden">Select patch 2</span>
+            <input type="radio" name="patch" value="2" />
+            <svg viewBox="0 0 120 100" width="12" height="10">
+              <use href="#bush" />
+            </svg>
+          </label>
+          <label>
+            <span class="visually-hidden">Select patch 3</span>
+            <input type="radio" name="patch" value="3" />
+            <svg viewBox="0 0 120 100" width="12" height="10">
+              <use href="#bush" />
+            </svg>
+          </label>
+          <label>
+            <span class="visually-hidden">Select patch 4</span>
+            <input type="radio" name="patch" value="4" />
+            <svg viewBox="0 0 120 100" width="12" height="10">
+              <use href="#bush" />
+            </svg>
+          </label>
+        </fieldset>
+      </form>
+
+      <div>
+        <button type="button">
+          <span class="visually-hidden">Move left</span>
+          <svg
+            style="transform: rotateY(180deg)"
+            viewBox="0 0 100 100"
+            width="15"
+            height="15"
+          >
+            <use href="#arrow" />
+          </svg>
+        </button>
+
+        <button type="submit">
+          <span class="visually-hidden">Select patch</span>
+        </button>
+
+        <button type="button">
+          <span class="visually-hidden">Move right</span>
+          <svg viewBox="0 0 100 100" width="15" height="15">
+            <use href="#arrow" />
+          </svg>
+        </button>
+      </div>
+    </main>
+
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>
