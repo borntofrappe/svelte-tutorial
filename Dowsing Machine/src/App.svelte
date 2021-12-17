@@ -1,48 +1,49 @@
 <script>
   const initialMessage = "Discover an item!";
   const initialGuesses = 2;
-
   const patches = 5;
 
   let patch = 0;
-  let itemPatch = Math.floor(Math.random() * patches);
-  let selectedPatches = [];
+  let item = Math.floor(Math.random() * patches);
 
   let isGuessing = false;
   let isFound = false;
+
+  let guesses = [];
   let guessesLeft = initialGuesses;
   let currentMessage = initialMessage;
 
-  function handleSubmit() {
+  function handleGuess() {
     if (isGuessing) return;
 
     if (guessesLeft === 0 || isFound) {
-      selectedPatches = [];
       isGuessing = false;
       isFound = false;
-      itemPatch = Math.floor(Math.random() * patches);
+
+      item = Math.floor(Math.random() * patches);
+      guesses = [];
       guessesLeft = initialGuesses;
       currentMessage = initialMessage;
-      // reset
-    } else if (!selectedPatches.includes(patch)) {
+    } else if (!guesses.includes(patch)) {
       isGuessing = true;
     }
   }
 
-  function handleAnimationend() {
-    selectedPatches = [...selectedPatches, patch];
+  function handleReveal() {
+    guesses = [...guesses, patch];
     guessesLeft = guessesLeft - 1;
-    if (patch === itemPatch) {
+
+    if (patch === item) {
       isFound = true;
       currentMessage = "Found it!";
     } else if (guessesLeft === 0) {
       isFound = true;
       currentMessage = "Out of luck...";
     } else {
-      currentMessage = `It's ${
-        Math.abs(patch - itemPatch) > 1 ? "far away" : "close"
-      }!`;
+      const distance = Math.abs(patch - item);
+      currentMessage = `It's ${distance > 1 ? "far away" : "close"}!`;
     }
+
     isGuessing = false;
   }
 </script>
@@ -92,7 +93,7 @@
     />
   </symbol>
 
-  <symbol id="bush" viewBox="0 0 120 100">
+  <symbol id="patch" viewBox="0 0 120 100">
     <path
       d="M 2.5 30 q 5 50 20 67.5 h 75 q 15 -17.5 20 -67.5 q -15 10 -25 30 q 5 -30 0 -50 q -20 10 -32.5 40 q -12.5 -30 -32.5 -40 q -5 20 0 50 q -10 -20 -25 -30"
       fill="currentColor"
@@ -121,8 +122,8 @@
   </symbol>
 </svg>
 
-<form on:submit|preventDefault={handleSubmit}>
-  <main>
+<main>
+  <form on:submit|preventDefault>
     <svg viewBox="0 0 150 100" width="50" height="33.33">
       <use href="#location" />
     </svg>
@@ -134,39 +135,38 @@
       <span>{guessesLeft}</span>
     </h2>
 
-    <div class:isGuessing on:animationend={handleAnimationend}>
+    <fieldset class:guessing={isGuessing} on:animationend={handleReveal}>
       {#each Array(patches).fill() as _, i}
         <label class:active={patch === i}>
           <span class="visually-hidden">Select patch {i}</span>
           <input type="radio" name="patches" bind:group={patch} value={i} />
           <svg
-            class:selectedPatches={selectedPatches.includes(i)}
+            class:guessed={guesses.includes(i)}
             viewBox="0 0 120 100"
             width="12"
             height="10"
           >
-            <use href="#bush" />
+            <use href="#patch" />
           </svg>
 
-          {#if itemPatch === i && isFound}
+          {#if item === i && isFound}
             <svg id="found-item" viewBox="0 0 120 100" width="18" height="15">
               <use href="#item" />
             </svg>
           {/if}
         </label>
       {/each}
-    </div>
-  </main>
+    </fieldset>
+  </form>
 
   <div>
     <button
-      type="button"
       on:click={() => {
         if (isGuessing) return;
         patch = Math.max(0, patch - 1);
       }}
     >
-      <span class="visually-hidden">Left patch</span>
+      <span class="visually-hidden">Select patch {Math.max(0, patch - 1)}</span>
       <svg
         style="transform: rotateY(180deg)"
         viewBox="0 0 100 100"
@@ -177,24 +177,25 @@
       </svg>
     </button>
 
-    <button type="submit">
-      <span class="visually-hidden">Select patch</span>
+    <button on:click={handleGuess}>
+      <span class="visually-hidden">Reveal patch {patch}</span>
     </button>
 
     <button
-      type="button"
       on:click={() => {
         if (isGuessing) return;
         patch = Math.min(patches - 1, patch + 1);
       }}
     >
-      <span class="visually-hidden">Right patch</span>
+      <span class="visually-hidden"
+        >Select patch {Math.min(patches - 1, patch + 1)}</span
+      >
       <svg viewBox="0 0 100 100" width="15" height="15">
         <use href="#arrow" />
       </svg>
     </button>
   </div>
-</form>
+</main>
 
 <style>
   :global(*) {
@@ -209,57 +210,127 @@
   }
 
   :global(body) {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :global(body) {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    background: hsl(60, 20%, 97%);
+    color: hsl(0, 0%, 20%);
+    background: hsl(0, 0%, 96%);
     accent-color: currentColor;
   }
 
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem 0;
+  }
+
+  main > div {
+    align-self: center;
+  }
+
   form {
-    width: 20rem;
-    height: 20rem;
-    padding: 3.5rem;
-    border-radius: 50%;
-    background: linear-gradient(
-      to bottom,
-      #f60b4a 48%,
-      #282843 48%,
-      #282843 52%,
-      #f6f6f6 52%
-    );
-    box-shadow: 0 0 15px -7.5px hsla(0, 0%, 0%, 0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  form fieldset {
+    margin: 1.75rem 0 1rem;
+  }
+
+  form > svg {
+    width: 3rem;
+    height: auto;
+    display: block;
+  }
+
+  form h1 {
+    order: 1;
+  }
+
+  @supports (display: grid) {
+    form {
+      flex-direction: initial;
+    }
+
+    form h1 {
+      order: initial;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 0 0.25rem;
+    }
+
+    form > svg {
+      width: 100%;
+    }
+
+    form h1 {
+      grid-row: 3;
+    }
+
+    form h2 {
+      align-self: end;
+    }
+
+    form h1,
+    form fieldset {
+      grid-column: 1/-1;
+    }
   }
 
   main {
-    color: #1a1a13;
-    background: hsl(60, 20%, 49%);
-    border-radius: 0.4rem;
-    border: 0.3rem solid #282843;
+    width: 20rem;
+    height: 20rem;
+    padding: 3.75rem;
+    border-radius: 50%;
+    background: linear-gradient(
+      to bottom,
+      hsl(344, 93%, 50%) 48%,
+      hsl(240, 25%, 21%) 48%,
+      hsl(240, 25%, 21%) 52%,
+      hsl(0, 0%, 96%) 52%
+    );
+    box-shadow: 0 0 0.25rem hsla(0, 0%, 0%, 0.25),
+      0 0.1rem 0.7rem -0.4rem hsla(0, 0%, 0%, 0.5);
+  }
+
+  form {
     padding: 0.5rem;
-    margin: 0.25rem 0.25rem 0.5rem;
-    display: grid;
-    grid-template-columns: 50px auto;
-    grid-gap: 0.5rem 0.25rem;
+    background: hsl(60, 20%, 49%);
+    border: 0.3rem solid currentColor;
+    border-radius: 0.4rem;
+  }
+
+  h1 {
+    font-size: 1rem;
+    padding: 0.2rem;
+    border: 0.15rem solid currentColor;
+    border-radius: 0.2rem;
   }
 
   h2 {
     text-transform: uppercase;
-    font-size: 0.8rem;
-    align-self: end;
+    font-size: 0.9rem;
   }
 
-  main > div {
-    grid-column: span 2;
+  fieldset {
+    border: none;
     display: flex;
-    justify-content: space-evenly;
-    margin: 1rem 0 0.75rem;
+    justify-content: center;
+    gap: 0 0.5rem;
   }
 
   label {
     position: relative;
-    width: 1.42rem;
+    width: 1.5rem;
   }
 
   label input {
@@ -272,13 +343,9 @@
   }
 
   label > svg:nth-of-type(1) {
-    display: block;
     width: 100%;
     height: auto;
-  }
-
-  label svg.selectedPatches {
-    opacity: 0.5;
+    display: block;
   }
 
   label > svg:nth-of-type(2) {
@@ -291,67 +358,33 @@
     display: block;
   }
 
-  label.active::before {
-    position: absolute;
-    content: "";
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    width: 0.7rem;
-    height: 0.7rem;
-    background: #1a1a13;
-    clip-path: polygon(0% 80%, 40% 40%, 60% 40%, 100% 80%, 100% 100%, 0% 100%);
-    animation: none;
-  }
-
-  h1 {
-    grid-column: 1/-1;
-    grid-row: 3;
-    font-size: 1rem;
-    padding: 0.2rem;
-    border: 2px solid #2c2c20;
-    border-radius: 0.2rem;
-  }
-
-  form > div {
+  div {
     display: flex;
     justify-content: center;
-    margin-top: 1.75rem;
+    align-items: center;
     gap: 0 1rem;
   }
 
   button {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     padding: 0.4rem;
     border: none;
     background: none;
-    box-shadow: 0 0 2px hsla(0, 0%, 0%, 1);
+    box-shadow: 0 0rem 0.1rem hsla(0, 0%, 0%, 0.25),
+      0 0.1rem 0.5rem -0.2rem hsla(0, 0%, 0%, 0.45);
   }
 
   button:nth-of-type(2) {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
   button svg {
     display: block;
     width: 100%;
     height: auto;
-  }
-
-  .isGuessing .active > svg {
-    animation: shake 1s step-start;
-  }
-
-  @keyframes shake {
-    33% {
-      transform: translateY(0.1rem);
-    }
-    67% {
-      transform: translateY(-0.1rem);
-    }
   }
 
   .visually-hidden:not(:focus):not(:active) {
@@ -362,5 +395,35 @@
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
+  }
+
+  label.active::before {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 0.7rem;
+    height: 0.7rem;
+    background: currentColor;
+    clip-path: polygon(0% 80%, 40% 40%, 60% 40%, 100% 80%, 100% 100%, 0% 100%);
+    animation: none;
+  }
+
+  .guessing label.active > svg:nth-of-type(1) {
+    animation: shake 1s step-start;
+  }
+
+  .guessed {
+    opacity: 0.5;
+  }
+
+  @keyframes shake {
+    33% {
+      transform: translateY(0.1rem);
+    }
+    67% {
+      transform: translateY(-0.1rem);
+    }
   }
 </style>

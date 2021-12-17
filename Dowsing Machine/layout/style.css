@@ -24,19 +24,6 @@ body {
   align-items: center;
 }
 
-@supports (display: grid) {
-  body {
-    flex-direction: initial;
-    justify-content: initial;
-    align-items: initial;
-  }
-
-  body {
-    display: grid;
-    place-items: center;
-  }
-}
-
 main {
   display: flex;
   flex-direction: column;
