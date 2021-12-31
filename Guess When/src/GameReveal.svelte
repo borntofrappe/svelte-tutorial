@@ -53,7 +53,7 @@
 </script>
 
 <article>
-  <h2>{game.name}</h2>
+  <h2>{game.title}</h2>
 
   <svg
     viewBox="-{dimensions.margin.left} -{dimensions.margin
@@ -70,8 +70,8 @@
         x1="0"
         x2="25"
       >
-        <stop stop-color="orange" offset="0" />
-        <stop stop-color="orange" offset="50%" />
+        <stop stop-color="hsl(39, 100%, 48%)" offset="0" />
+        <stop stop-color="hsl(39, 100%, 48%)" offset="50%" />
         <stop stop-color="transparent" offset="50%" />
         <stop stop-color="transparent" offset="100%" />
       </linearGradient>
@@ -113,7 +113,7 @@
       <g transform="translate({timeScale(parseTime(game.date))} 0)">
         <path
           fill="none"
-          stroke="green"
+          stroke="hsl(120, 80%, 27%)"
           stroke-width="1"
           d="M 0 0 v {dimensions.boundedHeight}"
         />
@@ -122,7 +122,7 @@
       <g transform="translate({timeScale(selectedDate)} 0)">
         <path
           fill="none"
-          stroke="orange"
+          stroke="hsl(39, 100%, 48%)"
           stroke-width="1"
           d="M 0 0 v {dimensions.boundedHeight}"
         />
@@ -147,7 +147,7 @@
             font-weight="bold"
             y={dimensions.boundedHeight / 2}
           >
-            {formatDate(date)}
+            {formatTime(date)}
           </text>
         </g>
       {/if}
@@ -166,9 +166,8 @@
 
   {#if selectedDate}
     <p>
-      You picked the date of <span>{formatDate(selectedDate)}</span>, while the
-      title was published <span>{formatDate(parseTime(game.date))}</span>.
-      Exactly
+      You picked <span>{formatDate(selectedDate)}</span>, while the title was
+      published <span>{formatDate(parseTime(game.date))}</span>. Exactly
       <strong
         >{Math.abs(timeDay.count(selectedDate, parseTime(game.date)))} days off</strong
       >.
@@ -205,12 +204,12 @@
   }
 
   p span:nth-of-type(1) {
-    color: white;
-    background: orange;
+    color: hsl(0, 0%, 100%);
+    background: hsl(39, 100%, 48%);
   }
 
   p span:nth-of-type(2) {
-    color: white;
-    background: green;
+    color: hsl(0, 0%, 100%);
+    background: hsl(120, 80%, 27%);
   }
 </style>

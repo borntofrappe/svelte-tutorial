@@ -1,10 +1,11 @@
 <script>
-  // date the game
-  // https://www.lemonde.fr/les-decodeurs/article/2021/12/29/covid-19-confinements-et-perception-du-temps-saurez-vous-dater-ces-evenements-qui-ont-marque-nos-vies-depuis-2020_6107625_4355770.html
+  import GameReveal from "./GameReveal.svelte";
   import data from "./data.js";
+
   let indexes = Array(data.length)
     .fill()
     .map((_, i) => i);
+
   const games = Array(4)
     .fill()
     .map(() => {
@@ -13,8 +14,6 @@
       indexes = [...indexes.slice(0, i), ...indexes.slice(i + 1)];
       return data[index];
     });
-
-  import GameReveal from "./GameReveal.svelte";
 </script>
 
 <div>
@@ -25,7 +24,7 @@
       where published?
     </p>
 
-    <p>Pick a date and find how close you got.</p>
+    <p>Pick a date and find how close you can get to the real launch.</p>
   </header>
 
   <main>
@@ -48,7 +47,7 @@
   }
 
   div {
-    max-width: 42rem;
+    max-width: 46rem;
     margin: 1rem auto;
   }
 
