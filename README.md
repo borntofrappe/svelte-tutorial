@@ -189,3 +189,7 @@ Create a playground to retrieve world coordinates for geographical visualization
 ## [Dowsing Machine](https://svelte.dev/repl/77a677bc6ecc466d86769369913fea7d?version=3.44.3)
 
 Recreate a small game from the Pokéwalker, a small device connected to two titles of the Pokemon series, highlighting Svelte's surgical reactivity.
+
+## [Guess When](https://svelte.dev/repl/a972aa8a38494ac093c835586aa6e867?version=3.44.3)
+
+Create a quiz with an interactive visualization.
