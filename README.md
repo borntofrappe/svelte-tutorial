@@ -193,3 +193,7 @@ Recreate a small game from the Pokéwalker, a small device connected to two titl
 ## [Guess When](https://svelte.dev/repl/a972aa8a38494ac093c835586aa6e867?version=3.44.3)
 
 Create a quiz with an interactive visualization.
+
+## Word Search
+
+Puzzle game where players are tasked to find a sequence of letters in a 2 dimensional grid.
