@@ -2,20 +2,6 @@
 
 [Word search](https://en.wikipedia.org/wiki/Word_search) describes a puzzle game where a sequence of words is hidden in a two-dimensional grid. The player is tasked to find the letters included in all possible directions.
 
-## Canvas
-
-While it is possible to include the letters in an `<svg>` element I prefer to rely on a canvas and the [canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API).
-
-The demo works to showcase how to ultimately set up the canvas by binding the element and drawing on the context made available on mount.
-
-The relevant functions on the 2D context are:
-
-- `font` to set the font family and size
-
-- `textAlign` and `textBaseline` to horizontally and vertically center the letters in the cell
-
-- `fillText` to render text in the canvas
-
 ## Algorithm
 
 The script implements a `Grid` class following the logic explained by [Jamis Buck](https://twitter.com/jamis) in the article [_Generating Word Search Puzzles_](https://weblog.jamisbuck.org/2015/9/26/generating-word-search-puzzles.html).
@@ -122,6 +108,18 @@ In the moment the word fits add a new object to the stack to consider the update
 
 In the moment you exhaust all words the algorithm is complete. Fill the grid with additional characters to create the puzzle.
 
+## Canvas
+
+The demo works to showcase how to ultimately set up a grid with a `<canvas>` element. In the context og Svelte it is necessary to bind the element and draw on the context made available on mount.
+
+The relevant functions on the 2D context are:
+
+- `font` to set the font family and size
+
+- `textAlign` and `textBaseline` to horizontally and vertically center the letters in the cell
+
+- `fillText` to render text in the canvas
+
 ## Pinned Line
 
 The demo focuses on one of the defining features of the puzzle game, receiving user input and displaying the result of the interaction.
@@ -144,3 +142,12 @@ With `foreground` draw the line and consider mouse input.
 The separate structure helps to draw the static assets in the background, once, while continuously draw the line following the mouse.
 
 Overlap the two canvas element so that project gives the illusion of having a single element.
+
+## SVG
+
+With [_Canvas_](#canvas) and [_Pinned Line_](#pinned-line) the project develops the grid with a `<canvas>` element — or two `<canvas>` elements for the interactive demo.
+
+With the project I re-work the logic to render the letters and line in an `<svg>` element. An immediate benefit comes in the form of sizing, since it is much easier to scale the visual up or down to any size. The challenge is that you need to consider a variable width and height when capturing the pointer's coordinates. This explains the binding on the `<svg>` container, and the use of the `getBoundingClientRect`.
+
+```js
+```
