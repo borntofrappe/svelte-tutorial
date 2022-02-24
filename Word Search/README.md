@@ -149,5 +149,5 @@ With [_Canvas_](#canvas) and [_Pinned Line_](#pinned-line) the project develops 
 
 With the project I re-work the logic to render the letters and line in an `<svg>` element. An immediate benefit comes in the form of sizing, since it is much easier to scale the visual up or down to any size. The challenge is that you need to consider a variable width and height when capturing the pointer's coordinates. This explains the binding on the `<svg>` container, and the use of the `getBoundingClientRect`.
 
-```js
-```
+## Final Demo
+
