@@ -5,7 +5,7 @@
   const height = 400;
 
   const columns = 12;
-  const rows = 6;
+  const rows = 8;
 
   const words = [
     "Beetroot",
@@ -22,6 +22,7 @@
   const cellHeight = height / rows;
 
   const grid = new Grid({ rows, columns });
+
   const letters = grid
     .fill({
       words: [...words],
@@ -37,19 +38,19 @@
       };
     });
 
-  let svg, line, isDragging;
-  let match;
+  let svg;
+  let line, match, isDragging;
 
   let lines = [];
   let matches = [];
 
-  const handleOnset = () => {
+  const handleDragStart = () => {
     line = null;
     match = null;
     isDragging = true;
   };
 
-  const handleReset = () => {
+  const handleDragEnd = () => {
     line = null;
     match = null;
     isDragging = false;
@@ -137,26 +138,27 @@
 
     <svg bind:this={svg} {width} {height} viewBox="0 0 {width} {height}">
       <g transform="translate({cellWidth / 2} {cellHeight / 2})">
-        {#each lines as { c1, r1, c2, r2 }}
-          <path
-            d="M {cellWidth * c1} {cellHeight * r1} {cellWidth *
-              c2} {cellHeight * r2}"
-            fill="none"
-            stroke="hsla(213, 93%, 58%, 0.4)"
-            stroke-width={Math.min(cellWidth, cellHeight) / 1.5}
-            stroke-linecap="round"
-          />
-        {/each}
-        {#if line}
-          <path
-            d="M {cellWidth * line.c1} {cellHeight * line.r1} {cellWidth *
-              line.c2} {cellHeight * line.r2}"
-            fill="none"
-            stroke="hsl(211, 82%, 38%)"
-            stroke-width={Math.min(cellWidth, cellHeight) / 1.5}
-            stroke-linecap="round"
-          />
-        {/if}
+        <g
+          fill="none"
+          stroke-width={Math.min(cellWidth, cellHeight) / 1.5}
+          stroke-linecap="round"
+        >
+          {#each lines as { c1, r1, c2, r2 }}
+            <path
+              d="M {cellWidth * c1} {cellHeight * r1} {cellWidth *
+                c2} {cellHeight * r2}"
+              stroke="hsla(213, 93%, 58%, 0.4)"
+            />
+          {/each}
+          {#if line}
+            <path
+              d="M {cellWidth * line.c1} {cellHeight * line.r1} {cellWidth *
+                line.c2} {cellHeight * line.r2}"
+              stroke="hsl(211, 82%, 38%)"
+            />
+          {/if}
+        </g>
+
         <g
           fill="currentColor"
           text-anchor="middle"
@@ -174,8 +176,8 @@
       </g>
 
       <rect
-        on:mousedown={handleOnset}
-        on:mouseup={handleReset}
+        on:mousedown={handleDragStart}
+        on:mouseup={handleDragEnd}
         on:mousemove={handleDrag}
         {width}
         {height}
@@ -205,7 +207,6 @@
   }
 
   :global(body) {
-    min-height: 100vh;
     background: hsl(222, 22%, 9%);
     font-family: "Jost", sans-serif;
   }
@@ -249,6 +250,22 @@
     padding: 1rem;
   }
 
+  main mark {
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+    padding: 0.2rem 1.25rem;
+    background: hsla(213, 93%, 58%, 0.4);
+    color: inherit;
+  }
+
+  main svg {
+    display: block;
+    max-width: 34rem;
+    width: 100%;
+    height: auto;
+    user-select: none;
+  }
+
   main ul {
     align-self: stretch;
     background: hsla(213, 93%, 58%, 0.4);
@@ -260,21 +277,5 @@
 
   main ul li::marker {
     content: "";
-  }
-
-  main svg {
-    display: block;
-    max-width: 34rem;
-    width: 100%;
-    height: auto;
-    user-select: none;
-  }
-
-  main mark {
-    letter-spacing: 0.1rem;
-    font-weight: 700;
-    padding: 0.2rem 1.25rem;
-    background: hsla(213, 93%, 58%, 0.4);
-    color: inherit;
   }
 </style>

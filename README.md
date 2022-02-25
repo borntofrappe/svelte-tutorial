@@ -194,6 +194,6 @@ Recreate a small game from the Pokéwalker, a small device connected to two titl
 
 Create a quiz with an interactive visualization.
 
-## Word Search
+## [Word Search](https://svelte.dev/repl/f9b963fa72ab4f619770d05682bd8283?version=3.46.4)
 
-Puzzle game where players are tasked to find a sequence of letters in a 2 dimensional grid.
+Recreate the puzzle game where players are tasked to find a sequence of letters hidden between superfluous characters.
