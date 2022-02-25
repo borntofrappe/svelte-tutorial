@@ -4,12 +4,18 @@
   const width = 600;
   const height = 400;
 
-  const columns = 10;
+  const columns = 12;
   const rows = 6;
 
-  const words = ["apple", "orange", "peach", "grapes"].map((word) =>
-    word.toUpperCase()
-  );
+  const words = [
+    "Beetroot",
+    "Cabbage",
+    "Kale",
+    "Leeks",
+    "Onions",
+    "Parsnips",
+    "Squash",
+  ].map((word) => word.toUpperCase());
   const range = ["A", "Z"];
 
   const cellWidth = width / columns;
@@ -33,6 +39,8 @@
 
   let svg, line, isDragging;
   let match;
+
+  let lines = [];
   let matches = [];
 
   const handleOnset = () => {
@@ -93,70 +101,180 @@
 
       if (!matches.includes(match) && words.includes(match)) {
         matches = [...matches, match];
+        lines = [
+          ...lines,
+          {
+            c1,
+            r1,
+            c2,
+            r2,
+          },
+        ];
       }
     }
   }
 </script>
 
-<h2>Words:</h2>
+<svelte:head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap");
+  </style>
+</svelte:head>
 
-<ul>
-  {#each words as word}
-    <li>
-      {#if matches.includes(word)}
-        <del>{word}</del>
-      {:else}
-        {word}
-      {/if}
-    </li>
-  {/each}
-</ul>
+<div>
+  <header>
+    <h1>Word search</h1>
+    <p>
+      Read carefully. There are definitely {words.length} words in the following
+      puzzle.
+    </p>
+  </header>
 
-<h2>Search: {match || ""}</h2>
+  <main>
+    <h2>
+      <mark>{match || ""}</mark>
+    </h2>
 
-<svg bind:this={svg} {width} {height} viewBox="0 0 {width} {height}">
-  <g transform="translate({cellWidth / 2} {cellHeight / 2})">
-    {#each letters as { x, y, letter }}
-      <g transform="translate({x} {y})">
-        <text
-          font-size={Math.min(cellWidth, cellHeight) / 2}
+    <svg bind:this={svg} {width} {height} viewBox="0 0 {width} {height}">
+      <g transform="translate({cellWidth / 2} {cellHeight / 2})">
+        {#each lines as { c1, r1, c2, r2 }}
+          <path
+            d="M {cellWidth * c1} {cellHeight * r1} {cellWidth *
+              c2} {cellHeight * r2}"
+            fill="none"
+            stroke="hsla(213, 93%, 58%, 0.4)"
+            stroke-width={Math.min(cellWidth, cellHeight) / 1.5}
+            stroke-linecap="round"
+          />
+        {/each}
+        {#if line}
+          <path
+            d="M {cellWidth * line.c1} {cellHeight * line.r1} {cellWidth *
+              line.c2} {cellHeight * line.r2}"
+            fill="none"
+            stroke="hsl(211, 82%, 38%)"
+            stroke-width={Math.min(cellWidth, cellHeight) / 1.5}
+            stroke-linecap="round"
+          />
+        {/if}
+        <g
+          fill="currentColor"
           text-anchor="middle"
           dominant-baseline="middle"
+          font-size={Math.min(cellWidth, cellHeight) / 2}
         >
-          {letter}
-        </text>
+          {#each letters as { x, y, letter }}
+            <g transform="translate({x} {y})">
+              <text>
+                {letter}
+              </text>
+            </g>
+          {/each}
+        </g>
       </g>
-    {/each}
-    {#if line}
-      <path
-        opacity="0.2"
-        d="M {cellWidth * line.c1} {cellHeight * line.r1} {cellWidth *
-          line.c2} {cellHeight * line.r2}"
-        fill="none"
-        stroke="currentColor"
-        stroke-width={Math.min(cellWidth, cellHeight) / 1.5}
-        stroke-linecap="round"
-      />
-    {/if}
-  </g>
 
-  <rect
-    on:mousedown={handleOnset}
-    on:mouseup={handleReset}
-    on:mousemove={handleDrag}
-    {width}
-    {height}
-    opacity="0"
-  />
-</svg>
+      <rect
+        on:mousedown={handleOnset}
+        on:mouseup={handleReset}
+        on:mousemove={handleDrag}
+        {width}
+        {height}
+        opacity="0"
+      />
+    </svg>
+
+    <ul>
+      {#each words as word}
+        <li>
+          {#if matches.includes(word)}
+            <del>{word}</del>
+          {:else}
+            {word}
+          {/if}
+        </li>
+      {/each}
+    </ul>
+  </main>
+</div>
 
 <style>
-  svg {
-    outline: 1px solid;
-    max-width: 36rem;
+  :global(*) {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  :global(body) {
+    min-height: 100vh;
+    background: hsl(222, 22%, 9%);
+    font-family: "Jost", sans-serif;
+  }
+
+  div {
+    max-width: 56rem;
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  div > * {
+    color: hsl(206, 53%, 94%);
+    background: hsl(224, 21%, 14%);
+  }
+
+  header {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  header > * + * {
+    margin-top: 0.5em;
+  }
+
+  header h1 {
+    font-size: 2.25rem;
+    text-transform: uppercase;
+  }
+
+  header p {
+    font-size: 1.1rem;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  main > * {
+    padding: 1rem;
+  }
+
+  main ul {
+    align-self: stretch;
+    background: hsla(213, 93%, 58%, 0.4);
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+
+  main ul li::marker {
+    content: "";
+  }
+
+  main svg {
+    display: block;
+    max-width: 34rem;
     width: 100%;
     height: auto;
-    display: block;
     user-select: none;
+  }
+
+  main mark {
+    letter-spacing: 0.1rem;
+    font-weight: 700;
+    padding: 0.2rem 1.25rem;
+    background: hsla(213, 93%, 58%, 0.4);
+    color: inherit;
   }
 </style>
