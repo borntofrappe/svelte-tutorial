@@ -197,3 +197,7 @@ Create a quiz with an interactive visualization.
 ## [Word Search](https://svelte.dev/repl/f9b963fa72ab4f619770d05682bd8283?version=3.46.4)
 
 Recreate the puzzle game where players are tasked to find a sequence of letters hidden between superfluous characters.
+
+## Connect the Dots
+
+Break up path element(s) in a series of points and allow visitors to trace the outline of the figure.
