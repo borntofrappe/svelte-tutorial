@@ -24,99 +24,99 @@ Each project should have a link redirecting to a live demo. That being said, it 
 
 ## [Light Bright](https://svelte.dev/repl/cef9541e26814afa8abdc2d84feecb42)
 
-Create a light bright app to introduce Svelte and focus on a few core features: components, reactivity, events, event dispatchers.
+Toggle colorful, bright lights on and off.
 
 ## [Strongman](https://svelte.dev/repl/c234f8c4626440179c710f0c65cabfca)
 
-Animate an SVG asset describing a carnival machine to illustrate Svelte reactivity and built-in motion functions.
+Raise a small mallet to hit a receptive surface.
 
 ## [Tournament Bracket](https://svelte.dev/repl/4941cafa6eee409d947716816190222f)
 
-Hihglight stages for a hypothetical sport competition through the `<svelte:self>` component and a custom store.
+Hihglight stages for a hypothetical tournament-based sport competition.
 
 ## [Key Value Pairs](https://svelte.dev/repl/2fead853d94049e79805984858db9adb)
 
-Create a basic CRUD application to add, update, delete key value pairs. Highlight the items through D3 and two elementary visualizations.
+Add, update and delete key value pairs. Highlight the values with visualizations.
 
 ## [Stopwatch](https://svelte.dev/repl/591aff801e1d47498afdc2738fea4485)
 
-Track the passing of time and the gap between laps.
+Track the passing of time and the gap between successive laps.
 
 ## [Word Frequency](https://codepen.io/borntofrappe/pen/QWWWqQM)
 
-Analyse the absolute frequency of words included through a `<textarea>` element with a table and a pie chart.
+Estimate the absolute frequency of the words in the input text.
 
 ## [Wind Chill Index](https://codepen.io/borntofrappe/pen/WNNrrJg)
 
-Compute the wind chill index on the basis of the input temperature and speed.
+Highlight the wind chill index.
 
 ## [Concentration](https://codepen.io/borntofrappe/pen/yLLVNME)
 
-Create a memory-based game in which cards are flipped and matched in pairs.
+Match cards in pairs.
 
 ## [Infinity Maze](https://codepen.io/borntofrappe/pen/pooeyww)
 
-Experiment with SVG syntax and the Aldous-Broder algorithm to create a game where the player moves within the boundaries of a maze to reach a goal.
+Moves within the boundaries of an endless maze.
 
 ## [Smart Watch](https://codepen.io/borntofrappe/pen/bGGWMBx)
 
-Create a series of independent applications for a hypothetical smart watch.
+Tinker with several applications in a hypothetical smart watch.
 
 ## [Picross](https://codepen.io/borntofrappe/pen/yLLPBMr)
 
-Recreate the basic structure of the popular puzzle game which allows to draw stylized figures with a pixelated look.
+Draw stylized figures with a pixelated look.
 
 ## [Markdown Editor](https://codepen.io/borntofrappe/pen/VwwyGzR)
 
-Create an online editor which allows to compose and preview markdown syntax.
+Create an online editor to compose and preview markdown syntax.
 
 ## [Tweet Component](https://svelte.dev/repl/2fd524fb5c7f427891269b4d0928ac15?version=3.12.1)
 
-Create a reusable component to share a quote or even introduce an article.
+Display a tweet in a reusable component.
 
 ## [Typing Adventure](https://codepen.io/borntofrappe/pen/WNNaGKJ)
 
-Build upon the concept developed [in this pen](https://codepen.io/borntofrappe/pen/bzpQLa) to have an application tracking key strokes and their correctness against a provided string of characters.
+Track key strokes and their correctness against a provided string of characters.
 
 ## [Line Charts](https://codesandbox.io/s/svelte-line-charts-spuqv)
 
-Highlight the google trends for the Tour de France through simple, yet effective and reusable line charts.
+Highlight the google trends for the Tour de France.
 
 ## [Roman Clock](https://svelte.dev/repl/ce67640a4c034cfa8585f3555fff3f8d)
 
-Use a readable store and SVG syntax to display the current time in a classic visual.
+Display the current time in a classic visual.
 
 ## [Star Wars Crawl](https://svelte.dev/repl/545f0f3393954c4e8f06b1c0a8786475)
 
-Create an interactive form allowing to edit and show the opening crawls from a Star Wars movie.
+Edit and animate the opening crawls from a Star Wars movie.
 
-## [Contact US](https://njbcg.codesandbox.io/)
+## [Contact US](https://codesandbox.io/s/njbcg)
 
-Create an interactive contact card, editing and displaying the input information on two opposing sides.
+Edit an interactive contact card.
 
 ## [Basic Arithmetic](https://svelte.dev/repl/730b7da509b74438a9d1c4bc6306b52f)
 
-Compute basic arithmetic operations and animate the solution with a staggered motion.
+Compute and animate basic arithmetic operations.
 
 ## [Icon Maker](https://svelte.dev/repl/44a0394acb4f408cb0115958c0fd76f6)
 
-Create icons of different size using the Canvas API and the experimental Path2D interface.
+Create icons of different sizes and color.
 
-## [Spring Motion](https://svelte.dev/repl/27163986809341a5a7c97cbc4746d01b)
+## [Bug Feature](https://svelte.dev/repl/27163986809341a5a7c97cbc4746d01b)
 
-Practice with the motion module and spring animation.
+Animate a small visual with spring motion.
 
 ## [Thermometer App](https://codesandbox.io/s/thermometer-app-h8rho)
 
-Explore the reactive nature of Svelte to create an interactive application describing the temperature in a given range.
+Describe a temperature in a given range.
 
 ## [Bit Shifting](https://svelte.dev/repl/a3bd24b328ce4f318b7b045381faf6a4)
 
-Experiment with group bindings and reactive declarations to illustrate a binary counter and how the bitwise operators `<<` and `>>` work.
+Illustrate a binary counter and how the bitwise operators `<<` and `>>` work.
 
 ## [Line Drawing Grid](https://svelte.dev/repl/cec6ed73541f43699ef0a154019ecac5)
 
-Draw an interactive SVG element which can be modified with mouse input.
+Draw a line in a grid with limited resolution.
 
 ## Single Page App
 
@@ -124,7 +124,7 @@ Lean on Sapper and then SvelteKit to develop a single page app with multiple rou
 
 ## School Closures Maps
 
-Highlight school closure at a global scale with a choropleth map and an interactive dashboard.
+Highlight school closures at a global scale with a choropleth map and an interactive dashboard.
 
 ## [Pixelated SVG](https://svelte.dev/repl/c10d39e4e247479f88f4381ca4a3eec2?version=3.38.1)
 
@@ -132,7 +132,7 @@ Create vector graphics with a pixelated look.
 
 ## [Colorful Building Bl.ocks](https://svelte.dev/repl/63d826e34edb4d78bd2e2d9bc7e63936?version=3.38.2)
 
-Celebrate the anniversary of D3 library by highlight the colors of the bl.ocks created through blockbuilder.
+Celebrate the anniversary of D3 library with the colors of the bl.ocks created through blockbuilder.org.
 
 ## [Two Way Binding](https://svelte.dev/repl/a471604a71ce4f5886974b2f54f537e0?version=3.38.2)
 
@@ -144,7 +144,11 @@ Toggle between two color schemes without user input.
 
 ## Await
 
-Illustrate the syntax for the `await` block with a couple of demos. [Fetch world data](https://svelte.dev/repl/763b2f9f567542eb92ef913fcca1574a?version=3.38.1), or again [search for a specific pokemon](https://svelte.dev/repl/8593b0e8b60e4a78900ff4ff584a03a2?version=3.38.2).
+Explore the `await` block to:
+
+- [fetch world data](https://svelte.dev/repl/763b2f9f567542eb92ef913fcca1574a?version=3.38.1)
+
+- [search for a specific pokemon](https://svelte.dev/repl/8593b0e8b60e4a78900ff4ff584a03a2?version=3.38.2)
 
 ## [Github Contributions](https://svelte.dev/repl/756596b4f3af4f02bf23e572159f159c?version=3.38.2)
 
@@ -152,56 +156,62 @@ Highlight the contributions to a public repository with a series of area charts.
 
 ## Actions
 
-Explore the `:use` directive with a series of demos. Create actions to [lazy load images](https://svelte.dev/repl/e81a037c763a4556a8b08d4302f84b7c?version=3.38.2), [show more information with a tooltip](https://svelte.dev/repl/a4682e449f0a4478aa4a24a804d9fe7c?version=3.38.2), [share a selection on twitter](https://svelte.dev/repl/cae85a6878114dd1a88d9fabd9f61742?version=3.38.2).
+Explore the `:use` directive and Svelte actions to:
+
+- [lazy load images](https://svelte.dev/repl/e81a037c763a4556a8b08d4302f84b7c?version=3.38.2)
+
+- [show more information with a tooltip](https://svelte.dev/repl/a4682e449f0a4478aa4a24a804d9fe7c?version=3.38.2)
+
+- [share a string of text on twitter](https://svelte.dev/repl/cae85a6878114dd1a88d9fabd9f61742?version=3.38.2)
 
 ## [Countdown App](https://svelte.dev/repl/a19df6f013434e01bb990349843af288?version=3.38.2)
 
-Lean on component binding and tween animation to count down an arbitrary number of hours, minutes and seconds.
+Count down an arbitrary number of hours, minutes and seconds.
 
 ## [Loto Seal](https://svelte.dev/repl/0ef0f010c62c492081bd3e8ce1b5f160?version=3.38.2)
 
-Take advantage of reactive declarations and a custom CSS transition to search for the Loto seal in the page.
+Search for Loto seal in the page.
 
 ## Binding Typewriter
 
-Introduce a JS transition while binding the state of input elements of type [`checkbox`](https://svelte.dev/repl/d6a041928cc14550bca2cb0eb25772ad?version=3) and [`radio`](https://svelte.dev/repl/e3b4a6f5d1db4e6eb7e71cd461fd5ff6?version=3.38.2).
+Explore input binding with input elements of type [`checkbox`](https://svelte.dev/repl/d6a041928cc14550bca2cb0eb25772ad?version=3) and [`radio`](https://svelte.dev/repl/e3b4a6f5d1db4e6eb7e71cd461fd5ff6?version=3.38.2).
 
 ## [Premier League Season](https://svelte.dev/repl/2bd49c76c94e4b7d823d3df8afd8eefd?version=3.38.2)
 
-Repurpose the information proposed for the league table of a popular football competition.
+Highlight the 2020 to 2021 season of the football competition with a regular table and custom visualizations.
 
 ## [High-speed Trains](https://svelte.dev/repl/0b1c85f4e13a4c53bf3bf381eb59c7bf?version=3.43.0)
 
-Highlight how high-speed trains reduced travel times between Paris and other populous French cities.
+Highlight how high-speed trains have reduced travel times between Paris and other populous French cities.
 
 ## [F1 Tyres](https://svelte.dev/repl/f500057f49ba407cbc9f1d094a107e4e?version=3.43.0)
 
-Analyse the degradation and offset of different tyre compounds, with column charts and generative visualizations.
+Analyse the degradation and offset of different tyre compounds both with conventional visualizations and more striking visuals.
 
 ## [Seasonal Cheese](https://svelte.dev/repl/138eb5cbb131409c8d09845567b1f1ec?version=3.44.1)
 
-Highlight the seasonality of some types of cheese, with reactive declarations and input binding.
+Highlight the seasonality of some types of cheese.
 
 ## [World Coordinates](https://svelte.dev/repl/bbb26de08d694a89bdf7077688d23f62?version=3.44.2)
 
-Create a playground to retrieve world coordinates for geographical visualizations.
+Retrieve world coordinates for geographical visualizations.
 
 ## [Dowsing Machine](https://svelte.dev/repl/77a677bc6ecc466d86769369913fea7d?version=3.44.3)
 
-Recreate a small game from the Pokéwalker, a small device connected to two titles of the Pokemon series, highlighting Svelte's surgical reactivity.
+Look for an item hidden behind one of five bushes.
 
 ## [Guess When](https://svelte.dev/repl/a972aa8a38494ac093c835586aa6e867?version=3.44.3)
 
-Create a quiz with an interactive visualization.
+Guess when a video game was released in the span of a year.
 
 ## [Word Search](https://svelte.dev/repl/f9b963fa72ab4f619770d05682bd8283?version=3.46.4)
 
-Recreate the puzzle game where players are tasked to find a sequence of letters hidden between superfluous characters.
+Find words hidden between superfluous letters.
 
-## Connect the Dots
+## [Connect the Dots](https://svelte.dev/repl/d859ef69e1a44b8e9c16a4f0d0c3a236?version=3.47.0)
 
-Break up path element(s) in a series of points and allow visitors to trace the outline of the figure.
+Connect the points to trace the outline of a not-so-hidden figure.
 
 ## [Drawing Canvas](https://svelte.dev/repl/434e0b14546747688401e8808c060a23?version=3.47.0)
 
-Draw on the surface provided by a `<canvas>` element with a series of selected colors.
+Draw with a series of selected colors.
