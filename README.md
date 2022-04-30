@@ -201,3 +201,7 @@ Recreate the puzzle game where players are tasked to find a sequence of letters 
 ## Connect the Dots
 
 Break up path element(s) in a series of points and allow visitors to trace the outline of the figure.
+
+## [Drawing Canvas](https://svelte.dev/repl/434e0b14546747688401e8808c060a23?version=3.47.0)
+
+Draw on the surface provided by a `<canvas>` element with a series of selected colors.

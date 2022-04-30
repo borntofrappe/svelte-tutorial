@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g fill="currentColor">
+    <circle r="2" cx="38" cy="40" />
+    <circle r="2" cx="62" cy="40" />
+  </g>
+
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M 46 55 a 6 6 0 0 0 8 0" />
+
+    <path d="M 27 77 q -3 3 -3 6 a 3 3 0 0 0 6 0 q 0 -3 -3 -6z" />
+    <path d="M 50 82 q -3 3 -3 6 a 3 3 0 0 0 6 0 q 0 -3 -3 -6z" />
+    <path d="M 73 77 q -3 3 -3 6 a 3 3 0 0 0 6 0 q 0 -3 -3 -6z" />
+
+    <path
+      d="M 37 25 a 13.5 13.5 0 0 1 26 0 14.5 14.5 0 0 1 20 20 14.5 14.5 0 0 1 -20 20 13.5 13.5 0 0 1 -26 0 14.5 14.5 0 0 1 -20 -20 14.5 14.5 0 0 1 20 -20z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>
