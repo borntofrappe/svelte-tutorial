@@ -215,3 +215,7 @@ Connect the points to trace the outline of a not-so-hidden figure.
 ## [Drawing Canvas](https://svelte.dev/repl/434e0b14546747688401e8808c060a23?version=3.47.0)
 
 Draw with a series of selected colors.
+
+## [Stopwatch Anew]
+
+Track the passing of time and the gap between successive laps — again.
