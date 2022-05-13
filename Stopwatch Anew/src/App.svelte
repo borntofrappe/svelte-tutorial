@@ -1,32 +1,32 @@
 <script>
-  import { stopwatch } from "./stores.js";
+  import Header from "./Header.svelte";
+  import Display from "./Display.svelte";
+  import Controls from "./Controls.svelte";
 </script>
 
-<p>
-  Current timing:
-  {$stopwatch}
-</p>
+<div>
+  <Header />
+  <Display />
+  <Controls />
+</div>
 
-<button
-  on:click={() => {
-    stopwatch.start();
-  }}
->
-  Start
-</button>
+<style>
+  div {
+    max-width: 24rem;
+    margin: 1rem auto;
+  }
 
-<button
-  on:click={() => {
-    stopwatch.pause();
-  }}
->
-  Pause
-</button>
+  div > :global(* + *) {
+    margin-top: 1em;
+  }
 
-<button
-  on:click={() => {
-    stopwatch.stop();
-  }}
->
-  Stop
-</button>
+  :global(.visually-hidden:not(:focus):not(:active)) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+  }
+</style>
