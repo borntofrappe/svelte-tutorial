@@ -1,12 +1,14 @@
 <script>
   import Header from "./Header.svelte";
   import Display from "./Display.svelte";
+  import Laps from "./Laps.svelte";
   import Controls from "./Controls.svelte";
 </script>
 
 <div>
   <Header />
   <Display />
+  <Laps />
   <Controls />
 </div>
 

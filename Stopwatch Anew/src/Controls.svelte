@@ -1,5 +1,5 @@
 <script>
-  import { stopwatch } from "./stores.js";
+  import { stopwatch, laps } from "./stores.js";
   import { fly } from "svelte/transition";
   import icons from "./icons";
 
@@ -17,7 +17,7 @@
   };
 
   const handleLap = () => {
-    // TODO consider laps
+    laps.add($stopwatch);
   };
 
   const handlePause = () => {

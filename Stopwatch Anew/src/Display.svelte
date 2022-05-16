@@ -1,20 +1,18 @@
 <script>
   import { stopwatch } from "./stores.js";
   import { tweened } from "svelte/motion";
+  import { formatTime, getTime } from "./utils";
 
-  let ms, s, m, i;
+  let ms, s, m;
 
   $: {
-    let time = $stopwatch;
-    ms = time % 1000;
-    time = Math.floor(time / 1000);
-    s = time % 60;
-    time = Math.floor(time / 60);
-    m = time % 60;
+    const time = getTime($stopwatch);
+    ms = time.ms;
+    s = time.s;
+    m = time.m;
   }
 
-  const formatTime = (t) => `${t}`.slice(0, 2).padStart(2, 0);
-  $: timer = `${formatTime(m)}:${formatTime(s)}.${formatTime(ms)}`;
+  $: timer = formatTime({ ms, s, m });
 
   const duration = 150;
   const threshold = 1000 - duration * 2;
@@ -61,6 +59,7 @@
 <style>
   main {
     text-align: center;
+    padding: 1rem 0;
   }
 
   strong {

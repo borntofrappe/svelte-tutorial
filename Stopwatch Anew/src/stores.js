@@ -1,4 +1,5 @@
 import { writable } from "svelte/store";
+import { formatTime, getTime } from "./utils";
 
 const createStopwatch = () => {
   const { subscribe, set, update } = writable(0);
@@ -36,3 +37,40 @@ const createStopwatch = () => {
 };
 
 export const stopwatch = createStopwatch();
+
+const createLaps = () => {
+  const { subscribe, set, update } = writable([]);
+
+  return {
+    subscribe,
+    add: (stopwatch) => {
+      update((lps) => {
+        const number = (lps.length + 1).toString().padStart(2, 0);
+
+        const total = formatTime(getTime(stopwatch));
+
+        let increment;
+        if (lps.length > 0) {
+          increment = formatTime(getTime(stopwatch - lps[0].stopwatch));
+        } else {
+          increment = total;
+        }
+
+        return [
+          {
+            stopwatch,
+            number,
+            increment,
+            total,
+          },
+          ...lps,
+        ];
+      });
+    },
+    clear: () => {
+      set([]);
+    },
+  };
+};
+
+export const laps = createLaps();
