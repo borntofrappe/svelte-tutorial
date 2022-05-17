@@ -7,12 +7,14 @@
 
   const handleStart = () => {
     stopwatch.start();
+
     isRunning = true;
   };
 
   const handleStop = () => {
     stopwatch.stop();
     laps.clear();
+
     isRunning = false;
   };
 
@@ -22,6 +24,7 @@
 
   const handlePause = () => {
     stopwatch.pause();
+
     isRunning = false;
   };
 
@@ -45,7 +48,7 @@
         {@html icons.stop}
       </button>
       <button on:click={handleStart}>
-        <span class="visually-hidden">Start</span>
+        <span class="visually-hidden">Resume</span>
         {@html icons.start}
       </button>
     {/if}
@@ -58,29 +61,3 @@
     </button>
   </div>
 {/if}
-
-<style>
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0 2.5rem;
-  }
-
-  button {
-    border-radius: 50%;
-    width: 3.25rem;
-    height: 3.25rem;
-    border: none;
-    box-shadow: 0 0 0.1rem -0.05rem currentColor,
-      0 0 1rem -0.5rem hsla(0, 0%, 0%, 0.2);
-    background: none;
-    padding: 0.7rem;
-  }
-
-  button > :global(svg) {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-</style>

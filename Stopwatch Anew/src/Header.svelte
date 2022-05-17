@@ -28,17 +28,3 @@
     />
   </svg>
 </header>
-
-<style>
-  header {
-    padding: 0.5rem;
-  }
-
-  header > svg {
-    width: 2.5rem;
-    height: auto;
-    display: block;
-    margin-inline-start: auto;
-    margin-inline-end: auto;
-  }
-</style>

@@ -10,10 +10,10 @@ const createStopwatch = () => {
     subscribe,
     start: () => {
       if (interval) clearInterval(interval);
-      const startDate = new Date() - elapsed;
+      const startDate = new Date() - elapsed * 10; // elapsed is in tens o seconds
 
       interval = setInterval(() => {
-        set(new Date() - startDate);
+        set(Math.floor((new Date() - startDate) / 10));
       }, 10);
     },
     pause: () => {
@@ -44,17 +44,15 @@ const createLaps = () => {
   return {
     subscribe,
     add: (stopwatch) => {
-      update((lps) => {
-        const number = (lps.length + 1).toString().padStart(2, 0);
+      update((laps) => {
+        const number = (laps.length + 1).toString().padStart(2, 0);
 
         const total = formatTime(getTime(stopwatch));
 
-        let increment;
-        if (lps.length > 0) {
-          increment = formatTime(getTime(stopwatch - lps[0].stopwatch));
-        } else {
-          increment = total;
-        }
+        const increment =
+          laps.length > 0
+            ? formatTime(getTime(stopwatch - laps[0].stopwatch))
+            : total;
 
         return [
           {
@@ -63,7 +61,7 @@ const createLaps = () => {
             increment,
             total,
           },
-          ...lps,
+          ...laps,
         ];
       });
     },

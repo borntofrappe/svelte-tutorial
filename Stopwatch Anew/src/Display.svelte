@@ -1,43 +1,45 @@
 <script>
   import { stopwatch } from "./stores.js";
   import { tweened } from "svelte/motion";
-  import { formatTime, getTime } from "./utils";
+  import { getTime, formatTime } from "./utils";
 
-  let ms, s, m;
+  let t, s, m;
 
   $: {
     const time = getTime($stopwatch);
-    ms = time.ms;
+    t = time.t;
     s = time.s;
     m = time.m;
   }
 
-  $: timer = formatTime({ ms, s, m });
+  $: timer = formatTime({ t, s, m });
 
-  const duration = 150;
-  const threshold = 1000 - duration * 2;
+  let tweening;
+  const duration = 200;
+  const threshold = 100 - Math.floor(duration / 10);
 
   $: offsetDot = s;
+
   const scaleDot = tweened(1, { duration });
 
-  $: if (ms > threshold) {
-    const offsetNext = (s + 1) % 60;
+  $: if (t > threshold && !tweening) {
+    tweening = true;
     scaleDot.set(0).then(() => {
       scaleDot.set(1);
+      tweening = false;
     });
   }
 </script>
 
 <main>
   <h2 class="visually-hidden">Current timing</h2>
-  <strong>{timer}</strong>
+  <p>{timer}</p>
 </main>
 
 <svg viewBox="0 0 60 1">
   <defs>
-    <circle r="0.2" />
     <pattern
-      id="p"
+      id="stopwatch-pattern-dots"
       viewBox="-0.5 -0.5 1 1"
       width="1"
       height="1"
@@ -46,7 +48,7 @@
       <circle r="0.1" />
     </pattern>
   </defs>
-  <rect width="60" height="1" fill="url(#p)" />
+  <rect width="60" height="1" fill="url(#stopwatch-pattern-dots)" />
   <g transform="translate(0.5 0.5)">
     <g transform="translate({offsetDot} 0)">
       <g transform="scale({$scaleDot})">
@@ -55,21 +57,3 @@
     </g>
   </g>
 </svg>
-
-<style>
-  main {
-    text-align: center;
-    padding: 1rem 0;
-  }
-
-  strong {
-    font-size: 3.25rem;
-    font-weight: 400;
-  }
-
-  svg {
-    max-width: 18rem;
-    display: block;
-    margin: 1rem auto 2rem;
-  }
-</style>
