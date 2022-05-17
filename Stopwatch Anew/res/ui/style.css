@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  color: hsl(0, 0%, 24%);
+  max-width: 24rem;
+  margin: 1rem auto;
+  padding: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+header {
+  padding: 1rem;
+}
+
+header svg {
+  width: 2em;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+main {
+  text-align: center;
+  padding: 1rem;
+}
+
+main h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+}
+
+main svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+main > * + * {
+  margin-top: 1em;
+}
+
+ol {
+  padding: 1rem;
+  height: 22rem;
+  overflow-y: auto;
+}
+
+ol li::marker {
+  content: "";
+}
+
+ol li {
+  display: flex;
+  gap: 0 0.75rem;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+}
+
+li span {
+  font-size: 1.1rem;
+}
+
+li span:first-of-type {
+  display: flex;
+  align-items: center;
+  gap: 0 0.5rem;
+}
+
+li span svg {
+  color: hsl(0, 0%, 86%);
+}
+
+li span:not(:last-of-type) {
+  color: hsl(0, 0%, 38%);
+}
+
+section {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 2.8rem;
+}
+
+section button {
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  padding: 1.3rem;
+  border: none;
+  background: hsl(0, 0%, 100%);
+  box-shadow: 0 0 0.5rem -0.1rem hsla(0, 0%, 0%, 0.1),
+    0 0.25rem 0.5rem -0.1rem hsla(0, 0%, 0%, 0.1);
+}
+
+button svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
