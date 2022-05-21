@@ -28,3 +28,17 @@
     />
   </svg>
 </header>
+
+<style>
+  header {
+    padding: 1rem;
+  }
+
+  svg {
+    color: var(--theme-color, #2283f6);
+    width: 2em;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+</style>

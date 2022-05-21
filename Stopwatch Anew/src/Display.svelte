@@ -57,3 +57,25 @@
     </g>
   </g>
 </svg>
+
+<style>
+  main {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  p {
+    font-size: 3rem;
+    font-weight: 400;
+  }
+
+  svg {
+    color: var(--theme-color, #2283f6);
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

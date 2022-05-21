@@ -61,3 +61,34 @@
     </button>
   </div>
 {/if}
+
+<style>
+  div {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 2.8rem;
+  }
+
+  div button {
+    color: var(--theme-color, #2283f6);
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    padding: 0.75rem;
+    border: none;
+    background: hsl(0, 0%, 100%);
+    box-shadow: 0 0 0.5rem -0.1rem hsla(0, 0%, 0%, 0.1),
+      0 0.25rem 0.5rem -0.1rem hsla(0, 0%, 0%, 0.1);
+  }
+
+  button > :global(svg) {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
