@@ -71,7 +71,7 @@
     gap: 0 2.8rem;
   }
 
-  div button {
+  button {
     color: var(--theme-color, #2283f6);
     margin: 0;
     padding: 0;
@@ -82,8 +82,15 @@
     padding: 0.75rem;
     border: none;
     background: hsl(0, 0%, 100%);
-    box-shadow: 0 0 0.5rem -0.1rem hsla(0, 0%, 0%, 0.1),
-      0 0.25rem 0.5rem -0.1rem hsla(0, 0%, 0%, 0.1);
+    box-shadow: 0 0 1rem -0.5rem currentColor,
+      0 0.25rem 0.4rem -0.4rem currentColor;
+    transition: box-shadow 0.25s ease-out;
+  }
+
+  button:hover {
+    box-shadow: 0 0 0.5rem -0.5rem currentColor,
+      0 0.25rem 0.2rem -0.4rem currentColor;
+    background: hsla(0, 0%, 0%, 0.1);
   }
 
   button > :global(svg) {

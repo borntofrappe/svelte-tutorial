@@ -216,6 +216,6 @@ Connect the points to trace the outline of a not-so-hidden figure.
 
 Draw with a series of selected colors.
 
-## [Stopwatch Anew]
+## [Stopwatch Anew](https://svelte.dev/repl/f190100932404f1da884286392920119?version=3.48.0)
 
-Track the passing of time and the gap between successive laps — again.
+Track the passing of time and the gap between successive laps.

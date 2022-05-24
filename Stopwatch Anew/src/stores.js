@@ -10,7 +10,7 @@ const createStopwatch = () => {
     subscribe,
     start: () => {
       if (interval) clearInterval(interval);
-      const startDate = new Date() - elapsed * 10; // elapsed is in tens o seconds
+      const startDate = new Date() - elapsed * 10;
 
       interval = setInterval(() => {
         set(Math.floor((new Date() - startDate) / 10));
