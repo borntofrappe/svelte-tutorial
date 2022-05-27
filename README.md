@@ -212,6 +212,6 @@ Draw with a series of selected colors.
 
 Track the passing of time and the gap between successive laps.
 
-## [Word Search](https://svelte.dev/repl/f9b963fa72ab4f619770d05682bd8283?version=3.46.4)
+## [Word Search](https://svelte.dev/repl/9bfabac6372c4175b0bb9c6eea088c54?version=3.48.0)
 
 Find words hidden between superfluous letters.
