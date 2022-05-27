@@ -2,109 +2,12 @@
 
 [Word search](https://en.wikipedia.org/wiki/Word_search) describes a puzzle game where a sequence of words is hidden in a two-dimensional grid. The player is tasked to find the letters included in all possible directions.
 
-## Algorithm
+_Please note:_ the project has been subject to a revision dated 27th May 2022, as I found a different, dare I say better, way to implement the logic associated with the algorithm and the interaction.
 
-In `utils.js` the script implements a `Grid` class following the logic explained by [Jamis Buck](https://twitter.com/jamis) in the article [_Generating Word Search Puzzles_](https://weblog.jamisbuck.org/2015/9/26/generating-word-search-puzzles.html).
+The project is built in increments and dedicated subfolders:
 
-```js
-const grid = new Grid();
-grid.fill();
-```
+- [display](https://svelte.dev/repl/47f98762434441d3b594acc0d074ca64?version=3.48.0) considers how to display letters in a `<canvas>` or `<svg>` element
 
-By default the grid is initialized with 7 rows and 7 columns. Moreover, `grid.fill()` includes two words — 'word' and 'search' — and fills the remaining spots with random letters — in the [a-z] range.
+- [pins](https://svelte.dev/repl/2799fa8eb4eb408c98d36625ac29802d?version=3.48.0) describes how to receive user input, again with both elements
 
-Change this default passing an object to the class and to the method.
-
-For the class describe the number of columns and or rows.
-
-```js
-const grid = new Grid({ rows: 5 });
-const matrix = new Grid({ rows: 6, columns: 6 });
-```
-
-For the methods customize the words and or range with arrays.
-
-```js
-grid.fill({ words: ["react", "svelte", "vue"] });
-matrix.fill({ words: ["un", "deux", "trois"], range: ["a", "g"] });
-```
-
-`grid.fill()` returns an array with the sequence of letters **or** raises an error in the moment the method is not able to place the words.
-
-```js
-grid.fill();
-/*
-[ 'k', 'j', 'w', 'm', 'i', 's', 'q', 'p', 'p', 'o', 'z', 'c', 'e', 'z', 'x', 'y', 'r', 'y', 's', 'a', 'o', 'k', 'k', 'd', 'g', 'd', 'r', 'x', 'r', 'i', 'e', 't', 'w', 'c', 'w', 'z', 'o', 'b', 'b', 'j', 'h', 'x', 'k', 'b', 'r', 'z', 'z', 't', 'v' ]
-*/
-```
-
-Additional properties allow to retrieve:
-
-1. a string where the letters are formatted in a series of lines
-
-   ```js
-   grid.string;
-   /*
-   kjwmisq
-   ppozcez
-   xyrysao
-   kkdgdrx
-   rietwcw
-   zobbjhx
-   kbrzztv
-   */
-   ```
-
-   The rows are separated with new line characters `\n`.
-
-2 a 2D array where the data is massaged into rows
-
-    ```js
-    grid.array;
-    /*
-    [
-    [ 'k', 'j', 'w', 'm', 'i', 's', 'q' ],
-    [ 'p', 'p', 'o', 'z', 'c', 'e', 'z' ],
-    [ 'x', 'y', 'r', 'y', 's', 'a', 'o' ],
-    [ 'k', 'k', 'd', 'g', 'd', 'r', 'x' ],
-    [ 'r', 'i', 'e', 't', 'w', 'c', 'w' ],
-    [ 'z', 'o', 'b', 'b', 'j', 'h', 'x' ],
-    [ 'k', 'b', 'r', 'z', 'z', 't', 'v' ]
-    ]
-    */
-    ```
-
-## Interaction
-
-To implement the dragging feature the script initializes a few controlling variables:
-
-- `isDragging`: a boolean to consider the pointer's coordinates only when the cursor is pressed on the `<svg>` element
-
-- `line`: an object detailing the start and end position of the current selection
-
-- `match`: the sequence of letters behind the selected line
-
-`match` is only updated with the letters of a contiguous line, one which connects letters in a column, row or again diagonal.
-
-Beside these `lines` and `matches` are initialized as arrays to store the completed lines and matches, and ultimately update the corresponding markup.
-
-It is also necessary  to have a reference to the `<svg>` element, since the mouse coordinates depend on the actual size of the container.
-
-## Reactivity
-
-Considering the `mousemove` event update the coordinates of the line, the start and end column and row.
-
-As you update the `line` consider the adjacent letters and eventually update the match and the remaining variable.
-
-```svelte
-$: if (line) {
-    // potentially update match
-}
-```
-
-When you update the arrays remember that you need to mutate the data structure to have the compiler update the markup.
-
-```diff
--matches.push(match);
-+matches = [...matches, match];
-```
+- [algorithm](https://svelte.dev/repl/f80fc1193bc04f6f88aeb95ddb292963?version=3.48.0) introduces the algorithm

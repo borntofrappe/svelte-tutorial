@@ -204,10 +204,6 @@ Look for an item hidden behind one of five bushes.
 
 Guess when a video game was released in the span of a year.
 
-## [Word Search](https://svelte.dev/repl/f9b963fa72ab4f619770d05682bd8283?version=3.46.4)
-
-Find words hidden between superfluous letters.
-
 ## [Connect the Dots](https://svelte.dev/repl/d859ef69e1a44b8e9c16a4f0d0c3a236?version=3.47.0)
 
 Connect the points to trace the outline of a not-so-hidden figure.
@@ -219,3 +215,7 @@ Draw with a series of selected colors.
 ## [Stopwatch Anew](https://svelte.dev/repl/f190100932404f1da884286392920119?version=3.48.0)
 
 Track the passing of time and the gap between successive laps.
+
+## [Word Search](https://svelte.dev/repl/f9b963fa72ab4f619770d05682bd8283?version=3.46.4)
+
+Find words hidden between superfluous letters.
