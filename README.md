@@ -192,10 +192,6 @@ Analyse the degradation and offset of different tyre compounds both with convent
 
 Highlight the seasonality of some types of cheese.
 
-## [World Coordinates](https://svelte.dev/repl/bbb26de08d694a89bdf7077688d23f62?version=3.44.2)
-
-Retrieve world coordinates for geographical visualizations.
-
 ## [Dowsing Machine](https://svelte.dev/repl/77a677bc6ecc466d86769369913fea7d?version=3.44.3)
 
 Look for an item hidden behind one of five bushes.
