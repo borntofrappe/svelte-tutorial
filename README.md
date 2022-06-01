@@ -216,6 +216,6 @@ Track the passing of time and the gap between successive laps.
 
 Find words hidden between superfluous letters.
 
-## Fubuki
+## [Fubuki](https://svelte.dev/repl/817f18a2321241bfbd08d265bc4101fc?version=3.48.0)
 
 Complete a grid so that the numbers in each column and row add up to the value described on each side.
