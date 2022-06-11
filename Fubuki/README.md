@@ -2,7 +2,7 @@
 
 In a [Fubuki puzzle](http://www.thepuzzleclub.com/fubuki.php) you are provided with a grid and tasked to fill the columns and rows with unique numbers. Below each column, next to each row you are provided with the sum of the values contained in each section, so that the game is complete when the numbers add up together to the goal value.
 
-The goal of this project is to create addition tables inspired by the game as proposed on [Ouest France](https://jeux.ouest-france.fr/jeux-de-chiffres/fubuki/).
+The goal of this project is to create such addition tables with keyboard and touch interaction.
 
 ## utils
 
@@ -21,7 +21,7 @@ For a size `3`, for instance, create `grid` with an array of numbers from 1 to 9
 
 To help implementing the game, and from the solution grid, create additional arrays to describe the totals and the numbers.
 
-With `locks` create an array describing the index of the values included by default, as a hint.
+With `locks` create an array describing the index of the values included by default, as a hint. Include as many "locks" as the specified by the input variable `reveal`.
 
 ## Svelte
 
@@ -35,4 +35,16 @@ $: columns = nums.reduce(...)
 $: solved = nums.reduce(...)
 ```
 
-Update `nums` and the associated variables follow suit.
+It is also possible to batch the updates in a single declarative statement which runs whenever `nums` changes.
+
+```svelte
+let rows = []
+let columns = []
+let solved
+
+$: if(nums) {
+  rows = nums.reduce(...)
+  columns = nums.reduce(...)
+  solved = nums.reduce(...)
+}
+```

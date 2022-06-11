@@ -17,7 +17,7 @@ const shuffle = (array) => {
 };
 
 export class Puzzle {
-  constructor({ size = 3 }) {
+  constructor({ size = 3, reveal = 0 }) {
     this.size = size;
 
     const grid = shuffle(
@@ -53,7 +53,7 @@ export class Puzzle {
     this.grid = grid;
 
     const nums = grid.slice(0, size).map((d) => d.slice(0, size));
-    const columns = grid[size].slice();
+    const columns = [...grid[size]];
     const rows = grid.reduce(
       (acc, curr) =>
         curr.length === size + 1 ? [...acc, curr[curr.length - 1]] : [...acc],
@@ -64,11 +64,13 @@ export class Puzzle {
     this.columns = columns;
     this.rows = rows;
 
-    const locks = shuffle(
-      Array(size ** 2)
-        .fill()
-        .map((_, i) => i)
-    ).slice(0, Math.floor(Math.random() * (size ** 2 - 2)) + 1);
-    this.locks = locks;
+    this.locks =
+      reveal > 0
+        ? shuffle(
+            Array(size ** 2)
+              .fill()
+              .map((_, i) => i)
+          ).slice(0, reveal)
+        : [];
   }
 }

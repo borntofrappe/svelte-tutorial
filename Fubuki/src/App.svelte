@@ -1,7 +1,7 @@
 <script>
   import { Puzzle } from "./utils.js";
 
-  const puzzle = new Puzzle({ size: 3 });
+  const puzzle = new Puzzle({ size: 3, reveal: 3 });
 
   const nums = puzzle.nums.map((row, r) =>
     row.map((d, c) => {
