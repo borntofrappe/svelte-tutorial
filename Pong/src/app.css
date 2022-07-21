@@ -1,3 +1,10 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 }
+
+body {
+  margin: 0;
+  color: #ffffff;
+  background: #abebff;
+  font-family: monospace;
+}
