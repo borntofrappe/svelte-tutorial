@@ -80,6 +80,7 @@
     if (playing) return;
 
     playing = true;
+    puck.start();
     update();
   };
 
@@ -112,8 +113,22 @@
 
     draw();
 
+    puck.update();
     paddleLeft.update();
     paddleRight.update();
+
+    // puck bounces against wall
+    if (puck.y - puck.r < 0) {
+      puck.y = puck.r;
+      puck.dy *= -1;
+    } else if (puck.y + puck.r > height) {
+      puck.y = height - puck.r;
+      puck.dy *= -1;
+    }
+
+    if (puck.x < -puck.r || puck.x > width + puck.r) {
+      reset();
+    }
 
     // paddles exceed vertical constraints
     if (paddleLeft.y < 0) {
@@ -131,6 +146,13 @@
       paddleRight.y = height - paddleRight.h;
       paddleRight.dy = 0;
     }
+  };
+
+  const reset = () => {
+    cancelAnimationFrame(animationId);
+    puck.reset();
+    draw();
+    playing = false;
   };
 </script>
 
