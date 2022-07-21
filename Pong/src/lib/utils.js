@@ -17,15 +17,27 @@ export class Puck {
 }
 
 export class Paddle {
-  constructor({ x, y, w, h }) {
+  constructor({ x, y, w, h, keys, speed = 3 }) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.y0 = y;
+    this.dy = 0;
+    this.speed = speed;
+    this.keys = keys;
   }
 
   show(context) {
     const { x, y, w, h } = this;
     context.fillRect(x, y, w, h);
+  }
+
+  update() {
+    this.y += this.dy * this.speed;
+  }
+
+  reset() {
+    this.y = this.y0;
   }
 }
