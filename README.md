@@ -219,3 +219,7 @@ Find words hidden between superfluous letters.
 ## [Fubuki](https://svelte.dev/repl/817f18a2321241bfbd08d265bc4101fc?version=3.48.0)
 
 Complete a grid so that the numbers in each column and row add up to the value described on each side.
+
+## Pong
+
+Play the classic arcade game with keyboard input.
