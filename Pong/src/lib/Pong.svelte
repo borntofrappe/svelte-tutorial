@@ -5,9 +5,9 @@
 
   const tween = tweened(0);
 
-  const canvasWidth = 400;
-  const canvasHeight = 250;
-  const padding = 5;
+  const canvasWidth = 500;
+  const canvasHeight = 320;
+  const padding = 10;
   const margin = 5;
   const border = 5;
 
@@ -16,8 +16,8 @@
 
   const puckRadius = 7;
 
-  const paddleWidth = 7;
-  const paddleHeight = 60;
+  const paddleWidth = 8;
+  const paddleHeight = 70;
 
   const puck = new Puck({ x: width / 2, y: height / 2, r: puckRadius });
 
@@ -58,10 +58,10 @@
   const draw = () => {
     context.clearRect(0, 0, width, height);
 
-    context.strokeStyle = "#ffffff";
+    context.strokeStyle = "hsl(201, 100%, 96%)";
     context.lineWidth = border * 2;
     context.strokeRect(0, 0, width, height);
-    context.fillStyle = "#0e826d";
+    context.fillStyle = "hsl(200, 71%, 80%)";
     context.fillRect(0, 0, width, height);
 
     context.lineWidth = border;
@@ -71,10 +71,10 @@
     context.closePath();
     context.stroke();
 
-    context.fillStyle = "#fdbd04";
+    context.fillStyle = "hsl(330, 79%, 56%)";
     puck.show(context);
 
-    context.fillStyle = "#fd5904";
+    context.fillStyle = "hsl(201, 79%, 46%)";
     paddleLeft.show(context);
     paddleRight.show(context);
   };
@@ -253,6 +253,7 @@
   article {
     display: inline-block;
     position: relative;
+    color: hsl(200, 82%, 24%);
   }
 
   article > div {
@@ -282,12 +283,14 @@
     padding: 0.3rem 0.8rem;
     border-radius: 0.25rem;
     border: none;
-    color: #fdbd04;
-    background: #025251;
-    border: 0.2rem solid #dbffff;
+    color: hsl(201, 100%, 96%);
+    background: hsl(200, 82%, 24%);
+    border: 0.2rem solid currentColor;
+    accent-color: currentColor;
   }
 
   button:active {
+    color: hsl(330, 79%, 56%);
     background: currentColor;
   }
 </style>

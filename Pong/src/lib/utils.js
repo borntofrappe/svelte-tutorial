@@ -3,7 +3,7 @@ export const map = (value, minDomain, maxDomain, minRange, maxRange) =>
   ((value - minDomain) / (maxDomain - minDomain)) * (maxRange - minRange);
 
 export class Puck {
-  constructor({ x, y, r, speed = 2.5 }) {
+  constructor({ x, y, r, speed = 3 }) {
     this.x = x;
     this.x0 = x;
     this.y = y;
@@ -67,7 +67,7 @@ export class Puck {
 }
 
 export class Paddle {
-  constructor({ x, y, w, h, keys, speed = 3, score = 0 }) {
+  constructor({ x, y, w, h, keys, speed = 3.5, score = 0 }) {
     this.x = x;
     this.y = y;
     this.w = w;

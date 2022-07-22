@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  color: #ffffff;
-  background: #abebff;
+  color: hsl(210, 36%, 96%);
+  background: hsl(200, 82%, 24%);
   font-family: monospace;
 }
