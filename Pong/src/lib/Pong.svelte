@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { Puck, Paddle } from "./utils.js";
+  import { Puck, Paddle, map } from "./utils.js";
 
   const canvasWidth = 400;
   const canvasHeight = 250;
@@ -11,7 +11,7 @@
   const width = canvasWidth - margin * 2;
   const height = canvasHeight - margin * 2;
 
-  const puckRadius = 8;
+  const puckRadius = 7;
 
   const paddleWidth = 7;
   const paddleHeight = 60;
@@ -126,6 +126,58 @@
       puck.dy *= -1;
     }
 
+    // puck bounces against paddles
+    if (puck.collides(paddleLeft)) {
+      puck.speed *= 1.025;
+
+      const y = (puck.y - paddleLeft.y) / paddleLeft.h;
+      if (y < 0) {
+        puck.dy = -1;
+        puck.y = paddleLeft.y - puck.r;
+      } else if (y > 1) {
+        puck.dy = 1;
+        puck.y = paddleLeft.y + paddleLeft.h + puck.r;
+      } else {
+        puck.x = paddleLeft.x + paddleLeft.w + puck.r;
+
+        const maxAngle = 90;
+        const angles = 4;
+        const angle = Math.round(map(y, 0, 1, 0, angles));
+        const theta = ((angle * (maxAngle / angles) - 45) / 180) * Math.PI;
+
+        const dx = Math.cos(theta) * puck.speed;
+        const dy = Math.sin(theta) * puck.speed;
+
+        puck.dx = dx;
+        puck.dy = dy;
+      }
+    } else if (puck.collides(paddleRight)) {
+      puck.speed *= 1.025;
+
+      const y = (puck.y - paddleRight.y) / paddleRight.h;
+      if (y < 0) {
+        puck.dy = -1;
+        puck.y = paddleRight.y - puck.r;
+      } else if (y > 1) {
+        puck.dy = 1;
+        puck.y = paddleRight.y + paddleRight.h + puck.r;
+      } else {
+        puck.x = paddleRight.x - puck.r;
+
+        const maxAngle = 90;
+        const angles = 4;
+        const angle = Math.round(map(y, 0, 1, 0, angles));
+        const theta = ((angle * (maxAngle / angles) - 45) / 180) * Math.PI;
+
+        const dx = Math.cos(theta) * puck.speed;
+        const dy = Math.sin(theta) * puck.speed;
+
+        puck.dx = dx * -1;
+        puck.dy = dy;
+      }
+    }
+
+    // puck exceeds horizontal constraints
     if (puck.x < -puck.r || puck.x > width + puck.r) {
       reset();
     }

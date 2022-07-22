@@ -1,3 +1,7 @@
+export const map = (value, minDomain, maxDomain, minRange, maxRange) =>
+  minRange +
+  ((value - minDomain) / (maxDomain - minDomain)) * (maxRange - minRange);
+
 export class Puck {
   constructor({ x, y, r, speed = 2.5 }) {
     this.x = x;
@@ -46,6 +50,19 @@ export class Puck {
     this.dx = 0;
     this.dy = 0;
     this.speed = this.initialSpeed;
+  }
+
+  collides(paddle) {
+    const { x, y, r } = this;
+    if (
+      x + r < paddle.x ||
+      x - r > paddle.x + paddle.w ||
+      y + r < paddle.y ||
+      y - r > paddle.y + paddle.h
+    ) {
+      return false;
+    }
+    return true;
   }
 }
 
