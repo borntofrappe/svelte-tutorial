@@ -67,7 +67,7 @@ export class Puck {
 }
 
 export class Paddle {
-  constructor({ x, y, w, h, keys, speed = 3 }) {
+  constructor({ x, y, w, h, keys, speed = 3, score = 0 }) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -76,6 +76,7 @@ export class Paddle {
     this.dy = 0;
     this.speed = speed;
     this.keys = keys;
+    this.score = score;
   }
 
   show(context) {

@@ -179,6 +179,12 @@
 
     // puck exceeds horizontal constraints
     if (puck.x < -puck.r || puck.x > width + puck.r) {
+      if (puck.x < width / 2) {
+        paddleRight.score += 1;
+      } else {
+        paddleLeft.score += 1;
+      }
+
       reset();
     }
 
@@ -210,25 +216,45 @@
 
 <svelte:body on:keydown={handleKeydown} on:keyup={handleKeyup} />
 
-<div>
+<article>
   {#if !playing}
-    <button on:click={handleStart}>Play</button>
+    <div>
+      <strong>
+        {paddleLeft.score}
+      </strong>
+      <button on:click={handleStart}> Play </button>
+      <strong>
+        {paddleRight.score}
+      </strong>
+    </div>
   {/if}
 
   <canvas bind:this={canvas} width={canvasWidth} height={canvasHeight} />
-</div>
+</article>
 
 <style>
-  div {
+  article {
     display: inline-block;
     position: relative;
   }
 
-  button {
+  article > div {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  div {
+    display: grid;
+    grid-template-columns: 1fr 0 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+
+  strong {
+    font-size: 3rem;
   }
 
   button {
@@ -242,5 +268,9 @@
     color: #fdbd04;
     background: #025251;
     border: 0.2rem solid #dbffff;
+  }
+
+  button:active {
+    background: currentColor;
   }
 </style>
