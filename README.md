@@ -220,6 +220,6 @@ Find words hidden between superfluous letters.
 
 Complete a grid so that the numbers in each column and row add up to the value described on each side.
 
-## Pong
+## [Pong](https://svelte.dev/repl/d874e50ed609488da312886ebd6b8b87?version=3.49.0)
 
-Play the classic arcade game with keyboard input.
+Play a round of Pong or two. Two players. Keyboard input.
