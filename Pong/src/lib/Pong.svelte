@@ -1,6 +1,9 @@
 <script>
   import { onMount } from "svelte";
   import { Puck, Paddle, map } from "./utils.js";
+  import { tweened } from "svelte/motion";
+
+  const tween = tweened(0);
 
   const canvasWidth = 400;
   const canvasHeight = 250;
@@ -206,10 +209,24 @@
     }
   };
 
-  const reset = () => {
+  const reset = async () => {
     cancelAnimationFrame(animationId);
+
+    const paddleLeftGap = paddleLeft.y - paddleLeft.y0;
+    const paddleRightGap = paddleRight.y - paddleRight.y0;
+
+    await tween.set(1, {
+      interpolate: (to, from) => (t) => {
+        paddleLeft.y = paddleLeft.y0 + paddleLeftGap * (1 - t);
+        paddleRight.y = paddleRight.y0 + paddleRightGap * (1 - t);
+        draw();
+        return (from - to) * t;
+      },
+    });
+
     puck.reset();
     draw();
+    tween.set(0, { duration: 0 });
     playing = false;
   };
 </script>
