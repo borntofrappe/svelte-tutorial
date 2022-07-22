@@ -1,6 +1,9 @@
 <script>
   import { onMount } from "svelte";
-  const countdown = 5;
+
+  import { jiggleJS as jiggle } from "./utils.js";
+
+  export let countdown = 5;
   let time = countdown;
 
   onMount(() => {
@@ -32,9 +35,11 @@
     stroke-linecap="round"
     font-size="15"
   >
-    <g>
-      <text>{time}</text>
-    </g>
+    {#key time}
+      <g in:jiggle>
+        <text>{time}</text>
+      </g>
+    {/key}
   </g>
 </svg>
 
