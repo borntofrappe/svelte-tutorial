@@ -18,26 +18,17 @@
   });
 </script>
 
-<svg viewBox="-15.5 -15.5 30 30">
-  <g
-    text-anchor="middle"
-    dominant-baseline="central"
-    font-family="sans-serif"
-    paint-order="stroke"
-    fill="#ffffff"
-    stroke="#3c3c3c"
-    stroke-width="1.65"
-    stroke-linejoin="round"
-    stroke-linecap="round"
-    font-size="15"
-  >
-    <text>{time}</text>
-  </g>
-</svg>
-
-<style>
-  svg {
-    outline: 1px solid;
-    max-width: 10rem;
-  }
-</style>
+<g
+  text-anchor="middle"
+  dominant-baseline="central"
+  font-family="sans-serif"
+  paint-order="stroke"
+  fill="#ffffff"
+  stroke="#3c3c3c"
+  stroke-width="1.65"
+  stroke-linejoin="round"
+  stroke-linecap="round"
+  font-size="15"
+>
+  <text>{time}</text>
+</g>

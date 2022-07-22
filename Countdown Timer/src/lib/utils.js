@@ -1,4 +1,18 @@
-import { backOut } from "svelte/easing";
+import { sineOut, backOut } from "svelte/easing";
+
+export const scaleCSS = (node, { duration = 200, delay = 0 }) => ({
+  duration,
+  delay,
+  css: (t) => `transform: scale(${sineOut(t)})`,
+});
+
+export const scaleJS = (node, { duration = 200, delay = 0 }) => ({
+  duration,
+  delay,
+  tick: (t) => {
+    node.style.transform = `scale(${sineOut(t)})`;
+  },
+});
 
 export const jiggleCSS = (node, { duration = 1000, delay = 0 }) => ({
   duration,
