@@ -31,7 +31,7 @@
   {/if}
   {#if isTimer}
     <g in:scale={{ delay: 200 }}>
-      <Timer time={timer} />
+      <Timer on:end time={timer} />
     </g>
   {/if}
 </svg>

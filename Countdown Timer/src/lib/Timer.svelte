@@ -1,5 +1,7 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let time = 20;
 
@@ -9,6 +11,7 @@
     const interval = setInterval(() => {
       if (time === 0) {
         clearInterval(interval);
+        dispatch("end");
       } else {
         time = Math.round((date.getTime() - new Date().getTime()) / 1000);
       }
