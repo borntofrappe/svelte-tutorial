@@ -1,7 +1,9 @@
 <script>
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
 
   import { jiggleJS as jiggle } from "./utils.js";
+
+  const dispatch = createEventDispatcher();
 
   export let time = 5;
 
@@ -11,6 +13,7 @@
     const interval = setInterval(() => {
       if (time === 0) {
         clearInterval(interval);
+        dispatch("end");
       } else {
         time = Math.round((date.getTime() - new Date().getTime()) / 1000);
       }

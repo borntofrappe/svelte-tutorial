@@ -10,21 +10,29 @@
   export let timer = 20;
 
   onMount(() => {
-    isCounter = true;
+    isCountdown = true;
   });
 
-  let isCounter;
+  let isCountdown;
   let isTimer;
 </script>
 
 <svg viewBox="-15.5 -15.5 30 30">
-  {#if isCounter}
-    <g transition:scale>
-      <Countdown time={countdown} />
+  {#if isCountdown}
+    <g transition:scale={{ duration: 200 }}>
+      <Countdown
+        on:end={() => {
+          isCountdown = false;
+          isTimer = true;
+        }}
+        time={countdown}
+      />
     </g>
   {/if}
   {#if isTimer}
-    <Timer time={timer} />
+    <g in:scale={{ delay: 200 }}>
+      <Timer time={timer} />
+    </g>
   {/if}
 </svg>
 
