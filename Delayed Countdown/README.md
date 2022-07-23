@@ -1,8 +1,8 @@
-# Countdown Timer
+# Delayed Countdown
 
-A component to count down a certain number of seconds and with a certain delay.
+A component to count down an arbitrary number of seconds after an arbitrary delay.
 
-Inspired by pokemon smile and the counter illustrating how long to brush one's own teeth, the component creates a nice playground for Svelte transitions, event forwarding and possibly a custom store.
+Inspired by pokemon smile and the counter illustrating how long to brush one's own teeth, the component creates a nice playground for Svelte transitions, event forwarding and possibly a store.
 
 ## Transitions
 

@@ -6,33 +6,35 @@
 
   const dispatch = createEventDispatcher();
 
-  export let countdown = 5;
-  export let timer = 20;
+  export let delay = 5;
+  export let countdown = 20;
 
+  let isDelay;
   let isCountdown;
-  let isTimer;
 
-  let time;
+  let timer;
 
   onMount(() => {
-    time = createTimer(countdown + 1);
-    isCountdown = true;
+    timer = createTimer(delay + 1);
+    isDelay = true;
+
+    return () => (timer = null);
   });
 
-  $: if (time && $time === 0) {
-    if (isCountdown) {
-      time = createTimer(timer);
-      isCountdown = false;
-      isTimer = true;
+  $: if (timer && $timer === 0) {
+    if (isDelay) {
+      timer = createTimer(countdown);
+      isDelay = false;
+      isCountdown = true;
     } else {
-      time = null;
+      timer = null;
       dispatch("end");
     }
   }
 </script>
 
 <svg viewBox="-15.5 -15.5 30 30">
-  {#if isCountdown}
+  {#if isDelay}
     <g transition:scale={{ duration: 200 }}>
       <circle r="10" fill="#f9c801" stroke="#3c3c3c" />
       <g
@@ -47,15 +49,15 @@
         stroke-linecap="round"
         font-size="14"
       >
-        {#key $time - 1}
+        {#key $timer - 1}
           <g in:jiggle>
-            <text>{$time - 1}</text>
+            <text>{$timer - 1}</text>
           </g>
         {/key}
       </g>
     </g>
   {/if}
-  {#if isTimer}
+  {#if isCountdown}
     <g in:scale={{ delay: 200 }}>
       <g
         text-anchor="middle"
@@ -69,7 +71,7 @@
         stroke-linecap="round"
         font-size="14"
       >
-        <text>{$time}</text>
+        <text>{$timer}</text>
       </g>
     </g>
   {/if}
