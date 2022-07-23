@@ -2,25 +2,26 @@
   import { onMount, createEventDispatcher } from "svelte";
 
   import { jiggleJS as jiggle } from "./utils.js";
+  import { createTimer } from "./stores.js";
 
   const dispatch = createEventDispatcher();
 
   export let time = 5;
 
+  let timer;
+
   onMount(() => {
-    let date = new Date(new Date().getTime() + time * 1000);
+    timer = createTimer(time + 1);
 
-    const interval = setInterval(() => {
-      if (time === 0) {
-        clearInterval(interval);
-        dispatch("end");
-      } else {
-        time = Math.round((date.getTime() - new Date().getTime()) / 1000);
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
+    return () => {
+      timer = null;
+    };
   });
+
+  $: if (timer && $timer === 0) {
+    dispatch("end");
+    timer = null;
+  }
 </script>
 
 <circle r="10" fill="#f9c801" stroke="#3c3c3c" />
@@ -34,11 +35,11 @@
   stroke-width="1.65"
   stroke-linejoin="round"
   stroke-linecap="round"
-  font-size="15"
+  font-size="14"
 >
-  {#key time}
+  {#key $timer - 1}
     <g in:jiggle>
-      <text>{time}</text>
+      <text>{$timer - 1}</text>
     </g>
   {/key}
 </g>
