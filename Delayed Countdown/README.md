@@ -51,3 +51,11 @@ $: console.log($time);
 ```
 
 Setting `time` to `null`, or something different from the store returned by the function, allows to call the `stop` function, so to avoid a memory leak.
+
+## Custom store
+
+The solution outlined with the readable store works as far as to create a countdown and clean up afterwards, but once you start a timer you have little few options past removing it and creating a new one.
+
+The idea of with the custom store is to expose a few methods — `start`, `pause`, `remove` to expand the countdown functionality.
+
+Remember to call `.remove()` to remove the interval, and especially when the component id destroyed — see the function returned in the `onMount` lifecycle.

@@ -18,16 +18,16 @@
     timer = createTimer(delay + 1);
     isDelay = true;
 
-    return () => (timer = null);
+    return () => timer.remove();
   });
 
   $: if (timer && $timer === 0) {
     if (isDelay) {
-      timer = createTimer(countdown);
+      timer.start(countdown);
       isDelay = false;
       isCountdown = true;
     } else {
-      timer = null;
+      timer.remove();
       dispatch("end");
     }
   }
