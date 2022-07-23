@@ -59,3 +59,5 @@ The solution outlined with the readable store works as far as to create a countd
 The idea of with the custom store is to expose a few methods — `start`, `pause`, `remove` to expand the countdown functionality.
 
 Remember to call `.remove()` to remove the interval, and especially when the component id destroyed — see the function returned in the `onMount` lifecycle.
+
+> as a proof of concept, mainly to test the pause function, the demo includes a button to pause/resume the current timer. The focus of the project remains on the custom transition functions and custom store.
