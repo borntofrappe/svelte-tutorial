@@ -223,3 +223,7 @@ Complete a grid so that the numbers in each column and row add up to the value d
 ## [Pong](https://svelte.dev/repl/d874e50ed609488da312886ebd6b8b87?version=3.49.0)
 
 Play a round of Pong or two. Two players. Keyboard input.
+
+## [Delayed Countdown](https://svelte.dev/repl/1df95519061e4429a8736482006c8582?version=3.49.0)
+
+Count down an arbitrary number of seconds after an arbitrary delay.
