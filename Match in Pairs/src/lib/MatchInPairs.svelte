@@ -11,27 +11,23 @@
     flipped: false,
   }));
 
-  let checking = false;
+  let flipping = false;
   let timeout;
 
   onDestroy(() => {
     if (timeout) clearTimeout(timeout);
   });
 
-  const handleFlip = () => {
-    if (checking) return;
-    checking = true;
+  const handleFlip = () => (flipping = true);
+
+  const handleFlipped = () => {
+    console.log("check flipped card(s)");
 
     timeout = setTimeout(() => {
-      console.log("check flipped card(s)");
+      console.log("allow to flip another card");
+      flipping = false;
       clearTimeout(timeout);
-
-      timeout = setTimeout(() => {
-        console.log("allow to flip another card");
-        checking = false;
-        clearTimeout(timeout);
-      }, 500);
-    }, transitionDuration);
+    }, 500);
   };
 
   const flipCard = (i) => {
@@ -41,6 +37,7 @@
 
 <ul
   on:transitionstart={handleFlip}
+  on:transitionend={handleFlipped}
   style:--grid-columns={gridColumns}
   style:--transition-duration="{transitionDuration / 1000}s"
 >
@@ -49,7 +46,7 @@
       <button
         class:flipped
         on:click={() => {
-          if (checking) return;
+          if (flipping) return;
           flipCard(i);
         }}
         data-value={value}

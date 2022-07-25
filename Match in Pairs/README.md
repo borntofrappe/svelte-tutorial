@@ -31,6 +31,6 @@ Quite interestingly, the button receives click events with the class of `.flippe
 
 With `flipCard` flip a card, period.
 
-Condition the action to a boolean, `checking`, which is immediately set to true as the flipping transition begins.
+With `handleFlip` set a boolean, controlling, variable to `true`. Use this boolean to prevent additional card flips.
 
-Set the boolean to true in `handleFlip`, consider the flipped card(s) and then, only after checking for a match, set the boolean back to its initial value.
+With `handleFlipped` consider the flipped cards and then, only after checking for a match, set the boolean back to its initial value.
