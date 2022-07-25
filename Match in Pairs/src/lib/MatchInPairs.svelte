@@ -6,6 +6,7 @@
   export let options = ["👋🏻", "🧡", "✨", "🌍", "🐦", "✏️", "🔥", "🙌"];
   export let gridColumns = 4;
   export let transitionDuration = 250;
+  export let delayDuration = 400;
 
   const getCards = (options) =>
     shuffle([...options, ...options]).map((value) => ({
@@ -21,6 +22,7 @@
 
   let moves = 0;
   const progress = tweened(0);
+
   $: matches = cards
     .filter(({ locked }) => locked)
     .map(({ value }) => value)
@@ -70,13 +72,14 @@
             preventFlip = false;
             clearTimeout(timeout);
           }, transitionDuration);
-        }, 500); // TODO configure how long to show the mismatch
+        }, delayDuration);
       }
     }
   };
 
   const handleReset = () => {
     preventFlip = true;
+
     const indexes = [];
     let index = cards.findIndex(({ flipped }) => flipped);
     while (index !== -1) {
@@ -87,6 +90,7 @@
     }
 
     moves = 0;
+
     if (indexes.length === 0) {
       cards = getCards(options);
       preventFlip = false;
@@ -108,75 +112,138 @@
   };
 </script>
 
-<section>
-  <progress value={$progress} />
-  <p>
-    Pairs matched
-    <span>{matches.length}/{options.length}</span>
-  </p>
-</section>
+<main>
+  <div>
+    <section>
+      <progress value={$progress} />
+      <p>
+        Pairs matched
+        <span>{matches.length}/{options.length}</span>
+      </p>
+    </section>
 
-<section>
-  <p>
-    Total moves
-    <span>{moves}</span>
-  </p>
-</section>
+    <section>
+      <p>
+        Total moves
+        <span>{moves}</span>
+      </p>
+    </section>
+  </div>
 
-<ul
-  on:transitionstart={handleFlip}
-  on:transitionend={handleFlipped}
-  style:--grid-columns={gridColumns}
-  style:--transition-duration="{transitionDuration / 1000}s"
->
-  {#each cards as { value, flipped, locked }, i}
-    <li>
-      <button
-        class:flipped
-        on:click={() => {
-          if (preventFlip || locked) return;
-          flipCard(i);
-        }}
-        data-value={value}
-      >
-        🃏
-      </button>
-    </li>
-  {/each}
-</ul>
+  <ul
+    on:transitionstart={handleFlip}
+    on:transitionend={handleFlipped}
+    style:--grid-columns={gridColumns}
+    style:--transition-duration="{transitionDuration / 1000}s"
+  >
+    {#each cards as { value, flipped, locked }, i}
+      <li>
+        <button
+          class:flipped
+          on:click={() => {
+            if (preventFlip || locked) return;
+            flipCard(i);
+          }}
+          data-value={value}
+        >
+          🃏
+        </button>
+      </li>
+    {/each}
+  </ul>
 
-<button on:click={handleReset}>Reset</button>
+  <button on:click={handleReset}>Reset</button>
+</main>
 
 <style>
+  :global(*) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :global(body) {
+    background: hsl(0, 0%, 97%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+
+  main {
+    max-width: 24rem;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  div {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  div > * {
+    width: 100%;
+  }
+
+  main > ul {
+    margin-top: 0.5rem;
+  }
+
+  section {
+    padding: 1rem;
+    background: hsl(0, 0%, 100%);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  section > progress {
+    width: 100%;
+  }
+
+  section > p {
+    margin-top: auto;
+  }
+
+  ul {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    gap: 0.5rem;
+  }
+
   li {
-    display: inline-block;
     perspective: 200px;
   }
 
-  li > button {
+  li button {
     border: none;
     background: none;
     margin: 0;
-    padding: 0;
-    display: block;
-    aspect-ratio: 1/1;
     transform: rotateY(0deg);
     transform-style: preserve-3d;
-    position: relative;
     transition: transform var(--transition-duration, 0.5s) ease-in-out;
+    position: relative;
     z-index: 0;
   }
 
-  li > button,
-  li > button::before {
+  li button,
+  li button::before {
+    display: block;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     backface-visibility: hidden;
+    padding: 1rem;
+    background: hsl(0, 0%, 100%);
+    border-radius: 0.5rem;
   }
 
-  li > button::before {
+  li button::before {
     content: attr(data-value);
     position: absolute;
     top: 0;
@@ -187,18 +254,35 @@
     z-index: -1;
   }
 
-  li > button.flipped {
+  li button.flipped {
     transform: rotateY(180deg);
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  p > span {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  main > button {
+    border: none;
+    align-self: center;
+    margin-top: 1rem;
+    padding: 0.5rem 0.75rem;
+    background: hsl(0, 0%, 100%);
+    border-radius: 0.5rem;
+    font-weight: 700;
   }
 
   @supports (display: grid) {
     ul {
       display: inline-grid;
       grid-template-columns: repeat(var(--grid-columns, 4), auto);
-    }
-
-    li {
-      display: unset;
+      gap: 0.5rem;
     }
   }
 </style>
