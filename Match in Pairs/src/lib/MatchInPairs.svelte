@@ -1,9 +1,12 @@
 <script>
-  const options = ["👋🏻", "🧡", "✨", "🌍", "🐦", "✏️", "🔥", "🙌"];
+  import { shuffle } from "./utils.js";
 
-  const cards = options.map((value) => ({
+  export let options = ["👋🏻", "🧡", "✨", "🌍", "🐦", "✏️", "🔥", "🙌"];
+  export let gridColumns = 4;
+
+  const cards = shuffle([...options, ...options]).map((value) => ({
     value,
-    flipped: false,
+    flipped: true,
   }));
 
   const flipCard = (i) => {
@@ -11,7 +14,7 @@
   };
 </script>
 
-<ul>
+<ul style:--grid-columns={gridColumns}>
   {#each cards as { value, flipped }, i}
     <li>
       <button class:flipped on:click={() => flipCard(i)} data-value={value}>
@@ -63,5 +66,16 @@
 
   button.flipped {
     transform: rotateY(180deg);
+  }
+
+  @supports (display: grid) {
+    ul {
+      display: inline-grid;
+      grid-template-columns: repeat(var(--grid-columns, 4), auto);
+    }
+
+    li {
+      display: unset;
+    }
   }
 </style>
