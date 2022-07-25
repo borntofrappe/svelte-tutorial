@@ -9,6 +9,7 @@
   const cards = shuffle([...options, ...options]).map((value) => ({
     value,
     flipped: false,
+    locked: false,
   }));
 
   let flipping = false;
@@ -21,13 +22,37 @@
   const handleFlip = () => (flipping = true);
 
   const handleFlipped = () => {
-    console.log("check flipped card(s)");
+    const indexes = [];
+    let index = cards.findIndex(({ flipped, locked }) => flipped && !locked);
+    while (index !== -1) {
+      let i =
+        indexes.length === 0 ? index : index + indexes[indexes.length - 1] + 1;
+      indexes.push(i);
+      index = cards
+        .slice(i + 1)
+        .findIndex(({ flipped, locked }) => flipped && !locked);
+    }
 
-    timeout = setTimeout(() => {
-      console.log("allow to flip another card");
+    if (indexes.length < 2) {
       flipping = false;
-      clearTimeout(timeout);
-    }, 500);
+    } else {
+      const [i1, i2] = indexes;
+      if (cards[i1].value === cards[i2].value) {
+        cards[i1].locked = true;
+        cards[i2].locked = true;
+        flipping = false;
+      } else {
+        timeout = setTimeout(() => {
+          cards[i1].flipped = false;
+          cards[i2].flipped = false;
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            flipping = false;
+            clearTimeout(timeout);
+          }, transitionDuration);
+        }, 500); // TODO configure how long to show the mismatch
+      }
+    }
   };
 
   const flipCard = (i) => {
@@ -41,12 +66,12 @@
   style:--grid-columns={gridColumns}
   style:--transition-duration="{transitionDuration / 1000}s"
 >
-  {#each cards as { value, flipped }, i}
+  {#each cards as { value, flipped, locked }, i}
     <li>
       <button
         class:flipped
         on:click={() => {
-          if (flipping) return;
+          if (flipping || locked) return;
           flipCard(i);
         }}
         data-value={value}
