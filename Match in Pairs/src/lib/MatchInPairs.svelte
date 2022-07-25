@@ -1,5 +1,6 @@
 <script>
   import { onDestroy } from "svelte";
+  import { tweened } from "svelte/motion";
   import { shuffle } from "./utils.js";
 
   export let options = ["👋🏻", "🧡", "✨", "🌍", "🐦", "✏️", "🔥", "🙌"];
@@ -15,11 +16,27 @@
   let flipping = false;
   let timeout;
 
+  let moves = 0;
+  const progress = tweened(0);
+  $: matches = cards
+    .filter(({ locked }) => locked)
+    .map(({ value }) => value)
+    .reduce(
+      (acc, curr) => (acc.includes(curr) ? [...acc] : [...acc, curr]),
+      []
+    );
+  $: progress.set(matches.length / options.length);
+
   onDestroy(() => {
     if (timeout) clearTimeout(timeout);
   });
 
-  const handleFlip = () => (flipping = true);
+  const handleFlip = () => {
+    if (flipping) return;
+
+    flipping = true;
+    moves++;
+  };
 
   const handleFlipped = () => {
     const indexes = [];
@@ -59,6 +76,21 @@
     cards[i].flipped = true;
   };
 </script>
+
+<section>
+  <progress value={$progress} />
+  <p>
+    Pairs matched
+    <span>{matches.length}/{options.length}</span>
+  </p>
+</section>
+
+<section>
+  <p>
+    Total moves
+    <span>{moves}</span>
+  </p>
+</section>
 
 <ul
   on:transitionstart={handleFlip}
