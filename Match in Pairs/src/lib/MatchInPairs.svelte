@@ -7,13 +7,16 @@
   export let gridColumns = 4;
   export let transitionDuration = 250;
 
-  const cards = shuffle([...options, ...options]).map((value) => ({
-    value,
-    flipped: false,
-    locked: false,
-  }));
+  const getCards = (options) =>
+    shuffle([...options, ...options]).map((value) => ({
+      value,
+      flipped: false,
+      locked: false,
+    }));
 
-  let flipping = false;
+  let cards = getCards(options);
+
+  let preventFlip = false;
   let timeout;
 
   let moves = 0;
@@ -32,9 +35,9 @@
   });
 
   const handleFlip = () => {
-    if (flipping) return;
+    if (preventFlip) return;
 
-    flipping = true;
+    preventFlip = true;
     moves++;
   };
 
@@ -51,24 +54,52 @@
     }
 
     if (indexes.length < 2) {
-      flipping = false;
+      preventFlip = false;
     } else {
       const [i1, i2] = indexes;
       if (cards[i1].value === cards[i2].value) {
         cards[i1].locked = true;
         cards[i2].locked = true;
-        flipping = false;
+        preventFlip = false;
       } else {
         timeout = setTimeout(() => {
           cards[i1].flipped = false;
           cards[i2].flipped = false;
           clearTimeout(timeout);
           timeout = setTimeout(() => {
-            flipping = false;
+            preventFlip = false;
             clearTimeout(timeout);
           }, transitionDuration);
         }, 500); // TODO configure how long to show the mismatch
       }
+    }
+  };
+
+  const handleReset = () => {
+    preventFlip = true;
+    const indexes = [];
+    let index = cards.findIndex(({ flipped }) => flipped);
+    while (index !== -1) {
+      let i =
+        indexes.length === 0 ? index : index + indexes[indexes.length - 1] + 1;
+      indexes.push(i);
+      index = cards.slice(i + 1).findIndex(({ flipped }) => flipped);
+    }
+
+    moves = 0;
+    if (indexes.length === 0) {
+      cards = getCards(options);
+      preventFlip = false;
+    } else {
+      indexes.forEach((index) => {
+        cards[index].flipped = false;
+      });
+
+      timeout = setTimeout(() => {
+        cards = getCards(options);
+        preventFlip = false;
+        clearTimeout(timeout);
+      }, transitionDuration);
     }
   };
 
@@ -103,7 +134,7 @@
       <button
         class:flipped
         on:click={() => {
-          if (flipping || locked) return;
+          if (preventFlip || locked) return;
           flipCard(i);
         }}
         data-value={value}
@@ -114,13 +145,15 @@
   {/each}
 </ul>
 
+<button on:click={handleReset}>Reset</button>
+
 <style>
   li {
     display: inline-block;
     perspective: 200px;
   }
 
-  button {
+  li > button {
     border: none;
     background: none;
     margin: 0;
@@ -134,8 +167,8 @@
     z-index: 0;
   }
 
-  button,
-  button::before {
+  li > button,
+  li > button::before {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,7 +176,7 @@
     backface-visibility: hidden;
   }
 
-  button::before {
+  li > button::before {
     content: attr(data-value);
     position: absolute;
     top: 0;
@@ -154,7 +187,7 @@
     z-index: -1;
   }
 
-  button.flipped {
+  li > button.flipped {
     transform: rotateY(180deg);
   }
 
