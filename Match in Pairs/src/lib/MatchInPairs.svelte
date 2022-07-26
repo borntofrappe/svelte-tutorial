@@ -115,34 +115,40 @@
   };
 </script>
 
-<Data
-  progress={$progress}
-  matches={matches.length}
-  total={options.length}
-  {moves}
-/>
+<div>
+  <article>
+    <Data
+      progress={$progress}
+      matches={matches.length}
+      total={options.length}
+      {moves}
+    />
 
-<ul
-  on:transitionstart={handleFlip}
-  on:transitionend={handleFlipped}
-  style:--grid-columns={gridColumns}
-  style:--transition-duration="{transitionDuration / 1000}s"
->
-  {#each cards as { value, flipped, locked }, i}
-    <li>
-      <button
-        class:flipped
-        on:click={() => {
-          if (preventFlip || locked) return;
-          flipCard(i);
-        }}
-        data-value={value}
-      />
-    </li>
-  {/each}
-</ul>
+    <ul
+      on:transitionstart={handleFlip}
+      on:transitionend={handleFlipped}
+      style:--grid-columns={gridColumns}
+      style:--transition-duration="{transitionDuration / 1000}s"
+    >
+      {#each cards as { value, flipped, locked }, i}
+        <li>
+          <button
+            class:flipped
+            on:click={() => {
+              if (preventFlip || locked) return;
+              flipCard(i);
+            }}
+            data-value={value}
+          >
+            🃏
+          </button>
+        </li>
+      {/each}
+    </ul>
 
-<Controls on:reset={handleReset} />
+    <Controls on:reset={handleReset} />
+  </article>
+</div>
 
 <style>
   :global(*) {
@@ -157,9 +163,35 @@
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   }
 
+  div {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  article {
+    gap: 0.5rem;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  article > :global(.datum) {
+    grid-column: span 1;
+  }
+
+  article > ul,
+  article > :global(.controls) {
+    grid-column: 1/-1;
+  }
+
   ul {
     padding: 0;
     list-style: none;
+    display: inline-grid;
+    grid-template-columns: repeat(var(--grid-columns, 4), auto);
+    gap: 0.5rem;
   }
 
   li {
@@ -204,13 +236,5 @@
 
   li button.flipped {
     transform: rotateY(180deg);
-  }
-
-  @supports (display: grid) {
-    ul {
-      display: inline-grid;
-      grid-template-columns: repeat(var(--grid-columns, 4), auto);
-      gap: 0.5rem;
-    }
   }
 </style>
