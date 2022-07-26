@@ -3,6 +3,9 @@
   import { tweened } from "svelte/motion";
   import { shuffle } from "./utils.js";
 
+  import Data from "./Data.svelte";
+  import Controls from "./Controls.svelte";
+
   export let options = ["👋🏻", "🧡", "✨", "🌍", "🐦", "✏️", "🔥", "🙌"];
   export let gridColumns = 4;
   export let transitionDuration = 250;
@@ -112,48 +115,34 @@
   };
 </script>
 
-<main>
-  <div>
-    <section>
-      <progress value={$progress} />
-      <p>
-        Pairs matched
-        <span>{matches.length}/{options.length}</span>
-      </p>
-    </section>
+<Data
+  progress={$progress}
+  matches={matches.length}
+  total={options.length}
+  {moves}
+/>
 
-    <section>
-      <p>
-        Total moves
-        <span>{moves}</span>
-      </p>
-    </section>
-  </div>
+<ul
+  on:transitionstart={handleFlip}
+  on:transitionend={handleFlipped}
+  style:--grid-columns={gridColumns}
+  style:--transition-duration="{transitionDuration / 1000}s"
+>
+  {#each cards as { value, flipped, locked }, i}
+    <li>
+      <button
+        class:flipped
+        on:click={() => {
+          if (preventFlip || locked) return;
+          flipCard(i);
+        }}
+        data-value={value}
+      />
+    </li>
+  {/each}
+</ul>
 
-  <ul
-    on:transitionstart={handleFlip}
-    on:transitionend={handleFlipped}
-    style:--grid-columns={gridColumns}
-    style:--transition-duration="{transitionDuration / 1000}s"
-  >
-    {#each cards as { value, flipped, locked }, i}
-      <li>
-        <button
-          class:flipped
-          on:click={() => {
-            if (preventFlip || locked) return;
-            flipCard(i);
-          }}
-          data-value={value}
-        >
-          🃏
-        </button>
-      </li>
-    {/each}
-  </ul>
-
-  <button on:click={handleReset}>Reset</button>
-</main>
+<Controls on:reset={handleReset} />
 
 <style>
   :global(*) {
@@ -168,49 +157,9 @@
       Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   }
 
-  main {
-    max-width: 24rem;
-    margin: 1rem auto;
-    display: flex;
-    flex-direction: column;
-  }
-
-  div {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  div > * {
-    width: 100%;
-  }
-
-  main > ul {
-    margin-top: 0.5rem;
-  }
-
-  section {
-    padding: 1rem;
-    background: hsl(0, 0%, 100%);
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-  }
-
-  section > progress {
-    width: 100%;
-  }
-
-  section > p {
-    margin-top: auto;
-  }
-
   ul {
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     list-style: none;
-    gap: 0.5rem;
   }
 
   li {
@@ -230,9 +179,7 @@
 
   li button,
   li button::before {
-    display: block;
     aspect-ratio: 1/1;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -244,6 +191,7 @@
   }
 
   li button::before {
+    box-sizing: border-box;
     content: attr(data-value);
     position: absolute;
     top: 0;
@@ -256,26 +204,6 @@
 
   li button.flipped {
     transform: rotateY(180deg);
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-
-  p > span {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  main > button {
-    border: none;
-    align-self: center;
-    margin-top: 1rem;
-    padding: 0.5rem 0.75rem;
-    background: hsl(0, 0%, 100%);
-    border-radius: 0.5rem;
-    font-weight: 700;
   }
 
   @supports (display: grid) {
