@@ -32,7 +32,7 @@
 
   section > progress {
     width: 100%;
-    accent-color: red;
+    accent-color: hsl(201, 79%, 46%);
   }
 
   section > p {

@@ -156,18 +156,6 @@
 </div>
 
 <style>
-  :global(*) {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  :global(body) {
-    background: hsl(0, 0%, 97%);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-  }
-
   div {
     min-height: 100vh;
     display: flex;
@@ -195,6 +183,7 @@
     padding: 0;
     list-style: none;
     display: inline-grid;
+    justify-content: center;
     grid-template-columns: repeat(var(--grid-columns, 4), auto);
     gap: 0.5rem;
   }
@@ -245,15 +234,5 @@
 
   li button:hover {
     background: hsl(0, 0%, 99%);
-  }
-
-  :global(.visually-hidden:not(:focus):not(:active)) {
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
   }
 </style>

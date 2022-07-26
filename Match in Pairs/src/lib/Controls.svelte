@@ -13,12 +13,12 @@
 
 <style>
   button {
-    margin-left: auto;
-    margin-right: auto;
     display: block;
     border: none;
     padding: 0.5rem 0.8rem;
-    background: hsl(0, 0%, 100%);
+    color: hsl(209, 61%, 16%);
+    background: hsl(196, 94%, 67%);
     border-radius: 0.5rem;
+    font-weight: 700;
   }
 </style>
