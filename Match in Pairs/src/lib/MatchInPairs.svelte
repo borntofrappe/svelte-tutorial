@@ -1,12 +1,12 @@
 <script>
   import { onDestroy } from "svelte";
   import { tweened } from "svelte/motion";
-  import { shuffle } from "./utils.js";
+  import { shuffle, emojis } from "./utils.js";
 
   import Data from "./Data.svelte";
   import Controls from "./Controls.svelte";
 
-  export let options = ["👋🏻", "🧡", "✨", "🌍", "🐦", "✏️", "🔥", "🙌"];
+  export let options = shuffle(emojis).slice(-8);
   export let gridColumns = 4;
   export let transitionDuration = 250;
   export let delayDuration = 400;
@@ -131,8 +131,10 @@
       style:--transition-duration="{transitionDuration / 1000}s"
     >
       {#each cards as { value, flipped, locked }, i}
+        {@const id = `title-${value}-${i}`}
         <li>
           <button
+            aria-labelledby={id}
             class:flipped
             on:click={() => {
               if (preventFlip || locked) return;
@@ -142,6 +144,9 @@
           >
             🃏
           </button>
+          <span class="visually-hidden" {id}
+            >{flipped ? `Card ${value}` : "Flip card"}</span
+          >
         </li>
       {/each}
     </ul>
@@ -236,5 +241,19 @@
 
   li button.flipped {
     transform: rotateY(180deg);
+  }
+
+  li button:hover {
+    background: hsl(0, 0%, 99%);
+  }
+
+  :global(.visually-hidden:not(:focus):not(:active)) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
   }
 </style>
