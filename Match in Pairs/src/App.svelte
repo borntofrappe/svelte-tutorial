@@ -1,5 +1,5 @@
 <script>
-  import MatchInPairs from "./lib/MatchInPairs.svelte";
+  import Game from "./lib/Game.svelte";
 </script>
 
-<MatchInPairs />
+<Game />

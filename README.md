@@ -227,3 +227,7 @@ Play a round of Pong or two. Two players. Keyboard input.
 ## [Delayed Countdown](https://svelte.dev/repl/1df95519061e4429a8736482006c8582?version=3.49.0)
 
 Count down an arbitrary number of seconds after an arbitrary delay.
+
+## [Match in Pairs](https://svelte.dev/repl/dd0fee137f1643d6b685c1aa57c28468?version=3.49.0)
+
+Match cards in pairs.
