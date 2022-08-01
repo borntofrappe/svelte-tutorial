@@ -23,3 +23,15 @@ For the label devoted to the average define a larger path to position the text w
 ```
 
 The angle also comes in handy to position a `<mask>` element for a custom indentation carving the donut at the coordinate of the mean.
+
+## Svelte reactivity
+
+Past reactive declarations to compute the offset and the angle, on the basis of the input value and average, it is possible to use the `$:` declaration to call a function whenever the values change.
+
+```svelte
+$: update(offset, angle);
+```
+
+The goal of the function is to update two `tweened` objects and animate the angle/offset instead of setting the measures immediately.
+
+Make the function `async` to first tween the offset, the outline of the donut. Following this animation tween the angle, so to show the position of the average.
