@@ -231,3 +231,7 @@ Count down an arbitrary number of seconds after an arbitrary delay.
 ## [Match in Pairs](https://svelte.dev/repl/dd0fee137f1643d6b685c1aa57c28468?version=3.49.0)
 
 Match cards in pairs.
+
+## Donut Values
+
+Highlight a specific value and an average in a donut chart.
