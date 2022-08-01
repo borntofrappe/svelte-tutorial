@@ -1,41 +1,67 @@
 <script>
+  import { fade } from "svelte/transition";
+  import { tweened } from "svelte/motion";
   export let value = 57;
   export let average = 83;
+  export let color = "hsl(125, 50%, 60%)";
 
   const pathLength = 100;
+  const id = Math.random().toString().slice(-5);
+  let showAverage = false;
+
   $: offset = pathLength - value;
   $: angle = (360 * average) / pathLength;
+
+  const tOffset = tweened(pathLength, {
+    duration: 1000,
+  });
+  const tAngle = tweened(-10, {
+    duration: 500,
+  });
+
+  $: update(offset, angle);
+
+  const update = async (offset, angle) => {
+    await tOffset.set(offset);
+    showAverage = true;
+    tAngle.set(angle);
+  };
 </script>
 
-<svg viewBox="-70 -70 140 140">
+<svg style:color viewBox="-70 -70 140 140">
   <defs>
-    <path id="tp" d="M 0 -60 a 60 60 0 0 1 0 120 60 60 0 0 1 0 -120" />
+    <path
+      id="donut-textpath-{id}"
+      d="M 0 -60 a 60 60 0 0 1 0 120 60 60 0 0 1 0 -120"
+    />
     <path
       {pathLength}
       fill="none"
       stroke-width="10"
       stroke-linecap="round"
-      id="p"
+      id="donut-path-{id}"
       d="M 0 -50 a 50 50 0 0 1 0 100 50 50 0 0 1 0 -100"
     />
-
-    <mask id="m">
+    <mask id="donut-mask-{id}">
       <rect fill="white" x="-70" y="-70" width="140" height="140" />
-
-      <g transform="rotate({angle})">
-        <g transform="translate(0 -55)">
-          <path d="M -5 0 h 10 l -5 5z" />
+      {#if showAverage}
+        <g in:fade>
+          <g transform="rotate({$tAngle})">
+            <g transform="translate(0 -55)">
+              <path d="M -5 0 h 10 l -5 5z" />
+            </g>
+          </g>
         </g>
-      </g>
+      {/if}
     </mask>
   </defs>
-  <g mask="url(#m)">
-    <use href="#p" stroke="hsl(0, 0%, 90%)" />
+  <g mask="url(#donut-mask-{id})">
+    <use href="#donut-path-{id}" stroke="hsl(0, 0%, 90%)" />
     <use
-      href="#p"
+      href="#donut-path-{id}"
       stroke="currentColor"
       stroke-dasharray={pathLength}
-      stroke-dashoffset={offset}
+      stroke-dashoffset={$tOffset}
     />
   </g>
   <g
@@ -46,19 +72,26 @@
     fill="currentColor"
   >
     <text>
-      {Math.floor(pathLength - offset)}%
+      {Math.floor(pathLength - $tOffset)}%
     </text>
   </g>
 
-  <g font-size="10" style:text-transform="uppercase" fill="hsl(0, 0%, 60%)">
-    <g transform="rotate({angle})">
-      <text>
-        <textPath href="#tp">
-          {average}% Average
-        </textPath>
-      </text>
+  {#if showAverage}
+    <g
+      in:fade
+      font-size="10"
+      style:text-transform="uppercase"
+      fill="hsl(0, 0%, 60%)"
+    >
+      <g transform="rotate({$tAngle})">
+        <text>
+          <textPath href="#donut-textpath-{id}">
+            {average}% Average
+          </textPath>
+        </text>
+      </g>
     </g>
-  </g>
+  {/if}
 </svg>
 
 <style>

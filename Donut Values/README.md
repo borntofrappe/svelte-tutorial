@@ -35,3 +35,32 @@ $: update(offset, angle);
 The goal of the function is to update two `tweened` objects and animate the angle/offset instead of setting the measures immediately.
 
 Make the function `async` to first tween the offset, the outline of the donut. Following this animation tween the angle, so to show the position of the average.
+
+## Donut component
+
+`Donut.svelte` does not require `d3`, but to test out the component the library helps to compute the average from a collection of random values and the color from a color scale.
+
+```js
+import { mean } from "d3-array";
+import { interpolateCool } from "d3-scale-chromatic";
+```
+
+For the average `App.svelte` first creates an array of random values.
+
+```js
+const average = mean(values);
+```
+
+For the color another random value between 0 and 100 allows to retrieve a color in the specific interpolating function.
+
+```js
+const color = interpolateCool(value / 100); // domain [0, 1]
+```
+
+In the moment you create multiple copies of the component do remember that the `id` attribute of the shapes defined in the `defs` block needs to be unique.
+
+```svelte
+<path id="donut-path-{id}" />
+```
+
+Without this step successive `Donut` components would rely on the definitions of the first copy's only.
