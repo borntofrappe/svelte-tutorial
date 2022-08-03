@@ -1,4 +1,6 @@
 <script>
+  import { tweened } from "svelte/motion";
+
   const level = `..wwwww.
 	wwweeew.
 	wtpceew.
@@ -21,7 +23,70 @@
   );
   const columns = grid[0].length;
   const rows = grid.length;
+
+  const cells = grid.reduce((acc, curr) => [...acc, ...curr], []);
+
+  const crates = cells.filter(({ value }) => value === "c" || value === "m");
+
+  const targets = cells.filter(({ value }) => value === "t" || value === "m");
+
+  const { column: pc, row: pr } = cells.find(({ value }) => value === "p");
+  const player = tweened({
+    column: pc,
+    row: pr,
+  });
+
+  const dirs = {
+    up: [0, -1],
+    right: [1, 0],
+    down: [0, 1],
+    left: [-1, 0],
+  };
+
+  let isMoving = false;
+  const updatePlayer = async (dir) => {
+    if (isMoving) return;
+
+    const [dc, dr] = dirs[dir];
+    const { column: pc, row: pr } = $player;
+    const column = pc + dc;
+    const row = pr + dr;
+
+    if (grid[row][column].value === "w") return;
+
+    isMoving = true;
+
+    await player.set({
+      column,
+      row,
+    });
+
+    isMoving = false;
+  };
 </script>
+
+<div>
+  <button
+    on:click={() => {
+      updatePlayer("left");
+    }}>left</button
+  >
+  <button
+    on:click={() => {
+      updatePlayer("up");
+    }}>up</button
+  >
+  <button
+    on:click={() => {
+      updatePlayer("right");
+    }}>right</button
+  >
+  <button
+    on:click={() => {
+      updatePlayer("down");
+    }}>down</button
+  >
+</div>
 
 <svg viewBox="0 0 {columns} {rows}">
   <defs>
@@ -38,45 +103,6 @@
         </g>
       </g>
     </g>
-    <g id="cell-c">
-      <g
-        transform="translate(0.1 0.1)"
-        fill="#ebb668"
-        stroke="#261700"
-        stroke-width="0.025"
-      >
-        <rect width="0.8" height="0.8" />
-        <g transform="translate(0.1 0.1)">
-          <rect width="0.6" height="0.6" />
-          <path
-            transform="translate(0.6 0) scale(-1 1)"
-            d="M 0.1 0 L 0.6 0.5 0.6 0.6 0.5 0.6 0 0.1 0 0z"
-          />
-          <path d="M 0.1 0 L 0.6 0.5 0.6 0.6 0.5 0.6 0 0.1 0 0z" />
-        </g>
-      </g>
-    </g>
-
-    <g id="cell-m">
-      <g
-        transform="translate(0.1 0.1)"
-        fill="#d99182"
-        stroke="#261700"
-        stroke-width="0.025"
-      >
-        <rect width="0.8" height="0.8" />
-        <g transform="translate(0.1 0.1)">
-          <rect width="0.6" height="0.6" />
-          <path
-            transform="translate(0.6 0) scale(-1 1)"
-            d="M 0.1 0 L 0.6 0.5 0.6 0.6 0.5 0.6 0 0.1 0 0z"
-          />
-          <path d="M 0.1 0 L 0.6 0.5 0.6 0.6 0.5 0.6 0 0.1 0 0z" />
-        </g>
-      </g>
-    </g>
-
-    <g id="cell-." />
 
     <g id="cell-e">
       <g fill="none" stroke="#c8c197" stroke-width="0.025">
@@ -92,7 +118,21 @@
       </g>
     </g>
 
-    <g id="cell-p">
+    <g id="cell-crate">
+      <g transform="translate(0.1 0.1)" stroke="#261700" stroke-width="0.025">
+        <rect width="0.8" height="0.8" />
+        <g transform="translate(0.1 0.1)">
+          <rect width="0.6" height="0.6" />
+          <path
+            transform="translate(0.6 0) scale(-1 1)"
+            d="M 0.1 0 L 0.6 0.5 0.6 0.6 0.5 0.6 0 0.1 0 0z"
+          />
+          <path d="M 0.1 0 L 0.6 0.5 0.6 0.6 0.5 0.6 0 0.1 0 0z" />
+        </g>
+      </g>
+    </g>
+
+    <g id="cell-player">
       <g transform="translate(0.5 0.5)" stroke="#4e2600" stroke-width="0.03">
         <circle fill="#f0bd7b" r="0.3" />
         <g fill="none">
@@ -113,6 +153,25 @@
     {#each grid.reduce((acc, curr) => [...acc, ...curr], []) as { value, column: x, row: y }}
       <use {x} {y} href="#cell-{value}" />
     {/each}
+  </g>
+
+  <g>
+    {#each crates as { column, row }}
+      <g transform="translate({column} {row})">
+        <use
+          fill={targets.some(
+            ({ column: tc, row: tr }) => tc === column && tr === row
+          )
+            ? "#d99182"
+            : "#ebb668"}
+          href="#cell-crate"
+        />
+      </g>
+    {/each}
+  </g>
+
+  <g transform="translate({$player.column} {$player.row})">
+    <use href="#cell-player" />
   </g>
 </svg>
 
