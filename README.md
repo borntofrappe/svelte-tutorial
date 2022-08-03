@@ -235,3 +235,7 @@ Match cards in pairs.
 ## [Donut Values](https://svelte.dev/repl/4a2088067b1c47e7bddbf24f58770c35?version=3.49.0)
 
 Highlight a specific value and an average in a donut chart.
+
+## Sokoban
+
+Move crates above designated areas.
