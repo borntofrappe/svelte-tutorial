@@ -54,12 +54,50 @@
 
     if (grid[row][column].value === "w") return;
 
+    const crateIndex = crates.findIndex(
+      ({ column: cc, row: rc }) => cc === column && rc === row
+    );
+
+    if (crateIndex !== -1) {
+      const nc = column + dc;
+      const nr = row + dr;
+
+      if (grid[nr][nc].value === "w") return;
+      if (crates.find(({ column: cc, row: rc }) => cc === nc && rc === nr))
+        return;
+    }
+
     isMoving = true;
 
-    await player.set({
-      column,
-      row,
-    });
+    if (crateIndex !== -1) {
+      await player.set(
+        {
+          column,
+          row,
+        },
+        {
+          interpolate: (from, to) => (t) => {
+            const { column: fc, row: fr } = from;
+            const { column: tc, row: tr } = to;
+            const column = fc + (tc - fc) * t;
+            const row = fr + (tr - fr) * t;
+            crates[crateIndex].column = column + dc;
+            crates[crateIndex].row = row + dr;
+            return {
+              column,
+              row,
+            };
+          },
+        }
+      );
+      crates[crateIndex].column = column + dc;
+      crates[crateIndex].row = row + dr;
+    } else {
+      await player.set({
+        column,
+        row,
+      });
+    }
 
     isMoving = false;
   };
@@ -90,7 +128,7 @@
 
 <svg viewBox="0 0 {columns} {rows}">
   <defs>
-    <g id="cell-w">
+    <g id="tile-w">
       <g stroke="#493f0e" stroke-width="0.03">
         <rect fill="#9f9758" width="1" height="1" />
         <g fill="none">
@@ -104,7 +142,7 @@
       </g>
     </g>
 
-    <g id="cell-e">
+    <g id="tile-e">
       <g fill="none" stroke="#c8c197" stroke-width="0.025">
         <path d="M 0.1 0.2 h 0.2 m 0.4 0 h 0.2" />
         <path d="M 0.2 0.5 h 0.2 m 0.3 0 h 0.2" />
@@ -112,13 +150,13 @@
       </g>
     </g>
 
-    <g id="cell-t">
+    <g id="tile-target">
       <g transform="translate(0.5 0.5)" fill="#d99182">
         <circle r="0.18" />
       </g>
     </g>
 
-    <g id="cell-crate">
+    <g id="tile-crate">
       <g transform="translate(0.1 0.1)" stroke="#261700" stroke-width="0.025">
         <rect width="0.8" height="0.8" />
         <g transform="translate(0.1 0.1)">
@@ -132,7 +170,7 @@
       </g>
     </g>
 
-    <g id="cell-player">
+    <g id="tile-player">
       <g transform="translate(0.5 0.5)" stroke="#4e2600" stroke-width="0.03">
         <circle fill="#f0bd7b" r="0.3" />
         <g fill="none">
@@ -151,7 +189,15 @@
 
   <g>
     {#each grid.reduce((acc, curr) => [...acc, ...curr], []) as { value, column: x, row: y }}
-      <use {x} {y} href="#cell-{value}" />
+      <use {x} {y} href="#tile-{value}" />
+    {/each}
+  </g>
+
+  <g>
+    {#each targets as { column, row }}
+      <g transform="translate({column} {row})">
+        <use href="#tile-target" />
+      </g>
     {/each}
   </g>
 
@@ -164,14 +210,14 @@
           )
             ? "#d99182"
             : "#ebb668"}
-          href="#cell-crate"
+          href="#tile-crate"
         />
       </g>
     {/each}
   </g>
 
   <g transform="translate({$player.column} {$player.row})">
-    <use href="#cell-player" />
+    <use href="#tile-player" />
   </g>
 </svg>
 
@@ -182,6 +228,6 @@
 
   svg {
     display: block;
-    max-width: 30rem;
+    max-height: 30rem;
   }
 </style>
