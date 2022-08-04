@@ -49,6 +49,7 @@
 
   let isMoving = false;
   let isResetting = false;
+  let hasWon = false;
 
   const updatePlayer = async (dir) => {
     if (isMoving || isResetting) return;
@@ -98,6 +99,10 @@
       );
       crates[crateIndex].column = column + dc;
       crates[crateIndex].row = row + dr;
+
+      hasWon = crates.every(({ column: cc, row: cr }) =>
+        targets.some(({ column: tc, row: tr }) => cc === tc && cr === tr)
+      );
     } else {
       await player.set({
         column,
@@ -127,6 +132,8 @@
     crates = grid
       .reduce((acc, curr) => [...acc, ...curr.map((cell) => ({ ...cell }))], [])
       .filter(({ value }) => value === "c" || value === "m");
+
+    hasWon = false;
 
     await scale.set(1);
     isResetting = false;
@@ -210,7 +217,9 @@
           <circle r="0.06" cx="-0.1" cy="-0.07" />
           <path
             stroke-linecap="round"
-            d="M -0.12 0.1 a 0.15 0.15 0 0 0 0.24 0"
+            d={hasWon
+              ? "M -0.12 0.1 a 0.15 0.15 0 0 0 0.24 0"
+              : "M -0.1 0.12 h 0.2"}
           />
         </g>
       </g>
@@ -256,6 +265,6 @@
 
   svg {
     display: block;
-    max-height: 100vmin;
+    max-width: 30rem;
   }
 </style>
