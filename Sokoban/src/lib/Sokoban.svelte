@@ -1,14 +1,14 @@
 <script>
   import { tweened } from "svelte/motion";
 
-  const level = `..wwwww.
-	wwweeew.
-	wtpceew.
-	wwwectw.
-	wtwwcew.
-	weweteww
-	wcemcctw
-	weeeteew
+  const level = `eewwwwwe
+	wwwbbbwe
+	wtpcbbwe
+	wwwbctwe
+	wtwwcbwe
+	wbwbtbww
+	wcbmcctw
+	wbbbtbbw
 	wwwwwwww`;
 
   const grid = level.split("\n").map((d, row) =>
@@ -181,7 +181,7 @@
       </g>
     </g>
 
-    <g id="tile-e">
+    <g id="tile-b">
       <g fill="none" stroke="#c8c197" stroke-width="0.025">
         <path d="M 0.1 0.2 h 0.2 m 0.4 0 h 0.2" />
         <path d="M 0.2 0.5 h 0.2 m 0.3 0 h 0.2" />
@@ -251,9 +251,11 @@
     {/each}
   </g>
 
-  <g transform="translate({$player.column} {$player.row})">
-    <g transform="translate(0.5 0.5) scale({$scale}) translate(-0.5 -0.5)">
-      <use href="#tile-player" />
+  <g>
+    <g transform="translate({$player.column} {$player.row})">
+      <g transform="translate(0.5 0.5) scale({$scale}) translate(-0.5 -0.5)">
+        <use href="#tile-player" />
+      </g>
     </g>
   </g>
 </svg>

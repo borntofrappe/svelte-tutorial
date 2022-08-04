@@ -236,6 +236,6 @@ Match cards in pairs.
 
 Highlight a specific value and an average in a donut chart.
 
-## Sokoban
+## [Sokoban](https://svelte.dev/repl/ebce8ef2dbe84d33bba4de666c761cb9?version=3.49.0)
 
 Move crates above designated areas.
