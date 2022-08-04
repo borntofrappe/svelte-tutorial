@@ -12,27 +12,26 @@ The level is set with a hard-coded string, describing the grid in rows and colum
 
 ```js
 const level = `eewwwwwe
-wwwbbbwe
-wtpcbbwe
-wwwbctwe
-wtwwcbwe
-wbwbtbww
-wcbmcctw
-wbbbtbbw
+wwweeewe
+wtpceewe
+wwwectwe
+wtwwcewe
+weweteww
+wcemcctw
+weeeteew
 wwwwwwww`;
 ```
 
 Each letter has a specific meaning, used immediately to draw a specific sprite, but also to position the interactable objects — player and crates.
 
-| Letter | Meaning    |
-| ------ | ---------- |
-| e      | empty      |
-| w      | wall       |
-| b      | background |
-| t      | target     |
-| p      | player     |
-| c      | crate      |
-| m      | match      |
+| Letter | Meaning |
+| ------ | ------- |
+| e      | empty   |
+| w      | wall    |
+| t      | target  |
+| p      | player  |
+| c      | crate   |
+| m      | match   |
 
 `m` describes a target _and_ a crate.
 
@@ -45,7 +44,7 @@ In the `<defs>` block define visual for the letters in the level, but only for t
 With a `{#each}` block loop through the grid and use the associated graphic with the `<use>` element.
 
 ```svelte
-<use href="#tile-{value}" />
+<use href="#cell-{value}" />
 ```
 
 It is not necessary to filter out the letters without definition. When the `href` attribute doesn't point to an existing id nothing will be rendered.
