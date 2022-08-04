@@ -24,13 +24,17 @@
   const columns = grid[0].length;
   const rows = grid.length;
 
-  const cells = grid.reduce((acc, curr) => [...acc, ...curr], []);
-
-  const crates = cells.filter(({ value }) => value === "c" || value === "m");
-
+  const cells = grid.reduce(
+    (acc, curr) => [...acc, ...curr.map((cell) => ({ ...cell }))],
+    []
+  );
   const targets = cells.filter(({ value }) => value === "t" || value === "m");
+  let crates = cells
+    .map((cell) => ({ ...cell }))
+    .filter(({ value }) => value === "c" || value === "m");
 
   const { column: pc, row: pr } = cells.find(({ value }) => value === "p");
+
   const player = tweened({
     column: pc,
     row: pr,
@@ -44,8 +48,10 @@
   };
 
   let isMoving = false;
+  let isResetting = false;
+
   const updatePlayer = async (dir) => {
-    if (isMoving) return;
+    if (isMoving || isResetting) return;
 
     const [dc, dr] = dirs[dir];
     const { column: pc, row: pr } = $player;
@@ -101,14 +107,33 @@
 
     isMoving = false;
   };
+
+  const scale = tweened(1);
+
+  const handleReset = async () => {
+    if (isMoving || isResetting) return;
+
+    isResetting = true;
+
+    await scale.set(0);
+
+    player.set(
+      {
+        column: pc,
+        row: pr,
+      },
+      { duration: 0 }
+    );
+    crates = grid
+      .reduce((acc, curr) => [...acc, ...curr.map((cell) => ({ ...cell }))], [])
+      .filter(({ value }) => value === "c" || value === "m");
+
+    await scale.set(1);
+    isResetting = false;
+  };
 </script>
 
 <div>
-  <button
-    on:click={() => {
-      updatePlayer("left");
-    }}>left</button
-  >
   <button
     on:click={() => {
       updatePlayer("up");
@@ -124,7 +149,14 @@
       updatePlayer("down");
     }}>down</button
   >
+  <button
+    on:click={() => {
+      updatePlayer("left");
+    }}>left</button
+  >
 </div>
+
+<button on:click={handleReset}>reset</button>
 
 <svg viewBox="0 0 {columns} {rows}">
   <defs>
@@ -150,7 +182,7 @@
       </g>
     </g>
 
-    <g id="tile-target">
+    <g id="tile-t">
       <g transform="translate(0.5 0.5)" fill="#d99182">
         <circle r="0.18" />
       </g>
@@ -194,30 +226,26 @@
   </g>
 
   <g>
-    {#each targets as { column, row }}
-      <g transform="translate({column} {row})">
-        <use href="#tile-target" />
-      </g>
-    {/each}
-  </g>
-
-  <g>
     {#each crates as { column, row }}
       <g transform="translate({column} {row})">
-        <use
-          fill={targets.some(
-            ({ column: tc, row: tr }) => tc === column && tr === row
-          )
-            ? "#d99182"
-            : "#ebb668"}
-          href="#tile-crate"
-        />
+        <g transform="translate(0.5 0.5) scale({$scale}) translate(-0.5 -0.5)">
+          <use
+            fill={targets.some(
+              ({ column: tc, row: tr }) => tc === column && tr === row
+            )
+              ? "#d99182"
+              : "#ebb668"}
+            href="#tile-crate"
+          />
+        </g>
       </g>
     {/each}
   </g>
 
   <g transform="translate({$player.column} {$player.row})">
-    <use href="#tile-player" />
+    <g transform="translate(0.5 0.5) scale({$scale}) translate(-0.5 -0.5)">
+      <use href="#tile-player" />
+    </g>
   </g>
 </svg>
 
@@ -228,6 +256,6 @@
 
   svg {
     display: block;
-    max-height: 30rem;
+    max-height: 100vmin;
   }
 </style>
