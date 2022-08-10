@@ -87,7 +87,7 @@
     {question}
   </p>
 
-  <svg bind:this={svg} viewBox="-20 -50 340 100">
+  <svg bind:this={svg} viewBox="-24 -50 348 100">
     <g>
       <rect y="-3.5" width="300" height="7" rx="3.5" fill="hsl(0, 0%, 85%)" />
 
@@ -189,35 +189,7 @@
           </g>
         </g>
       {:else}
-        <g transform="translate({x1} 0)">
-          <g style:color="hsl(205, 87%, 29%)">
-            <g out:scale={{ duration: durations.out }}>
-              <g transform="translate(0 -26)">
-                <g
-                  fill="currentColor"
-                  font-size="11"
-                  font-weight="700"
-                  text-anchor="middle"
-                >
-                  <text>{value.toFixed(precision)}</text>
-                </g>
-              </g>
-
-              <circle
-                r="18.5"
-                fill="hsl(0, 0%, 100%)"
-                stroke="currentColor"
-                stroke-width="3"
-              />
-              <g fill="currentColor">
-                <path d="M 2 -5 l 5 5 -5 5z" />
-                <path transform="scale(-1 1)" d="M 2 -5 l 5 5 -5 5z" />
-              </g>
-            </g>
-          </g>
-        </g>
         <g
-          bind:this={g}
           style:cursor="pointer"
           on:mousedown={handleStart}
           on:mouseup={handleEnd}
@@ -229,7 +201,47 @@
           class="focusable"
           on:keydown={handleKeydown}
         >
-          <rect opacity="0" y="-50" width="300" height="100" />
+          <g style:pointer-events="none">
+            <g transform="translate({x1} 0)">
+              <g style:color="hsl(205, 87%, 29%)">
+                <g out:scale={{ duration: durations.out }}>
+                  <g transform="translate(0 -28)">
+                    <g
+                      fill="currentColor"
+                      font-size="11"
+                      font-weight="700"
+                      text-anchor="middle"
+                    >
+                      <text>{value.toFixed(precision)}</text>
+                    </g>
+                  </g>
+
+                  <g transform="scale(0)" class="focus">
+                    <circle
+                      r="23.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1"
+                    />
+                  </g>
+
+                  <circle
+                    r="18.5"
+                    fill="hsl(0, 0%, 100%)"
+                    stroke="currentColor"
+                    stroke-width="3"
+                  />
+                  <g fill="currentColor">
+                    <path d="M 2 -5 l 5 5 -5 5z" />
+                    <path transform="scale(-1 1)" d="M 2 -5 l 5 5 -5 5z" />
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <g bind:this={g}>
+            <rect opacity="0" y="-50" width="300" height="100" />
+          </g>
         </g>
       {/if}
     </g>
@@ -262,6 +274,10 @@
     margin-top: 0.75em;
   }
 
+  p {
+    line-height: 1.7;
+  }
+
   svg {
     display: block;
   }
@@ -278,5 +294,17 @@
     border: none;
     padding: 0.75rem 0.95rem;
     color: hsl(0, 0%, 100%);
+  }
+
+  .focus {
+    transition: transform 0.25s cubic-bezier(0.45, 0, 0.55, 1);
+  }
+
+  .focusable:focus .focus {
+    transform: scale(1);
+  }
+
+  .focusable:focus:not(:focus-visible) .focus {
+    transform: scale(0);
   }
 </style>

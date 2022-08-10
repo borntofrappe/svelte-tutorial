@@ -18,4 +18,8 @@
   question="How many liters of tap water drinks a person per day?"
   answer={1.5}
   details="1.5 liters of tap water are devoted to drinking in a day."
+  min={0}
+  max={5}
+  value={2.5}
+  precision={1}
 />
