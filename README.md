@@ -239,3 +239,7 @@ Highlight a specific value and an average in a donut chart.
 ## [Sokoban](https://svelte.dev/repl/ebce8ef2dbe84d33bba4de666c761cb9?version=3.49.0)
 
 Move crates above designated areas.
+
+## [Slider Quiz](https://svelte.dev/repl/0551729fa2584f1d8be155261ffb1743?version=3.49.0)
+
+Answer questions with a number selecting the value in a range.

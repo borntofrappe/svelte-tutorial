@@ -4,9 +4,10 @@
 
   export let title = "A matter of time";
   export let question =
-    "Svelte 3 is alive and kicking, but in what year was the compiler created?";
+    "Svelte 3 is alive and kicking, but what year saw the advent of the first version?";
   export let answer = 2016;
-  export let details = "...";
+  export let details =
+    "Some say it was released on the 29th of November. Svelte 2 appeared in spring 2018, and version 3 rapidly followed a year later.";
 
   export let min = 2000;
   export let max = 2022;

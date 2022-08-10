@@ -14,12 +14,14 @@
 <Quiz />
 
 <Quiz
-  title="Drinking"
-  question="How many liters of tap water drinks a person per day?"
-  answer={1.5}
-  details="1.5 liters of tap water are devoted to drinking in a day."
-  min={0}
-  max={5}
-  value={2.5}
-  precision={1}
+  title="A taste for precision"
+  question="If you were to limit PI to 4 digits after the decimal point, what number would you find?"
+  answer={parseFloat(Math.PI.toFixed(4))}
+  details="{Math.PI.toFixed(
+    4
+  )}, precise enough? If you were to ask JavaScript for the full answer, by happenstance, you'd find {Math.PI}."
+  min={3.14}
+  max={3.1499}
+  value={3.14}
+  precision={4}
 />
