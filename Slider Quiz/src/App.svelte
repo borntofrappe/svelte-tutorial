@@ -11,6 +11,8 @@
   />
 </div> -->
 
+<Quiz />
+
 <Quiz
   title="Drinking"
   question="How many liters of tap water drinks a person per day?"

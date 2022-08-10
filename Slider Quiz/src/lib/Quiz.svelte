@@ -2,14 +2,15 @@
   import { onMount } from "svelte";
   import { fade, scale } from "svelte/transition";
 
-  export let title = "Question";
-  export let question = "???";
-  export let answer = 42;
+  export let title = "A matter of time";
+  export let question =
+    "Svelte 3 is alive and kicking, but in what year was the compiler created?";
+  export let answer = 2016;
   export let details = "...";
 
-  export let min = 0;
-  export let max = 100;
-  export let value = 50;
+  export let min = 2000;
+  export let max = 2022;
+  export let value = 2010;
   export let precision = 0;
 
   const x0 = (1 / (max - min)) * (answer - min) * 300;
@@ -46,7 +47,7 @@
 
     const p = (offsetX - (l - sl)) / w;
     x1 = p * 300;
-    value = min === 0 ? max * p : min + (max / min) * p;
+    value = min === 0 ? max * p : min + (max - min) * p;
   };
 
   const handleKeydown = (e) => {
