@@ -1,10 +1,24 @@
 <script>
+  import { fade, scale } from "svelte/transition";
+
   export let title;
   export let question;
   export let answer;
   export let details;
 
   let isRevealed = false;
+
+  const durations = {
+    out: 500,
+    in: 400,
+  };
+
+  const delays = {
+    out: 0,
+    inGuess: 500,
+    inAnswer: 2200,
+    details: 2900,
+  };
 </script>
 
 <article>
@@ -25,17 +39,45 @@
       {#if isRevealed}
         <g transform="translate(20 0)">
           <g style:color="hsl(185, 62%, 45%)">
-            <g fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle r="9" />
-              <path d="M 0 9 v 11" />
-            </g>
             <g fill="currentColor">
-              <circle r="6" />
-              <g transform="translate(-2 34)" font-size="11">
-                <text> Correct answer </text>
-                <text y="12" font-size="9" font-weight="700">
-                  {answer}
-                </text>
+              <g
+                in:scale={{
+                  duration: durations.in,
+                  delay: delays.inAnswer,
+                }}
+              >
+                <circle r="6" />
+              </g>
+            </g>
+            <g fill="none" stroke="currentColor" stroke-width="1.5">
+              <g
+                in:scale={{
+                  duration: durations.in,
+                  delay: delays.inAnswer + 100,
+                }}
+              >
+                <circle r="9" />
+              </g>
+            </g>
+
+            <g
+              in:fade={{
+                duration: durations.in,
+                delay: delays.inAnswer + durations.in,
+              }}
+            >
+              <g>
+                <g fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M 0 9 v 11" />
+                </g>
+                <g fill="currentColor">
+                  <g transform="translate(-2 34)" font-size="12">
+                    <text> Correct answer </text>
+                    <text y="12" font-size="10" font-weight="700">
+                      {answer}
+                    </text>
+                  </g>
+                </g>
               </g>
             </g>
           </g>
@@ -43,15 +85,44 @@
 
         <g transform="translate(200 0)">
           <g style:color="hsl(205, 87%, 29%)">
-            <g fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle r="9" />
-              <path d="M 0 -9 v -11" />
-            </g>
             <g fill="currentColor">
-              <circle r="6" />
-              <g transform="translate(2 -38)" font-size="11" text-anchor="end">
-                <text> You guessed... </text>
-                <text y="12" font-size="9" font-weight="700"> 10.2 </text>
+              <g
+                in:scale={{
+                  duration: durations.in,
+                  delay: delays.inGuess,
+                }}
+              >
+                <circle r="6" />
+              </g>
+            </g>
+            <g fill="none" stroke="currentColor" stroke-width="1.5">
+              <g
+                in:scale={{
+                  duration: durations.in,
+                  delay: delays.inGuess + 100,
+                }}
+              >
+                <circle r="9" />
+              </g>
+            </g>
+            <g
+              in:fade={{
+                duration: durations.in,
+                delay: delays.inGuess + durations.in,
+              }}
+            >
+              <g fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M 0 -9 v -11" />
+              </g>
+              <g fill="currentColor">
+                <g
+                  transform="translate(2 -38)"
+                  font-size="12"
+                  text-anchor="end"
+                >
+                  <text> You guessed... </text>
+                  <text y="12" font-size="10" font-weight="700"> 10.2 </text>
+                </g>
               </g>
             </g>
           </g>
@@ -59,29 +130,32 @@
       {:else}
         <g transform="translate(200 0)">
           <g style:color="hsl(205, 87%, 29%)">
-            <g transform="translate(0 -26)">
-              <g
-                fill="currentColor"
-                font-size="11"
-                font-weight="700"
-                text-anchor="middle"
-              >
-                <text>10.2</text>
+            <g out:scale={{ duration: durations.out }}>
+              <g transform="translate(0 -26)">
+                <g
+                  fill="currentColor"
+                  font-size="11"
+                  font-weight="700"
+                  text-anchor="middle"
+                >
+                  <text>10.2</text>
+                </g>
               </g>
-            </g>
-            <circle
-              r="18.5"
-              fill="hsl(0, 0%, 100%)"
-              stroke="currentColor"
-              stroke-width="3"
-            />
-            <g fill="currentColor">
-              <path d="M 2 -5 l 5 5 -5 5z" />
-              <path transform="scale(-1 1)" d="M 2 -5 l 5 5 -5 5z" />
-            </g>
 
-            <g style:cursor="col-resize">
-              <circle r="20" opacity="0" />
+              <circle
+                r="18.5"
+                fill="hsl(0, 0%, 100%)"
+                stroke="currentColor"
+                stroke-width="3"
+              />
+              <g fill="currentColor">
+                <path d="M 2 -5 l 5 5 -5 5z" />
+                <path transform="scale(-1 1)" d="M 2 -5 l 5 5 -5 5z" />
+              </g>
+
+              <g style:cursor="col-resize">
+                <circle r="20" opacity="0" />
+              </g>
             </g>
           </g>
         </g>
@@ -90,7 +164,7 @@
   </svg>
 
   {#if isRevealed}
-    <p>
+    <p in:fade={{ delay: delays.details }}>
       {details}
     </p>
   {:else}

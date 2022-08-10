@@ -15,3 +15,23 @@ Ultimately the project includes the functionality of the slider in `Quiz.svelte`
 ```svelte
 $: dispatch("change", { value });
 ```
+
+## Transitions
+
+The `<svg>` incorporates two visuals, one for the interactive slider and one comparing the value of the slider against the answer of the quiz. To transition between the two the component includes Svelte's own `scale` and `fade` transitions, staggering the elements as follows:
+
+- scaler the circle making up the interaction of the slider
+
+- scale the circle describing the user's guess, the value of the slider
+
+- fade the text accompanying the value, with the value prefaced by a fitting label
+
+- scale the circle describing the quiz's answer
+
+- fade the text accompanying the answer
+
+The markup is modified to separate the elements which scale from those which fade.
+
+Following this chain the component also fades the paragraph element which follows the `<svg>`.
+
+In the script I set up two objects to try and organize the transitions' durations and delays, but the solution is far from ideal.
