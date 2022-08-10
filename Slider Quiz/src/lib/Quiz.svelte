@@ -1,12 +1,66 @@
 <script>
+  import { onMount } from "svelte";
   import { fade, scale } from "svelte/transition";
 
-  export let title;
-  export let question;
-  export let answer;
-  export let details;
+  export let title = "Question";
+  export let question = "???";
+  export let answer = 42;
+  export let details = "...";
 
+  export let min = 0;
+  export let max = 100;
+  export let value = 50;
+  export let precision = 0;
+
+  const x0 = (1 / (max - min)) * (answer - min) * 300;
+  let x1 = (1 / (max - min)) * (value - min) * 300;
+
+  let hasStarted = false;
   let isRevealed = false;
+
+  let svg;
+  let g;
+  let sl, l, w;
+
+  onMount(() => {
+    handleSize();
+  });
+
+  const handleSize = () => {
+    if (isRevealed === true) return;
+
+    const { left: sleft } = svg.getBoundingClientRect();
+    const { left, width } = g.getBoundingClientRect();
+    sl = sleft;
+    l = left;
+    w = width;
+  };
+
+  const handleStart = (e) => {
+    hasStarted = true;
+    handleIng(e);
+  };
+  const handleEnd = () => (hasStarted = false);
+  const handleIng = ({ offsetX }) => {
+    if (hasStarted === false) return;
+
+    const p = (offsetX - (l - sl)) / w;
+    x1 = p * 300;
+    value = min === 0 ? max * p : min + (max / min) * p;
+  };
+
+  const handleKeydown = (e) => {
+    const { code } = e;
+    if (code === "ArrowLeft" || code === "ArrowRight") {
+      e.preventDefault();
+
+      const increment = precision === 0 ? 1 : 1 / 10 ** precision;
+      if (code === "ArrowLeft") value = Math.max(min, value - increment);
+      if (code === "ArrowRight") value = Math.min(max, value + increment);
+
+      x1 = (1 / (max - min)) * (value - min) * 300;
+    }
+  };
 
   const durations = {
     out: 500,
@@ -16,8 +70,8 @@
   const delays = {
     out: 0,
     inGuess: 500,
-    inAnswer: 2200,
-    details: 2900,
+    inAnswer: 2000,
+    details: 2700,
   };
 </script>
 
@@ -32,12 +86,12 @@
     {question}
   </p>
 
-  <svg viewBox="-20 -50 340 100">
+  <svg bind:this={svg} viewBox="-20 -50 340 100">
     <g>
       <rect y="-3.5" width="300" height="7" rx="3.5" fill="hsl(0, 0%, 85%)" />
 
       {#if isRevealed}
-        <g transform="translate(20 0)">
+        <g transform="translate({x0} 0)">
           <g style:color="hsl(185, 62%, 45%)">
             <g fill="currentColor">
               <g
@@ -71,7 +125,11 @@
                   <path d="M 0 9 v 11" />
                 </g>
                 <g fill="currentColor">
-                  <g transform="translate(-2 34)" font-size="12">
+                  <g
+                    transform="translate(0 34)"
+                    font-size="12"
+                    text-anchor={x0 > 150 ? "end" : "start"}
+                  >
                     <text> Correct answer </text>
                     <text y="12" font-size="10" font-weight="700">
                       {answer}
@@ -83,7 +141,7 @@
           </g>
         </g>
 
-        <g transform="translate(200 0)">
+        <g transform="translate({x1} 0)">
           <g style:color="hsl(205, 87%, 29%)">
             <g fill="currentColor">
               <g
@@ -116,19 +174,21 @@
               </g>
               <g fill="currentColor">
                 <g
-                  transform="translate(2 -38)"
+                  transform="translate(0 -38)"
                   font-size="12"
-                  text-anchor="end"
+                  text-anchor={x1 > 150 ? "end" : "start"}
                 >
                   <text> You guessed... </text>
-                  <text y="12" font-size="10" font-weight="700"> 10.2 </text>
+                  <text y="12" font-size="10" font-weight="700"
+                    >{value.toFixed(precision)}</text
+                  >
                 </g>
               </g>
             </g>
           </g>
         </g>
       {:else}
-        <g transform="translate(200 0)">
+        <g transform="translate({x1} 0)">
           <g style:color="hsl(205, 87%, 29%)">
             <g out:scale={{ duration: durations.out }}>
               <g transform="translate(0 -26)">
@@ -138,7 +198,7 @@
                   font-weight="700"
                   text-anchor="middle"
                 >
-                  <text>10.2</text>
+                  <text>{value.toFixed(precision)}</text>
                 </g>
               </g>
 
@@ -152,12 +212,23 @@
                 <path d="M 2 -5 l 5 5 -5 5z" />
                 <path transform="scale(-1 1)" d="M 2 -5 l 5 5 -5 5z" />
               </g>
-
-              <g style:cursor="col-resize">
-                <circle r="20" opacity="0" />
-              </g>
             </g>
           </g>
+        </g>
+        <g
+          bind:this={g}
+          style:cursor="pointer"
+          on:mousedown={handleStart}
+          on:mouseup={handleEnd}
+          on:mouseleave={handleEnd}
+          on:mousemove={handleIng}
+          style:outline="none"
+          tabindex="0"
+          aria-label="Change the value with the left and right arrow keys."
+          class="focusable"
+          on:keydown={handleKeydown}
+        >
+          <rect opacity="0" y="-50" width="300" height="100" />
         </g>
       {/if}
     </g>
